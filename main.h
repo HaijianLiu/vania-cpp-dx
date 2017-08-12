@@ -27,7 +27,7 @@
 < Macross >
 ------------------------------------------------------------------------------*/
 
-#define PIXEL_SCALE (2)
+#define PIXEL_SCALE (3)
 
 
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)

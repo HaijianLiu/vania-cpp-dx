@@ -6,7 +6,7 @@
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
-#define TEXTURE_GAME_PLAYER00 _T("assets/player/player-run.png")
+#define TEXTURE_GAME_PLAYER00 _T("assets/player-run-shoot.png")
 
 
 Player::Player() {
