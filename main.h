@@ -5,16 +5,16 @@
 /*------------------------------------------------------------------------------
 < include >
 ------------------------------------------------------------------------------*/
-#define _CRT_SECURE_NO_WARNINGS // scanf のwarning防止
+#define _CRT_SECURE_NO_WARNINGS
 #include "windows.h"
 #include "d3dx9.h"
 #include <tchar.h>
 
-#define DIRECTINPUT_VERSION 0x0800 // 警告対処
+#define DIRECTINPUT_VERSION 0x0800
 #include "dinput.h"
 #include "mmsystem.h"
 
-#if 1	// [ここを"0"にした場合、"構成プロパティ" -> "リンカ" -> "入力" -> "追加の依存ファイル"に対象ライブラリを設定する]
+#if 1
 	#pragma comment (lib, "d3d9.lib")
 	#pragma comment (lib, "d3dx9.lib")
 	#pragma comment (lib, "dinput8.lib")
@@ -27,22 +27,20 @@
 < Macross >
 ------------------------------------------------------------------------------*/
 
-#define PIXEL_SCALE (4)
+#define PIXEL_SCALE (2)
 
 
-// 頂点フォーマット( 頂点座標[2D] / 反射光 / テクスチャ座標 )
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 
 
 /*------------------------------------------------------------------------------
 < Struct >
 ------------------------------------------------------------------------------*/
-// 上記頂点フォーマットに合わせた構造体を定義
 typedef struct {
-	D3DXVECTOR3 vertex;  // 頂点座標
-	float       rhw;     // テクスチャのパースペクティブコレクト用
-	D3DCOLOR    diffuse; // 反射光
-	D3DXVECTOR2 texture; // テクスチャ座標(*33)
+	D3DXVECTOR3 vertex;
+	float rhw;
+	D3DCOLOR diffuse;
+	D3DXVECTOR2 texture;
 } Vertex2D;
 
 
@@ -60,6 +58,6 @@ typedef struct {
 /*------------------------------------------------------------------------------
 < Functions >
 ------------------------------------------------------------------------------*/
-LPDIRECT3DDEVICE9 GetDevice(void);		// デバイス取得関数
+LPDIRECT3DDEVICE9 GetDevice(void);
 
 #endif

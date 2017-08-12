@@ -5,9 +5,9 @@
 class Player {
 private:
 	LPDIRECT3DDEVICE9  device;
-	D3DXVECTOR3        position;         // ポリゴンの移動量
-	D3DXVECTOR3        rotation;         // ポリゴンの回転量
-	Vertex2D           vertex[4];        // 頂点情報格納ワーク
+	D3DXVECTOR3        position;
+	D3DXVECTOR3        rotation;
+	Vertex2D           vertex[4];
 
 	Animation animRun;
 

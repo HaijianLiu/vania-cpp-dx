@@ -105,59 +105,56 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	dwCurrentTime = dwFrameCount = 0;
 
 
-/*------------------------------------------------------------------------------
-Start
-------------------------------------------------------------------------------*/
+	/*------------------------------------------------------------------------------
+	Start
+	------------------------------------------------------------------------------*/
 	player->Start();
 
-	while(1)
-	{
-		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-		{
-			if(msg.message == WM_QUIT)
-			{// PostQuitMessage()が呼ばれたらループ終了
+	while(1) {
+
+		// check for break app
+		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+			if(msg.message == WM_QUIT) {
 				break;
 			}
-			else
-			{
-				// メッセージの翻訳とディスパッチ
+			else {
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
 		}
-		else
-		{
-			dwCurrentTime = timeGetTime();
 
-			if ((dwCurrentTime - dwFPSLastTime) >= 500) {
-				#ifdef _DEBUG
-					gCountFPS = (dwFrameCount * 1000) / (dwCurrentTime - dwFPSLastTime); // FPSを計測
-				#endif
-				dwFPSLastTime = dwCurrentTime; // FPS計測時刻を保存
-				dwFrameCount = 0; // カウントをクリア
-			}
+		// set time
+		dwCurrentTime = timeGetTime();
 
-			if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60)) { // 1/60秒ごとに実行
-				dwExecLastTime = dwCurrentTime; // 処理した時刻を保存
-/*------------------------------------------------------------------------------
-Update
-------------------------------------------------------------------------------*/
-				// 更新処理
-				Update();
-				// 描画処理
-				Draw();
-				dwFrameCount ++; // 処理回数のカウントを加算
-			}
+		// reset frame counter
+		if ((dwCurrentTime - dwFPSLastTime) >= 500) {
+			#ifdef _DEBUG
+				gCountFPS = (dwFrameCount * 1000) / (dwCurrentTime - dwFPSLastTime);
+			#endif
+			dwFPSLastTime = dwCurrentTime;
+			dwFrameCount = 0;
+		}
+
+		// Update
+		if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60)) {
+			dwExecLastTime = dwCurrentTime;
+
+			/*------------------------------------------------------------------------------
+			Update
+			------------------------------------------------------------------------------*/
+			Update();
+			Draw();
+
+			dwFrameCount ++;
 		}
 	}
 
-	// ウィンドウクラスの登録を解除
+	/*------------------------------------------------------------------------------
+	Uninit
+	------------------------------------------------------------------------------*/
+	Uninit();
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
-/*------------------------------------------------------------------------------
-Uninit
-------------------------------------------------------------------------------*/
-	Uninit();
 
 	return (int)msg.wParam;
 }
