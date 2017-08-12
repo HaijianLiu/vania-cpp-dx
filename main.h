@@ -48,11 +48,9 @@ typedef struct {
 
 typedef struct {
 	LPDIRECT3DTEXTURE9 texture;
-	int divideX;
-	int divideY;
-	int patterSizeX;
-	int patterSizeY;
-	int pattern;
+	int divideX, divideY;
+	int patterSizeX, patterSizeY;
+	int currentPattern;
 	int patternMax;
 	int sampleTime;
 	int counter;

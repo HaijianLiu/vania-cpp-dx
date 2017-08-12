@@ -55,7 +55,7 @@ void Player::Start() {
 		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
 		&this->animRun.texture);
 	this->animRun.counter = 0;
-	this->animRun.pattern = 0;
+	this->animRun.currentPattern = 0;
 
 	this->animRun.sampleTime = 4;
 	this->animRun.divideX = 10;
@@ -77,9 +77,9 @@ void Player::Update() {
 	}
 	if(this->animRun.counter % this->animRun.sampleTime == 0) {
 		// パターンの切り替え
-		this->animRun.pattern = (this->animRun.pattern + 1) % this->animRun.patternMax;
+		this->animRun.currentPattern = (this->animRun.currentPattern + 1) % this->animRun.patternMax;
 		// テクスチャ座標を設定
-		Player::SetTexture(this->animRun.pattern);
+		Player::SetTexture(this->animRun.currentPattern);
 	}
 }
 
