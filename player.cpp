@@ -9,12 +9,6 @@
 #define	NUM_VERTEX      (4) // 頂点数
 #define	NUM_PLAYER      (2) // ポリゴン数
 #define TEXTURE_GAME_PLAYER00 _T("assets/player/player-run.png")	// サンプル用画像 (*33)
-#define TEXTURE_PLAYER00_SIZE_X (800/10*4) // テクスチャサイズ (*33)
-#define TEXTURE_PLAYER00_SIZE_Y (80/1*4) // 同上 (*33)
-#define TEXTURE_PATTERN_DIVIDE_X (10) // アニメパターンのテクスチャ内分割数（X) (*34)
-#define TEXTURE_PATTERN_DIVIDE_Y (1) // アニメパターンのテクスチャ内分割数（Y) (*34)
-#define ANIM_PATTERN_NUM         (TEXTURE_PATTERN_DIVIDE_X*TEXTURE_PATTERN_DIVIDE_Y)	// アニメーションパターン数 (*34)
-#define TIME_ANIMATION           (40) // アニメーションの切り替わるカウント (*34)
 
 
 Player::Player() {
@@ -37,9 +31,9 @@ Player::Player() {
 
 	// テクスチャ座標の設定
 	this->vertex[0].texture = D3DXVECTOR2(0.0f, 0.0f);
-	this->vertex[1].texture = D3DXVECTOR2(1.0f/TEXTURE_PATTERN_DIVIDE_X, 0.0f);
-	this->vertex[2].texture = D3DXVECTOR2(0.0f, 1.0f/TEXTURE_PATTERN_DIVIDE_Y);
-	this->vertex[3].texture = D3DXVECTOR2(1.0f/TEXTURE_PATTERN_DIVIDE_X, 1.0f/TEXTURE_PATTERN_DIVIDE_Y);
+	this->vertex[1].texture = D3DXVECTOR2(1.0f/this->animRun.divideX, 0.0f);
+	this->vertex[2].texture = D3DXVECTOR2(0.0f, 1.0f/this->animRun.divideY);
+	this->vertex[3].texture = D3DXVECTOR2(1.0f/this->animRun.divideX, 1.0f/this->animRun.divideY);
 
 }
 
@@ -62,6 +56,14 @@ void Player::Start() {
 		&this->animRun.texture);
 	this->animRun.counter = 0;
 	this->animRun.pattern = 0;
+
+	this->animRun.sampleTime = 4;
+	this->animRun.divideX = 10;
+	this->animRun.divideY = 1;
+	this->animRun.patterSizeX = 800 / this->animRun.divideX * PIXEL_SCALE;
+	this->animRun.patterSizeY = 80 / this->animRun.divideY * PIXEL_SCALE;
+	this->animRun.patternMax = this->animRun.divideX * this->animRun.divideY;
+
 }
 
 void Player::Update() {
@@ -70,12 +72,12 @@ void Player::Update() {
 
 	this->animRun.counter++;
 	// リセットカウンター
-	if (this->animRun.counter > TIME_ANIMATION-1) {
+	if (this->animRun.counter > this->animRun.sampleTime-1) {
 		this->animRun.counter = 0; // 先頭に戻す
 	}
-	if(this->animRun.counter % TIME_ANIMATION == 0) {
+	if(this->animRun.counter % this->animRun.sampleTime == 0) {
 		// パターンの切り替え
-		this->animRun.pattern = (this->animRun.pattern + 1) % ANIM_PATTERN_NUM;
+		this->animRun.pattern = (this->animRun.pattern + 1) % this->animRun.patternMax;
 		// テクスチャ座標を設定
 		Player::SetTexture(this->animRun.pattern);
 	}
@@ -98,10 +100,10 @@ void Player::Draw() {
 void Player::SetTexture(int animationPattern)
 {
 	// テクスチャ座標の設定
-	int x             = animationPattern % TEXTURE_PATTERN_DIVIDE_X;
-	int y             = animationPattern / TEXTURE_PATTERN_DIVIDE_X;
-	float sizeX       = 1.0f / TEXTURE_PATTERN_DIVIDE_X;
-	float sizeY       = 1.0f / TEXTURE_PATTERN_DIVIDE_Y;
+	int x             = animationPattern % this->animRun.divideX;
+	int y             = animationPattern / this->animRun.divideY;
+	float sizeX       = 1.0f / this->animRun.divideX;
+	float sizeY       = 1.0f / this->animRun.divideY;
 
 	this->vertex[0].texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY );
 	this->vertex[1].texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY );
@@ -112,7 +114,7 @@ void Player::SetTexture(int animationPattern)
 // 頂点座標の設定
 void Player::SetVertex() {
 	this->vertex[0].vertex = D3DXVECTOR3(this->position.x, this->position.y, 0.0f);
-	this->vertex[1].vertex = D3DXVECTOR3(this->position.x + TEXTURE_PLAYER00_SIZE_X, this->position.y, 0.0f);
-	this->vertex[2].vertex = D3DXVECTOR3(this->position.x, this->position.y + TEXTURE_PLAYER00_SIZE_Y, 0.0f);
-	this->vertex[3].vertex = D3DXVECTOR3(this->position.x + TEXTURE_PLAYER00_SIZE_X, this->position.y + TEXTURE_PLAYER00_SIZE_Y, 0.0f);
+	this->vertex[1].vertex = D3DXVECTOR3(this->position.x + this->animRun.patterSizeX, this->position.y, 0.0f);
+	this->vertex[2].vertex = D3DXVECTOR3(this->position.x, this->position.y + this->animRun.patterSizeY, 0.0f);
+	this->vertex[3].vertex = D3DXVECTOR3(this->position.x + this->animRun.patterSizeX, this->position.y + this->animRun.patterSizeY, 0.0f);
 }

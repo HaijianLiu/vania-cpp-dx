@@ -26,6 +26,10 @@
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
+
+#define PIXEL_SCALE (4)
+
+
 // 頂点フォーマット( 頂点座標[2D] / 反射光 / テクスチャ座標 )
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 
@@ -44,8 +48,14 @@ typedef struct {
 
 typedef struct {
 	LPDIRECT3DTEXTURE9 texture;
-	int counter;
+	int divideX;
+	int divideY;
+	int patterSizeX;
+	int patterSizeY;
 	int pattern;
+	int patternMax;
+	int sampleTime;
+	int counter;
 } Animation;
 
 
