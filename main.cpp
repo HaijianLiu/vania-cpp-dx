@@ -3,40 +3,34 @@
 #include "main.h"
 #include "player.h"
 
-//*****************************************************************************
-// マクロ定義
-//*****************************************************************************
+/*==============================================================================
+Macross
+------------------------------------------------------------------------------*/
 #define CLASS_NAME  _T("AppClass")     // ウインドウのクラス名
 #define WINDOW_NAME _T("アニメーション") // ウインドウのキャプション名
+#define SCREEN_WIDTH    (800)                 // ウインドウの幅
+#define SCREEN_HEIGHT   (640)                 // ウインドウの高さ
+#define SCREEN_CENTER_X (SCREEN_WIDTH / 2)  // ウインドウの中心Ｘ座標
+#define SCREEN_CENTER_Y (SCREEN_HEIGHT / 2) // ウインドウの中心Ｙ座標
+/*============================================================================*/
 
-//*****************************************************************************
-// 構造体定義
-//*****************************************************************************
-//*****************************************************************************
-// プロトタイプ宣言
-//*****************************************************************************
+
+
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT Init(HWND hWnd, BOOL bWindow);
 void Uninit(void);
 void Update(void);
 void Draw(void);
 
-//*****************************************************************************
-// グローバル変数:
-//*****************************************************************************
 LPDIRECT3D9       g_pD3D = NULL;       // Direct3Dオブジェクト
 LPDIRECT3DDEVICE9 g_pD3DDevice = NULL; // Deviceオブジェクト(描画に必要)
 
-#ifdef _DEBUG // (*35)
-LPD3DXFONT g_pD3DXFont = NULL; // フォントへのポインタ
-int        g_nCountFPS; // FPSカウンタ
-void DrawDebugFont(void);
+#ifdef _DEBUG
+	LPD3DXFONT g_pD3DXFont = NULL; // フォントへのポインタ
+	int        g_nCountFPS; // FPSカウンタ
+	void       DrawDebugFont(void);
 #endif
 
-
-//=============================================================================
-// メイン関数
-//=============================================================================
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);	// 無くても良いけど、警告が出る（未使用宣言）
@@ -62,24 +56,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		CLASS_NAME,
 		NULL
 	};
-	HWND		hWnd;
-	MSG			msg;
+	HWND hWnd;
+	MSG  msg;
 
 	// ウィンドウクラスの登録
 	RegisterClassEx(&wcex);
 
 	// ウィンドウの作成
-	hWnd = CreateWindow(CLASS_NAME,
-						WINDOW_NAME,
-						WS_OVERLAPPEDWINDOW,
-						CW_USEDEFAULT,																		// ウィンドウの左座標
-						CW_USEDEFAULT,																		// ウィンドウの上座標
-						SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME)*2,									// ウィンドウ横幅
-						SCREEN_HEIGHT + GetSystemMetrics(SM_CXDLGFRAME)*2+GetSystemMetrics(SM_CYCAPTION),	// ウィンドウ縦幅
-						NULL,
-						NULL,
-						hInstance,
-						NULL);
+	hWnd = CreateWindow(
+		CLASS_NAME,
+		WINDOW_NAME,
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,																		// ウィンドウの左座標
+		CW_USEDEFAULT,																		// ウィンドウの上座標
+		SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME)*2,									// ウィンドウ横幅
+		SCREEN_HEIGHT + GetSystemMetrics(SM_CXDLGFRAME)*2+GetSystemMetrics(SM_CYCAPTION),	// ウィンドウ縦幅
+		NULL,
+		NULL,
+		hInstance,
+		NULL);
 
 	// DirectXの初期化(ウィンドウを作成してから行う)
 	if(FAILED(Init(hWnd, true)))
