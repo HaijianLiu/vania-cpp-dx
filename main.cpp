@@ -10,8 +10,13 @@ Macross
 #define WINDOW_NAME _T  ("Vania")
 #define SCREEN_WIDTH    (800)
 #define SCREEN_HEIGHT   (640)
-#define SCREEN_CENTER_X (SCREEN_WIDTH / 2)
-#define SCREEN_CENTER_Y (SCREEN_HEIGHT / 2)
+
+
+/*------------------------------------------------------------------------------
+Prototype
+------------------------------------------------------------------------------*/
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+HRESULT InitDirectX(HWND hWnd, BOOL bWindow);
 
 
 /*------------------------------------------------------------------------------
@@ -20,17 +25,11 @@ Global variables
 LPDIRECT3D9 gD3D = NULL;
 LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 
-Player* player = new Player();
-
 
 /*------------------------------------------------------------------------------
-Prototype
+Global Object
 ------------------------------------------------------------------------------*/
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-HRESULT Init(HWND hWnd, BOOL bWindow);
-void Uninit(void);
-void Update(void);
-void Draw(void);
+Player* player = new Player();
 
 
 /*------------------------------------------------------------------------------
@@ -39,8 +38,70 @@ Debug
 #ifdef _DEBUG
 	LPD3DXFONT gD3DXFont = NULL; // D3D font pointer
 	int gCountFPS; // FPS counter
-	void DrawDebugFont(void);
+	void DrawDebugFont(void) {
+		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
+		TCHAR str[256];
+		wsprintf(str,_T("FPS:%d\n"), gCountFPS);
+		gD3DXFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
+	}
 #endif
+
+/*------------------------------------------------------------------------------
+Start
+------------------------------------------------------------------------------*/
+void Start() {
+	player->Start();
+}
+
+/*------------------------------------------------------------------------------
+Update
+------------------------------------------------------------------------------*/
+void Update(void) {
+	player->Update();
+}
+
+/*------------------------------------------------------------------------------
+Draw
+------------------------------------------------------------------------------*/
+void Draw(void) {
+	gD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
+
+	if(SUCCEEDED(gD3DDevice->BeginScene())) {
+
+		player->Draw();
+
+		#ifdef _DEBUG
+			DrawDebugFont();
+		#endif
+
+		gD3DDevice->EndScene();
+	}
+
+	gD3DDevice->Present(NULL, NULL, NULL, NULL);
+}
+
+
+/*------------------------------------------------------------------------------
+Delete
+------------------------------------------------------------------------------*/
+void Delete(void)
+{
+	if(gD3DDevice != NULL) {
+		gD3DDevice->Release();
+	}
+
+	if(gD3D != NULL) {
+		gD3D->Release();
+	}
+
+	#ifdef _DEBUG
+		if(gD3DXFont != NULL) {
+			gD3DXFont->Release();
+		}
+	#endif
+
+	delete player;
+}
 
 
 /*------------------------------------------------------------------------------
@@ -86,7 +147,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		NULL);
 
 	// Init DirectX
-	if(FAILED(Init(hWnd, true))) {
+	if(FAILED(InitDirectX(hWnd, true))) {
 		return -1;
 	}
 
@@ -108,7 +169,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	/*------------------------------------------------------------------------------
 	Start
 	------------------------------------------------------------------------------*/
-	player->Start();
+	Start();
 
 	while(1) {
 
@@ -150,9 +211,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 
 	/*------------------------------------------------------------------------------
-	Uninit
+	Delete
 	------------------------------------------------------------------------------*/
-	Uninit();
+	Delete();
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
 
@@ -160,63 +221,26 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 }
 
 
-/*------------------------------------------------------------------------------
-Update
-------------------------------------------------------------------------------*/
-void Update(void) {
-	player->Update();
-}
+
+
+
+
+
+
+
+
 
 
 /*------------------------------------------------------------------------------
-Draw
-------------------------------------------------------------------------------*/
-void Draw(void) {
-	gD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
-
-	if(SUCCEEDED(gD3DDevice->BeginScene())) {
-
-		player->Draw();
-
-		#ifdef _DEBUG
-			DrawDebugFont();
-		#endif
-
-		gD3DDevice->EndScene();
-	}
-
-	gD3DDevice->Present(NULL, NULL, NULL, NULL);
-}
-
-
-/*------------------------------------------------------------------------------
-Draw
-------------------------------------------------------------------------------*/
-void Uninit(void)
-{
-	if(gD3DDevice != NULL) {
-		gD3DDevice->Release();
-	}
-
-	if(gD3D != NULL) {
-		gD3D->Release();
-	}
-
-	#ifdef _DEBUG
-		if(gD3DXFont != NULL) {
-			gD3DXFont->Release();
-		}
-	#endif
-
-	delete player;
-}
-
-/*------------------------------------------------------------------------------
-Draw
+Get gD3DDevice
 ------------------------------------------------------------------------------*/
 LPDIRECT3DDEVICE9 GetDevice(void) {
 	return(gD3DDevice);
 }
+
+
+
+
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -224,7 +248,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
-
 		case WM_KEYDOWN:
 			switch(wParam) {
 				case VK_ESCAPE: // [ESC] key
@@ -232,29 +255,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 					break;
 			}
 			break;
-
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
-
 	return 0;
 }
 
-HRESULT Init(HWND hWnd, BOOL bWindow)
-{
+HRESULT InitDirectX(HWND hWnd, BOOL bWindow) {
 	D3DPRESENT_PARAMETERS d3dpp;
 	D3DDISPLAYMODE d3ddm;
 
 	// Create Direct3D Object
 	gD3D = Direct3DCreate9(D3D_SDK_VERSION);
-	if(gD3D == NULL)
-	{
+	if(gD3D == NULL) {
 		return E_FAIL;
 	}
 
 	// Get Adapter Display Mode
-	if(FAILED(gD3D->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &d3ddm)))
-	{
+	if(FAILED(gD3D->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &d3ddm))) {
 		return E_FAIL;
 	}
 
@@ -312,12 +330,3 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 
 	return S_OK;
 }
-
-#ifdef _DEBUG
-	void DrawDebugFont(void) {
-		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
-		TCHAR str[256];
-		wsprintf(str,_T("FPS:%d\n"),gCountFPS);
-		gD3DXFont->DrawText(NULL,str,-1,&rect,DT_LEFT,D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
-	}
-#endif
