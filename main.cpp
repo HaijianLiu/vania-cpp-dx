@@ -3,7 +3,7 @@
 #include "main.h"
 #include "player.h"
 
-/*==============================================================================
+/*------------------------------------------------------------------------------
 Macross
 ------------------------------------------------------------------------------*/
 #define CLASS_NAME  _T("AppClass")     // ウインドウのクラス名
@@ -12,13 +12,17 @@ Macross
 #define SCREEN_HEIGHT   (640)                 // ウインドウの高さ
 #define SCREEN_CENTER_X (SCREEN_WIDTH / 2)  // ウインドウの中心Ｘ座標
 #define SCREEN_CENTER_Y (SCREEN_HEIGHT / 2) // ウインドウの中心Ｙ座標
-/*============================================================================*/
 
 
-// ポリゴンの初期化処理
+/*------------------------------------------------------------------------------
+Global variables
+------------------------------------------------------------------------------*/
 Player* player = new Player();
 
 
+/*------------------------------------------------------------------------------
+Prototype
+------------------------------------------------------------------------------*/
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT Init(HWND hWnd, BOOL bWindow);
 void Uninit(void);
@@ -34,8 +38,7 @@ LPDIRECT3DDEVICE9 g_pD3DDevice = NULL; // Deviceオブジェクト(描画に必�
 	void       DrawDebugFont(void);
 #endif
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	UNREFERENCED_PARAMETER(hPrevInstance);	// 無くても良いけど、警告が出る（未使用宣言）
 	UNREFERENCED_PARAMETER(lpCmdLine);		// 無くても良いけど、警告が出る（未使用宣言）
 

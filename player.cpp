@@ -22,15 +22,11 @@ Player::Player() {
 	this->position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	this->rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
-	// テクスチャの読み込み
-	this->animationCount = 0;
-	this->animationPattern = 0;
-
 	Player::SetVertex();
 
-	this->vertex[0].rhw =
-	this->vertex[1].rhw =
-	this->vertex[2].rhw =
+	this->vertex[0].rhw = 1.0f;
+	this->vertex[1].rhw = 1.0f;
+	this->vertex[2].rhw = 1.0f;
 	this->vertex[3].rhw = 1.0f;
 
 	// 反射光の設定
@@ -49,9 +45,9 @@ Player::Player() {
 
 Player::~Player(void)
 {
-	if(this->texture != NULL ) { // テクスチャの開放
-		this->texture->Release();
-		this->texture = NULL;
+	if(this->animRun.texture != NULL ) { // テクスチャの開放
+		this->animRun.texture->Release();
+		this->animRun.texture = NULL;
 	}
 }
 
@@ -59,36 +55,30 @@ void Player::Start() {
 	this->device = GetDevice();
 	// D3DXCreateTextureFromFile(this->device, TEXTURE_GAME_PLAYER00, &texture);
 	D3DXCreateTextureFromFileEx(
-        this->device,
-        TEXTURE_GAME_PLAYER00,
-        800, 80, //★取得した画像ファイルのサイズを指定する
-        1, 0,
-        D3DFMT_A8R8G8B8,
-        D3DPOOL_MANAGED,
-        D3DX_FILTER_NONE,
-        D3DX_FILTER_NONE,
-        0xFF000000,
-        NULL, NULL,
-        &texture);
+		this->device, TEXTURE_GAME_PLAYER00,
+		800, 80, //取得した画像ファイルのサイズを指定する
+		1, 0,
+		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
+		&this->animRun.texture);
+	this->animRun.counter = 0;
+	this->animRun.pattern = 0;
 }
 
 void Player::Update() {
 
 	Player::SetVertex();
 
-	this->animationCount++;
+	this->animRun.counter++;
 	// リセットカウンター
-	if (this->animationCount > TIME_ANIMATION-1) {
-		this->animationCount = 0; // 先頭に戻す
+	if (this->animRun.counter > TIME_ANIMATION-1) {
+		this->animRun.counter = 0; // 先頭に戻す
 	}
-	if(this->animationCount % TIME_ANIMATION == 0) {
+	if(this->animRun.counter % TIME_ANIMATION == 0) {
 		// パターンの切り替え
-		this->animationPattern = (this->animationPattern + 1) % ANIM_PATTERN_NUM;
+		this->animRun.pattern = (this->animRun.pattern + 1) % ANIM_PATTERN_NUM;
 		// テクスチャ座標を設定
-		Player::SetTexture(this->animationPattern);
+		Player::SetTexture(this->animRun.pattern);
 	}
-
-
 }
 
 void Player::Draw() {
@@ -96,7 +86,7 @@ void Player::Draw() {
 	this->device->SetFVF(FVF_VERTEX_2D);
 
 	// テクスチャの設定 (*33)
-	this->device->SetTexture(0,texture);
+	this->device->SetTexture(0,this->animRun.texture);
 
 	// ポリゴンの描画
 	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
