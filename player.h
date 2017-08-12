@@ -2,12 +2,25 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-//*****************************************************************************
-// プロトタイプ宣言
-//*****************************************************************************
-HRESULT InitPlayer(void);
-void UninitPlayer(void);
-void UpdatePlayer(void);
-void DrawPlayer(void);
+class Player {
+private:
+	LPDIRECT3DDEVICE9  device;
+	D3DXVECTOR3        position; // ポリゴンの移動量
+	D3DXVECTOR3        rotation; // ポリゴンの回転量
+	int                animationCount;                // アニメーションカウント (*34)
+	int                animationPattern;              // アニメーションパターンナンバー (*34)
+	LPDIRECT3DTEXTURE9 texture; // テクスチャへのポリゴン (*33)
+	Vertex2D           vertex[4];      // 頂点情報格納ワーク
+
+	void SetTexture(int pattern);
+	void SetVertex(void);
+
+public:
+	Player ();
+	virtual ~Player ();
+	void Start();
+	void Update();
+	void Draw();
+};
 
 #endif

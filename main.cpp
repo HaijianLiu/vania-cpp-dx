@@ -15,6 +15,9 @@ Macross
 /*============================================================================*/
 
 
+// ポリゴンの初期化処理
+Player* player = new Player();
+
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT Init(HWND hWnd, BOOL bWindow);
@@ -91,6 +94,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
+	player->Start();
+
 	// メッセージループ
 	while(1)
 	{
@@ -112,9 +117,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			dwCurrentTime = timeGetTime();
 
 			if ((dwCurrentTime - dwFPSLastTime) >= 500) {
-#ifdef _DEBUG
-				g_nCountFPS = (dwFrameCount * 1000) / (dwCurrentTime - dwFPSLastTime); // FPSを計測
-#endif
+				#ifdef _DEBUG
+					g_nCountFPS = (dwFrameCount * 1000) / (dwCurrentTime - dwFPSLastTime); // FPSを計測
+				#endif
 				dwFPSLastTime = dwCurrentTime; // FPS計測時刻を保存
 				dwFrameCount = 0; // カウントをクリア
 			}
@@ -270,9 +275,6 @@ HRESULT Init(HWND hWnd, BOOL bWindow)
 	D3DXCreateFont(g_pD3DDevice,18,0,0,0,FALSE,SHIFTJIS_CHARSET,OUT_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,_T("Terminal"),&g_pD3DXFont);
 	#endif
 
-	// ポリゴンの初期化処理
-	InitPlayer();
-
 	return S_OK;
 }
 
@@ -297,7 +299,7 @@ void Uninit(void)
 	}
 	#endif
 	// ポリゴンの終了処理
-	UninitPlayer();
+	delete player;
 }
 
 //=============================================================================
@@ -306,7 +308,7 @@ void Uninit(void)
 void Update(void)
 {
 	// ポリゴンの更新処理
-	UpdatePlayer();
+	player->Update();
 }
 
 //=============================================================================
@@ -320,15 +322,15 @@ void Draw(void)
 	// Direct3Dによる描画の開始
 	if(SUCCEEDED(g_pD3DDevice->BeginScene()))
 	{
-		g_pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);	// テクスチャ拡大時の補間設定
-		g_pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);	// テクスチャ縮小時の補間設定
-		g_pD3DDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);	// テクスチャ縮小時の補間設定
+		// g_pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);	// テクスチャ拡大時の補間設定
+		// g_pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);	// テクスチャ縮小時の補間設定
+		// g_pD3DDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);	// テクスチャ縮小時の補間設定
 
 		// ポリゴンの描画処理
-		DrawPlayer();
+		player->Draw();
 
 		#ifdef _DEBUG
-		DrawDebugFont(); // 一番最後にDrawするように
+			DrawDebugFont(); // 一番最後にDrawするように
 		#endif
 
 		// Direct3Dによる描画の終了
@@ -342,8 +344,7 @@ void Draw(void)
 //=============================================================================
 // デバイス取得関数
 //=============================================================================
-LPDIRECT3DDEVICE9 GetDevice(void)
-{
+LPDIRECT3DDEVICE9 GetDevice(void) {
 	return(g_pD3DDevice);
 }
 
