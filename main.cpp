@@ -6,10 +6,10 @@
 /*------------------------------------------------------------------------------
 Macross
 ------------------------------------------------------------------------------*/
-#define CLASS_NAME  _T("AppClass")     // ウインドウのクラス名
-#define WINDOW_NAME _T("アニメーション") // ウインドウのキャプション名
-#define SCREEN_WIDTH    (800)                 // ウインドウの幅
-#define SCREEN_HEIGHT   (640)                 // ウインドウの高さ
+#define CLASS_NAME  _T  ("AppClass")        // ウインドウのクラス名
+#define WINDOW_NAME _T  ("Vania")           // ウインドウのキャプション名
+#define SCREEN_WIDTH    (800)               // ウインドウの幅
+#define SCREEN_HEIGHT   (640)               // ウインドウの高さ
 #define SCREEN_CENTER_X (SCREEN_WIDTH / 2)  // ウインドウの中心Ｘ座標
 #define SCREEN_CENTER_Y (SCREEN_HEIGHT / 2) // ウインドウの中心Ｙ座標
 
