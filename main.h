@@ -44,17 +44,6 @@ typedef struct {
 } Vertex2D;
 
 
-typedef struct {
-	LPDIRECT3DTEXTURE9 texture;
-	int divideX, divideY;
-	int patterSizeX, patterSizeY;
-	int currentPattern;
-	int patternMax;
-	int sampleTime;
-	int counter;
-} Animation;
-
-
 /*------------------------------------------------------------------------------
 < Functions >
 ------------------------------------------------------------------------------*/
