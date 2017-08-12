@@ -165,10 +165,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	dwExecLastTime = dwFPSLastTime = timeGetTime();
 	dwCurrentTime = dwFrameCount = 0;
 
-
-	/*------------------------------------------------------------------------------
-	Start
-	------------------------------------------------------------------------------*/
+	// Start
 	Start();
 
 	while(1) {
@@ -200,19 +197,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60)) {
 			dwExecLastTime = dwCurrentTime;
 
-			/*------------------------------------------------------------------------------
-			Update
-			------------------------------------------------------------------------------*/
+			// Update
 			Update();
+			// Draw
 			Draw();
 
 			dwFrameCount ++;
 		}
 	}
 
-	/*------------------------------------------------------------------------------
-	Delete
-	------------------------------------------------------------------------------*/
+	// Delete
 	Delete();
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
@@ -221,22 +215,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 }
 
 
-
-
-
-
-
-
-
-
-
-
 /*------------------------------------------------------------------------------
 Get gD3DDevice
 ------------------------------------------------------------------------------*/
 LPDIRECT3DDEVICE9 GetDevice(void) {
 	return(gD3DDevice);
 }
+
+
+
+
+
+
 
 
 
