@@ -2,7 +2,7 @@
 
 #include "main.h"
 #include "Animation.h"
-#include "player.h"
+#include "Player.h"
 
 /*------------------------------------------------------------------------------
 < Texture Pathes >
