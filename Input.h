@@ -2,11 +2,6 @@
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
-#include "main.h"
-
-//*****************************************************************************
-// プロトタイプ宣言
-//*****************************************************************************
 HRESULT InitInput(HINSTANCE hInst, HWND hWnd);
 void UninitInput(void);
 void UpdateInput(void);
