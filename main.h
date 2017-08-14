@@ -5,15 +5,17 @@
 /*------------------------------------------------------------------------------
 < include >
 ------------------------------------------------------------------------------*/
+// Warning
 #define _CRT_SECURE_NO_WARNINGS
-#include "windows.h"
-#include "d3dx9.h"
-#include <tchar.h>
-
 #define DIRECTINPUT_VERSION 0x0800
-#include "dinput.h"
+// Standard
+#include "stdio.h"
+#include <tchar.h>
+// Windows & DirectX
+#include "windows.h"
 #include "mmsystem.h"
-
+#include "d3dx9.h"
+#include "dinput.h"
 #if 1
 	#pragma comment (lib, "d3d9.lib")
 	#pragma comment (lib, "d3dx9.lib")
@@ -22,15 +24,12 @@
 	#pragma comment (lib, "winmm.lib")
 #endif
 
-#include "Input.h"
-
 
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
 
 #define PIXEL_SCALE (3)
-
 
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 
@@ -44,6 +43,14 @@ typedef struct {
 	D3DCOLOR diffuse;
 	D3DXVECTOR2 texture;
 } Vertex2D;
+
+
+/*------------------------------------------------------------------------------
+< class Prototype >
+------------------------------------------------------------------------------*/
+#include "Input.h"
+#include "Time.h"
+#include "Player.h"
 
 
 /*------------------------------------------------------------------------------
