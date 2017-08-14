@@ -207,10 +207,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 
 /*------------------------------------------------------------------------------
-Get gD3DDevice
+Get Functions
 ------------------------------------------------------------------------------*/
-LPDIRECT3DDEVICE9 GetDevice(void) {
-	return(gD3DDevice);
+LPDIRECT3DDEVICE9 GetDevice() {
+	return gD3DDevice;
+}
+
+Time* GetTime() {
+	return time;
 }
 
 
@@ -234,7 +238,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			break;
 		case WM_KEYDOWN:
 			switch(wParam) {
-				case VK_ESCAPE: // [ESC] key
+				case VK_ESCAPE:
 					DestroyWindow(hWnd);
 					break;
 			}
@@ -244,6 +248,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	}
 	return 0;
 }
+
+
 
 HRESULT InitDirectX(HWND hWnd, BOOL bWindow) {
 	D3DPRESENT_PARAMETERS d3dpp;
