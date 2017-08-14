@@ -57,6 +57,7 @@ void Start() {
 Update
 ------------------------------------------------------------------------------*/
 void Update(void) {
+	UpdateInput();
 	player->Update();
 }
 
@@ -101,6 +102,7 @@ void Delete(void)
 	#endif
 
 	delete player;
+	UninitInput();
 }
 
 
@@ -167,6 +169,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	// Start
 	Start();
+	InitInput(hInstance,hWnd);
 
 	while(1) {
 

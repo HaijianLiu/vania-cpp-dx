@@ -26,7 +26,7 @@ Player::Player() {
 	this->vertex[1].rhw = 1.0f;
 	this->vertex[2].rhw = 1.0f;
 	this->vertex[3].rhw = 1.0f;
-	
+
 	this->vertex[0].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 	this->vertex[1].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 	this->vertex[2].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
@@ -69,6 +69,53 @@ void Player::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Player::Update() {
+
+	float speed = 10.0f;
+
+	if (GetKeyboardPress(DIK_UP)) {
+		if (GetKeyboardPress(DIK_LEFT)) {
+			this->position.y -= 0.69 * speed;
+			this->position.x -= 0.69 * speed;
+		} else if (GetKeyboardPress(DIK_RIGHT)) {
+			this->position.y -= 0.69 * speed;
+			this->position.x += 0.69 * speed;
+		} else {
+			this->position.y -= speed;
+		}
+	}
+	else if (GetKeyboardPress(DIK_DOWN)) {
+		if (GetKeyboardPress(DIK_LEFT)) {
+			this->position.y += 0.69 * speed;
+			this->position.x -= 0.69 * speed;
+		} else if (GetKeyboardPress(DIK_RIGHT)) {
+			this->position.y += 0.69 * speed;
+			this->position.x += 0.69 * speed;
+		} else {
+			this->position.y += speed;
+		}
+	}
+	else if (GetKeyboardPress(DIK_LEFT)) {
+		if (GetKeyboardPress(DIK_UP)) {
+			this->position.y -= 0.69 * speed;
+			this->position.x -= 0.69 * speed;
+		} else if (GetKeyboardPress(DIK_DOWN)) {
+			this->position.y += 0.69 * speed;
+			this->position.x -= 0.69 * speed;
+		} else {
+			this->position.x -= speed;
+		}
+	}
+	else if (GetKeyboardPress(DIK_RIGHT)) {
+		if (GetKeyboardPress(DIK_UP)) {
+			this->position.y -= 0.69 * speed;
+			this->position.x += 0.69 * speed;
+		} else if (GetKeyboardPress(DIK_DOWN)) {
+			this->position.y += 0.69 * speed;
+			this->position.x += 0.69 * speed;
+		} else {
+			this->position.x += speed;
+		}
+	}
 
 	Player::SetVertex();
 	this->animRun->Update(this->vertex);

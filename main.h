@@ -22,6 +22,8 @@
 	#pragma comment (lib, "winmm.lib")
 #endif
 
+#include "Input.h"
+
 
 /*------------------------------------------------------------------------------
 < Macross >
