@@ -15,6 +15,7 @@ private:
 public:
 	int patterSizeX, patterSizeY;
 	int divideX, divideY;
+	bool flipX;
 
 	Animation(int imageSizeX, int imageSizeY, int divideX, int divideY, int sampleTime);
 	virtual ~Animation ();

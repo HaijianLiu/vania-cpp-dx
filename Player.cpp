@@ -15,7 +15,7 @@
 ------------------------------------------------------------------------------*/
 Player::Player() {
 
-	Player::SetVertex();
+	this->animRun = new Animation(800,80,10,1,4);
 
 	this->vertex[0].rhw = 1.0f;
 	this->vertex[1].rhw = 1.0f;
@@ -26,11 +26,6 @@ Player::Player() {
 	this->vertex[1].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 	this->vertex[2].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 	this->vertex[3].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
-
-	this->vertex[0].texture = D3DXVECTOR2(0.0f, 0.0f);
-	this->vertex[1].texture = D3DXVECTOR2(1.0f/this->animRun->divideX, 0.0f);
-	this->vertex[2].texture = D3DXVECTOR2(0.0f, 1.0f/this->animRun->divideY);
-	this->vertex[3].texture = D3DXVECTOR2(1.0f/this->animRun->divideX, 1.0f/this->animRun->divideY);
 }
 
 
@@ -66,15 +61,17 @@ void Player::Start() {
 void Player::Update() {
 
 	if (GetKeyboardPress(DIK_LEFT)) {
+		this->right = false;
 		this->position.x -= this->speed;
 	}
 	if (GetKeyboardPress(DIK_RIGHT)) {
+		this->right = true;
 		this->position.x += this->speed;
 	}
-
 	Player::SetVertex();
-	this->animRun->Update(this->vertex);
 
+	this->animRun->flipX = !this->right;
+	this->animRun->Update(this->vertex);
 }
 
 
@@ -86,6 +83,8 @@ void Player::Draw() {
 	this->device->SetTexture(0,this->texture);
 	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
 }
+
+
 
 
 

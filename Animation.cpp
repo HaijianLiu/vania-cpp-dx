@@ -12,6 +12,7 @@ Animation::Animation(int imageSizeX, int imageSizeY, int divideX, int divideY, i
 	this->patterSizeX = imageSizeX / this->divideX * PIXEL_SCALE;
 	this->patterSizeY = imageSizeY / this->divideY * PIXEL_SCALE;
 	this->patternMax = this->divideX * this->divideY;
+	this->flipX = false;
 }
 
 Animation::~Animation() {
@@ -35,8 +36,16 @@ void Animation::SetTexture(Vertex2D* vertex) {
 	float sizeX = 1.0f / this->divideX;
 	float sizeY = 1.0f / this->divideY;
 
-	(vertex+0)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY );
-	(vertex+1)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY );
-	(vertex+2)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY + sizeY );
-	(vertex+3)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY + sizeY );
+	if (this->flipX == false) {
+		(vertex+0)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY );
+		(vertex+1)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY );
+		(vertex+2)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY + sizeY );
+		(vertex+3)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY + sizeY );
+	}
+	if (this->flipX == true) {
+		(vertex+0)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY );
+		(vertex+1)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY );
+		(vertex+2)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY + sizeY );
+		(vertex+3)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY + sizeY );
+	}
 }

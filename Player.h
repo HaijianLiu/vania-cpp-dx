@@ -13,14 +13,16 @@ private:
 	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	float speed = 5.0f;
 
+	bool right = true;
+
 	LPDIRECT3DTEXTURE9 texture;
-	Animation* animRun = new Animation(800,80,10,1,4);
+	Animation* animRun;
 
 	void SetVertex(void);
 
 public:
 	Player ();
-	virtual ~Player ();
+	virtual ~Player();
 	void Start();
 	void Update();
 	void Draw();
