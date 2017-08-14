@@ -26,7 +26,7 @@ Player::Player() {
 	this->vertex[1].rhw = 1.0f;
 	this->vertex[2].rhw = 1.0f;
 	this->vertex[3].rhw = 1.0f;
-
+	
 	this->vertex[0].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 	this->vertex[1].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 	this->vertex[2].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
@@ -46,6 +46,7 @@ Player::~Player() {
 	if (this->texture != NULL) {
 		this->texture->Release();
 	}
+	delete animRun;
 }
 
 
@@ -61,7 +62,6 @@ void Player::Start() {
 		1, 0,
 		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
 		&this->texture);
-
 }
 
 
