@@ -1,6 +1,5 @@
 ﻿
-#include "main.h"
-#include "Animation.h"
+#include "Engine.h"
 
 Animation::Animation(int imageSizeX, int imageSizeY, int divideX, int divideY, int sampleTime) {
 	this->counter = 0;

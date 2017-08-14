@@ -32,9 +32,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -45,6 +42,9 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

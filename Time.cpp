@@ -1,7 +1,5 @@
 ﻿
-#include "main.h"
-#include "Time.h"
-
+#include "Engine.h"
 
 Time::Time() {
 
