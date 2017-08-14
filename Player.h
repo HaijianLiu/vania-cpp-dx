@@ -11,7 +11,7 @@ private:
 
 	D3DXVECTOR3 position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	float speed = 5.0f;
+	float speed = 2.0f * PIXEL_SCALE;
 
 	bool right = true;
 
