@@ -60,14 +60,30 @@ void Player::Start() {
 ------------------------------------------------------------------------------*/
 void Player::Update() {
 
+	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->right = false;
-		this->position.x -= this->speed;
+		this->position.x -= this->speed * PIXEL_SCALE;
 	}
 	if (GetKeyboardPress(DIK_RIGHT)) {
 		this->right = true;
-		this->position.x += this->speed;
+		this->position.x += this->speed * PIXEL_SCALE;
 	}
+
+	// jump
+	if (GetKeyboardPress(DIK_SPACE)) {
+		if (!air) {
+			this->verticalSpeed = this->jumpPower;
+			this->air = true;
+		}
+	}
+
+	// gravity
+	if (air) {
+		this->position.y -= 0.5f * this->verticalSpeed * PIXEL_SCALE;
+		this->verticalSpeed -= this->gravity;
+	}
+
 	Player::SetVertex();
 
 	this->animRun->flipX = !this->right;

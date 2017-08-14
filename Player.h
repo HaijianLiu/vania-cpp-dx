@@ -11,8 +11,12 @@ private:
 
 	D3DXVECTOR3 position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	float speed = 2.0f * PIXEL_SCALE;
+	float verticalSpeed = 0.0f;
 
+	float gravity = 0.1f;
+	float speed = 2.0f;
+	float jumpPower = 5.0f;
+	bool air = false;
 	bool right = true;
 
 	LPDIRECT3DTEXTURE9 texture;

@@ -8,8 +8,8 @@ Macross
 ------------------------------------------------------------------------------*/
 #define CLASS_NAME  _T  ("AppClass")
 #define WINDOW_NAME _T  ("Vania")
-#define SCREEN_WIDTH    (800)
-#define SCREEN_HEIGHT   (640)
+#define SCREEN_WIDTH    (1280)
+#define SCREEN_HEIGHT   (720)
 
 
 /*------------------------------------------------------------------------------
