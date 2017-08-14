@@ -1,15 +1,14 @@
 ﻿
-
 #include "main.h"
 #include "Player.h"
 
 /*------------------------------------------------------------------------------
 Macross
 ------------------------------------------------------------------------------*/
-#define CLASS_NAME  _T  ("AppClass")
-#define WINDOW_NAME _T  ("Vania")
-#define SCREEN_WIDTH    (1280)
-#define SCREEN_HEIGHT   (720)
+#define CLASS_NAME _T("AppClass")
+#define WINDOW_NAME _T("Vania")
+#define SCREEN_WIDTH (800)
+#define SCREEN_HEIGHT (600)
 
 
 /*------------------------------------------------------------------------------
@@ -29,6 +28,7 @@ LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 /*------------------------------------------------------------------------------
 Global Object
 ------------------------------------------------------------------------------*/
+Time* time = new Time();
 Player* player = new Player();
 
 
@@ -37,11 +37,11 @@ Debug
 ------------------------------------------------------------------------------*/
 #ifdef _DEBUG
 	LPD3DXFONT gD3DXFont = NULL; // D3D font pointer
-	int gCountFPS; // FPS counter
-	void DrawDebugFont(void) {
+
+	void DrawDebugFont() {
 		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
-		TCHAR str[256];
-		wsprintf(str,_T("FPS:%d\n"), gCountFPS);
+		char str[256];
+		sprintf(str,"FPS:%d\nDeltaTime:%.3fs\n", time->countFPS, time->deltaTime);
 		gD3DXFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
 	}
 #endif
@@ -50,6 +50,7 @@ Debug
 Start
 ------------------------------------------------------------------------------*/
 void Start() {
+	time->Start();
 	player->Start();
 }
 
@@ -58,6 +59,7 @@ Update
 ------------------------------------------------------------------------------*/
 void Update(void) {
 	UpdateInput();
+	time->Update();
 	player->Update();
 }
 
@@ -101,7 +103,9 @@ void Delete(void)
 		}
 	#endif
 
+	delete time;
 	delete player;
+
 	UninitInput();
 }
 
@@ -156,19 +160,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
-	// time
-	DWORD dwExecLastTime;
-	DWORD dwFPSLastTime;
-	DWORD dwCurrentTime;
-	DWORD dwFrameCount;
 
-	// Init frame time
-	timeBeginPeriod(1);
-	dwExecLastTime = dwFPSLastTime = timeGetTime();
-	dwCurrentTime = dwFrameCount = 0;
-
-	// Start
+	/*------------------------------------------------------------------------------
+	Start
+	------------------------------------------------------------------------------*/
 	Start();
+
+
 	InitInput(hInstance,hWnd);
 
 	while(1) {
@@ -184,32 +182,23 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			}
 		}
 
+
+		/*------------------------------------------------------------------------------
+		Update
+		------------------------------------------------------------------------------*/
 		// set time
-		dwCurrentTime = timeGetTime();
-
-		// reset frame counter
-		if ((dwCurrentTime - dwFPSLastTime) >= 500) {
-			#ifdef _DEBUG
-				gCountFPS = (dwFrameCount * 1000) / (dwCurrentTime - dwFPSLastTime);
-			#endif
-			dwFPSLastTime = dwCurrentTime;
-			dwFrameCount = 0;
-		}
-
+		time->SetTime();
 		// Update
-		if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60)) {
-			dwExecLastTime = dwCurrentTime;
-
-			// Update
+		if (time->CheckFPS(60)) {
 			Update();
-			// Draw
 			Draw();
-
-			dwFrameCount ++;
 		}
 	}
 
-	// Delete
+
+	/*------------------------------------------------------------------------------
+	Delete
+	------------------------------------------------------------------------------*/
 	Delete();
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
@@ -224,6 +213,9 @@ Get gD3DDevice
 LPDIRECT3DDEVICE9 GetDevice(void) {
 	return(gD3DDevice);
 }
+
+
+
 
 
 
