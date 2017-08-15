@@ -22,8 +22,12 @@ void Animation::Update(Vertex2D* vertex) {
 	if (this->counter > this->sampleTime - 1) {
 		this->counter = 0;
 	}
+
 	if(this->counter % this->sampleTime == 0) {
 		this->currentPattern = (this->currentPattern + 1) % this->patternMax;
+		Animation::SetTexture(vertex);
+	}
+	else {
 		Animation::SetTexture(vertex);
 	}
 }
