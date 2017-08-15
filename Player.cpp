@@ -44,7 +44,6 @@ Player::~Player() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Player::Start() {
-	this->device = GetDevice();
 	this->time = GetTime();
 	this->animIdle->sprite->CreatTexture(TEXTURE_PLAYER_IDLE);
 	this->animRun->sprite->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);

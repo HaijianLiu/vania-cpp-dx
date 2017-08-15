@@ -8,17 +8,19 @@ private:
 	LPDIRECT3DTEXTURE9 texture;
 
 	D3DXVECTOR2 imageSize;
-	D3DXVECTOR2 divide;
-	D3DXVECTOR2 spriteSize;
-	int spriteMax;
 
 public:
+	D3DXVECTOR2 spriteSize;
+	D3DXVECTOR2 divide;
+	int spriteMax;
 	bool flipX = false;
 
 	Sprite(int imageSizeX, int imageSizeY, int divideX, int divideY);
 	virtual ~Sprite();
 
 	void CreatTexture(const char* path);
+	void SetTexture(Vertex2D* vertex, int currentSprite);
+	void Draw(Vertex2D* vertex);
 };
 
 #endif

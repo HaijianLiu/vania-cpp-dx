@@ -6,7 +6,6 @@ class Animation;
 
 class Player {
 private:
-	LPDIRECT3DDEVICE9 device;
 	Vertex2D vertex[4];
 	Time* time;
 
