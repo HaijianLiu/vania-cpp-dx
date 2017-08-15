@@ -53,6 +53,7 @@ typedef struct {
 ------------------------------------------------------------------------------*/
 #include "Input.h"
 #include "Time.h"
+#include "Transform.h"
 #include "Animation.h"
 
 
