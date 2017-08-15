@@ -26,6 +26,7 @@ LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 Global Object
 ------------------------------------------------------------------------------*/
 Time* time = new Time();
+Ground* ground = new Ground();
 Player* player = new Player();
 
 
@@ -48,6 +49,7 @@ Start
 ------------------------------------------------------------------------------*/
 void Start() {
 	time->Start();
+	ground->Start();
 	player->Start();
 }
 
@@ -57,6 +59,7 @@ Update
 void Update(void) {
 	UpdateInput();
 	time->Update();
+	ground->Update();
 	player->Update();
 }
 
@@ -68,6 +71,7 @@ void Draw(void) {
 
 	if(SUCCEEDED(gD3DDevice->BeginScene())) {
 
+		ground->Draw();
 		player->Draw();
 
 		#ifdef _DEBUG
@@ -101,6 +105,7 @@ void Delete(void)
 	#endif
 
 	delete time;
+	delete ground;
 	delete player;
 
 	UninitInput();
