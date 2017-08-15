@@ -14,9 +14,7 @@
 Player::Player() {
 
 	this->transform = new Transform();
-	this->sprRun = new Sprite(800,80,10,1);
 	this->animRun = new Animation(800,80,10,1,4);
-	this->sprIdle = new Sprite(240,80,3,1);
 	this->animIdle = new Animation(240,80,3,1,15);
 
 	this->vertex[0].rhw = 1.0f;
@@ -35,18 +33,9 @@ Player::Player() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Player::~Player() {
-	// delete textures
-	if (this->texAnimRun != NULL) {
-		this->texAnimRun->Release();
-	}
-	if (this->texAnimIdle != NULL) {
-		this->texAnimIdle->Release();
-	}
 	// delete objects
 	delete this->transform;
-	delete this->sprRun;
 	delete this->animRun;
-	delete this->sprIdle;
 	delete this->animIdle;
 }
 
@@ -57,23 +46,8 @@ Player::~Player() {
 void Player::Start() {
 	this->device = GetDevice();
 	this->time = GetTime();
-	this->sprIdle->CreatTexture(TEXTURE_PLAYER_IDLE);
-	this->sprRun->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);
-
-	D3DXCreateTextureFromFileEx(
-		this->device, TEXTURE_PLAYER_RUN_SHOOT,
-		800, 80,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&this->texAnimRun);
-
-	D3DXCreateTextureFromFileEx(
-		this->device, TEXTURE_PLAYER_IDLE,
-		240, 80,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&this->texAnimIdle);
-
+	this->animIdle->sprite->CreatTexture(TEXTURE_PLAYER_IDLE);
+	this->animRun->sprite->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);
 }
 
 
@@ -107,24 +81,12 @@ void Player::Update() {
 
 	// gravity
 	if (this->air) {
-		this->transform->position.y -= 0.5f * this->verticalSpeed  * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.y -= this->verticalSpeed  * this->time->deltaTime * UNIT_TO_PIXEL;
 		this->verticalSpeed -= this->gravity * this->time->deltaTime;
 	}
 
 	// Update Transform
-	this->transform->Update(this->vertex, this->animRun->patterSizeX, this->animRun->patterSizeY);
-
-
-	// Update Animation
-	if (this->move) {
-		this->animRun->flipX = !this->right;
-		this->animRun->Update(this->vertex);
-	}
-	if (!this->move) {
-		this->animIdle->flipX = !this->right;
-		this->animIdle->Update(this->vertex);
-	}
-
+	this->transform->Update(this->vertex, (int)this->animRun->sprite->spriteSize.x, (int)this->animRun->sprite->spriteSize.y);
 }
 
 
@@ -132,12 +94,14 @@ void Player::Update() {
 < Draw >
 ------------------------------------------------------------------------------*/
 void Player::Draw() {
-	this->device->SetFVF(FVF_VERTEX_2D);
 	if (this->move) {
-		this->device->SetTexture(0,this->texAnimRun);
+		this->animRun->sprite->flipX = !this->right;
+		this->animRun->Update(this->vertex);
+		this->animRun->sprite->Draw(vertex);
 	}
 	if (!this->move) {
-		this->device->SetTexture(0,this->texAnimIdle);
+		this->animIdle->sprite->flipX = !this->right;
+		this->animIdle->Update(this->vertex);
+		this->animIdle->sprite->Draw(vertex);
 	}
-	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, this->vertex, sizeof(Vertex2D));
 }
