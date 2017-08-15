@@ -9,7 +9,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define DIRECTINPUT_VERSION 0x0800
 // Standard
-#include "stdio.h"
+#include <iostream>
+#include <map>
 #include <tchar.h>
 // Windows & DirectX
 #include "windows.h"
@@ -72,6 +73,7 @@ struct Int2D {
 < Game Object classes >
 ------------------------------------------------------------------------------*/
 #include "Player.h"
+#include "Ground.h"
 
 
 /*------------------------------------------------------------------------------
