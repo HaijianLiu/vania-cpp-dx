@@ -6,15 +6,18 @@ class Time {
 private:
 	DWORD lastTime = 0;
 	DWORD currentTime = 0;
-	// FPS debug
-	DWORD lastFPSTime = 0;
-	DWORD frameCounter = 0;
 
+	#ifdef _DEBUG
+		DWORD lastFPSTime = 0;
+		DWORD frameCounter = 0;
+	#endif
 
 public:
 	float deltaTime = 0;
-	// FPS debug
-	int countFPS = 0;
+	
+	#ifdef _DEBUG
+		int countFPS = 0;
+	#endif
 
 	Time();
 	~Time();

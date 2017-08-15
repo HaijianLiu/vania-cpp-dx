@@ -12,20 +12,24 @@ Time::~Time() {
 void Time::Start() {
 	timeBeginPeriod(1);
 	this->lastTime = timeGetTime();
-	// FPS debug
-	this->lastFPSTime = this->lastTime;
+
+	#ifdef _DEBUG
+		this->lastFPSTime = this->lastTime;
+	#endif
 }
 
 // in a game loop but not in FPS check loop
 void Time::SetTime() {
 	this->currentTime = timeGetTime();
-	// FPS debug
-	// reset frame counter
-	if ((this->currentTime - this->lastFPSTime) >= 1000) {
-		this->countFPS = (this->frameCounter * 1000) / (this->currentTime - this->lastFPSTime);
-		this->lastFPSTime = this->currentTime;
-		this->frameCounter = 0;
-	}
+
+	#ifdef _DEBUG
+		// reset frame counter
+		if ((this->currentTime - this->lastFPSTime) >= 1000) {
+			this->countFPS = (this->frameCounter * 1000) / (this->currentTime - this->lastFPSTime);
+			this->lastFPSTime = this->currentTime;
+			this->frameCounter = 0;
+		}
+	#endif
 }
 
 
@@ -33,8 +37,10 @@ void Time::SetTime() {
 void Time::Update() {
 	this->deltaTime = ((float)this->currentTime - (float)this->lastTime) / 1000;
 	this->lastTime = this->currentTime;
-	// FPS debug
-	this->frameCounter ++;
+
+	#ifdef _DEBUG
+		this->frameCounter ++;
+	#endif
 }
 
 
