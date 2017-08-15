@@ -60,11 +60,11 @@ void Player::Update() {
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->right = false;
-		this->position.x -= this->speed * PIXEL_SCALE;
+		this->position.x -= this->speed * PIXEL_SCALE * GetDeltaTime();
 	}
 	if (GetKeyboardPress(DIK_RIGHT)) {
 		this->right = true;
-		this->position.x += this->speed * PIXEL_SCALE;
+		this->position.x += this->speed * PIXEL_SCALE * GetDeltaTime();
 	}
 
 	// jump

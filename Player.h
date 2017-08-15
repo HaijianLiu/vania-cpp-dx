@@ -14,7 +14,7 @@ private:
 	float verticalSpeed = 0.0f;
 
 	float gravity = 0.1f;
-	float speed = 2.0f;
+	float speed = 50.0f;
 	float jumpPower = 5.0f;
 	bool air = false;
 	bool right = true;

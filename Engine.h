@@ -61,7 +61,7 @@ typedef struct {
 < Global Functions >
 ------------------------------------------------------------------------------*/
 LPDIRECT3DDEVICE9 GetDevice();
-Time* GetTime();
+float GetDeltaTime();
 
 
 #endif
