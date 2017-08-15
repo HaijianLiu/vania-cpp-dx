@@ -10,8 +10,9 @@ private:
 	Vertex2D vertex[4];
 	Time* time;
 
-	D3DXVECTOR3 position = D3DXVECTOR3(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 0.0f);
-	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	LPDIRECT3DTEXTURE9 texture;
+	Transform* transform;
+	Animation* animRun;
 
 	float gravity = 9.8f;
 	float speed = 1.0f;
@@ -19,10 +20,6 @@ private:
 	bool air = false;
 	bool right = true;
 
-	LPDIRECT3DTEXTURE9 texture;
-	Animation* animRun;
-
-	void SetVertex(void);
 
 public:
 	float verticalSpeed = 0.0f;

@@ -12,6 +12,7 @@
 ------------------------------------------------------------------------------*/
 Player::Player() {
 
+	this->transform = new Transform();
 	this->animRun = new Animation(800,80,10,1,4);
 
 	this->vertex[0].rhw = 1.0f;
@@ -33,6 +34,7 @@ Player::~Player() {
 	if (this->texture != NULL) {
 		this->texture->Release();
 	}
+	delete transform;
 	delete animRun;
 }
 
@@ -61,11 +63,11 @@ void Player::Update() {
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->right = false;
-		this->position.x -= this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.x -= this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
 	}
 	if (GetKeyboardPress(DIK_RIGHT)) {
 		this->right = true;
-		this->position.x += this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.x += this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
 	}
 
 	// jump
@@ -78,14 +80,17 @@ void Player::Update() {
 
 	// gravity
 	if (air) {
-		this->position.y -= 0.5f * this->verticalSpeed  * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.y -= 0.5f * this->verticalSpeed  * this->time->deltaTime * UNIT_TO_PIXEL;
 		this->verticalSpeed -= this->gravity * this->time->deltaTime;
 	}
 
-	Player::SetVertex();
+	// Update Transform
+	this->transform->Update(this->vertex, this->animRun->patterSizeX, this->animRun->patterSizeY);
 
 	this->animRun->flipX = !this->right;
+	// Update Animation
 	this->animRun->Update(this->vertex);
+
 }
 
 
@@ -96,17 +101,4 @@ void Player::Draw() {
 	this->device->SetFVF(FVF_VERTEX_2D);
 	this->device->SetTexture(0,this->texture);
 	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
-}
-
-
-
-
-
-
-
-void Player::SetVertex() {
-	this->vertex[0].vertex = D3DXVECTOR3(this->position.x - this->animRun->patterSizeX / 2.0f, this->position.y - this->animRun->patterSizeY / 2.0f, 0.0f);
-	this->vertex[1].vertex = D3DXVECTOR3(this->position.x + this->animRun->patterSizeX / 2.0f, this->position.y - this->animRun->patterSizeY / 2.0f, 0.0f);
-	this->vertex[2].vertex = D3DXVECTOR3(this->position.x - this->animRun->patterSizeX / 2.0f, this->position.y + this->animRun->patterSizeY / 2.0f, 0.0f);
-	this->vertex[3].vertex = D3DXVECTOR3(this->position.x + this->animRun->patterSizeX / 2.0f, this->position.y + this->animRun->patterSizeY / 2.0f, 0.0f);
 }
