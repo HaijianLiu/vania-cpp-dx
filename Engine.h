@@ -40,12 +40,22 @@
 /*------------------------------------------------------------------------------
 < Structs >
 ------------------------------------------------------------------------------*/
-typedef struct {
+struct Vertex2D {
 	D3DXVECTOR3 vertex;
 	float rhw;
 	D3DCOLOR diffuse;
 	D3DXVECTOR2 texCoord;
-} Vertex2D;
+};
+
+struct Int2D {
+	int x;
+	int y;
+	Int2D() {};
+	Int2D(int x, int y) {
+		this->x = x;
+		this->y = y;
+	}
+};
 
 
 /*------------------------------------------------------------------------------

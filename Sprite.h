@@ -7,11 +7,11 @@ private:
 	LPDIRECT3DDEVICE9 device;
 	LPDIRECT3DTEXTURE9 texture;
 
-	D3DXVECTOR2 imageSize;
+	Int2D imageSize;
 
 public:
-	D3DXVECTOR2 spriteSize;
-	D3DXVECTOR2 divide;
+	Int2D spriteSize;
+	Int2D divide;
 	int spriteMax;
 	bool flipX = false;
 

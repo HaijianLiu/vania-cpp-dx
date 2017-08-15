@@ -89,7 +89,7 @@ void Player::Update() {
 	}
 
 	// Update Transform
-	this->transform->Update(this->vertex, (int)this->animIdle->sprite->spriteSize.x, (int)this->animIdle->sprite->spriteSize.y);
+	this->transform->Update(this->vertex, this->animIdle->sprite->spriteSize.x, this->animIdle->sprite->spriteSize.y);
 }
 
 

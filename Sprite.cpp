@@ -2,9 +2,9 @@
 #include "Engine.h"
 
 Sprite::Sprite(int imageSizeX, int imageSizeY, int divideX, int divideY) {
-	this->imageSize = D3DXVECTOR2((float)imageSizeX, (float)imageSizeY);
-	this->divide = D3DXVECTOR2((float)divideX, (float)divideY);
-	this->spriteSize = D3DXVECTOR2((float)imageSizeX / (float)divideX * PIXEL_SCALE, (float)imageSizeY / (float)divideY * PIXEL_SCALE);
+	this->imageSize = Int2D(imageSizeX, imageSizeY);
+	this->divide = Int2D(divideX, divideY);
+	this->spriteSize = Int2D(imageSizeX / divideX * PIXEL_SCALE, imageSizeY / divideY * PIXEL_SCALE);
 	this->spriteMax = divideX * divideY;
 }
 Sprite::~Sprite() {
@@ -18,15 +18,15 @@ void Sprite::CreatTexture(const char* path) {
 
 	D3DXCreateTextureFromFileEx(
 		this->device, path,
-		(int)this->imageSize.x, (int)this->imageSize.y,
+		this->imageSize.x, this->imageSize.y,
 		1, 0,
 		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
 		&this->texture);
 }
 
 void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
-	int x = currentSprite % (int)this->divide.x;
-	int y = currentSprite / (int)this->divide.y;
+	int x = currentSprite % this->divide.x;
+	int y = currentSprite / this->divide.y;
 	float sizeX = 1.0f / this->divide.x;
 	float sizeY = 1.0f / this->divide.y;
 
