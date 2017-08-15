@@ -4,8 +4,9 @@
 /*------------------------------------------------------------------------------
 < Texture Pathes >
 ------------------------------------------------------------------------------*/
-#define TEXTURE_PLAYER_RUN_SHOOT _T("assets/player-run-shoot.png")
 #define TEXTURE_PLAYER_IDLE _T("assets/player-idle.png")
+#define TEXTURE_PLAYER_RUN_SHOOT _T("assets/player-run-shoot.png")
+#define TEXTURE_PLAYER_JUMP _T("assets/player-jump.png")
 
 
 /*------------------------------------------------------------------------------
@@ -14,8 +15,9 @@
 Player::Player() {
 
 	this->transform = new Transform();
-	this->animRun = new Animation(800,80,10,1,4);
 	this->animIdle = new Animation(240,80,3,1,15);
+	this->animRun = new Animation(800,80,10,1,4);
+	this->animJump = new Animation(480,80,6,1,4);
 
 	this->vertex[0].rhw = 1.0f;
 	this->vertex[1].rhw = 1.0f;
@@ -35,8 +37,9 @@ Player::Player() {
 Player::~Player() {
 	// delete objects
 	delete this->transform;
-	delete this->animRun;
 	delete this->animIdle;
+	delete this->animRun;
+	delete this->animJump;
 }
 
 
@@ -47,6 +50,7 @@ void Player::Start() {
 	this->time = GetTime();
 	this->animIdle->sprite->CreatTexture(TEXTURE_PLAYER_IDLE);
 	this->animRun->sprite->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);
+	this->animJump->sprite->CreatTexture(TEXTURE_PLAYER_JUMP);
 }
 
 
@@ -85,7 +89,7 @@ void Player::Update() {
 	}
 
 	// Update Transform
-	this->transform->Update(this->vertex, (int)this->animRun->sprite->spriteSize.x, (int)this->animRun->sprite->spriteSize.y);
+	this->transform->Update(this->vertex, (int)this->animIdle->sprite->spriteSize.x, (int)this->animIdle->sprite->spriteSize.y);
 }
 
 
@@ -93,14 +97,21 @@ void Player::Update() {
 < Draw >
 ------------------------------------------------------------------------------*/
 void Player::Draw() {
-	if (this->move) {
-		this->animRun->sprite->flipX = !this->right;
-		this->animRun->Update(this->vertex);
-		this->animRun->sprite->Draw(vertex);
+	if (this->air) {
+		this->animJump->sprite->flipX = !this->right;
+		this->animJump->Update(this->vertex);
+		this->animJump->sprite->Draw(vertex);
 	}
-	if (!this->move) {
-		this->animIdle->sprite->flipX = !this->right;
-		this->animIdle->Update(this->vertex);
-		this->animIdle->sprite->Draw(vertex);
+	else {
+		if (this->move) {
+			this->animRun->sprite->flipX = !this->right;
+			this->animRun->Update(this->vertex);
+			this->animRun->sprite->Draw(vertex);
+		}
+		if (!this->move) {
+			this->animIdle->sprite->flipX = !this->right;
+			this->animIdle->Update(this->vertex);
+			this->animIdle->sprite->Draw(vertex);
+		}
 	}
 }

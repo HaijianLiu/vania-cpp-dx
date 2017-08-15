@@ -11,8 +11,9 @@ private:
 
 	Transform* transform;
 
-	Animation* animRun;
 	Animation* animIdle;
+	Animation* animRun;
+	Animation* animJump;
 
 	float gravity = 9.8f;
 	float speed = 1.0f;
