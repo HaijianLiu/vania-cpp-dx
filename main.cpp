@@ -213,8 +213,8 @@ LPDIRECT3DDEVICE9 GetDevice() {
 	return gD3DDevice;
 }
 
-float GetDeltaTime() {
-	return time->deltaTime;
+Time* GetTime() {
+	return time;
 }
 
 

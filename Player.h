@@ -8,13 +8,14 @@ class Player {
 private:
 	LPDIRECT3DDEVICE9 device;
 	Vertex2D vertex[4];
+	Time* time;
 
 	D3DXVECTOR3 position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	float verticalSpeed = 0.0f;
 
 	float gravity = 0.1f;
-	float speed = 50.0f;
+	float speed = 100.0f;
 	float jumpPower = 5.0f;
 	bool air = false;
 	bool right = true;

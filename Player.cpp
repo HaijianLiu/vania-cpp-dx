@@ -42,6 +42,7 @@ Player::~Player() {
 ------------------------------------------------------------------------------*/
 void Player::Start() {
 	this->device = GetDevice();
+	this->time = GetTime();
 
 	D3DXCreateTextureFromFileEx(
 		this->device, TEXTURE_PLAYER_RUN_SHOOT,
@@ -60,11 +61,11 @@ void Player::Update() {
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->right = false;
-		this->position.x -= this->speed * PIXEL_SCALE * GetDeltaTime();
+		this->position.x -= this->speed * PIXEL_SCALE * this->time->deltaTime;
 	}
 	if (GetKeyboardPress(DIK_RIGHT)) {
 		this->right = true;
-		this->position.x += this->speed * PIXEL_SCALE * GetDeltaTime();
+		this->position.x += this->speed * PIXEL_SCALE * this->time->deltaTime;
 	}
 
 	// jump
