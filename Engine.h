@@ -44,7 +44,7 @@ typedef struct {
 	D3DXVECTOR3 vertex;
 	float rhw;
 	D3DCOLOR diffuse;
-	D3DXVECTOR2 texture;
+	D3DXVECTOR2 texCoord;
 } Vertex2D;
 
 

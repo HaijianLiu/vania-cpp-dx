@@ -31,16 +31,16 @@ void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
 	float sizeY = 1.0f / this->divide.y;
 
 	if (this->flipX == false) {
-		(vertex+0)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY );
-		(vertex+1)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY );
-		(vertex+2)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY + sizeY );
-		(vertex+3)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY + sizeY );
+		(vertex+0)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY);
+		(vertex+1)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY);
+		(vertex+2)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY + sizeY);
+		(vertex+3)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY + sizeY);
 	}
 	if (this->flipX == true) {
-		(vertex+0)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY );
-		(vertex+1)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY );
-		(vertex+2)->texture = D3DXVECTOR2( (float)( x ) * sizeX + sizeX, (float)( y ) * sizeY + sizeY );
-		(vertex+3)->texture = D3DXVECTOR2( (float)( x ) * sizeX, (float)( y ) * sizeY + sizeY );
+		(vertex+0)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY);
+		(vertex+1)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY);
+		(vertex+2)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY + sizeY);
+		(vertex+3)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY + sizeY);
 	}
 }
 
