@@ -40,7 +40,7 @@ Debug
 	void DrawDebugFont() {
 		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
 		char str[256];
-		sprintf(str,"FPS:%d\n", time->countFPS);
+		sprintf(str,"FPS:%d\nDelta Time:%.3f\n", time->countFPS, time->deltaTime);
 		gD3DXFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
 	}
 #endif
