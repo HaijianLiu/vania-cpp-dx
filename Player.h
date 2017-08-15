@@ -10,13 +10,17 @@ private:
 	Vertex2D vertex[4];
 	Time* time;
 
-	LPDIRECT3DTEXTURE9 texture;
 	Transform* transform;
+
+	LPDIRECT3DTEXTURE9 texAnimRun;
 	Animation* animRun;
+	LPDIRECT3DTEXTURE9 texAnimIdle;
+	Animation* animIdle;
 
 	float gravity = 9.8f;
 	float speed = 1.0f;
 	float jumpPower = 4.0f;
+	bool move = false;
 	bool air = false;
 	bool right = true;
 
