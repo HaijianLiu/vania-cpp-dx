@@ -105,8 +105,8 @@ void Player::Draw() {
 
 
 void Player::SetVertex() {
-	this->vertex[0].vertex = D3DXVECTOR3(this->position.x, this->position.y, 0.0f);
-	this->vertex[1].vertex = D3DXVECTOR3(this->position.x + this->animRun->patterSizeX, this->position.y, 0.0f);
-	this->vertex[2].vertex = D3DXVECTOR3(this->position.x, this->position.y + this->animRun->patterSizeY, 0.0f);
-	this->vertex[3].vertex = D3DXVECTOR3(this->position.x + this->animRun->patterSizeX, this->position.y + this->animRun->patterSizeY, 0.0f);
+	this->vertex[0].vertex = D3DXVECTOR3(this->position.x - this->animRun->patterSizeX / 2.0f, this->position.y - this->animRun->patterSizeY / 2.0f, 0.0f);
+	this->vertex[1].vertex = D3DXVECTOR3(this->position.x + this->animRun->patterSizeX / 2.0f, this->position.y - this->animRun->patterSizeY / 2.0f, 0.0f);
+	this->vertex[2].vertex = D3DXVECTOR3(this->position.x - this->animRun->patterSizeX / 2.0f, this->position.y + this->animRun->patterSizeY / 2.0f, 0.0f);
+	this->vertex[3].vertex = D3DXVECTOR3(this->position.x + this->animRun->patterSizeX / 2.0f, this->position.y + this->animRun->patterSizeY / 2.0f, 0.0f);
 }

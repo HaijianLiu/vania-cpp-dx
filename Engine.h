@@ -28,6 +28,10 @@
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
+#define SCREEN_WIDTH (800)
+#define SCREEN_HEIGHT (600)
+#define SCREEN_WIDTH_CENTER (SCREEN_WIDTH / 2)
+#define SCREEN_HEIGHT_CENTER (SCREEN_HEIGHT / 2)
 #define PIXEL_SCALE (3)
 #define UNIT_TO_PIXEL (PIXEL_SCALE * 100)
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
