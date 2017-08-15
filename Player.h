@@ -12,8 +12,11 @@ private:
 
 	Transform* transform;
 
+	Sprite* sprRun;
 	LPDIRECT3DTEXTURE9 texAnimRun;
 	Animation* animRun;
+
+	Sprite* sprIdle;
 	LPDIRECT3DTEXTURE9 texAnimIdle;
 	Animation* animIdle;
 

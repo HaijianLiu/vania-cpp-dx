@@ -14,7 +14,9 @@
 Player::Player() {
 
 	this->transform = new Transform();
+	this->sprRun = new Sprite(800,80,10,1);
 	this->animRun = new Animation(800,80,10,1,4);
+	this->sprIdle = new Sprite(240,80,3,1);
 	this->animIdle = new Animation(240,80,3,1,15);
 
 	this->vertex[0].rhw = 1.0f;
@@ -42,7 +44,10 @@ Player::~Player() {
 	}
 	// delete objects
 	delete this->transform;
+	delete this->sprRun;
 	delete this->animRun;
+	delete this->sprIdle;
+	delete this->animIdle;
 }
 
 
@@ -52,6 +57,8 @@ Player::~Player() {
 void Player::Start() {
 	this->device = GetDevice();
 	this->time = GetTime();
+	this->sprIdle->CreatTexture(TEXTURE_PLAYER_IDLE);
+	this->sprRun->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);
 
 	D3DXCreateTextureFromFileEx(
 		this->device, TEXTURE_PLAYER_RUN_SHOOT,
