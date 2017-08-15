@@ -12,11 +12,10 @@ private:
 
 	D3DXVECTOR3 position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	float verticalSpeed = 0.0f;
 
-	float gravity = 0.1f;
-	float speed = 100.0f;
-	float jumpPower = 5.0f;
+	float gravity = 9.8f;
+	float speed = 1.0f;
+	float jumpPower = 4.0f;
 	bool air = false;
 	bool right = true;
 
@@ -26,6 +25,8 @@ private:
 	void SetVertex(void);
 
 public:
+	float verticalSpeed = 0.0f;
+
 	Player ();
 	virtual ~Player();
 	void Start();

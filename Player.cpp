@@ -61,11 +61,11 @@ void Player::Update() {
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->right = false;
-		this->position.x -= this->speed * PIXEL_SCALE * this->time->deltaTime;
+		this->position.x -= this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
 	}
 	if (GetKeyboardPress(DIK_RIGHT)) {
 		this->right = true;
-		this->position.x += this->speed * PIXEL_SCALE * this->time->deltaTime;
+		this->position.x += this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
 	}
 
 	// jump
@@ -78,8 +78,8 @@ void Player::Update() {
 
 	// gravity
 	if (air) {
-		this->position.y -= 0.5f * this->verticalSpeed * PIXEL_SCALE;
-		this->verticalSpeed -= this->gravity;
+		this->position.y -= 0.5f * this->verticalSpeed  * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->verticalSpeed -= this->gravity * this->time->deltaTime;
 	}
 
 	Player::SetVertex();
