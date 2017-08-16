@@ -13,21 +13,10 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Player::Player() {
-
 	this->transform = new Transform();
 	this->animIdle = new Animation(240,80,3,1,15);
 	this->animRun = new Animation(800,80,10,1,4);
 	this->animJump = new Animation(480,80,6,1,4);
-
-	this->vertex[0].rhw = 1.0f;
-	this->vertex[1].rhw = 1.0f;
-	this->vertex[2].rhw = 1.0f;
-	this->vertex[3].rhw = 1.0f;
-
-	this->vertex[0].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
-	this->vertex[1].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
-	this->vertex[2].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
-	this->vertex[3].diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
 }
 
 
@@ -100,18 +89,18 @@ void Player::Draw() {
 	if (this->air) {
 		this->animJump->sprite->flipX = !this->right;
 		this->animJump->Update(this->vertex);
-		this->animJump->sprite->Draw(vertex);
+		this->animJump->sprite->Draw(this->vertex);
 	}
 	else {
 		if (this->move) {
 			this->animRun->sprite->flipX = !this->right;
 			this->animRun->Update(this->vertex);
-			this->animRun->sprite->Draw(vertex);
+			this->animRun->sprite->Draw(this->vertex);
 		}
 		if (!this->move) {
 			this->animIdle->sprite->flipX = !this->right;
 			this->animIdle->Update(this->vertex);
-			this->animIdle->sprite->Draw(vertex);
+			this->animIdle->sprite->Draw(this->vertex);
 		}
 	}
 }
