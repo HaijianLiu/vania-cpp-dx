@@ -14,6 +14,7 @@ public:
 	virtual ~Transform ();
 
 	void Update(Vertex2D* vertex, int spriteX, int spriteY);
+	void Update(Vertex2D* vertex, Int2D size);
 };
 
 #endif
