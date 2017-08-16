@@ -46,12 +46,16 @@ struct Vertex2D {
 	float rhw;
 	D3DCOLOR diffuse;
 	D3DXVECTOR2 texCoord;
+	Vertex2D() {
+		this->rhw = 1.0f;
+		this->diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
+	};
 };
 
 struct Int2D {
 	int x;
 	int y;
-	Int2D() {};
+	Int2D(){};
 	Int2D(int x, int y) {
 		this->x = x;
 		this->y = y;
