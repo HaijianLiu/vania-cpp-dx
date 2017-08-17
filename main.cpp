@@ -52,7 +52,7 @@ Start
 void Start() {
 	time->Start();
 	tile->CreatTexture("assets/tilesets.png");
-	ground->transform->position.y -= 1;
+	ground->transform->position.y -= 1.0f;
 	ground->Start();
 	player->Start();
 }
