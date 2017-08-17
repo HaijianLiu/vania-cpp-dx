@@ -33,22 +33,22 @@ void Sprite::MakeSlice(const char* name, int x, int y, int w, int h) {
 }
 
 void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
-	int x = currentSprite % this->divide.x;
-	int y = currentSprite / this->divide.y;
-	float sizeX = 1.0f / this->divide.x;
-	float sizeY = 1.0f / this->divide.y;
+	float x = (float)(currentSprite % this->divide.x);
+	float y = (float)(currentSprite / this->divide.y);
+	float w = 1.0f / (float)this->divide.x;
+	float h = 1.0f / (float)this->divide.y;
 
 	if (this->flipX == false) {
-		(vertex+0)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY);
-		(vertex+1)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY);
-		(vertex+2)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY + sizeY);
-		(vertex+3)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY + sizeY);
+		(vertex+0)->texCoord = D3DXVECTOR2(x*w,y*h);
+		(vertex+1)->texCoord = D3DXVECTOR2(x*w+w,y*h);
+		(vertex+2)->texCoord = D3DXVECTOR2(x*w,y*h+h);
+		(vertex+3)->texCoord = D3DXVECTOR2(x*w+w,y*h+h);
 	}
 	if (this->flipX == true) {
-		(vertex+0)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY);
-		(vertex+1)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY);
-		(vertex+2)->texCoord = D3DXVECTOR2((float)x * sizeX + sizeX, (float)y * sizeY + sizeY);
-		(vertex+3)->texCoord = D3DXVECTOR2((float)x * sizeX, (float)y * sizeY + sizeY);
+		(vertex+0)->texCoord = D3DXVECTOR2(x*w+w,y*h);
+		(vertex+1)->texCoord = D3DXVECTOR2(x*w,y*h);
+		(vertex+2)->texCoord = D3DXVECTOR2(x*w+w,y*h+h);
+		(vertex+3)->texCoord = D3DXVECTOR2(x*w,y*h+h);
 	}
 }
 void Sprite::SetTexture(Vertex2D* vertex, const char* name) {

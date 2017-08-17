@@ -20,10 +20,11 @@ private:
 	Int2D imageSize;
 
 public:
+	// Animation
 	Int2D spriteSize;
 	Int2D divide;
 	int spriteMax;
-
+	// Slice
 	std::map<const char*, Slice> slices;
 
 	bool flipX = false;
