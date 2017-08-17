@@ -13,8 +13,9 @@ public:
 	Transform ();
 	virtual ~Transform ();
 
-	void Update(Vertex2D* vertex, int spriteX, int spriteY);
+	void Update(Vertex2D* vertex, int sizeX, int sizeY);
 	void Update(Vertex2D* vertex, Int2D size);
+	void Update(Vertex2D* vertex, D3DXVECTOR2 size);
 };
 
 #endif
