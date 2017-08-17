@@ -14,9 +14,12 @@
 ------------------------------------------------------------------------------*/
 Player::Player() {
 	this->transform = new Transform();
+	// Animation
 	this->animIdle = new Animation(240,80,3,1,15);
 	this->animRun = new Animation(800,80,10,1,4);
 	this->animJump = new Animation(480,80,6,1,4);
+	// Collider
+	this->collGroundCheck = new BoxCollider(0.0f,-0.21f,1.0f,5.0f);
 }
 
 
@@ -29,6 +32,7 @@ Player::~Player() {
 	delete this->animIdle;
 	delete this->animRun;
 	delete this->animJump;
+	delete this->collGroundCheck;
 }
 
 
@@ -40,6 +44,10 @@ void Player::Start() {
 	this->animIdle->sprite->CreatTexture(TEXTURE_PLAYER_IDLE);
 	this->animRun->sprite->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);
 	this->animJump->sprite->CreatTexture(TEXTURE_PLAYER_JUMP);
+
+	#ifdef _DEBUG
+	 this->collGroundCheck->Start();
+	#endif
 }
 
 
@@ -79,6 +87,10 @@ void Player::Update() {
 
 	// Update Transform
 	this->transform->Update(this->vertex, this->animIdle->sprite->spriteSize.x, this->animIdle->sprite->spriteSize.y);
+
+	#ifdef _DEBUG
+	 this->collGroundCheck->Update(this->transform);
+	#endif
 }
 
 
@@ -103,4 +115,8 @@ void Player::Draw() {
 			this->animIdle->sprite->Draw(this->vertex);
 		}
 	}
+
+	#ifdef _DEBUG
+	 this->collGroundCheck->Draw();
+	#endif
 }
