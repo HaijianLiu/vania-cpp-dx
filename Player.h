@@ -2,8 +2,10 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-class Player {
+class Player : public GameObject {
 private:
+	std::vector<GameObject*>* gameObjects;
+	
 	Time* time;
 
 	// Animation
@@ -31,7 +33,8 @@ public:
 	BoxCollider* collGroundCheck;
 
 	Player ();
-	virtual ~Player();
+	~Player();
+
 	void Start();
 	void Update();
 	void Draw();

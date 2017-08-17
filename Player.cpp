@@ -13,6 +13,9 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Player::Player() {
+	this->gameObjects = GetGameObjects();
+	this->gameObjects->push_back(this);
+
 	this->transform = new Transform();
 	// Animation
 	this->animIdle = new Animation(240,80,3,1,15);

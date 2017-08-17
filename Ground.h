@@ -2,8 +2,10 @@
 #ifndef _GROUND_H_
 #define _GROUND_H_
 
-class Ground {
+class Ground : public GameObject {
 private:
+	std::vector<GameObject*>* gameObjects;
+
 	Vertex2D vertex[4] = {Vertex2D()};
 	Sprite* sprite;
 
@@ -12,7 +14,8 @@ public:
 	BoxCollider* collider;
 
 	Ground(Sprite* sprite);
-	virtual ~Ground();
+	~Ground();
+
 	void Start();
 	void Update();
 	void Draw();

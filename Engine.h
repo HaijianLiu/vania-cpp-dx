@@ -74,6 +74,7 @@ struct Int2D {
 #include "Sprite.h"
 #include "BoxCollider.h"
 #include "Animation.h"
+#include "GameObject.h"
 
 
 /*------------------------------------------------------------------------------
@@ -90,6 +91,7 @@ LPDIRECT3DDEVICE9 GetDevice();
 Time* GetTime();
 Camera* GetCamera();
 std::vector<BoxCollider*>* GetColliders();
+std::vector<GameObject*>* GetGameObjects();
 
 
 #endif

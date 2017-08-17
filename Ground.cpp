@@ -11,6 +11,9 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Ground::Ground(Sprite* sprite) {
+	this->gameObjects = GetGameObjects();
+	this->gameObjects->push_back(this);
+
 	this->sprite = sprite;
 	this->transform = new Transform();
 	this->collider = new BoxCollider(this->transform, 0.0f,0.0f,32.0f,32.0f);

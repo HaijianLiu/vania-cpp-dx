@@ -28,12 +28,16 @@ Global Object
 ------------------------------------------------------------------------------*/
 // Engine
 std::vector<BoxCollider*> colliders;
+std::vector<GameObject*> gameObjects;
+
 Time* time = new Time();
-// Game Object
 Camera* camera = new Camera();
 Sprite* tile = new Sprite(384,192);
+
+// Game Object
 Ground* ground = new Ground(tile);
 Player* player = new Player();
+
 
 
 /*------------------------------------------------------------------------------
@@ -57,17 +61,20 @@ void Start() {
 	time->Start();
 	tile->CreatTexture("assets/tilesets.png");
 	ground->transform->position.y += 1.0f;
-	ground->Start();
-	player->Start();
+
+	for (unsigned int i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->Start();
+	}
 }
 
 /*------------------------------------------------------------------------------
 Delete
 ------------------------------------------------------------------------------*/
 void Delete() {
-	delete ground;
+	for (unsigned int i = 0; i < gameObjects.size(); i++) {
+		delete gameObjects[i];
+	}
 	delete tile;
-	delete player;
 	delete time;
 	delete camera;
 	UninitInput();
@@ -93,8 +100,11 @@ Update
 void Update(void) {
 	UpdateInput();
 	time->Update();
-	ground->Update();
-	player->Update();
+
+	for (unsigned int i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->Update();
+	}
+
 	CheckCollider();
 }
 
@@ -106,8 +116,9 @@ void Draw(void) {
 
 	if(SUCCEEDED(gD3DDevice->BeginScene())) {
 
-		ground->Draw();
-		player->Draw();
+		for (unsigned int i = 0; i < gameObjects.size(); i++) {
+			gameObjects[i]->Draw();
+		}
 
 		#ifdef _DEBUG
 			DrawDebugFont();
@@ -238,6 +249,10 @@ Camera* GetCamera() {
 
 std::vector<BoxCollider*>* GetColliders() {
 	return &colliders;
+}
+
+std::vector<GameObject*>* GetGameObjects() {
+	return &gameObjects;
 }
 
 
