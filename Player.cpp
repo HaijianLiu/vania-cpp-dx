@@ -52,12 +52,12 @@ void Player::Update() {
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->move = true;
 		this->right = false;
-		this->transform->position.x -= this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.x -= this->speed * this->time->deltaTime;
 	}
 	else if (GetKeyboardPress(DIK_RIGHT)) {
 		this->move = true;
 		this->right = true;
-		this->transform->position.x += this->speed * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.x += this->speed * this->time->deltaTime;
 	}
 	else {
 		this->move = false;
@@ -73,7 +73,7 @@ void Player::Update() {
 
 	// gravity
 	if (this->air) {
-		this->transform->position.y -= this->verticalSpeed  * this->time->deltaTime * UNIT_TO_PIXEL;
+		this->transform->position.y += this->verticalSpeed * this->time->deltaTime;
 		this->verticalSpeed -= this->gravity * this->time->deltaTime;
 	}
 
