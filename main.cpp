@@ -26,7 +26,8 @@ LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 Global Object
 ------------------------------------------------------------------------------*/
 Time* time = new Time();
-Ground* ground = new Ground();
+Sprite* tile = new Sprite(384,192);
+Ground* ground = new Ground(tile);
 Player* player = new Player();
 
 
@@ -49,8 +50,34 @@ Start
 ------------------------------------------------------------------------------*/
 void Start() {
 	time->Start();
+	tile->CreatTexture("assets/tilesets.png");
 	ground->Start();
 	player->Start();
+}
+
+/*------------------------------------------------------------------------------
+Delete
+------------------------------------------------------------------------------*/
+void Delete() {
+	delete time;
+	delete ground;
+	delete player;
+	delete tile;
+	UninitInput();
+
+	if(gD3DDevice != NULL) {
+		gD3DDevice->Release();
+	}
+
+	if(gD3D != NULL) {
+		gD3D->Release();
+	}
+
+	#ifdef _DEBUG
+		if(gD3DXFont != NULL) {
+			gD3DXFont->Release();
+		}
+	#endif
 }
 
 /*------------------------------------------------------------------------------
@@ -85,31 +112,8 @@ void Draw(void) {
 }
 
 
-/*------------------------------------------------------------------------------
-Delete
-------------------------------------------------------------------------------*/
-void Delete(void)
-{
-	if(gD3DDevice != NULL) {
-		gD3DDevice->Release();
-	}
 
-	if(gD3D != NULL) {
-		gD3D->Release();
-	}
 
-	#ifdef _DEBUG
-		if(gD3DXFont != NULL) {
-			gD3DXFont->Release();
-		}
-	#endif
-
-	delete time;
-	delete ground;
-	delete player;
-
-	UninitInput();
-}
 
 
 /*------------------------------------------------------------------------------

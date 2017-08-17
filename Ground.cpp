@@ -10,9 +10,9 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Ground::Ground() {
+Ground::Ground(Sprite* sprite) {
 	this->transform = new Transform();
-	this->sprite = new Sprite(384,192);
+	this->sprite = sprite;
 }
 
 
@@ -21,7 +21,7 @@ Ground::Ground() {
 ------------------------------------------------------------------------------*/
 Ground::~Ground() {
 	delete this->transform;
-	delete this->sprite;
+	// delete this->sprite;
 }
 
 
@@ -29,9 +29,9 @@ Ground::~Ground() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Ground::Start() {
-	this->sprite->CreatTexture(TEXTURE_TILE_SETS);
 	this->sprite->MakeSlice("Floor",160,64,32,32);
 	this->sprite->SetTexture(this->vertex, "Floor");
+	this->transform->Update(this->vertex, this->sprite->slices.at("Floor").size);
 }
 
 
@@ -39,8 +39,7 @@ void Ground::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Ground::Update() {
-	// Update Transform
-	this->transform->Update(this->vertex, this->sprite->slices.at("Floor").size);
+	
 }
 
 

@@ -10,7 +10,7 @@ private:
 	Sprite* sprite;
 
 public:
-	Ground();
+	Ground(Sprite* sprite);
 	virtual ~Ground();
 	void Start();
 	void Update();
