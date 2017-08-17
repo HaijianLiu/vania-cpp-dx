@@ -69,6 +69,7 @@ struct Int2D {
 ------------------------------------------------------------------------------*/
 #include "Input.h"
 #include "Time.h"
+#include "Camera.h"
 #include "Transform.h"
 #include "Sprite.h"
 #include "Animation.h"
@@ -86,6 +87,7 @@ struct Int2D {
 ------------------------------------------------------------------------------*/
 LPDIRECT3DDEVICE9 GetDevice();
 Time* GetTime();
+Camera* GetCamera();
 
 
 #endif
