@@ -4,23 +4,25 @@
 
 class BoxCollider {
 private:
+	Transform* parent;
 	D3DXVECTOR2 offset;
 	D3DXVECTOR2 size;
 
 	#ifdef _DEBUG
+		// for Render
 		Vertex2D vertex[4] = {Vertex2D()};
 		Transform* transform;
 		Sprite* sprite;
 	#endif
 
 public:
-	BoxCollider(float x, float y, float w, float h);
+	BoxCollider(Transform* parent, float x, float y, float w, float h);
 	virtual ~BoxCollider();
 
-
 	#ifdef _DEBUG
+		// for render
 		void Start();
-		void Update(Transform* transform);
+		void Update();
 		void Draw();
 	#endif
 };

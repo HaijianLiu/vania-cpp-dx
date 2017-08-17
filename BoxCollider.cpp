@@ -1,7 +1,8 @@
 ﻿
 #include "Engine.h"
 
-BoxCollider::BoxCollider(float x, float y, float w, float h) {
+BoxCollider::BoxCollider(Transform* parent, float x, float y, float w, float h) {
+	this->parent = parent;
 	this->offset.x = x;
 	this->offset.y = y;
 	this->size.x = w;
@@ -23,15 +24,14 @@ BoxCollider::~BoxCollider() {
 	#endif
 }
 
-
 #ifdef _DEBUG
 	void BoxCollider::Start() {
 		this->sprite->CreatTexture("assets/white-32.png");
 		this->sprite->SetTexture(this->vertex);
 	}
-	void BoxCollider::Update(Transform* transform) {
-		this->transform->position.x = transform->position.x + this->offset.x;
-		this->transform->position.y = transform->position.y + this->offset.y;
+	void BoxCollider::Update() {
+		this->transform->position.x = this->parent->position.x + this->offset.x;
+		this->transform->position.y = this->parent->position.y + this->offset.y;
 		this->transform->Update(this->vertex, this->size);
 	}
 	void BoxCollider::Draw() {

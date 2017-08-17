@@ -13,7 +13,7 @@
 Ground::Ground(Sprite* sprite) {
 	this->sprite = sprite;
 	this->transform = new Transform();
-	this->collider = new BoxCollider(0.0f,0.0f,32.0f,32.0f);
+	this->collider = new BoxCollider(this->transform, 0.0f,0.0f,32.0f,32.0f);
 }
 
 
@@ -34,7 +34,7 @@ void Ground::Start() {
 	this->sprite->SetTexture(this->vertex, "Floor");
 
 	#ifdef _DEBUG
-	 this->collider->Start();
+		this->collider->Start();
 	#endif
 }
 
@@ -46,7 +46,7 @@ void Ground::Update() {
 	this->transform->Update(this->vertex, this->sprite->slices.at("Floor").size);
 
 	#ifdef _DEBUG
-	 this->collider->Update(this->transform);
+		this->collider->Update();
 	#endif
 }
 
@@ -58,6 +58,6 @@ void Ground::Draw() {
 	this->sprite->Draw(this->vertex);
 
 	#ifdef _DEBUG
-	 this->collider->Draw();
+		this->collider->Draw();
 	#endif
 }

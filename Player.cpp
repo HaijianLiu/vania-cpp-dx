@@ -19,7 +19,7 @@ Player::Player() {
 	this->animRun = new Animation(800,80,10,1,4);
 	this->animJump = new Animation(480,80,6,1,4);
 	// Collider
-	this->collGroundCheck = new BoxCollider(0.0f,-0.21f,1.0f,5.0f);
+	this->collGroundCheck = new BoxCollider(this->transform, 0.0f,-0.21f,1.0f,5.0f);
 }
 
 
@@ -89,7 +89,7 @@ void Player::Update() {
 	this->transform->Update(this->vertex, this->animIdle->sprite->spriteSize.x, this->animIdle->sprite->spriteSize.y);
 
 	#ifdef _DEBUG
-	 this->collGroundCheck->Update(this->transform);
+		this->collGroundCheck->Update();
 	#endif
 }
 
@@ -117,6 +117,6 @@ void Player::Draw() {
 	}
 
 	#ifdef _DEBUG
-	 this->collGroundCheck->Draw();
+		this->collGroundCheck->Draw();
 	#endif
 }
