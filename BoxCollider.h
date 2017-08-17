@@ -14,7 +14,7 @@ private:
 	#endif
 
 public:
-	Transform* parent;
+	GameObject* gameObject;
 	D3DXVECTOR2 offset;
 	D3DXVECTOR2 size;
 
@@ -23,8 +23,8 @@ public:
 	bool exit = false;
 	bool stay = false;
 
-	BoxCollider(Transform* parent, float x, float y, float w, float h);
-	virtual ~BoxCollider();
+	BoxCollider(GameObject* gameObject, float x, float y, float w, float h);
+	~BoxCollider();
 
 	#ifdef _DEBUG
 		// for render

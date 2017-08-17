@@ -17,6 +17,10 @@ public:
 	virtual void Start() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	// virtual void OnTriggerEnter(GameObject* other);
+	// virtual void OnTriggerExit(GameObject* other) = 0;
+	// virtual void OnTriggerStay(GameObject* other) = 0;
+	// virtual void OnTriggerLeave(GameObject* other) = 0;
 };
 
 #endif

@@ -27,8 +27,8 @@ LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 Global Object
 ------------------------------------------------------------------------------*/
 // Engine
-std::vector<BoxCollider*> colliders;
 std::vector<GameObject*> gameObjects;
+std::vector<BoxCollider*> colliders;
 
 Time* time = new Time();
 Camera* camera = new Camera();
@@ -280,18 +280,18 @@ Check Colliders
 bool CheckCollision(BoxCollider* a, BoxCollider* b) {
 	// Collision x-axis?
 	bool collisionX =
-		a->parent->position.x + a->offset.x + a->size.x / UNIT_TO_PIXEL >=
-		b->parent->position.x + b->offset.x - b->size.x / UNIT_TO_PIXEL
+		a->gameObject->transform->position.x + a->offset.x + a->size.x / UNIT_TO_PIXEL >=
+		b->gameObject->transform->position.x + b->offset.x - b->size.x / UNIT_TO_PIXEL
 		&&
-		a->parent->position.x + a->offset.x - a->size.x / UNIT_TO_PIXEL <=
-		b->parent->position.x + b->offset.x + b->size.x / UNIT_TO_PIXEL;
+		a->gameObject->transform->position.x + a->offset.x - a->size.x / UNIT_TO_PIXEL <=
+		b->gameObject->transform->position.x + b->offset.x + b->size.x / UNIT_TO_PIXEL;
 	// Collision y-axis?
 	bool collisionY =
-		a->parent->position.y + a->offset.y + a->size.y / UNIT_TO_PIXEL >=
-		b->parent->position.y + b->offset.y - b->size.y / UNIT_TO_PIXEL
+		a->gameObject->transform->position.y + a->offset.y + a->size.y / UNIT_TO_PIXEL >=
+		b->gameObject->transform->position.y + b->offset.y - b->size.y / UNIT_TO_PIXEL
 		&&
-		a->parent->position.y + a->offset.y - a->size.y / UNIT_TO_PIXEL <=
-		b->parent->position.y + b->offset.y + b->size.y / UNIT_TO_PIXEL;
+		a->gameObject->transform->position.y + a->offset.y - a->size.y / UNIT_TO_PIXEL <=
+		b->gameObject->transform->position.y + b->offset.y + b->size.y / UNIT_TO_PIXEL;
 	// Collision only if on both axes
 	return collisionX && collisionY;
 }
@@ -309,7 +309,7 @@ void CheckCollider() {
 							colliders[i]->exit = false;
 							colliders[i]->stay = false;
 
-							player->collGroundCheck->parent->position.y = ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL - player->collGroundCheck->offset.y - player->collGroundCheck->size.y / UNIT_TO_PIXEL;
+							player->collGroundCheck->gameObject->transform->position.y = ground->collider->gameObject->transform->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL - player->collGroundCheck->offset.y - player->collGroundCheck->size.y / UNIT_TO_PIXEL;
 							player->air = false;
 							player->transform->Update(player->vertex, 80, 80);
 							player->verticalSpeed = 0.0f;

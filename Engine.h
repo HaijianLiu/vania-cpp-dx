@@ -72,9 +72,9 @@ struct Int2D {
 #include "Camera.h"
 #include "Transform.h"
 #include "Sprite.h"
+#include "GameObject.h"
 #include "BoxCollider.h"
 #include "Animation.h"
-#include "GameObject.h"
 
 
 /*------------------------------------------------------------------------------

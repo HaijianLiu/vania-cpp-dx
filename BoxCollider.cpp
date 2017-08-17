@@ -1,10 +1,11 @@
 ﻿
 #include "Engine.h"
 
-BoxCollider::BoxCollider(Transform* parent, float x, float y, float w, float h) {
+BoxCollider::BoxCollider(GameObject* gameObject, float x, float y, float w, float h) {
 	this->colliders = GetColliders();
 	this->colliders->push_back(this);
-	this->parent = parent;
+
+	this->gameObject = gameObject;
 	this->offset.x = x;
 	this->offset.y = y;
 	this->size.x = w;
@@ -35,8 +36,8 @@ BoxCollider::~BoxCollider() {
 		this->sprite->SetTexture(this->vertex);
 	}
 	void BoxCollider::Update() {
-		this->transform->position.x = this->parent->position.x + this->offset.x;
-		this->transform->position.y = this->parent->position.y + this->offset.y;
+		this->transform->position.x = this->gameObject->transform->position.x + this->offset.x;
+		this->transform->position.y = this->gameObject->transform->position.y + this->offset.y;
 		this->transform->Update(this->vertex, this->size);
 	}
 	void BoxCollider::Draw() {

@@ -30,6 +30,10 @@ public:
 	void Start();
 	void Update();
 	void Draw();
+	void OnTriggerEnter(GameObject* other);
+	// void OnTriggerExit(GameObject* other);
+	// void OnTriggerStay(GameObject* other);
+	// void OnTriggerLeave(GameObject* other);
 };
 
 #endif
