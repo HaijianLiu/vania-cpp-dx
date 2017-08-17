@@ -306,14 +306,14 @@ void CheckCollider() {
 					if (!colliders[i]->enter) {
 						if (collision) {
 							colliders[i]->enter = true;
-							colliders[i]->gameObject->OnTriggerEnter(colliders[j]->gameObject);
+							colliders[i]->gameObject->OnTriggerEnter(colliders[j]);
 						}
 					}
 					// OnTriggerExit
 					else if (colliders[i]->enter) {
 						if (!collision) {
 							colliders[i]->enter = false;
-							colliders[i]->gameObject->OnTriggerExit(colliders[j]->gameObject);
+							colliders[i]->gameObject->OnTriggerExit(colliders[j]);
 						}
 					}
 					/*

@@ -114,9 +114,8 @@ void Player::Draw() {
 /*------------------------------------------------------------------------------
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
-void Player::OnTriggerEnter(GameObject* other) {
-	BoxCollider* collider = other->GetCollider();
-	this->transform->position.y = other->transform->position.y + collider->offset.y - collider->size.y / UNIT_TO_PIXEL - this->collGroundCheck->offset.y - this->collGroundCheck->size.y / UNIT_TO_PIXEL;
+void Player::OnTriggerEnter(BoxCollider* other) {
+	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->size.y / UNIT_TO_PIXEL - this->collGroundCheck->offset.y - this->collGroundCheck->size.y / UNIT_TO_PIXEL;
 	this->air = false;
 	this->verticalSpeed = 0.0f;
 	this->transform->Update(this->vertex, 80, 80);
@@ -126,6 +125,6 @@ void Player::OnTriggerEnter(GameObject* other) {
 /*------------------------------------------------------------------------------
 < On Trigger Exit >
 ------------------------------------------------------------------------------*/
-void Player::OnTriggerExit(GameObject* other) {
+void Player::OnTriggerExit(BoxCollider* other) {
 	this->air = true;
 }

@@ -12,7 +12,3 @@ GameObject::~GameObject() {
 void GameObject::PreStart() {
 	this->time = GetTime();
 }
-
-BoxCollider * GameObject::GetCollider() {
-	return nullptr;
-}

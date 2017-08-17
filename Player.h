@@ -30,8 +30,8 @@ public:
 	void Start();
 	void Update();
 	void Draw();
-	void OnTriggerEnter(GameObject* other);
-	void OnTriggerExit(GameObject* other);
+	void OnTriggerEnter(BoxCollider* other);
+	void OnTriggerExit(BoxCollider* other);
 	// void OnTriggerStay(GameObject* other);
 	// void OnTriggerLeave(GameObject* other);
 };

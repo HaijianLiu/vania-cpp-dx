@@ -57,7 +57,7 @@ void Ground::Draw() {
 /*------------------------------------------------------------------------------
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
-void Ground::OnTriggerEnter(GameObject* other) {
+void Ground::OnTriggerEnter(BoxCollider* other) {
 
 }
 
@@ -65,11 +65,6 @@ void Ground::OnTriggerEnter(GameObject* other) {
 /*------------------------------------------------------------------------------
 < On Trigger Exit >
 ------------------------------------------------------------------------------*/
-void Ground::OnTriggerExit(GameObject* other) {
+void Ground::OnTriggerExit(BoxCollider* other) {
 
-}
-
-
-BoxCollider* Ground::GetCollider() {
-	return this->collider;
 }
