@@ -1,5 +1,6 @@
 ﻿
 #include "Engine.h"
+#include "GameObject.h"
 
 GameObject::GameObject() {
 	this->transform = new Transform();
@@ -10,4 +11,8 @@ GameObject::~GameObject() {
 
 void GameObject::PreStart() {
 	this->time = GetTime();
+}
+
+BoxCollider * GameObject::GetCollider() {
+	return nullptr;
 }

@@ -52,3 +52,24 @@ void Ground::Update() {
 void Ground::Draw() {
 	this->sprite->Draw(this->vertex);
 }
+
+
+/*------------------------------------------------------------------------------
+< On Trigger Enter >
+------------------------------------------------------------------------------*/
+void Ground::OnTriggerEnter(GameObject* other) {
+
+}
+
+
+/*------------------------------------------------------------------------------
+< On Trigger Exit >
+------------------------------------------------------------------------------*/
+void Ground::OnTriggerExit(GameObject* other) {
+
+}
+
+
+BoxCollider* Ground::GetCollider() {
+	return this->collider;
+}

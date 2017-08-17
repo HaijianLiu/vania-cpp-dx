@@ -20,8 +20,6 @@ public:
 
 	bool trigger = false;
 	bool enter = false;
-	bool exit = false;
-	bool stay = false;
 
 	BoxCollider(GameObject* gameObject, float x, float y, float w, float h);
 	~BoxCollider();

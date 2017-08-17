@@ -306,25 +306,17 @@ void CheckCollider() {
 					if (!colliders[i]->enter) {
 						if (collision) {
 							colliders[i]->enter = true;
-							colliders[i]->exit = false;
-							colliders[i]->stay = false;
-
-							player->collGroundCheck->gameObject->transform->position.y = ground->collider->gameObject->transform->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL - player->collGroundCheck->offset.y - player->collGroundCheck->size.y / UNIT_TO_PIXEL;
-							player->air = false;
-							player->transform->Update(player->vertex, 80, 80);
-							player->verticalSpeed = 0.0f;
+							colliders[i]->gameObject->OnTriggerEnter(colliders[j]->gameObject);
 						}
 					}
 					// OnTriggerExit
 					else if (colliders[i]->enter) {
 						if (!collision) {
 							colliders[i]->enter = false;
-							colliders[i]->exit = true;
-							colliders[i]->stay = false;
-
-							player->air = true;
+							colliders[i]->gameObject->OnTriggerExit(colliders[j]->gameObject);
 						}
 					}
+					/*
 					// TriggerStay
 					else if (collision) {
 						colliders[i]->enter = false;
@@ -337,6 +329,7 @@ void CheckCollider() {
 						colliders[i]->exit = false;
 						colliders[i]->stay = false;
 					}
+					*/
 				}
 			}
 		}
