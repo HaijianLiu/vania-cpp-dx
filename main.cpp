@@ -26,6 +26,7 @@ LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 Global Object
 ------------------------------------------------------------------------------*/
 Time* time = new Time();
+Camera* camera = new Camera();
 Sprite* tile = new Sprite(384,192);
 Ground* ground = new Ground(tile);
 Player* player = new Player();
@@ -51,7 +52,7 @@ Start
 void Start() {
 	time->Start();
 	tile->CreatTexture("assets/tilesets.png");
-	ground->transform->position = D3DXVECTOR3(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER + 100.0f * PIXEL_SCALE, 0.0f);
+	ground->transform->position.y -= 1;
 	ground->Start();
 	player->Start();
 }
@@ -60,10 +61,11 @@ void Start() {
 Delete
 ------------------------------------------------------------------------------*/
 void Delete() {
-	delete time;
 	delete ground;
-	delete player;
 	delete tile;
+	delete player;
+	delete time;
+	delete camera;
 	UninitInput();
 
 	if(gD3DDevice != NULL) {
@@ -223,6 +225,10 @@ LPDIRECT3DDEVICE9 GetDevice() {
 
 Time* GetTime() {
 	return time;
+}
+
+Camera* GetCamera() {
+	return camera;
 }
 
 
