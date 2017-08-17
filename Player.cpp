@@ -16,7 +16,6 @@ Player::Player() {
 	this->gameObjects = GetGameObjects();
 	this->gameObjects->push_back(this);
 
-	this->transform = new Transform();
 	// Animation
 	this->animIdle = new Animation(240,80,3,1,15);
 	this->animRun = new Animation(800,80,10,1,4);
@@ -32,7 +31,6 @@ Player::Player() {
 ------------------------------------------------------------------------------*/
 Player::~Player() {
 	// delete objects
-	delete this->transform;
 	delete this->animIdle;
 	delete this->animRun;
 	delete this->animJump;
@@ -44,14 +42,9 @@ Player::~Player() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Player::Start() {
-	this->time = GetTime();
 	this->animIdle->sprite->CreatTexture(TEXTURE_PLAYER_IDLE);
 	this->animRun->sprite->CreatTexture(TEXTURE_PLAYER_RUN_SHOOT);
 	this->animJump->sprite->CreatTexture(TEXTURE_PLAYER_JUMP);
-
-	#ifdef _DEBUG
-	 this->collGroundCheck->Start();
-	#endif
 }
 
 
@@ -91,10 +84,6 @@ void Player::Update() {
 
 	// Update Transform
 	this->transform->Update(this->vertex, this->animIdle->sprite->spriteSize.x, this->animIdle->sprite->spriteSize.y);
-
-	#ifdef _DEBUG
-		this->collGroundCheck->Update();
-	#endif
 }
 
 
@@ -119,8 +108,4 @@ void Player::Draw() {
 			this->animIdle->sprite->Draw(this->vertex);
 		}
 	}
-
-	#ifdef _DEBUG
-		this->collGroundCheck->Draw();
-	#endif
 }

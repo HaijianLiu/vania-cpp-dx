@@ -5,8 +5,6 @@
 class Player : public GameObject {
 private:
 	std::vector<GameObject*>* gameObjects;
-	
-	Time* time;
 
 	// Animation
 	Animation* animIdle;
@@ -19,18 +17,12 @@ private:
 	bool move = false;
 	bool right = true;
 
-
 public:
-	Vertex2D vertex[4] = {Vertex2D()};
-
-	// Transform
-	Transform* transform;
+	// Collider
+	BoxCollider* collGroundCheck;
 
 	bool air = false;
 	float verticalSpeed = 0.0f;
-
-	// Collider
-	BoxCollider* collGroundCheck;
 
 	Player ();
 	~Player();

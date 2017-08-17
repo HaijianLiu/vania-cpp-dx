@@ -63,8 +63,14 @@ void Start() {
 	ground->transform->position.y += 1.0f;
 
 	for (unsigned int i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->PreStart();
 		gameObjects[i]->Start();
 	}
+	#ifdef _DEBUG
+		for (unsigned i = 0; i < colliders.size(); i++) {
+			colliders[i]->Start();
+		}
+	#endif
 }
 
 /*------------------------------------------------------------------------------
@@ -104,6 +110,11 @@ void Update(void) {
 	for (unsigned int i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->Update();
 	}
+	#ifdef _DEBUG
+		for (unsigned i = 0; i < colliders.size(); i++) {
+			colliders[i]->Update();
+		}
+	#endif
 
 	CheckCollider();
 }
@@ -119,6 +130,11 @@ void Draw(void) {
 		for (unsigned int i = 0; i < gameObjects.size(); i++) {
 			gameObjects[i]->Draw();
 		}
+		#ifdef _DEBUG
+			for (unsigned i = 0; i < colliders.size(); i++) {
+				colliders[i]->Draw();
+			}
+		#endif
 
 		#ifdef _DEBUG
 			DrawDebugFont();
