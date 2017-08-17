@@ -5,11 +5,11 @@
 class Ground {
 private:
 	Vertex2D vertex[4] = {Vertex2D()};
-	Transform* transform;
-
 	Sprite* sprite;
 
 public:
+	Transform* transform;
+
 	Ground(Sprite* sprite);
 	virtual ~Ground();
 	void Start();

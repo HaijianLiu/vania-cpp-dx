@@ -51,6 +51,7 @@ Start
 void Start() {
 	time->Start();
 	tile->CreatTexture("assets/tilesets.png");
+	ground->transform->position = D3DXVECTOR3(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER + 100.0f * PIXEL_SCALE, 0.0f);
 	ground->Start();
 	player->Start();
 }
