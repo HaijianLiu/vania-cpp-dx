@@ -20,6 +20,7 @@ Player::Player() {
 	this->animJump = new Animation(480,80,6,1,4);
 	// Collider
 	this->collGroundCheck = new BoxCollider(this->transform, 0.0f,0.21f,1.0f,5.0f);
+	this->collGroundCheck->trigger = true;
 }
 
 

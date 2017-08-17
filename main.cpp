@@ -14,7 +14,7 @@ Prototype
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT InitDirectX(HWND hWnd, BOOL bWindow);
 
-void CheckCollider(Player* player, Ground* ground);
+void CheckCollider();
 
 /*------------------------------------------------------------------------------
 Global variables
@@ -26,7 +26,10 @@ LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 /*------------------------------------------------------------------------------
 Global Object
 ------------------------------------------------------------------------------*/
+// Engine
+std::vector<BoxCollider*> colliders;
 Time* time = new Time();
+// Game Object
 Camera* camera = new Camera();
 Sprite* tile = new Sprite(384,192);
 Ground* ground = new Ground(tile);
@@ -92,7 +95,7 @@ void Update(void) {
 	time->Update();
 	ground->Update();
 	player->Update();
-	CheckCollider(player, ground);
+	CheckCollider();
 }
 
 /*------------------------------------------------------------------------------
@@ -233,25 +236,80 @@ Camera* GetCamera() {
 	return camera;
 }
 
-void CheckCollider(Player* player, Ground* ground) {
-	if (!player->collGroundCheck->enter) {
-		if (player->collGroundCheck->parent->position.y + player->collGroundCheck->offset.y + player->collGroundCheck->size.y / UNIT_TO_PIXEL >= ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL) {
-			player->collGroundCheck->enter = true;
-			player->collGroundCheck->parent->position.y = ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL - player->collGroundCheck->offset.y - player->collGroundCheck->size.y / UNIT_TO_PIXEL;
-			player->air = false;
-			player->transform->Update(player->vertex, 80, 80);
+std::vector<BoxCollider*>* GetColliders() {
+	return &colliders;
+}
+
+
+
+/*------------------------------------------------------------------------------
+Check Colliders
+------------------------------------------------------------------------------*/
+
+bool CheckCollision(BoxCollider* a, BoxCollider* b) {
+	// Collision x-axis?
+	bool collisionX =
+		a->parent->position.x + a->offset.x + a->size.x / UNIT_TO_PIXEL >=
+		b->parent->position.x + b->offset.x - b->size.x / UNIT_TO_PIXEL
+		&&
+		a->parent->position.x + a->offset.x - a->size.x / UNIT_TO_PIXEL <=
+		b->parent->position.x + b->offset.x + b->size.x / UNIT_TO_PIXEL;
+	// Collision y-axis?
+	bool collisionY =
+		a->parent->position.y + a->offset.y + a->size.y / UNIT_TO_PIXEL >=
+		b->parent->position.y + b->offset.y - b->size.y / UNIT_TO_PIXEL
+		&&
+		a->parent->position.y + a->offset.y - a->size.y / UNIT_TO_PIXEL <=
+		b->parent->position.y + b->offset.y + b->size.y / UNIT_TO_PIXEL;
+	// Collision only if on both axes
+	return collisionX && collisionY;
+}
+
+void CheckCollider() {
+	for (unsigned int i = 0; i < colliders.size(); i++) {
+		if (colliders[i]->trigger) {
+			for (unsigned int j = 0; j < colliders.size(); j++) {
+				bool collision = CheckCollision(colliders[i],colliders[j]);
+				if (i != j) {
+					// OnTriggerEnter
+					if (!colliders[i]->enter) {
+						if (collision) {
+							colliders[i]->enter = true;
+							colliders[i]->exit = false;
+							colliders[i]->stay = false;
+
+							player->collGroundCheck->parent->position.y = ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL - player->collGroundCheck->offset.y - player->collGroundCheck->size.y / UNIT_TO_PIXEL;
+							player->air = false;
+							player->transform->Update(player->vertex, 80, 80);
+							player->verticalSpeed = 0.0f;
+						}
+					}
+					// OnTriggerExit
+					else if (colliders[i]->enter) {
+						if (!collision) {
+							colliders[i]->enter = false;
+							colliders[i]->exit = true;
+							colliders[i]->stay = false;
+
+							player->air = true;
+						}
+					}
+					// TriggerStay
+					else if (collision) {
+						colliders[i]->enter = false;
+						colliders[i]->exit = false;
+						colliders[i]->stay = true;
+					}
+					// TiggerLeave
+					else {
+						colliders[i]->enter = false;
+						colliders[i]->exit = false;
+						colliders[i]->stay = false;
+					}
+				}
+			}
 		}
 	}
-
-	if (player->collGroundCheck->enter) {
-		if (player->collGroundCheck->parent->position.y + player->collGroundCheck->offset.y + player->collGroundCheck->size.y / UNIT_TO_PIXEL <= ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL) {
-			player->collGroundCheck->enter = false;
-		}
-	}
-
-	// if (trigger->parent->position.y + trigger->offset.y + trigger->size.y / UNIT_TO_PIXEL >= collider->parent->position.y + collider->offset.y - collider->size.y / UNIT_TO_PIXEL) {
-	// 	trigger->parent->position.y = 0;
-	// }
 }
 
 

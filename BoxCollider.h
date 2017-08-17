@@ -4,6 +4,7 @@
 
 class BoxCollider {
 private:
+	std::vector<BoxCollider*>* colliders;
 
 	#ifdef _DEBUG
 		// for Render
@@ -19,6 +20,8 @@ public:
 
 	bool trigger = false;
 	bool enter = false;
+	bool exit = false;
+	bool stay = false;
 
 	BoxCollider(Transform* parent, float x, float y, float w, float h);
 	virtual ~BoxCollider();

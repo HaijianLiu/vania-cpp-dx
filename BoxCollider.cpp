@@ -2,6 +2,8 @@
 #include "Engine.h"
 
 BoxCollider::BoxCollider(Transform* parent, float x, float y, float w, float h) {
+	this->colliders = GetColliders();
+	this->colliders->push_back(this);
 	this->parent = parent;
 	this->offset.x = x;
 	this->offset.y = y;
@@ -18,6 +20,9 @@ BoxCollider::BoxCollider(Transform* parent, float x, float y, float w, float h) 
 	#endif
 }
 BoxCollider::~BoxCollider() {
+
+	/* Dont forget to clear vector member here!! */
+
 	#ifdef _DEBUG
 		delete this->transform;
 		delete this->sprite;

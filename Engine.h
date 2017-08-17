@@ -89,6 +89,7 @@ struct Int2D {
 LPDIRECT3DDEVICE9 GetDevice();
 Time* GetTime();
 Camera* GetCamera();
+std::vector<BoxCollider*>* GetColliders();
 
 
 #endif
