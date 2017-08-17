@@ -35,6 +35,7 @@ public:
 
 	void CreatTexture(const char* path);
 	void MakeSlice(const char* name, int x, int y, int w, int h);
+	void SetTexture(Vertex2D* vertex);
 	void SetTexture(Vertex2D* vertex, int currentSprite);
 	void SetTexture(Vertex2D* vertex, const char* name);
 	void Draw(Vertex2D* vertex);

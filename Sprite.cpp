@@ -32,6 +32,21 @@ void Sprite::MakeSlice(const char* name, int x, int y, int w, int h) {
 	this->slices.insert(std::make_pair(name, Slice(x,y,w,h)));
 }
 
+
+void Sprite::SetTexture(Vertex2D* vertex) {
+	if (this->flipX == false) {
+		(vertex+0)->texCoord = D3DXVECTOR2(0.0f, 0.0f);
+		(vertex+1)->texCoord = D3DXVECTOR2(1.0f, 0.0f);
+		(vertex+2)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
+		(vertex+3)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
+	}
+	if (this->flipX == true) {
+		(vertex+0)->texCoord = D3DXVECTOR2(1.0f, 0.0f);
+		(vertex+1)->texCoord = D3DXVECTOR2(0.0f, 0.0f);
+		(vertex+2)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
+		(vertex+3)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
+	}
+}
 void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
 	float x = (float)(currentSprite % this->divide.x);
 	float y = (float)(currentSprite / this->divide.y);
