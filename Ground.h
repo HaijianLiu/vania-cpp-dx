@@ -7,10 +7,9 @@ private:
 	Vertex2D vertex[4] = {Vertex2D()};
 	Sprite* sprite;
 
-	BoxCollider* collider;
-
 public:
 	Transform* transform;
+	BoxCollider* collider;
 
 	Ground(Sprite* sprite);
 	virtual ~Ground();

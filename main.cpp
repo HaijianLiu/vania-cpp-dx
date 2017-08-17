@@ -14,6 +14,7 @@ Prototype
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT InitDirectX(HWND hWnd, BOOL bWindow);
 
+void CheckCollider(Player* player, Ground* ground);
 
 /*------------------------------------------------------------------------------
 Global variables
@@ -52,7 +53,7 @@ Start
 void Start() {
 	time->Start();
 	tile->CreatTexture("assets/tilesets.png");
-	ground->transform->position.y -= 1.0f;
+	ground->transform->position.y += 1.0f;
 	ground->Start();
 	player->Start();
 }
@@ -91,6 +92,7 @@ void Update(void) {
 	time->Update();
 	ground->Update();
 	player->Update();
+	CheckCollider(player, ground);
 }
 
 /*------------------------------------------------------------------------------
@@ -229,6 +231,27 @@ Time* GetTime() {
 
 Camera* GetCamera() {
 	return camera;
+}
+
+void CheckCollider(Player* player, Ground* ground) {
+	if (!player->collGroundCheck->enter) {
+		if (player->collGroundCheck->parent->position.y + player->collGroundCheck->offset.y + player->collGroundCheck->size.y / UNIT_TO_PIXEL >= ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL) {
+			player->collGroundCheck->enter = true;
+			player->collGroundCheck->parent->position.y = ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL - player->collGroundCheck->offset.y - player->collGroundCheck->size.y / UNIT_TO_PIXEL;
+			player->air = false;
+			player->transform->Update(player->vertex, 80, 80);
+		}
+	}
+
+	if (player->collGroundCheck->enter) {
+		if (player->collGroundCheck->parent->position.y + player->collGroundCheck->offset.y + player->collGroundCheck->size.y / UNIT_TO_PIXEL <= ground->collider->parent->position.y + ground->collider->offset.y - ground->collider->size.y / UNIT_TO_PIXEL) {
+			player->collGroundCheck->enter = false;
+		}
+	}
+
+	// if (trigger->parent->position.y + trigger->offset.y + trigger->size.y / UNIT_TO_PIXEL >= collider->parent->position.y + collider->offset.y - collider->size.y / UNIT_TO_PIXEL) {
+	// 	trigger->parent->position.y = 0;
+	// }
 }
 
 

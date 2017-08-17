@@ -11,7 +11,7 @@ Transform::~Transform () {
 void Transform::Update(Vertex2D* vertex, int sizeX, int sizeY) {
 	// World Axis to Screen Axis
 	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->camera->position.y - this->position.y) * UNIT_TO_PIXEL; // Invert Y Axis
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
 
 	// Screen Axis
 	float w = (float)(sizeX * PIXEL_SCALE) / 2.0f;
@@ -25,7 +25,7 @@ void Transform::Update(Vertex2D* vertex, int sizeX, int sizeY) {
 void Transform::Update(Vertex2D* vertex, Int2D size) {
 	// World Axis to Screen Axis
 	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->camera->position.y - this->position.y) * UNIT_TO_PIXEL; // Invert Y Axis
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
 
 	// Screen Axis
 	float w = (float)(size.x * PIXEL_SCALE) / 2.0f;
@@ -39,7 +39,7 @@ void Transform::Update(Vertex2D* vertex, Int2D size) {
 void Transform::Update(Vertex2D* vertex, D3DXVECTOR2 size) {
 	// World Axis to Screen Axis
 	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->camera->position.y - this->position.y) * UNIT_TO_PIXEL; // Invert Y Axis
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
 
 	// Screen Axis
 	float w = (float)(size.x * PIXEL_SCALE) / 2.0f;

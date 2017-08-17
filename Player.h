@@ -4,28 +4,31 @@
 
 class Player {
 private:
-	Vertex2D vertex[4] = {Vertex2D()};
 	Time* time;
-	
-	// Transform
-	Transform* transform;
+
 	// Animation
 	Animation* animIdle;
 	Animation* animRun;
 	Animation* animJump;
-	// Collider
-	BoxCollider* collGroundCheck;
 	// Parameter
 	float gravity = 9.8f;
 	float speed = 1.0f;
 	float jumpPower = 4.0f;
 	bool move = false;
-	bool air = false;
 	bool right = true;
 
 
 public:
+	Vertex2D vertex[4] = {Vertex2D()};
+
+	// Transform
+	Transform* transform;
+
+	bool air = false;
 	float verticalSpeed = 0.0f;
+
+	// Collider
+	BoxCollider* collGroundCheck;
 
 	Player ();
 	virtual ~Player();

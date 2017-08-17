@@ -4,9 +4,6 @@
 
 class BoxCollider {
 private:
-	Transform* parent;
-	D3DXVECTOR2 offset;
-	D3DXVECTOR2 size;
 
 	#ifdef _DEBUG
 		// for Render
@@ -16,6 +13,13 @@ private:
 	#endif
 
 public:
+	Transform* parent;
+	D3DXVECTOR2 offset;
+	D3DXVECTOR2 size;
+
+	bool trigger = false;
+	bool enter = false;
+
 	BoxCollider(Transform* parent, float x, float y, float w, float h);
 	virtual ~BoxCollider();
 
