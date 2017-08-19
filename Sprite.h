@@ -19,6 +19,7 @@ private:
 	LPDIRECT3DDEVICE9 device;
 
 public:
+	Vertex2D vertex[4] = {Vertex2D()};
 	Texture texture;
 
 	// Slice

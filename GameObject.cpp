@@ -16,5 +16,5 @@ void GameObject::PreStart() {
 }
 
 void GameObject::UpdateTransform() {
-	this->transform->Update(this->vertex);
+	this->transform->Update(this->sprite->vertex);
 }

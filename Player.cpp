@@ -105,17 +105,17 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 ------------------------------------------------------------------------------*/
 void Player::Draw() {
 	if (this->air) {
-		this->animJump->Update(this->vertex);
-		this->animJump->sprite->Draw(this->vertex);
+		this->animJump->Update(this->sprite->vertex);
+		this->animJump->sprite->Draw(this->sprite->vertex);
 	}
 	else {
 		if (this->move) {
-			this->animRun->Update(this->vertex);
-			this->animRun->sprite->Draw(this->vertex);
+			this->animRun->Update(this->sprite->vertex);
+			this->animRun->sprite->Draw(this->sprite->vertex);
 		}
 		if (!this->move) {
-			this->animIdle->Update(this->vertex);
-			this->animIdle->sprite->Draw(this->vertex);
+			this->animIdle->Update(this->sprite->vertex);
+			this->animIdle->sprite->Draw(this->sprite->vertex);
 		}
 	}
 }

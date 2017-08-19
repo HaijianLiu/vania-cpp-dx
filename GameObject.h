@@ -8,7 +8,6 @@ class GameObject {
 private:
 
 public:
-	Vertex2D vertex[4] = {Vertex2D()};
 	Time* time;
 	Transform* transform;
 	Sprite* sprite;
