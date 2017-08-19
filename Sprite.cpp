@@ -2,18 +2,18 @@
 #include "Engine.h"
 
 Sprite::Sprite(int imageSizeX, int imageSizeY, int divideX, int divideY) {
-	this->imageSize = Int2D(imageSizeX, imageSizeY);
+	this->texture.size = Int2D(imageSizeX, imageSizeY);
 	this->divide = Int2D(divideX, divideY);
 	this->spriteSize = Int2D(imageSizeX / divideX, imageSizeY / divideY);
 	this->spriteMax = divideX * divideY;
 }
 Sprite::Sprite(int imageSizeX, int imageSizeY) {
-	this->imageSize = Int2D(imageSizeX, imageSizeY);
+	this->texture.size = Int2D(imageSizeX, imageSizeY);
 }
 
 Sprite::~Sprite() {
-	if (this->texture != NULL) {
-		this->texture->Release();
+	if (this->texture.texture != NULL) {
+		this->texture.texture->Release();
 	}
 }
 
@@ -22,10 +22,10 @@ void Sprite::CreatTexture(const char* path) {
 
 	D3DXCreateTextureFromFileEx(
 		this->device, path,
-		this->imageSize.x, this->imageSize.y,
+		this->texture.size.x, this->texture.size.y,
 		1, 0,
 		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&this->texture);
+		&this->texture.texture);
 }
 
 void Sprite::MakeSlice(const char* name, int x, int y, int w, int h) {
@@ -67,10 +67,10 @@ void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
 	}
 }
 void Sprite::SetTexture(Vertex2D* vertex, const char* name) {
-	float x = (float)this->slices.at(name).position.x / (float)this->imageSize.x;
-	float y = (float)(this->imageSize.y - this->slices.at(name).position.y - this->slices.at(name).size.y) / (float)this->imageSize.y;
-	float w = (float)this->slices.at(name).size.x / (float)this->imageSize.x;
-	float h = (float)this->slices.at(name).size.y / (float)this->imageSize.y;;
+	float x = (float)this->slices.at(name).position.x / (float)this->texture.size.x;
+	float y = (float)(this->texture.size.y - this->slices.at(name).position.y - this->slices.at(name).size.y) / (float)this->texture.size.y;
+	float w = (float)this->slices.at(name).size.x / (float)this->texture.size.x;
+	float h = (float)this->slices.at(name).size.y / (float)this->texture.size.y;;
 
 	if (this->flipX == false) {
 		(vertex+0)->texCoord = D3DXVECTOR2(x,y);
@@ -88,6 +88,6 @@ void Sprite::SetTexture(Vertex2D* vertex, const char* name) {
 
 void Sprite::Draw(Vertex2D* vertex) {
 	this->device->SetFVF(FVF_VERTEX_2D);
-	this->device->SetTexture(0,this->texture);
+	this->device->SetTexture(0,this->texture.texture);
 	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
 }

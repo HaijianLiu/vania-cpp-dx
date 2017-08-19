@@ -15,9 +15,11 @@ struct Slice {
 class Sprite {
 private:
 	LPDIRECT3DDEVICE9 device;
-	LPDIRECT3DTEXTURE9 texture;
 
-	Int2D imageSize;
+	Texture texture;
+	// LPDIRECT3DTEXTURE9 texture;
+	//
+	// Int2D imageSize;
 
 public:
 	// Animation

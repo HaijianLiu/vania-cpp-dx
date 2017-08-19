@@ -68,6 +68,12 @@ struct Texture {
 	LPDIRECT3DTEXTURE9 texture;
 	const char* path;
 	Int2D size;
+	Texture(){};
+	Texture(const char* path, int x, int y) {
+		this->texture = NULL;
+		this->path = path;
+		this->size = Int2D(x,y);
+	}
 };
 
 
