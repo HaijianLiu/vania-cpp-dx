@@ -2,14 +2,6 @@
 #include "Engine.h"
 
 /*------------------------------------------------------------------------------
-< Texture Pathes >
-------------------------------------------------------------------------------*/
-#define TEXTURE_PLAYER_IDLE _T("assets/player-idle.png")
-#define TEXTURE_PLAYER_RUN_SHOOT _T("assets/player-run-shoot.png")
-#define TEXTURE_PLAYER_JUMP _T("assets/player-jump.png")
-
-
-/*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
 Player::Player() {
@@ -104,6 +96,7 @@ void Player::Update() {
 			this->sprite->texture = this->animIdle->sprite->texture;
 		}
 	}
+
 }
 
 
@@ -111,7 +104,6 @@ void Player::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Player::OnTriggerEnter(BoxCollider* other) {
-	// this->groundCounter++;
 	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 	this->air = false;
 	this->verticalSpeed = 0.0f;
