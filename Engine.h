@@ -82,6 +82,7 @@ struct Texture {
 ------------------------------------------------------------------------------*/
 #include "Window.h"
 #include "Input.h"
+#include "Debug.h"
 #include "Time.h"
 #include "Camera.h"
 #include "Transform.h"
