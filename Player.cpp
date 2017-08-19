@@ -16,6 +16,8 @@ Player::Player() {
 	this->gameObjects = GetGameObjects();
 	this->gameObjects->push_back(this);
 
+	// pixel size
+	this->transform->size = Int2D(80,80);
 	// Animation
 	this->animIdle = new Animation(240,80,3,1,15);
 	this->animRun = new Animation(800,80,10,1,4);
@@ -77,14 +79,24 @@ void Player::Update() {
 	}
 
 	// gravity
-	if (this->air) {
-		this->transform->position.y -= this->verticalSpeed * this->time->deltaTime;
-		this->verticalSpeed -= this->gravity * this->time->deltaTime;
+	this->verticalSpeed -= this->gravity * this->time->deltaTime;
+	this->transform->position.y -= this->verticalSpeed * this->time->deltaTime;
+	if (this->verticalSpeed < -1.0f) {
+		this->air = true;
 	}
-
-	// Update Transform
-	this->transform->Update(this->vertex, this->animIdle->sprite->spriteSize.x, this->animIdle->sprite->spriteSize.y);
 }
+
+
+/*------------------------------------------------------------------------------
+< On Trigger Enter >
+------------------------------------------------------------------------------*/
+void Player::OnTriggerEnter(BoxCollider* other) {
+	// this->groundCounter++;
+	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->size.y / UNIT_TO_PIXEL - this->collGroundCheck->offset.y - this->collGroundCheck->size.y / UNIT_TO_PIXEL;
+	this->air = false;
+	this->verticalSpeed = 0.0f;
+}
+
 
 
 /*------------------------------------------------------------------------------
@@ -108,23 +120,4 @@ void Player::Draw() {
 			this->animIdle->sprite->Draw(this->vertex);
 		}
 	}
-}
-
-
-/*------------------------------------------------------------------------------
-< On Trigger Enter >
-------------------------------------------------------------------------------*/
-void Player::OnTriggerEnter(BoxCollider* other) {
-	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->size.y / UNIT_TO_PIXEL - this->collGroundCheck->offset.y - this->collGroundCheck->size.y / UNIT_TO_PIXEL;
-	this->air = false;
-	this->verticalSpeed = 0.0f;
-	this->transform->Update(this->vertex, 80, 80);
-}
-
-
-/*------------------------------------------------------------------------------
-< On Trigger Exit >
-------------------------------------------------------------------------------*/
-void Player::OnTriggerExit(BoxCollider* other) {
-	this->air = true;
 }

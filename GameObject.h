@@ -16,11 +16,13 @@ public:
 	~GameObject();
 
 	void PreStart();
+	void UpdateTransform();
+
 	virtual void Start() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	virtual void OnTriggerEnter(BoxCollider* other) = 0;
-	virtual void OnTriggerExit(BoxCollider* other) = 0;
+	// virtual void OnTriggerExit(BoxCollider* other) = 0;
 	// virtual void OnTriggerStay(GameObject* other) = 0;
 	// virtual void OnTriggerLeave(GameObject* other) = 0;
 };

@@ -21,7 +21,7 @@ public:
 	// Collider
 	BoxCollider* collGroundCheck;
 
-	bool air = false;
+	bool air = true;
 	float verticalSpeed = 0.0f;
 
 	Player ();
@@ -31,7 +31,7 @@ public:
 	void Update();
 	void Draw();
 	void OnTriggerEnter(BoxCollider* other);
-	void OnTriggerExit(BoxCollider* other);
+	// void OnTriggerExit(BoxCollider* other);
 	// void OnTriggerStay(GameObject* other);
 	// void OnTriggerLeave(GameObject* other);
 };

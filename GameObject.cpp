@@ -12,3 +12,7 @@ GameObject::~GameObject() {
 void GameObject::PreStart() {
 	this->time = GetTime();
 }
+
+void GameObject::UpdateTransform() {
+	this->transform->Update(this->vertex);
+}

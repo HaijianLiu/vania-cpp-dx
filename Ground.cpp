@@ -14,6 +14,8 @@ Ground::Ground(Sprite* sprite) {
 	this->gameObjects = GetGameObjects();
 	this->gameObjects->push_back(this);
 
+	this->transform->size = Int2D(32,32);
+
 	this->sprite = sprite;
 	this->collider = new BoxCollider(this,0.0f,0.0f,32.0f,32.0f);
 }
@@ -33,8 +35,6 @@ Ground::~Ground() {
 void Ground::Start() {
 	this->sprite->MakeSlice("Floor",160,64,32,32);
 	this->sprite->SetTexture(this->vertex, "Floor");
-
-	this->transform->Update(this->vertex, this->sprite->slices.at("Floor").size);
 }
 
 
@@ -58,13 +58,5 @@ void Ground::Draw() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Ground::OnTriggerEnter(BoxCollider* other) {
-
-}
-
-
-/*------------------------------------------------------------------------------
-< On Trigger Exit >
-------------------------------------------------------------------------------*/
-void Ground::OnTriggerExit(BoxCollider* other) {
 
 }

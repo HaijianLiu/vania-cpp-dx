@@ -19,7 +19,6 @@ public:
 	D3DXVECTOR2 size;
 
 	bool trigger = false;
-	bool enter = false;
 
 	BoxCollider(GameObject* gameObject, float x, float y, float w, float h);
 	~BoxCollider();

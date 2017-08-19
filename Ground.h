@@ -18,7 +18,7 @@ public:
 	void Update();
 	void Draw();
 	void OnTriggerEnter(BoxCollider* other);
-	void OnTriggerExit(BoxCollider* other);
+	// void OnTriggerExit(BoxCollider* other);
 	// void OnTriggerStay(GameObject* other);
 	// void OnTriggerLeave(GameObject* other);
 };

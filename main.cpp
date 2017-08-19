@@ -34,9 +34,8 @@ Time* time = new Time();
 Camera* camera = new Camera();
 Sprite* tile = new Sprite(384,192);
 
-// Game Object
-Ground* ground = new Ground(tile);
 Player* player = new Player();
+
 
 
 
@@ -49,7 +48,7 @@ Debug
 	void DrawDebugFont() {
 		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
 		char str[256];
-		sprintf(str,"FPS:%d\nDelta Time:%.3f\nVertical Speed:%.3f", time->countFPS, time->deltaTime, player->verticalSpeed);
+		sprintf(str,"FPS:%d\nDelta Time:%.3f\nAir:%d\n", time->countFPS, time->deltaTime, player->air);
 		gD3DXFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
 	}
 #endif
@@ -58,9 +57,26 @@ Debug
 Start
 ------------------------------------------------------------------------------*/
 void Start() {
+	// Game Object
+	Ground* ground1 = new Ground(tile);
+		ground1->transform->position.y = 0.96f;
+		ground1->transform->position.x = 0.0f;
+	Ground* ground2 = new Ground(tile);
+		ground2->transform->position.y = 0.96f;
+		ground2->transform->position.x = 0.32f;
+	Ground* ground3 = new Ground(tile);
+		ground3->transform->position.y = 0.96f;
+		ground3->transform->position.x = 0.64f;
+	Ground* ground4 = new Ground(tile);
+		ground4->transform->position.y = 0.96f;
+		ground4->transform->position.x = 0.96f;
+	Ground* ground5 = new Ground(tile);
+		ground5->transform->position.y = 0.96f;
+		ground5->transform->position.x = 1.28f;
+
+
 	time->Start();
 	tile->CreatTexture("assets/tilesets.png");
-	ground->transform->position.y += 1.0f;
 
 	for (unsigned int i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->PreStart();
@@ -110,13 +126,17 @@ void Update(void) {
 	for (unsigned int i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->Update();
 	}
+	CheckCollider();
+	for (unsigned int i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->UpdateTransform();
+	}
+
 	#ifdef _DEBUG
 		for (unsigned i = 0; i < colliders.size(); i++) {
 			colliders[i]->Update();
 		}
 	#endif
 
-	CheckCollider();
 }
 
 /*------------------------------------------------------------------------------
@@ -280,17 +300,17 @@ Check Colliders
 bool CheckCollision(BoxCollider* a, BoxCollider* b) {
 	// Collision x-axis?
 	bool collisionX =
-		a->gameObject->transform->position.x + a->offset.x + a->size.x / UNIT_TO_PIXEL >=
+		a->gameObject->transform->position.x + a->offset.x + a->size.x / UNIT_TO_PIXEL >
 		b->gameObject->transform->position.x + b->offset.x - b->size.x / UNIT_TO_PIXEL
 		&&
-		a->gameObject->transform->position.x + a->offset.x - a->size.x / UNIT_TO_PIXEL <=
+		a->gameObject->transform->position.x + a->offset.x - a->size.x / UNIT_TO_PIXEL <
 		b->gameObject->transform->position.x + b->offset.x + b->size.x / UNIT_TO_PIXEL;
 	// Collision y-axis?
 	bool collisionY =
-		a->gameObject->transform->position.y + a->offset.y + a->size.y / UNIT_TO_PIXEL >=
+		a->gameObject->transform->position.y + a->offset.y + a->size.y / UNIT_TO_PIXEL >
 		b->gameObject->transform->position.y + b->offset.y - b->size.y / UNIT_TO_PIXEL
 		&&
-		a->gameObject->transform->position.y + a->offset.y - a->size.y / UNIT_TO_PIXEL <=
+		a->gameObject->transform->position.y + a->offset.y - a->size.y / UNIT_TO_PIXEL <
 		b->gameObject->transform->position.y + b->offset.y + b->size.y / UNIT_TO_PIXEL;
 	// Collision only if on both axes
 	return collisionX && collisionY;
@@ -302,34 +322,9 @@ void CheckCollider() {
 			for (unsigned int j = 0; j < colliders.size(); j++) {
 				bool collision = CheckCollision(colliders[i],colliders[j]);
 				if (i != j) {
-					// OnTriggerEnter
-					if (!colliders[i]->enter) {
-						if (collision) {
-							colliders[i]->enter = true;
-							colliders[i]->gameObject->OnTriggerEnter(colliders[j]);
-						}
+					if (collision) {
+						colliders[i]->gameObject->OnTriggerEnter(colliders[j]);
 					}
-					// OnTriggerExit
-					else if (colliders[i]->enter) {
-						if (!collision) {
-							colliders[i]->enter = false;
-							colliders[i]->gameObject->OnTriggerExit(colliders[j]);
-						}
-					}
-					/*
-					// TriggerStay
-					else if (collision) {
-						colliders[i]->enter = false;
-						colliders[i]->exit = false;
-						colliders[i]->stay = true;
-					}
-					// TiggerLeave
-					else {
-						colliders[i]->enter = false;
-						colliders[i]->exit = false;
-						colliders[i]->stay = false;
-					}
-					*/
 				}
 			}
 		}
