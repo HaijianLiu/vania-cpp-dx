@@ -9,10 +9,15 @@ private:
 	int counter;
 
 public:
+	Int2D spriteSize;
+	Int2D divide;
+	int spriteMax;
+
 	Sprite* sprite;
 
-	Animation(int imageSizeX, int imageSizeY, int divideX, int divideY, int sampleTime);
-	virtual ~Animation ();
+	Animation(int divideX, int divideY, int sampleTime);
+	~Animation ();
+	void Start();
 	void Update(Vertex2D* vertex);
 };
 

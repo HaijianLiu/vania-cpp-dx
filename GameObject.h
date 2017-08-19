@@ -8,9 +8,10 @@ class GameObject {
 private:
 
 public:
-	Time* time;
 	Vertex2D vertex[4] = {Vertex2D()};
+	Time* time;
 	Transform* transform;
+	Sprite* sprite;
 
 	GameObject();
 	~GameObject();
@@ -22,9 +23,6 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	virtual void OnTriggerEnter(BoxCollider* other) = 0;
-	// virtual void OnTriggerExit(BoxCollider* other) = 0;
-	// virtual void OnTriggerStay(GameObject* other) = 0;
-	// virtual void OnTriggerLeave(GameObject* other) = 0;
 };
 
 #endif

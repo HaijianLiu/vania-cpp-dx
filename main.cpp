@@ -32,10 +32,6 @@ std::vector<BoxCollider*> colliders;
 
 Time* time = new Time();
 Camera* camera = new Camera();
-Sprite* tile = new Sprite(384,192);
-
-Player* player = new Player();
-
 
 
 
@@ -48,7 +44,7 @@ Debug
 	void DrawDebugFont() {
 		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
 		char str[256];
-		sprintf(str,"FPS:%d\nDelta Time:%.3f\nAir:%d\n", time->countFPS, time->deltaTime, player->air);
+		sprintf(str,"FPS:%d\nDelta Time:%.3f", time->countFPS, time->deltaTime);
 		gD3DXFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
 	}
 #endif
@@ -57,26 +53,67 @@ Debug
 Start
 ------------------------------------------------------------------------------*/
 void Start() {
+	Texture texTile = Texture("assets/tilesets.png",384,192);
+	D3DXCreateTextureFromFileEx(
+		gD3DDevice, texTile.path,
+		texTile.size.x, texTile.size.y,
+		1, 0,
+		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
+		&texTile.texture);
+
+	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
+	D3DXCreateTextureFromFileEx(
+		gD3DDevice, texPlayerIdle.path,
+		texPlayerIdle.size.x, texPlayerIdle.size.y,
+		1, 0,
+		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
+		&texPlayerIdle.texture);
+
+	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
+	D3DXCreateTextureFromFileEx(
+		gD3DDevice, texPlayerRun.path,
+		texPlayerRun.size.x, texPlayerRun.size.y,
+		1, 0,
+		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
+		&texPlayerRun.texture);
+
+	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
+	D3DXCreateTextureFromFileEx(
+		gD3DDevice, texPlayerJump.path,
+		texPlayerJump.size.x, texPlayerJump.size.y,
+		1, 0,
+		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
+		&texPlayerJump.texture);
+
 	// Game Object
-	Ground* ground1 = new Ground(tile);
+	Player* player = new Player();
+		player->animIdle->sprite->texture = texPlayerIdle;
+		player->animRun->sprite->texture = texPlayerRun;
+		player->animJump->sprite->texture = texPlayerJump;
+
+	Ground* ground1 = new Ground();
+		ground1->sprite->texture = texTile;
 		ground1->transform->position.y = 0.96f;
 		ground1->transform->position.x = 0.0f;
-	Ground* ground2 = new Ground(tile);
+	Ground* ground2 = new Ground();
+		ground2->sprite->texture = texTile;
 		ground2->transform->position.y = 0.96f;
 		ground2->transform->position.x = 0.32f;
-	Ground* ground3 = new Ground(tile);
+	Ground* ground3 = new Ground();
+		ground3->sprite->texture = texTile;
 		ground3->transform->position.y = 0.96f;
 		ground3->transform->position.x = 0.64f;
-	Ground* ground4 = new Ground(tile);
+	Ground* ground4 = new Ground();
+	ground4->sprite->texture = texTile;
 		ground4->transform->position.y = 0.96f;
 		ground4->transform->position.x = 0.96f;
-	Ground* ground5 = new Ground(tile);
+	Ground* ground5 = new Ground();
+		ground5->sprite->texture = texTile;
 		ground5->transform->position.y = 0.96f;
 		ground5->transform->position.x = 1.28f;
 
 
 	time->Start();
-	tile->CreatTexture("assets/tilesets.png");
 
 	for (unsigned int i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->PreStart();
@@ -96,7 +133,6 @@ void Delete() {
 	for (unsigned int i = 0; i < gameObjects.size(); i++) {
 		delete gameObjects[i];
 	}
-	delete tile;
 	delete time;
 	delete camera;
 	UninitInput();

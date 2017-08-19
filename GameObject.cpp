@@ -4,9 +4,11 @@
 
 GameObject::GameObject() {
 	this->transform = new Transform();
+	this->sprite = new Sprite();
 }
 GameObject::~GameObject() {
 	delete this->transform;
+	delete this->sprite;
 }
 
 void GameObject::PreStart() {

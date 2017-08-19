@@ -17,27 +17,29 @@ struct Slice {
 class Sprite {
 private:
 	LPDIRECT3DDEVICE9 device;
-	Texture texture;
 
 public:
-	// Animation
-	Int2D spriteSize;
-	Int2D divide;
-	int spriteMax;
+	Texture texture;
+
 	// Slice
+	std::vector<Slice> frames;
 	std::map<const char*, Slice> slices;
 
 	bool flipX = false;
 
-	Sprite(int imageSizeX, int imageSizeY, int divideX, int divideY);
+	Sprite();
 	Sprite(int imageSizeX, int imageSizeY);
-	virtual ~Sprite();
+	~Sprite();
 
 	void CreatTexture(const char* path);
+
 	void MakeSlice(Slice slice);
+	void MakeFrame(int frame, int x, int y, int w, int h);
 	void SetTexture(Vertex2D* vertex);
+
 	void SetTexture(Vertex2D* vertex, int currentSprite);
 	void SetTexture(Vertex2D* vertex, const char* name);
+
 	void Draw(Vertex2D* vertex);
 };
 

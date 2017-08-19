@@ -1,11 +1,8 @@
 ﻿
 #include "Engine.h"
 
-Sprite::Sprite(int imageSizeX, int imageSizeY, int divideX, int divideY) {
-	this->texture.size = Int2D(imageSizeX, imageSizeY);
-	this->divide = Int2D(divideX, divideY);
-	this->spriteSize = Int2D(imageSizeX / divideX, imageSizeY / divideY);
-	this->spriteMax = divideX * divideY;
+Sprite::Sprite() {
+	this->device = GetDevice();
 }
 Sprite::Sprite(int imageSizeX, int imageSizeY) {
 	this->texture.size = Int2D(imageSizeX, imageSizeY);
@@ -32,6 +29,10 @@ void Sprite::MakeSlice(Slice slice) {
 	this->slices.insert(std::make_pair(slice.name, slice));
 }
 
+void Sprite::MakeFrame(int frame, int x, int y, int w, int h) {
+	this->frames.push_back(Slice("frame",x,y,w,h));
+}
+
 
 void Sprite::SetTexture(Vertex2D* vertex) {
 	if (this->flipX == false) {
@@ -48,22 +49,22 @@ void Sprite::SetTexture(Vertex2D* vertex) {
 	}
 }
 void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
-	float x = (float)(currentSprite % this->divide.x);
-	float y = (float)(currentSprite / this->divide.y);
-	float w = 1.0f / (float)this->divide.x;
-	float h = 1.0f / (float)this->divide.y;
+	float x = (float)this->frames[currentSprite].position.x / (float)this->texture.size.x;
+	float y = (float)this->frames[currentSprite].position.y / (float)this->texture.size.y;
+	float w = (float)this->frames[currentSprite].size.x / (float)this->texture.size.x;
+	float h = (float)this->frames[currentSprite].size.y / (float)this->texture.size.y;;
 
 	if (this->flipX == false) {
-		(vertex+0)->texCoord = D3DXVECTOR2(x*w,y*h);
-		(vertex+1)->texCoord = D3DXVECTOR2(x*w+w,y*h);
-		(vertex+2)->texCoord = D3DXVECTOR2(x*w,y*h+h);
-		(vertex+3)->texCoord = D3DXVECTOR2(x*w+w,y*h+h);
+		(vertex+0)->texCoord = D3DXVECTOR2(x,y);
+		(vertex+1)->texCoord = D3DXVECTOR2(x+w,y);
+		(vertex+2)->texCoord = D3DXVECTOR2(x,y+h);
+		(vertex+3)->texCoord = D3DXVECTOR2(x+w,y+h);
 	}
 	if (this->flipX == true) {
-		(vertex+0)->texCoord = D3DXVECTOR2(x*w+w,y*h);
-		(vertex+1)->texCoord = D3DXVECTOR2(x*w,y*h);
-		(vertex+2)->texCoord = D3DXVECTOR2(x*w+w,y*h+h);
-		(vertex+3)->texCoord = D3DXVECTOR2(x*w,y*h+h);
+		(vertex+0)->texCoord = D3DXVECTOR2(x+w,y);
+		(vertex+1)->texCoord = D3DXVECTOR2(x,y);
+		(vertex+2)->texCoord = D3DXVECTOR2(x+w,y+h);
+		(vertex+3)->texCoord = D3DXVECTOR2(x,y+h);
 	}
 }
 void Sprite::SetTexture(Vertex2D* vertex, const char* name) {

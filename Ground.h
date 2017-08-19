@@ -4,25 +4,26 @@
 
 class Ground : public GameObject {
 private:
+	// List of GameObjects
 	std::vector<GameObject*>* gameObjects;
 
-	Sprite* sprite;
-
-	Slice slice = Slice("Floor",160,192-64-32,32,32);
-
 public:
+	// Animation or Slice
+	Slice slice;
+	// Collider
 	BoxCollider* collider;
 
-	Ground(Sprite* sprite);
+	// Parameter
+
+	// Constructors
+	Ground();
 	~Ground();
 
+	// virtual Functions
 	void Start();
 	void Update();
 	void Draw();
 	void OnTriggerEnter(BoxCollider* other);
-	// void OnTriggerExit(BoxCollider* other);
-	// void OnTriggerStay(GameObject* other);
-	// void OnTriggerLeave(GameObject* other);
 };
 
 #endif

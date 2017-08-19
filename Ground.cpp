@@ -2,21 +2,17 @@
 #include "Engine.h"
 
 /*------------------------------------------------------------------------------
-< Texture Pathes >
-------------------------------------------------------------------------------*/
-#define TEXTURE_TILE_SETS _T("assets/tilesets.png")
-
-
-/*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Ground::Ground(Sprite* sprite) {
+Ground::Ground() {
+	// GetGameObjects and push_back
 	this->gameObjects = GetGameObjects();
 	this->gameObjects->push_back(this);
-
-	this->transform->size = Int2D(32,32);
-
-	this->sprite = sprite;
+	// Transform Size in real pixel (Int2D)
+	this->transform->size = Int2D(32, 32);
+	// Animation (divideX, divideY, sampleTime) || Slice (name,positionX,positionY,sizeX,sizeY) all in real pixel
+	this->slice = Slice("Floor", 160, 192 - 64 - 32, 32, 32);
+	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,32.0f,32.0f);
 }
 
@@ -25,6 +21,7 @@ Ground::Ground(Sprite* sprite) {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Ground::~Ground() {
+	// delete objects
 	delete this->collider;
 }
 
@@ -33,7 +30,8 @@ Ground::~Ground() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Ground::Start() {
-	this->sprite->MakeSlice(slice);
+	// set Animation || set Slice
+	this->sprite->MakeSlice(this->slice);
 	this->sprite->SetTexture(this->vertex, "Floor");
 }
 
@@ -42,7 +40,7 @@ void Ground::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Ground::Update() {
-	// this->transform->Update(this->vertex, this->sprite->slices.at("Floor").size);
+
 }
 
 
