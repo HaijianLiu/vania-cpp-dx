@@ -59,12 +59,12 @@ void Player::Update() {
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->move = true;
-		this->sprite->flipX = true;
+		this->right = false;
 		this->transform->position.x -= this->speed * this->time->deltaTime;
 	}
 	else if (GetKeyboardPress(DIK_RIGHT)) {
 		this->move = true;
-		this->sprite->flipX = false;
+		this->right = true;
 		this->transform->position.x += this->speed * this->time->deltaTime;
 	}
 	else {
@@ -85,6 +85,25 @@ void Player::Update() {
 	if (this->verticalSpeed < -1.0f) {
 		this->air = true;
 	}
+
+	// Animator
+	if (this->air) {
+		this->animJump->sprite->flipX = !this->right;
+		this->animJump->Update(this->sprite->vertex);
+		this->sprite->texture = this->animJump->sprite->texture;
+	}
+	else {
+		if (this->move) {
+			this->animRun->sprite->flipX = !this->right;
+			this->animRun->Update(this->sprite->vertex);
+			this->sprite->texture = this->animRun->sprite->texture;
+		}
+		if (!this->move) {
+			this->animIdle->sprite->flipX = !this->right;
+			this->animIdle->Update(this->sprite->vertex);
+			this->sprite->texture = this->animIdle->sprite->texture;
+		}
+	}
 }
 
 
@@ -104,18 +123,5 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 < Draw >
 ------------------------------------------------------------------------------*/
 void Player::Draw() {
-	if (this->air) {
-		this->animJump->Update(this->sprite->vertex);
-		this->animJump->sprite->Draw(this->sprite->vertex);
-	}
-	else {
-		if (this->move) {
-			this->animRun->Update(this->sprite->vertex);
-			this->animRun->sprite->Draw(this->sprite->vertex);
-		}
-		if (!this->move) {
-			this->animIdle->Update(this->sprite->vertex);
-			this->animIdle->sprite->Draw(this->sprite->vertex);
-		}
-	}
+	this->sprite->Draw(this->sprite->vertex);
 }
