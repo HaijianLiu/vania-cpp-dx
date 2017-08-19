@@ -88,7 +88,7 @@ struct Texture {
 #include "GameObject.h"
 #include "BoxCollider.h"
 #include "Animation.h"
-
+#include "Scene.h"
 
 /*------------------------------------------------------------------------------
 < Game Object classes >
