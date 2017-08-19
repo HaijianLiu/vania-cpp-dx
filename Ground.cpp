@@ -33,7 +33,7 @@ Ground::~Ground() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Ground::Start() {
-	this->sprite->MakeSlice("Floor",160,64,32,32);
+	this->sprite->MakeSlice(slice);
 	this->sprite->SetTexture(this->vertex, "Floor");
 }
 

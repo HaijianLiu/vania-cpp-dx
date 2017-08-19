@@ -8,6 +8,8 @@ private:
 
 	Sprite* sprite;
 
+	Slice slice = Slice("Floor",160,192-64-32,32,32);
+
 public:
 	BoxCollider* collider;
 

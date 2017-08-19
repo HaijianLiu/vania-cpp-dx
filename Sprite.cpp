@@ -28,8 +28,8 @@ void Sprite::CreatTexture(const char* path) {
 		&this->texture.texture);
 }
 
-void Sprite::MakeSlice(const char* name, int x, int y, int w, int h) {
-	this->slices.insert(std::make_pair(name, Slice(x,y,w,h)));
+void Sprite::MakeSlice(Slice slice) {
+	this->slices.insert(std::make_pair(slice.name, slice));
 }
 
 
@@ -68,7 +68,10 @@ void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
 }
 void Sprite::SetTexture(Vertex2D* vertex, const char* name) {
 	float x = (float)this->slices.at(name).position.x / (float)this->texture.size.x;
+	float y = (float)this->slices.at(name).position.y / (float)this->texture.size.y;
+	/* inver y axis
 	float y = (float)(this->texture.size.y - this->slices.at(name).position.y - this->slices.at(name).size.y) / (float)this->texture.size.y;
+	*/
 	float w = (float)this->slices.at(name).size.x / (float)this->texture.size.x;
 	float h = (float)this->slices.at(name).size.y / (float)this->texture.size.y;;
 

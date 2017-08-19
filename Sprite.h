@@ -3,10 +3,12 @@
 #define _SPRITE_H_
 
 struct Slice {
+	const char* name;
 	Int2D position;
 	Int2D size;
 	Slice() {};
-	Slice(int x, int y, int w, int h) {
+	Slice(const char* name, int x, int y, int w, int h) {
+		this->name = name;
 		this->position = Int2D(x,y);
 		this->size = Int2D(w,h);
 	}
@@ -15,11 +17,7 @@ struct Slice {
 class Sprite {
 private:
 	LPDIRECT3DDEVICE9 device;
-
 	Texture texture;
-	// LPDIRECT3DTEXTURE9 texture;
-	//
-	// Int2D imageSize;
 
 public:
 	// Animation
@@ -36,7 +34,7 @@ public:
 	virtual ~Sprite();
 
 	void CreatTexture(const char* path);
-	void MakeSlice(const char* name, int x, int y, int w, int h);
+	void MakeSlice(Slice slice);
 	void SetTexture(Vertex2D* vertex);
 	void SetTexture(Vertex2D* vertex, int currentSprite);
 	void SetTexture(Vertex2D* vertex, const char* name);
