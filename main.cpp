@@ -2,33 +2,23 @@
 #include "Engine.h"
 
 /*------------------------------------------------------------------------------
-Engine Objects
+List of GetGameObject and Collider
 ------------------------------------------------------------------------------*/
-// List of GetGameObject and Collider
 std::vector<GameObject*> gameObjects;
 std::vector<BoxCollider*> colliders;
-// Time
-Time* time = new Time();
-Camera* camera = new Camera();
 
 /*------------------------------------------------------------------------------
-Scene Objects
+Game Objects
 ------------------------------------------------------------------------------*/
+Time* time = new Time();
+Camera* camera = new Camera();
 Scene* scene = new Scene();
-
 
 /*------------------------------------------------------------------------------
 Debug
 ------------------------------------------------------------------------------*/
 #ifdef _DEBUG
-	LPD3DXFONT gD3DXFont = NULL; // D3D font pointer
-
-	void DrawDebugFont() {
-		RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
-		char str[256];
-		sprintf(str,"FPS:%d\nDelta Time:%.3f", time->countFPS, time->deltaTime);
-		gD3DXFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff,0xff,0xff,0xff));
-	}
+	Debug* debug = new Debug(scene);
 #endif
 
 /*------------------------------------------------------------------------------
@@ -39,9 +29,8 @@ void Start() {
 	scene->Start();
 
 	#ifdef _DEBUG
-		D3DXCreateFont(GetDevice(),18,0,0,0,FALSE,SHIFTJIS_CHARSET,OUT_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,_T("Terminal"),&gD3DXFont);
+		debug->Start();
 	#endif
-
 }
 
 /*------------------------------------------------------------------------------
@@ -53,7 +42,7 @@ void Delete() {
 	delete time;
 
 	#ifdef _DEBUG
-		if (gD3DXFont != NULL) gD3DXFont->Release();
+		delete debug;
 	#endif
 }
 
@@ -73,19 +62,42 @@ void Draw(void) {
 	ClearWindow();
 	if(WindowBeginScene()) {
 		scene->Draw();
+
 		#ifdef _DEBUG
-			DrawDebugFont();
+			debug->Draw();
 		#endif
+
 		WindowEndScene();
 	}
 	PresentWindow();
 }
 
-
-
 /*------------------------------------------------------------------------------
-main
+Get Functions
 ------------------------------------------------------------------------------*/
+Time* GetTime() {
+	return time;
+}
+Camera* GetCamera() {
+	return camera;
+}
+std::vector<BoxCollider*>* GetColliders() {
+	return &colliders;
+}
+std::vector<GameObject*>* GetGameObjects() {
+	return &gameObjects;
+}
+std::vector<BoxCollider*> CopyColliders() {
+	return colliders;
+}
+std::vector<GameObject*> CopyGameObjects() {
+	return gameObjects;
+}
+
+
+/*==============================================================================
+main
+==============================================================================*/
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	if (!InitWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow)) return -1;
 	// Start
@@ -103,29 +115,4 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	// Delete
 	Delete();
 	return DeleteWindow();
-}
-
-
-/*------------------------------------------------------------------------------
-Get Functions
-------------------------------------------------------------------------------*/
-Time* GetTime() {
-	return time;
-}
-
-Camera* GetCamera() {
-	return camera;
-}
-
-std::vector<BoxCollider*>* GetColliders() {
-	return &colliders;
-}
-std::vector<GameObject*>* GetGameObjects() {
-	return &gameObjects;
-}
-std::vector<BoxCollider*> CopyColliders() {
-	return colliders;
-}
-std::vector<GameObject*> CopyGameObjects() {
-	return gameObjects;
 }
