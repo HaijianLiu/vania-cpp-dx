@@ -17,10 +17,10 @@ public:
 
 	void PreStart();
 	void UpdateTransform();
+	void Draw();
 
 	virtual void Start() = 0;
 	virtual void Update() = 0;
-	virtual void Draw() = 0;
 	virtual void OnTriggerEnter(BoxCollider* other) = 0;
 };
 

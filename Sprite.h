@@ -37,12 +37,13 @@ public:
 	void SetTexture(Vertex2D* vertex, int currentSprite);
 	void SetTexture(Vertex2D* vertex, const char* name);
 
-	void Draw(Vertex2D* vertex);
+	void Draw();
 
 	#ifdef _DEBUG
 		Sprite(int imageSizeX, int imageSizeY);
 		void CreatTexture(const char* path);
 		void SetTexture(Vertex2D* vertex);
+		void Draw(Vertex2D* vertex);
 	#endif
 };
 

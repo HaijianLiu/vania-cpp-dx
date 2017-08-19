@@ -18,3 +18,7 @@ void GameObject::PreStart() {
 void GameObject::UpdateTransform() {
 	this->transform->Update(this->sprite->vertex);
 }
+
+void GameObject::Draw() {
+	this->sprite->Draw();
+}

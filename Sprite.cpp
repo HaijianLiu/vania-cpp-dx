@@ -60,10 +60,10 @@ void Sprite::SetTexture(Vertex2D* vertex, const char* name) {
 	}
 }
 
-void Sprite::Draw(Vertex2D* vertex) {
+void Sprite::Draw() {
 	this->device->SetFVF(FVF_VERTEX_2D);
 	this->device->SetTexture(0,this->texture.texture);
-	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
+	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, this->vertex, sizeof(Vertex2D));
 }
 
 
@@ -72,7 +72,7 @@ void Sprite::Draw(Vertex2D* vertex) {
 	Sprite::Sprite(int imageSizeX, int imageSizeY) {
 		this->texture.size = Int2D(imageSizeX, imageSizeY);
 	}
-	
+
 	void Sprite::CreatTexture(const char* path) {
 		this->device = GetDevice();
 
@@ -97,5 +97,10 @@ void Sprite::Draw(Vertex2D* vertex) {
 			(vertex+2)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
 			(vertex+3)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
 		}
+	}
+	void Sprite::Draw(Vertex2D* vertex) {
+		this->device->SetFVF(FVF_VERTEX_2D);
+		this->device->SetTexture(0,this->texture.texture);
+		this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
 	}
 #endif

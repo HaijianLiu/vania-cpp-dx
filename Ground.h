@@ -22,7 +22,6 @@ public:
 	// virtual Functions
 	void Start();
 	void Update();
-	void Draw();
 	void OnTriggerEnter(BoxCollider* other);
 };
 

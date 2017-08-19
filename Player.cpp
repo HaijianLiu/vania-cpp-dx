@@ -116,12 +116,3 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	this->air = false;
 	this->verticalSpeed = 0.0f;
 }
-
-
-
-/*------------------------------------------------------------------------------
-< Draw >
-------------------------------------------------------------------------------*/
-void Player::Draw() {
-	this->sprite->Draw(this->sprite->vertex);
-}
