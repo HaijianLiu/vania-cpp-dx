@@ -36,10 +36,10 @@ Player::~Player() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Player::Start() {
-	// set Animation || set Slice
-	this->animIdle->Start();
-	this->animRun->Start();
-	this->animJump->Start();
+	// Animation MakeFrame() || Sprite MakeSlice()
+	this->animIdle->MakeFrame();
+	this->animRun->MakeFrame();
+	this->animJump->MakeFrame();
 }
 
 
@@ -78,21 +78,21 @@ void Player::Update() {
 		this->air = true;
 	}
 
-	// Animator
+	// Animation SetTexture() || Sprite SetTexture()
 	if (this->air) {
 		this->animJump->sprite->flipX = !this->right;
-		this->animJump->Update(this->sprite->vertex);
+		this->animJump->SetTexture(this->sprite->vertex);
 		this->sprite->texture = this->animJump->sprite->texture;
 	}
 	else {
 		if (this->move) {
 			this->animRun->sprite->flipX = !this->right;
-			this->animRun->Update(this->sprite->vertex);
+			this->animRun->SetTexture(this->sprite->vertex);
 			this->sprite->texture = this->animRun->sprite->texture;
 		}
 		if (!this->move) {
 			this->animIdle->sprite->flipX = !this->right;
-			this->animIdle->Update(this->sprite->vertex);
+			this->animIdle->SetTexture(this->sprite->vertex);
 			this->sprite->texture = this->animIdle->sprite->texture;
 		}
 	}

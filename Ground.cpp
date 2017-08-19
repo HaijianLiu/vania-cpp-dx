@@ -30,9 +30,8 @@ Ground::~Ground() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Ground::Start() {
-	// set Animation || set Slice
+	// Animation MakeFrame() || Sprite MakeSlice()
 	this->sprite->MakeSlice(this->slice);
-	this->sprite->SetTexture(this->sprite->vertex, "Floor");
 }
 
 
@@ -41,6 +40,8 @@ void Ground::Start() {
 ------------------------------------------------------------------------------*/
 void Ground::Update() {
 
+	// Animation SetTexture() || Sprite SetTexture()
+	this->sprite->SetTexture(this->sprite->vertex, "Floor");
 }
 
 

@@ -14,7 +14,7 @@ Animation::~Animation() {
 	delete this->sprite;
 }
 
-void Animation::Start() {
+void Animation::MakeFrame() {
 	this->spriteSize = Int2D(this->sprite->texture.size.x / this->divide.x, this->sprite->texture.size.y / this->divide.y);
 	this->spriteMax = this->divide.x * this->divide.y;
 	for (int i = 0; i < this->spriteMax; i++) {
@@ -23,7 +23,7 @@ void Animation::Start() {
 	}
 }
 
-void Animation::Update(Vertex2D* vertex) {
+void Animation::SetTexture(Vertex2D* vertex) {
 	this->counter++;
 	// reset counter
 	if (this->counter > this->sampleTime - 1) {

@@ -17,8 +17,8 @@ public:
 
 	Animation(int divideX, int divideY, int sampleTime);
 	~Animation ();
-	void Start();
-	void Update(Vertex2D* vertex);
+	void MakeFrame();
+	void SetTexture(Vertex2D* vertex);
 };
 
 #endif
