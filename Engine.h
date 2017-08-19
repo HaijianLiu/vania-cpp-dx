@@ -64,6 +64,12 @@ struct Int2D {
 	}
 };
 
+struct Texture {
+	LPDIRECT3DTEXTURE9 texture;
+	const char* path;
+	Int2D size;
+};
+
 
 /*------------------------------------------------------------------------------
 < Engine classes >
