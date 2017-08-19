@@ -10,6 +10,7 @@
 #define DIRECTINPUT_VERSION 0x0800
 // Standard
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <map>
 #include <tchar.h>

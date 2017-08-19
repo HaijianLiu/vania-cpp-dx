@@ -6,12 +6,15 @@
 
 class Debug {
 private:
-	LPD3DXFONT font = NULL;
-
-public:
 	Scene* scene;
 	Time* time;
 
+	LPD3DXFONT font = NULL;
+	RECT rect = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT};
+
+	std::stringstream sout;
+
+public:
 	Debug(Scene* scene);
 	~Debug();
 
