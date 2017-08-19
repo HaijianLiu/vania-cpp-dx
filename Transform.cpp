@@ -11,8 +11,8 @@ Transform::~Transform () {
 
 void Transform::Update(Vertex2D* vertex) {
 	// World Axis to Screen Axis
-	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
+	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL * PIXEL_SCALE;
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL * PIXEL_SCALE;
 
 	// Screen Axis
 	float w = (float)(this->size.x * PIXEL_SCALE) / 2.0f;
@@ -26,8 +26,8 @@ void Transform::Update(Vertex2D* vertex) {
 
 void Transform::Update(Vertex2D* vertex, int sizeX, int sizeY) {
 	// World Axis to Screen Axis
-	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
+	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL * PIXEL_SCALE;
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL * PIXEL_SCALE;
 
 	// Screen Axis
 	float w = (float)(sizeX * PIXEL_SCALE) / 2.0f;
@@ -40,8 +40,8 @@ void Transform::Update(Vertex2D* vertex, int sizeX, int sizeY) {
 
 void Transform::Update(Vertex2D* vertex, Int2D size) {
 	// World Axis to Screen Axis
-	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
+	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL * PIXEL_SCALE;
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL * PIXEL_SCALE;
 
 	// Screen Axis
 	float w = (float)(size.x * PIXEL_SCALE) / 2.0f;
@@ -54,8 +54,8 @@ void Transform::Update(Vertex2D* vertex, Int2D size) {
 
 void Transform::Update(Vertex2D* vertex, D3DXVECTOR2 size) {
 	// World Axis to Screen Axis
-	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL;
-	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL;
+	float x = (this->position.x - this->camera->position.x) * UNIT_TO_PIXEL * PIXEL_SCALE;
+	float y = (this->position.y - this->camera->position.y) * UNIT_TO_PIXEL * PIXEL_SCALE;
 
 	// Screen Axis
 	float w = (float)(size.x * PIXEL_SCALE) / 2.0f;

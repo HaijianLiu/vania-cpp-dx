@@ -10,6 +10,8 @@ BoxCollider::BoxCollider(GameObject* gameObject, float x, float y, float w, floa
 	this->offset.y = y;
 	this->size.x = w;
 	this->size.y = h;
+	this->halfSize.x = w / 2.0f;
+	this->halfSize.y = h / 2.0f;
 
 	#ifdef _DEBUG
 		this->vertex[0].diffuse = D3DCOLOR_RGBA(0, 255, 0, 0);

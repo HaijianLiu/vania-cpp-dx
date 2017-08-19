@@ -92,7 +92,7 @@ void Player::Update() {
 ------------------------------------------------------------------------------*/
 void Player::OnTriggerEnter(BoxCollider* other) {
 	// this->groundCounter++;
-	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->size.y / UNIT_TO_PIXEL - this->collGroundCheck->offset.y - this->collGroundCheck->size.y / UNIT_TO_PIXEL;
+	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 	this->air = false;
 	this->verticalSpeed = 0.0f;
 }

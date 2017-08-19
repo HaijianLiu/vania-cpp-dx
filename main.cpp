@@ -300,18 +300,18 @@ Check Colliders
 bool CheckCollision(BoxCollider* a, BoxCollider* b) {
 	// Collision x-axis?
 	bool collisionX =
-		a->gameObject->transform->position.x + a->offset.x + a->size.x / UNIT_TO_PIXEL >
-		b->gameObject->transform->position.x + b->offset.x - b->size.x / UNIT_TO_PIXEL
+		a->gameObject->transform->position.x + a->offset.x + a->halfSize.x * PIXEL_TO_UNIT >
+		b->gameObject->transform->position.x + b->offset.x - b->halfSize.x * PIXEL_TO_UNIT
 		&&
-		a->gameObject->transform->position.x + a->offset.x - a->size.x / UNIT_TO_PIXEL <
-		b->gameObject->transform->position.x + b->offset.x + b->size.x / UNIT_TO_PIXEL;
+		a->gameObject->transform->position.x + a->offset.x - a->halfSize.x * PIXEL_TO_UNIT <
+		b->gameObject->transform->position.x + b->offset.x + b->halfSize.x * PIXEL_TO_UNIT;
 	// Collision y-axis?
 	bool collisionY =
-		a->gameObject->transform->position.y + a->offset.y + a->size.y / UNIT_TO_PIXEL >
-		b->gameObject->transform->position.y + b->offset.y - b->size.y / UNIT_TO_PIXEL
+		a->gameObject->transform->position.y + a->offset.y + a->halfSize.y * PIXEL_TO_UNIT >
+		b->gameObject->transform->position.y + b->offset.y - b->halfSize.y * PIXEL_TO_UNIT
 		&&
-		a->gameObject->transform->position.y + a->offset.y - a->size.y / UNIT_TO_PIXEL <
-		b->gameObject->transform->position.y + b->offset.y + b->size.y / UNIT_TO_PIXEL;
+		a->gameObject->transform->position.y + a->offset.y - a->halfSize.y * PIXEL_TO_UNIT <
+		b->gameObject->transform->position.y + b->offset.y + b->halfSize.y * PIXEL_TO_UNIT;
 	// Collision only if on both axes
 	return collisionX && collisionY;
 }

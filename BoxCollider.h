@@ -17,6 +17,7 @@ public:
 	GameObject* gameObject;
 	D3DXVECTOR2 offset;
 	D3DXVECTOR2 size;
+	D3DXVECTOR2 halfSize;
 
 	bool trigger = false;
 
