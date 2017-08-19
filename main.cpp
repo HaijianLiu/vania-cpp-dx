@@ -14,26 +14,28 @@ Prototype
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT InitDirectX(HWND hWnd, BOOL bWindow);
 
-void CheckCollider();
-
 /*------------------------------------------------------------------------------
 Global variables
 ------------------------------------------------------------------------------*/
 LPDIRECT3D9 gD3D = NULL;
 LPDIRECT3DDEVICE9 gD3DDevice = NULL;
 
-
 /*------------------------------------------------------------------------------
-Global Object
+Engine Objects
 ------------------------------------------------------------------------------*/
-// Engine
+// List of GetGameObject and Collider
 std::vector<GameObject*> gameObjects;
 std::vector<BoxCollider*> colliders;
-
+// Time
 Time* time = new Time();
 Camera* camera = new Camera();
 
-Scene* scene01 = new Scene();
+/*------------------------------------------------------------------------------
+Scene Objects
+------------------------------------------------------------------------------*/
+Scene* scene = new Scene();
+
+
 
 
 
@@ -55,103 +57,23 @@ Debug
 Start
 ------------------------------------------------------------------------------*/
 void Start() {
-	Texture texTile = Texture("assets/tilesets.png",384,192);
-	D3DXCreateTextureFromFileEx(
-		gD3DDevice, texTile.path,
-		texTile.size.x, texTile.size.y,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&texTile.texture);
-
-	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
-	D3DXCreateTextureFromFileEx(
-		gD3DDevice, texPlayerIdle.path,
-		texPlayerIdle.size.x, texPlayerIdle.size.y,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&texPlayerIdle.texture);
-
-	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
-	D3DXCreateTextureFromFileEx(
-		gD3DDevice, texPlayerRun.path,
-		texPlayerRun.size.x, texPlayerRun.size.y,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&texPlayerRun.texture);
-
-	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
-	D3DXCreateTextureFromFileEx(
-		gD3DDevice, texPlayerJump.path,
-		texPlayerJump.size.x, texPlayerJump.size.y,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&texPlayerJump.texture);
-
-	// Game Object
-	Player* player = new Player();
-		player->animIdle->sprite->texture = texPlayerIdle;
-		player->animRun->sprite->texture = texPlayerRun;
-		player->animJump->sprite->texture = texPlayerJump;
-
-	Ground* ground1 = new Ground();
-		ground1->sprite->texture = texTile;
-		ground1->transform->position.y = 0.96f;
-		ground1->transform->position.x = 0.0f;
-	Ground* ground2 = new Ground();
-		ground2->sprite->texture = texTile;
-		ground2->transform->position.y = 0.96f;
-		ground2->transform->position.x = 0.32f;
-	Ground* ground3 = new Ground();
-		ground3->sprite->texture = texTile;
-		ground3->transform->position.y = 0.96f;
-		ground3->transform->position.x = 0.64f;
-	Ground* ground4 = new Ground();
-	ground4->sprite->texture = texTile;
-		ground4->transform->position.y = 0.96f;
-		ground4->transform->position.x = 0.96f;
-	Ground* ground5 = new Ground();
-		ground5->sprite->texture = texTile;
-		ground5->transform->position.y = 0.96f;
-		ground5->transform->position.x = 1.28f;
-
-
 	time->Start();
-
-	for (unsigned int i = 0; i < gameObjects.size(); i++) {
-		gameObjects[i]->PreStart();
-		gameObjects[i]->Start();
-	}
-	#ifdef _DEBUG
-		for (unsigned i = 0; i < colliders.size(); i++) {
-			colliders[i]->Start();
-		}
-	#endif
+	scene->Start();
 }
 
 /*------------------------------------------------------------------------------
 Delete
 ------------------------------------------------------------------------------*/
 void Delete() {
-	for (unsigned int i = 0; i < gameObjects.size(); i++) {
-		delete gameObjects[i];
-	}
-	delete time;
+	delete scene;
 	delete camera;
-	delete scene01;
+	delete time;
 	UninitInput();
 
-	if(gD3DDevice != NULL) {
-		gD3DDevice->Release();
-	}
-
-	if(gD3D != NULL) {
-		gD3D->Release();
-	}
-
+	if (gD3DDevice != NULL) gD3DDevice->Release();
+	if (gD3D != NULL) gD3D->Release();
 	#ifdef _DEBUG
-		if(gD3DXFont != NULL) {
-			gD3DXFont->Release();
-		}
+		if (gD3DXFont != NULL) gD3DXFont->Release();
 	#endif
 }
 
@@ -161,21 +83,7 @@ Update
 void Update(void) {
 	UpdateInput();
 	time->Update();
-
-	for (unsigned int i = 0; i < gameObjects.size(); i++) {
-		gameObjects[i]->Update();
-	}
-	CheckCollider();
-	for (unsigned int i = 0; i < gameObjects.size(); i++) {
-		gameObjects[i]->UpdateTransform();
-	}
-
-	#ifdef _DEBUG
-		for (unsigned i = 0; i < colliders.size(); i++) {
-			colliders[i]->Update();
-		}
-	#endif
-
+	scene->Update();
 }
 
 /*------------------------------------------------------------------------------
@@ -186,14 +94,7 @@ void Draw(void) {
 
 	if(SUCCEEDED(gD3DDevice->BeginScene())) {
 
-		for (unsigned int i = 0; i < gameObjects.size(); i++) {
-			gameObjects[i]->Draw();
-		}
-		#ifdef _DEBUG
-			for (unsigned i = 0; i < colliders.size(); i++) {
-				colliders[i]->Draw();
-			}
-		#endif
+		scene->Draw();
 
 		#ifdef _DEBUG
 			DrawDebugFont();
@@ -325,10 +226,16 @@ Camera* GetCamera() {
 std::vector<BoxCollider*>* GetColliders() {
 	return &colliders;
 }
-
 std::vector<GameObject*>* GetGameObjects() {
 	return &gameObjects;
 }
+std::vector<BoxCollider*> CopyColliders() {
+	return colliders;
+}
+std::vector<GameObject*> CopyGameObjects() {
+	return gameObjects;
+}
+
 
 
 
@@ -336,39 +243,6 @@ std::vector<GameObject*>* GetGameObjects() {
 Check Colliders
 ------------------------------------------------------------------------------*/
 
-bool CheckCollision(BoxCollider* a, BoxCollider* b) {
-	// Collision x-axis?
-	bool collisionX =
-		a->gameObject->transform->position.x + a->offset.x + a->halfSize.x * PIXEL_TO_UNIT >
-		b->gameObject->transform->position.x + b->offset.x - b->halfSize.x * PIXEL_TO_UNIT
-		&&
-		a->gameObject->transform->position.x + a->offset.x - a->halfSize.x * PIXEL_TO_UNIT <
-		b->gameObject->transform->position.x + b->offset.x + b->halfSize.x * PIXEL_TO_UNIT;
-	// Collision y-axis?
-	bool collisionY =
-		a->gameObject->transform->position.y + a->offset.y + a->halfSize.y * PIXEL_TO_UNIT >
-		b->gameObject->transform->position.y + b->offset.y - b->halfSize.y * PIXEL_TO_UNIT
-		&&
-		a->gameObject->transform->position.y + a->offset.y - a->halfSize.y * PIXEL_TO_UNIT <
-		b->gameObject->transform->position.y + b->offset.y + b->halfSize.y * PIXEL_TO_UNIT;
-	// Collision only if on both axes
-	return collisionX && collisionY;
-}
-
-void CheckCollider() {
-	for (unsigned int i = 0; i < colliders.size(); i++) {
-		if (colliders[i]->trigger) {
-			for (unsigned int j = 0; j < colliders.size(); j++) {
-				bool collision = CheckCollision(colliders[i],colliders[j]);
-				if (i != j) {
-					if (collision) {
-						colliders[i]->gameObject->OnTriggerEnter(colliders[j]);
-					}
-				}
-			}
-		}
-	}
-}
 
 
 

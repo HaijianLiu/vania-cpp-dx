@@ -16,9 +16,9 @@ struct Slice {
 
 class Sprite {
 private:
-	LPDIRECT3DDEVICE9 device;
 
 public:
+	LPDIRECT3DDEVICE9 device;
 	Vertex2D vertex[4] = {Vertex2D()};
 	Texture texture;
 
@@ -31,9 +31,10 @@ public:
 	Sprite();
 	~Sprite();
 
+	// in Start function
 	void MakeSlice(Slice slice);
 	void MakeFrame(int frame, int x, int y, int w, int h);
-
+	// in Update function
 	void SetTexture(Vertex2D* vertex, int currentSprite);
 	void SetTexture(Vertex2D* vertex, const char* name);
 

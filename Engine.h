@@ -88,13 +88,17 @@ struct Texture {
 #include "GameObject.h"
 #include "BoxCollider.h"
 #include "Animation.h"
-#include "Scene.h"
 
 /*------------------------------------------------------------------------------
 < Game Object classes >
 ------------------------------------------------------------------------------*/
 #include "Player.h"
 #include "Ground.h"
+
+/*------------------------------------------------------------------------------
+< Scene classes >
+------------------------------------------------------------------------------*/
+#include "Scene.h"
 
 
 /*------------------------------------------------------------------------------
@@ -105,6 +109,8 @@ Time* GetTime();
 Camera* GetCamera();
 std::vector<BoxCollider*>* GetColliders();
 std::vector<GameObject*>* GetGameObjects();
+std::vector<BoxCollider*> CopyColliders();
+std::vector<GameObject*> CopyGameObjects();
 
 
 #endif

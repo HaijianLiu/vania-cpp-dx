@@ -2,12 +2,10 @@
 #include "Engine.h"
 
 Sprite::Sprite() {
-	this->device = GetDevice();
+
 }
 Sprite::~Sprite() {
-	if (this->texture.texture != NULL) {
-		this->texture.texture->Release();
-	}
+	
 }
 
 void Sprite::MakeSlice(Slice slice) {
