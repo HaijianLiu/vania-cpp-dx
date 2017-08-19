@@ -33,6 +33,8 @@ std::vector<BoxCollider*> colliders;
 Time* time = new Time();
 Camera* camera = new Camera();
 
+Scene* scene01 = new Scene();
+
 
 
 /*------------------------------------------------------------------------------
@@ -135,6 +137,7 @@ void Delete() {
 	}
 	delete time;
 	delete camera;
+	delete scene01;
 	UninitInput();
 
 	if(gD3DDevice != NULL) {
