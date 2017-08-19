@@ -4,25 +4,10 @@
 Sprite::Sprite() {
 	this->device = GetDevice();
 }
-Sprite::Sprite(int imageSizeX, int imageSizeY) {
-	this->texture.size = Int2D(imageSizeX, imageSizeY);
-}
-
 Sprite::~Sprite() {
 	if (this->texture.texture != NULL) {
 		this->texture.texture->Release();
 	}
-}
-
-void Sprite::CreatTexture(const char* path) {
-	this->device = GetDevice();
-
-	D3DXCreateTextureFromFileEx(
-		this->device, path,
-		this->texture.size.x, this->texture.size.y,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&this->texture.texture);
 }
 
 void Sprite::MakeSlice(Slice slice) {
@@ -33,21 +18,6 @@ void Sprite::MakeFrame(int frame, int x, int y, int w, int h) {
 	this->frames.push_back(Slice("frame",x,y,w,h));
 }
 
-
-void Sprite::SetTexture(Vertex2D* vertex) {
-	if (this->flipX == false) {
-		(vertex+0)->texCoord = D3DXVECTOR2(0.0f, 0.0f);
-		(vertex+1)->texCoord = D3DXVECTOR2(1.0f, 0.0f);
-		(vertex+2)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
-		(vertex+3)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
-	}
-	if (this->flipX == true) {
-		(vertex+0)->texCoord = D3DXVECTOR2(1.0f, 0.0f);
-		(vertex+1)->texCoord = D3DXVECTOR2(0.0f, 0.0f);
-		(vertex+2)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
-		(vertex+3)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
-	}
-}
 void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
 	float x = (float)this->frames[currentSprite].position.x / (float)this->texture.size.x;
 	float y = (float)this->frames[currentSprite].position.y / (float)this->texture.size.y;
@@ -95,3 +65,37 @@ void Sprite::Draw(Vertex2D* vertex) {
 	this->device->SetTexture(0,this->texture.texture);
 	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vertex, sizeof(Vertex2D));
 }
+
+
+
+#ifdef _DEBUG
+	Sprite::Sprite(int imageSizeX, int imageSizeY) {
+		this->texture.size = Int2D(imageSizeX, imageSizeY);
+	}
+	
+	void Sprite::CreatTexture(const char* path) {
+		this->device = GetDevice();
+
+		D3DXCreateTextureFromFileEx(
+			this->device, path,
+			this->texture.size.x, this->texture.size.y,
+			1, 0,
+			D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
+			&this->texture.texture);
+	}
+
+	void Sprite::SetTexture(Vertex2D* vertex) {
+		if (this->flipX == false) {
+			(vertex+0)->texCoord = D3DXVECTOR2(0.0f, 0.0f);
+			(vertex+1)->texCoord = D3DXVECTOR2(1.0f, 0.0f);
+			(vertex+2)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
+			(vertex+3)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
+		}
+		if (this->flipX == true) {
+			(vertex+0)->texCoord = D3DXVECTOR2(1.0f, 0.0f);
+			(vertex+1)->texCoord = D3DXVECTOR2(0.0f, 0.0f);
+			(vertex+2)->texCoord = D3DXVECTOR2(1.0f, 1.0f);
+			(vertex+3)->texCoord = D3DXVECTOR2(0.0f, 1.0f);
+		}
+	}
+#endif

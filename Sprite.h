@@ -28,19 +28,21 @@ public:
 	bool flipX = false;
 
 	Sprite();
-	Sprite(int imageSizeX, int imageSizeY);
 	~Sprite();
-
-	void CreatTexture(const char* path);
 
 	void MakeSlice(Slice slice);
 	void MakeFrame(int frame, int x, int y, int w, int h);
-	void SetTexture(Vertex2D* vertex);
 
 	void SetTexture(Vertex2D* vertex, int currentSprite);
 	void SetTexture(Vertex2D* vertex, const char* name);
 
 	void Draw(Vertex2D* vertex);
+
+	#ifdef _DEBUG
+		Sprite(int imageSizeX, int imageSizeY);
+		void CreatTexture(const char* path);
+		void SetTexture(Vertex2D* vertex);
+	#endif
 };
 
 #endif
