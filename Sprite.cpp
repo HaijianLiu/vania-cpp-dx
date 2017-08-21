@@ -5,15 +5,12 @@ Sprite::Sprite() {
 
 }
 Sprite::~Sprite() {
-	
+
 }
 
-void Sprite::MakeSlice(Slice slice) {
-	this->slices.insert(std::make_pair(slice.name, slice));
-}
 
 void Sprite::MakeFrame(int frame, int x, int y, int w, int h) {
-	this->frames.push_back(Slice("frame",x,y,w,h));
+	this->frames.push_back(Slice(0,x,y,w,h));
 }
 
 void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
@@ -35,26 +32,23 @@ void Sprite::SetTexture(Vertex2D* vertex, int currentSprite) {
 		(vertex+3)->texCoord = D3DXVECTOR2(x,y+h);
 	}
 }
-void Sprite::SetTexture(Vertex2D* vertex, const char* name) {
-	float x = (float)this->slices.at(name).position.x / (float)this->texture.size.x;
-	float y = (float)this->slices.at(name).position.y / (float)this->texture.size.y;
-	/* inver y axis
-	float y = (float)(this->texture.size.y - this->slices.at(name).position.y - this->slices.at(name).size.y) / (float)this->texture.size.y;
-	*/
-	float w = (float)this->slices.at(name).size.x / (float)this->texture.size.x;
-	float h = (float)this->slices.at(name).size.y / (float)this->texture.size.y;;
+void Sprite::SetTexture() {
+	float x = (float)this->slice.position.x / (float)this->texture.size.x;
+	float y = (float)this->slice.position.y / (float)this->texture.size.y;
+	float w = (float)this->slice.size.x / (float)this->texture.size.x;
+	float h = (float)this->slice.size.y / (float)this->texture.size.y;;
 
 	if (this->flipX == false) {
-		(vertex+0)->texCoord = D3DXVECTOR2(x,y);
-		(vertex+1)->texCoord = D3DXVECTOR2(x+w,y);
-		(vertex+2)->texCoord = D3DXVECTOR2(x,y+h);
-		(vertex+3)->texCoord = D3DXVECTOR2(x+w,y+h);
+		this->vertex[0].texCoord = D3DXVECTOR2(x,y);
+		this->vertex[1].texCoord = D3DXVECTOR2(x+w,y);
+		this->vertex[2].texCoord = D3DXVECTOR2(x,y+h);
+		this->vertex[3].texCoord = D3DXVECTOR2(x+w,y+h);
 	}
 	if (this->flipX == true) {
-		(vertex+0)->texCoord = D3DXVECTOR2(x+w,y);
-		(vertex+1)->texCoord = D3DXVECTOR2(x,y);
-		(vertex+2)->texCoord = D3DXVECTOR2(x+w,y+h);
-		(vertex+3)->texCoord = D3DXVECTOR2(x,y+h);
+		this->vertex[0].texCoord = D3DXVECTOR2(x+w,y);
+		this->vertex[1].texCoord = D3DXVECTOR2(x,y);
+		this->vertex[2].texCoord = D3DXVECTOR2(x+w,y+h);
+		this->vertex[3].texCoord = D3DXVECTOR2(x,y+h);
 	}
 }
 

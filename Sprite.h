@@ -3,12 +3,12 @@
 #define _SPRITE_H_
 
 struct Slice {
-	const char* name;
+	int tileID;
 	Int2D position;
 	Int2D size;
 	Slice() {};
-	Slice(const char* name, int x, int y, int w, int h) {
-		this->name = name;
+	Slice(int tileID, int x, int y, int w, int h) {
+		this->tileID = tileID;
 		this->position = Int2D(x,y);
 		this->size = Int2D(w,h);
 	}
@@ -23,8 +23,8 @@ public:
 	Texture texture;
 
 	// Slice
+	Slice slice;
 	std::vector<Slice> frames;
-	std::map<const char*, Slice> slices;
 
 	bool flipX = false;
 
@@ -32,11 +32,10 @@ public:
 	~Sprite();
 
 	// in Start function
-	void MakeSlice(Slice slice);
 	void MakeFrame(int frame, int x, int y, int w, int h);
 	// in Update function
 	void SetTexture(Vertex2D* vertex, int currentSprite);
-	void SetTexture(Vertex2D* vertex, const char* name);
+	void SetTexture();
 
 	void Draw();
 

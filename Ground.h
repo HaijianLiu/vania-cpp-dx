@@ -8,10 +8,9 @@ private:
 	std::vector<GameObject*>* gameObjects;
 
 public:
-	// Animation or Slice
-	Slice slice;
 	// Collider
 	BoxCollider* collider;
+	// Animation
 
 	// Parameter
 

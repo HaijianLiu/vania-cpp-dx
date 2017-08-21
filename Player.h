@@ -10,7 +10,7 @@ private:
 public:
 	// Collider
 	BoxCollider* collGroundCheck;
-	// Animation
+	// Animation or Tilesets
 	Animation* animIdle;
 	Animation* animRun;
 	Animation* animJump;

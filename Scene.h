@@ -11,14 +11,15 @@ private:
 	std::vector<BoxCollider*> colliders;
 
 	// Texture
-	Texture texTile = Texture("assets/tilesets.png",384,192);
+	Texture texTile = Texture("assets/omegateam.png",624,160);
 	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
 	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
 	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
 
 	// Map Data
 	Int2D mapSize = Int2D(5,4);
-	int tileSize = 32;
+	int tilePixel = 16;
+	Int2D tileSize = Int2D(624/16,160/16);
 	std::vector<int> groundData;
 
 	// private functions

@@ -9,11 +9,11 @@ Ground::Ground() {
 	this->gameObjects = GetGameObjects();
 	this->gameObjects->push_back(this);
 	// Transform Size in real pixel (Int2D)
-	this->transform->size = Int2D(32, 32);
-	// Animation (divideX, divideY, sampleTime) || Slice (name,positionX,positionY,sizeX,sizeY) all in real pixel
-	this->slice = Slice("Floor", 160, 192 - 64 - 32, 32, 32);
+				// get from scene mapData
+	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
+				// get from scene mapData
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
-	this->collider = new BoxCollider(this,0.0f,0.0f,32.0f,32.0f);
+	this->collider = new BoxCollider(this,0.0f,0.0f,16.0f,16.0f);
 }
 
 
@@ -30,8 +30,7 @@ Ground::~Ground() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Ground::Start() {
-	// Animation MakeFrame() || Sprite MakeSlice()
-	this->sprite->MakeSlice(this->slice);
+	// Animation MakeFrame()
 }
 
 
@@ -41,7 +40,7 @@ void Ground::Start() {
 void Ground::Update() {
 
 	// Animation SetTexture() || Sprite SetTexture()
-	this->sprite->SetTexture(this->sprite->vertex, "Floor");
+	this->sprite->SetTexture();
 }
 
 

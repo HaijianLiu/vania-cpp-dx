@@ -14,12 +14,14 @@ Scene::Scene() {
 	// Load Map Data
 	Scene::LoadMapData("assets/10..csv", this->groundData);
 
-	// Layer GameObjects set transform position
+	// Layer GameObjects init
 	for (unsigned int i = 0; i < this->groundData.size(); i++) {
 		if (groundData[i] != 0) {
-			this->grounds.push_back(new Ground()); // then set texture  tileID
-			this->grounds.back()->transform->position.x = i % mapSize.x * PIXEL_TO_UNIT * tileSize;
-			this->grounds.back()->transform->position.y = i / mapSize.x * PIXEL_TO_UNIT * tileSize;
+			this->grounds.push_back(new Ground());
+			this->grounds.back()->transform->position.x = i % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
+			this->grounds.back()->transform->position.y = i / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
+			this->grounds.back()->transform->size = Int2D(this->tilePixel, this->tilePixel);
+			this->grounds.back()->sprite->slice = Slice(groundData[i],groundData[i]%this->tileSize.x * this->tilePixel,groundData[i]/this->tileSize.y * this->tilePixel,this->tilePixel,this->tilePixel);
 		}
 	}
 }
@@ -65,11 +67,11 @@ void Scene::Start() {
 	LoadTexture(&this->texPlayerRun);
 	LoadTexture(&this->texPlayerJump);
 
-	// Init Layer GameObjects
+	// Link GameObjects device && texture
+	this->player->sprite->device = this->device;
 	this->player->animIdle->sprite->texture = this->texPlayerIdle;
 	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->texture = this->texPlayerJump;
-	this->player->sprite->device = this->device;
 	this->player->animIdle->sprite->device = this->device;
 	this->player->animRun->sprite->device = this->device;
 	this->player->animJump->sprite->device = this->device;
