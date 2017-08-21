@@ -16,7 +16,7 @@ Bullet::Bullet() {
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
 	this->sprite->slice = Slice(0,0,0,4,4);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
-	this->collider = new BoxCollider(this,0.0f,0.0f,16.0f,16.0f);
+	this->collider = new BoxCollider(this,0.0f,0.0f,4.0f,4.0f);
 	this->collider->trigger = true;
 	// Default GameObject active == true
 	this->gameObject->active = false;
@@ -44,10 +44,22 @@ void Bullet::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Bullet::Update() {
+	/* Destroy
+	..............................................................................*/
 	Destroy(this->gameObject, this->lifeTime);
 
-	// Animation SetTexture() || Sprite SetTexture()
-	this->sprite->SetTexture();
+	/* Transform
+	..............................................................................*/
+	if (this->gameObject->active) {
+		if (this->right) {
+			this->transform->position.x += this->speed * this->time->deltaTime;
+		}
+		else {
+			this->transform->position.x -= this->speed * this->time->deltaTime;
+		}
+		// Animation SetTexture() || Sprite SetTexture()
+		this->sprite->SetTexture();
+	}
 }
 
 
@@ -55,6 +67,14 @@ void Bullet::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Bullet::OnTriggerEnter(BoxCollider* other) {
+	this->gameObject->active = false;
+}
+
+
+/*------------------------------------------------------------------------------
+< Fixed Update >
+------------------------------------------------------------------------------*/
+void Bullet::FixedUpdate() {
 
 }
 

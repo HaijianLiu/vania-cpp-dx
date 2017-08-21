@@ -15,9 +15,11 @@ public:
 	// Animation
 
 	// Parameter
+	float speed = 3.0f;
 	float lifeTime = 2.0f;
 
 	// status
+	bool right = true;
 	DWORD birthTime;
 
 	// Constructors
@@ -28,6 +30,7 @@ public:
 	void Start();
 	void Update();
 	void OnTriggerEnter(BoxCollider* other);
+	void FixedUpdate();
 
 	// Functions
 	void Destroy(GameObject* gameObject, float time);

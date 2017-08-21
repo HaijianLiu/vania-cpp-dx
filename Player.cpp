@@ -66,8 +66,8 @@ void Player::Start() {
 ------------------------------------------------------------------------------*/
 void Player::Update() {
 
-/* Transform
-..............................................................................*/
+	/* Transform
+	..............................................................................*/
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->move = true;
@@ -82,7 +82,6 @@ void Player::Update() {
 	else {
 		this->move = false;
 	}
-
 	// jump
 	if (GetKeyboardPress(DIK_SPACE)) {
 		if (!this->air) {
@@ -90,7 +89,6 @@ void Player::Update() {
 			this->air = true;
 		}
 	}
-
 	// gravity
 	this->verticalSpeed -= this->gravity * this->time->deltaTime;
 	this->transform->position.y -= this->verticalSpeed * this->time->deltaTime;
@@ -98,30 +96,8 @@ void Player::Update() {
 		this->air = true;
 	}
 
-/* Camera
-..............................................................................*/
-	// Camera
-	this->camera->position.x = this->transform->position.x;
-	this->camera->position.y = this->transform->position.y;
-
-/* Fire
-..............................................................................*/
-	if (GetKeyboardPress(DIK_F)) {
-		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
-			for (unsigned int i = 0; i < this->bullets.size(); i++) {
-				if (!this->bullets[i]->gameObject->active) {
-					this->lastFire = this->time->currentTime;
-					this->bullets[i]->birthTime = this->time->currentTime;
-					this->bullets[i]->gameObject->active = true;
-					this->bullets[i]->transform->position = this->transform->position;
-					break;
-				}
-			}
-		}
-	}
-
-/* Animation
-..............................................................................*/
+	/* Animation
+	..............................................................................*/
 	// Animation SetTexture() || Sprite SetTexture()
 	if (this->air) {
 		this->animJump->sprite->flipX = !this->right;
@@ -140,7 +116,6 @@ void Player::Update() {
 			this->sprite->texture = this->animIdle->sprite->texture;
 		}
 	}
-
 }
 
 
@@ -148,12 +123,13 @@ void Player::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Player::OnTriggerEnter(BoxCollider* other) {
+	/* Transform
+	..............................................................................*/
 	if (this->collGroundCheck->enter == true) {
 		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 		this->air = false;
 		this->verticalSpeed = 0.0f;
 	}
-
 	if (this->collHorizonCheck->enter == true) {
 		if (this->transform->position.x > other->gameObject->transform->position.x) {
 			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
@@ -162,13 +138,42 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
 		}
 	}
-
 	if (this->collCeilingCheck->enter == true) {
 		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y + other->halfSize.y * PIXEL_TO_UNIT - this->collCeilingCheck->offset.y + this->collCeilingCheck->halfSize.y * PIXEL_TO_UNIT;
 		this->verticalSpeed = 0.0f;
 	}
+}
 
-	// Camera
+
+/*------------------------------------------------------------------------------
+< Fixed Update >
+------------------------------------------------------------------------------*/
+void Player::FixedUpdate() {
+	/* Camera
+	..............................................................................*/
 	this->camera->position.x = this->transform->position.x;
 	this->camera->position.y = this->transform->position.y;
+
+	/* Fire
+	..............................................................................*/
+	if (GetKeyboardPress(DIK_F)) {
+		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
+			for (unsigned int i = 0; i < this->bullets.size(); i++) {
+				if (!this->bullets[i]->gameObject->active) {
+					this->lastFire = this->time->currentTime;
+					this->bullets[i]->birthTime = this->time->currentTime;
+					this->bullets[i]->right = this->right;
+					this->bullets[i]->gameObject->active = true;
+					if (this->right) {
+						this->bullets[i]->transform->position.x = this->transform->position.x + 0.2f;
+					}
+					else {
+						this->bullets[i]->transform->position.x = this->transform->position.x - 0.2f;
+					}
+					this->bullets[i]->transform->position.y = this->transform->position.y - 0.015f;
+					break;
+				}
+			}
+		}
+	}
 }

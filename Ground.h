@@ -24,6 +24,7 @@ public:
 	void Start();
 	void Update();
 	void OnTriggerEnter(BoxCollider* other);
+	void FixedUpdate();
 };
 
 #endif

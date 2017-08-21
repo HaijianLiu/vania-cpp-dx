@@ -10,7 +10,7 @@ Ground::Ground() {
 	this->gameObjects->push_back(this);
 	// Get GetGameObject pointer
 	this->gameObject = this;
-	
+
 	// Transform Size in real pixel (Int2D)
 				// get from scene mapData
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
@@ -51,5 +51,13 @@ void Ground::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Ground::OnTriggerEnter(BoxCollider* other) {
+
+}
+
+
+/*------------------------------------------------------------------------------
+< Fixed Update >
+------------------------------------------------------------------------------*/
+void Ground::FixedUpdate() {
 
 }

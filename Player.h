@@ -28,7 +28,7 @@ public:
 	float gravity = 9.8f;
 	float speed = 1.0f;
 	float jumpPower = 4.0f;
-	float fireColdDown = 1.0f;
+	float fireColdDown = 0.1f;
 	// status
 	bool move = false;
 	bool right = true;
@@ -43,6 +43,7 @@ public:
 	void Start();
 	void Update();
 	void OnTriggerEnter(BoxCollider* other);
+	void FixedUpdate();
 };
 
 #endif
