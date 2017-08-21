@@ -26,6 +26,10 @@ Player::Player() {
 	this->collHorizonCheck->trigger = true;
 	// Camera
 	this->camera = GetCamera();
+	// Bullet
+	for (int i = 0; i < 16; i++) {
+		this->bullets.push_back(new Bullet());
+	}
 }
 
 
@@ -38,6 +42,11 @@ Player::~Player() {
 	delete this->animRun;
 	delete this->animJump;
 	delete this->collGroundCheck;
+	delete this->collCeilingCheck;
+	delete this->collHorizonCheck;
+	for (unsigned int i = 0; i < this->bullets.size(); i++) {
+		delete this->bullets[i];
+	}
 }
 
 
@@ -57,6 +66,8 @@ void Player::Start() {
 ------------------------------------------------------------------------------*/
 void Player::Update() {
 
+/* Transform
+..............................................................................*/
 	// move
 	if (GetKeyboardPress(DIK_LEFT)) {
 		this->move = true;
@@ -87,10 +98,30 @@ void Player::Update() {
 		this->air = true;
 	}
 
+/* Camera
+..............................................................................*/
 	// Camera
 	this->camera->position.x = this->transform->position.x;
 	this->camera->position.y = this->transform->position.y;
 
+/* Fire
+..............................................................................*/
+	if (GetKeyboardPress(DIK_F)) {
+		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
+			for (unsigned int i = 0; i < this->bullets.size(); i++) {
+				if (!this->bullets[i]->gameObject->active) {
+					this->lastFire = this->time->currentTime;
+					this->bullets[i]->birthTime = this->time->currentTime;
+					this->bullets[i]->gameObject->active = true;
+					this->bullets[i]->transform->position = this->transform->position;
+					break;
+				}
+			}
+		}
+	}
+
+/* Animation
+..............................................................................*/
 	// Animation SetTexture() || Sprite SetTexture()
 	if (this->air) {
 		this->animJump->sprite->flipX = !this->right;

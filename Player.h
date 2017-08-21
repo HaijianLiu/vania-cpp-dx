@@ -20,11 +20,16 @@ public:
 	Animation* animJump;
 	// Camera
 	Camera* camera;
+	// Bullet
+	std::vector<Bullet*> bullets;
+	DWORD lastFire = 0;
 
 	// Parameter
 	float gravity = 9.8f;
 	float speed = 1.0f;
 	float jumpPower = 4.0f;
+	float fireColdDown = 1.0f;
+	// status
 	bool move = false;
 	bool right = true;
 	bool air = true;
