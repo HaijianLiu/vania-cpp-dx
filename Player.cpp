@@ -20,6 +20,12 @@ Player::Player() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,1.0f,5.0f);
 	this->collGroundCheck->trigger = true;
+	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.09f,1.0f,5.0f);
+	this->collCeilingCheck->trigger = true;
+	this->collHorizonCheck = new BoxCollider(this,0.0f,0.06f,18.0f,32.0f);
+	this->collHorizonCheck->trigger = true;
+	// Camera
+	this->camera = GetCamera();
 }
 
 
@@ -81,6 +87,10 @@ void Player::Update() {
 		this->air = true;
 	}
 
+	// Camera
+	this->camera->position.x = this->transform->position.x;
+	this->camera->position.y = this->transform->position.y;
+
 	// Animation SetTexture() || Sprite SetTexture()
 	if (this->air) {
 		this->animJump->sprite->flipX = !this->right;
@@ -107,7 +117,27 @@ void Player::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Player::OnTriggerEnter(BoxCollider* other) {
-	this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
-	this->air = false;
-	this->verticalSpeed = 0.0f;
+	if (this->collGroundCheck->enter == true) {
+		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
+		this->air = false;
+		this->verticalSpeed = 0.0f;
+	}
+
+	if (this->collHorizonCheck->enter == true) {
+		if (this->transform->position.x > other->gameObject->transform->position.x) {
+			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+		}
+		if (this->transform->position.x < other->gameObject->transform->position.x) {
+			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+		}
+	}
+
+	if (this->collCeilingCheck->enter == true) {
+		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y + other->halfSize.y * PIXEL_TO_UNIT - this->collCeilingCheck->offset.y + this->collCeilingCheck->halfSize.y * PIXEL_TO_UNIT;
+		this->verticalSpeed = 0.0f;
+	}
+
+	// Camera
+	this->camera->position.x = this->transform->position.x;
+	this->camera->position.y = this->transform->position.y;
 }

@@ -12,10 +12,14 @@ public:
 	GameObject* gameObject;
 	// Collider
 	BoxCollider* collGroundCheck;
+	BoxCollider* collCeilingCheck;
+	BoxCollider* collHorizonCheck;
 	// Animation or Tilesets
 	Animation* animIdle;
 	Animation* animRun;
 	Animation* animJump;
+	// Camera
+	Camera* camera;
 
 	// Parameter
 	float gravity = 9.8f;
