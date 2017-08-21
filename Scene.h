@@ -16,9 +16,16 @@ private:
 	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
 	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
 
+	// Map Data
+	Int2D mapSize = Int2D(5,4);
+	int tileSize = 32;
+	std::vector<int> groundData;
+
+	// private functions
 	bool CheckCollision(BoxCollider* a, BoxCollider* b);
 	void CheckCollider();
 	void LoadTexture(Texture* texture);
+	bool LoadMapData(const char* path, std::vector<int>& data);
 
 public:
 	// Camera
@@ -26,11 +33,7 @@ public:
 
 	// GameObject
 	Player* player;
-	Ground* ground1;
-	Ground* ground2;
-	Ground* ground3;
-	Ground* ground4;
-	Ground* ground5;
+	std::vector<Ground*> grounds;
 
 
 	Scene();
