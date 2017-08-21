@@ -5,7 +5,6 @@
 class Time {
 private:
 	DWORD lastTime = 0;
-	DWORD currentTime = 0;
 
 	#ifdef _DEBUG
 		DWORD lastFPSTime = 0;
@@ -13,8 +12,9 @@ private:
 	#endif
 
 public:
+	DWORD currentTime = 0;
 	float deltaTime = 0;
-	
+
 	#ifdef _DEBUG
 		int countFPS = 0;
 	#endif
