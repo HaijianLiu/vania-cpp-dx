@@ -8,6 +8,8 @@ private:
 	std::vector<GameObject*>* gameObjects;
 
 public:
+	// GameObject
+	GameObject* gameObject;
 	// Collider
 	BoxCollider* collGroundCheck;
 	// Animation or Tilesets
