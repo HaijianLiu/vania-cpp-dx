@@ -12,11 +12,11 @@ Scene::Scene() {
 	this->player = new Player();
 
 	// Load Map Data
-	Scene::LoadMapData("assets/10..csv", this->groundData);
+	Scene::LoadMapData("map/scene_Ground.csv", this->groundData);
 
 	// Layer GameObjects init
 	for (unsigned int i = 0; i < this->groundData.size(); i++) {
-		if (groundData[i] != 0) {
+		if (groundData[i] != -1) {
 			this->grounds.push_back(new Ground());
 			Scene::SetTile(this->grounds.back(), i, groundData[i]);
 		}
@@ -203,5 +203,5 @@ void Scene::SetTile(GameObject* gameObject, int mapID, int tileID) {
 	gameObject->transform->position.x = mapID % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 	gameObject->transform->size = Int2D(this->tilePixel, this->tilePixel);
-	gameObject->sprite->slice = Slice(tileID,tileID%this->tileSize.x * this->tilePixel,tileID/this->tileSize.y * this->tilePixel,this->tilePixel,this->tilePixel);
+	gameObject->sprite->slice = Slice(tileID, tileID % this->tileSize.x * this->tilePixel , tileID / this->tileSize.x * this->tilePixel, this->tilePixel, this->tilePixel);
 }
