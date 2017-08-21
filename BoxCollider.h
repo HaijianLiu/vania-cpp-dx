@@ -19,7 +19,9 @@ public:
 	D3DXVECTOR2 size;
 	D3DXVECTOR2 halfSize;
 
-	bool trigger = false;
+	bool trigger = false; // if check collision with others
+	bool active = true; // if check collision
+	bool enter = false; // will be set to true before OnTriggerEnter and be set to false after OnTriggerEnter
 
 	BoxCollider(GameObject* gameObject, float x, float y, float w, float h);
 	~BoxCollider();
