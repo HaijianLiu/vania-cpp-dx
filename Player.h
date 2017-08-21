@@ -14,7 +14,7 @@ public:
 	BoxCollider* collGroundCheck;
 	BoxCollider* collCeilingCheck;
 	BoxCollider* collHorizonCheck;
-	// Animation or Tilesets
+	// Animation
 	Animation* animIdle;
 	Animation* animRun;
 	Animation* animJump;
