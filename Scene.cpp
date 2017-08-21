@@ -8,19 +8,17 @@ Scene::Scene() {
 	// Camera
 	this->camera = GetCamera();
 
-	// GameObject
-	this->player = new Player();
-
 	// Load Map Data
 	Scene::LoadMapData("map/scene_Ground.csv", this->groundData);
 
-	// Layer GameObjects init
+	// GameObject Order in Layers
 	for (unsigned int i = 0; i < this->groundData.size(); i++) {
 		if (groundData[i] != -1) {
 			this->grounds.push_back(new Ground());
 			Scene::SetTile(this->grounds.back(), i, groundData[i]);
 		}
 	}
+	this->player = new Player();
 }
 
 
@@ -157,10 +155,11 @@ void Scene::CheckCollider() {
 		if (this->colliders[i]->trigger) {
 			for (unsigned int j = 0; j < this->colliders.size(); j++) {
 				bool collision = CheckCollision(this->colliders[i],this->colliders[j]);
-				if (i != j) {
-					if (collision) {
-						this->colliders[i]->gameObject->OnTriggerEnter(this->colliders[j]);
-					}
+				if (i != j && collision && this->colliders[j]->trigger == false) {
+					this->colliders[i]->enter = true;
+					this->colliders[i]->gameObject->OnTriggerEnter(this->colliders[j]);
+					this->colliders[i]->enter = false;
+					break;
 				}
 			}
 		}
