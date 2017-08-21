@@ -39,6 +39,7 @@ Scene::~Scene() {
 	if (this->texPlayerIdle.texture != NULL) this->texPlayerIdle.texture->Release();
 	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
 	if (this->texPlayerJump.texture != NULL) this->texPlayerJump.texture->Release();
+	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
 
 	// Clear Global GameObject and Collider
 	// ...
@@ -61,20 +62,26 @@ void Scene::Start() {
 	LoadTexture(&this->texPlayerIdle);
 	LoadTexture(&this->texPlayerRun);
 	LoadTexture(&this->texPlayerJump);
+	LoadTexture(&this->texBullet);
 
 	// Link GameObjects device && texture
 	this->player->sprite->device = this->device;
-	this->player->animIdle->sprite->texture = this->texPlayerIdle;
-	this->player->animRun->sprite->texture = this->texPlayerRun;
-	this->player->animJump->sprite->texture = this->texPlayerJump;
 	this->player->animIdle->sprite->device = this->device;
+	this->player->animIdle->sprite->texture = this->texPlayerIdle;
 	this->player->animRun->sprite->device = this->device;
+	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->device = this->device;
+	this->player->animJump->sprite->texture = this->texPlayerJump;
+	for (int i = 0; i < this->player->bullets.size(); i++) {
+		this->player->bullets[i]->sprite->device = this->device;
+		this->player->bullets[i]->sprite->texture = this->texBullet;
+	}
 
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
 		this->grounds[i]->sprite->device = this->device;
 		this->grounds[i]->sprite->texture = this->texTile;
 	}
+
 
 
 	/*------------------------------------------------------------------------------
@@ -99,15 +106,21 @@ void Scene::Start() {
 void Scene::Update() {
 	// Update GameObject && CheckCollider && Update Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
-		this->gameObjects[i]->Update();
+		if (this->gameObjects[i]->active) {
+			this->gameObjects[i]->Update();
+		}
 	}
 	CheckCollider();
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
-		this->gameObjects[i]->UpdateTransform();
+		if (this->gameObjects[i]->active) {
+			this->gameObjects[i]->UpdateTransform();
+		}
 	}
 	#ifdef _DEBUG
 		for (unsigned i = 0; i < this->colliders.size(); i++) {
-			this->colliders[i]->Update();
+			if (this->colliders[i]->gameObject->active) {
+				this->colliders[i]->Update();
+			}
 		}
 	#endif
 }
@@ -119,11 +132,15 @@ void Scene::Update() {
 void Scene::Draw() {
 	// Draw GameObject && Draw Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
-		this->gameObjects[i]->Draw();
+		if (this->gameObjects[i]->active) {
+			this->gameObjects[i]->Draw();
+		}
 	}
 	#ifdef _DEBUG
 		for (unsigned i = 0; i < this->colliders.size(); i++) {
-			this->colliders[i]->Draw();
+			if (this->colliders[i]->gameObject->active) {
+				this->colliders[i]->Draw();
+			}
 		}
 	#endif
 }
@@ -152,10 +169,10 @@ bool Scene::CheckCollision(BoxCollider* a, BoxCollider* b) {
 }
 void Scene::CheckCollider() {
 	for (unsigned int i = 0; i < this->colliders.size(); i++) {
-		if (this->colliders[i]->trigger) {
+		if (this->colliders[i]->trigger && this->colliders[i]->gameObject->active) {
 			for (unsigned int j = 0; j < this->colliders.size(); j++) {
 				bool collision = CheckCollision(this->colliders[i],this->colliders[j]);
-				if (i != j && collision && this->colliders[j]->trigger == false) {
+				if (i != j && collision && this->colliders[j]->trigger == false && this->colliders[j]->gameObject->active) {
 					this->colliders[i]->enter = true;
 					this->colliders[i]->gameObject->OnTriggerEnter(this->colliders[j]);
 					this->colliders[i]->enter = false;
