@@ -11,6 +11,7 @@ public:
 	Time* time;
 	Transform* transform;
 	Sprite* sprite;
+	bool active = true;
 
 	GameObject();
 	~GameObject();
