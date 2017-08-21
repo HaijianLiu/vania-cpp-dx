@@ -72,7 +72,7 @@ void Scene::Start() {
 	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->device = this->device;
 	this->player->animJump->sprite->texture = this->texPlayerJump;
-	for (int i = 0; i < this->player->bullets.size(); i++) {
+	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
 		this->player->bullets[i]->sprite->device = this->device;
 		this->player->bullets[i]->sprite->texture = this->texBullet;
 	}

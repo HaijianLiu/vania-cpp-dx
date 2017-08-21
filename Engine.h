@@ -90,6 +90,7 @@ struct Texture {
 #include "GameObject.h"
 #include "BoxCollider.h"
 #include "Animation.h"
+#include "Particle.h"
 
 /*------------------------------------------------------------------------------
 < Game Object classes >
