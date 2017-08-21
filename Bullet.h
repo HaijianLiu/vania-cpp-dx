@@ -2,13 +2,35 @@
 #ifndef _BULLET_H_
 #define _BULLET_H_
 
-class Buttlet : public GameObject {
+class Bullet : public GameObject {
 private:
-	/* data */
+	// List of GameObjects
+	std::vector<GameObject*>* gameObjects;
 
 public:
-	Buttlet();
-	~Buttlet();
+	// GameObject
+	GameObject* gameObject;
+	// Collider
+	BoxCollider* collider;
+	// Animation
+
+	// Parameter
+	float lifeTime = 2.0f;
+
+	// status
+	DWORD birthTime;
+
+	// Constructors
+	Bullet();
+	~Bullet();
+
+	// virtual Functions
+	void Start();
+	void Update();
+	void OnTriggerEnter(BoxCollider* other);
+
+	// Functions
+	void Destroy(GameObject* gameObject, float time);
 };
 
 #endif
