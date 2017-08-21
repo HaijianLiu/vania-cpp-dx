@@ -27,6 +27,7 @@ private:
 	void CheckCollider();
 	void LoadTexture(Texture* texture);
 	bool LoadMapData(const char* path, std::vector<int>& data);
+	void SetTile(GameObject* gameObject, int mapID, int tileID);
 
 public:
 	// Camera

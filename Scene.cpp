@@ -18,10 +18,7 @@ Scene::Scene() {
 	for (unsigned int i = 0; i < this->groundData.size(); i++) {
 		if (groundData[i] != 0) {
 			this->grounds.push_back(new Ground());
-			this->grounds.back()->transform->position.x = i % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
-			this->grounds.back()->transform->position.y = i / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
-			this->grounds.back()->transform->size = Int2D(this->tilePixel, this->tilePixel);
-			this->grounds.back()->sprite->slice = Slice(groundData[i],groundData[i]%this->tileSize.x * this->tilePixel,groundData[i]/this->tileSize.y * this->tilePixel,this->tilePixel,this->tilePixel);
+			Scene::SetTile(this->grounds.back(), i, groundData[i]);
 		}
 	}
 }
@@ -81,6 +78,10 @@ void Scene::Start() {
 		this->grounds[i]->sprite->texture = this->texTile;
 	}
 
+
+	/*------------------------------------------------------------------------------
+	< ............................................................................ >
+	------------------------------------------------------------------------------*/
 	// Start GameObject && Start Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
 		this->gameObjects[i]->PreStart();
@@ -196,4 +197,11 @@ bool Scene::LoadMapData(const char* path, std::vector<int>& data) {
 
 	fclose(file);
 	return true;
+}
+
+void Scene::SetTile(GameObject* gameObject, int mapID, int tileID) {
+	gameObject->transform->position.x = mapID % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
+	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
+	gameObject->transform->size = Int2D(this->tilePixel, this->tilePixel);
+	gameObject->sprite->slice = Slice(tileID,tileID%this->tileSize.x * this->tilePixel,tileID/this->tileSize.y * this->tilePixel,this->tilePixel,this->tilePixel);
 }
