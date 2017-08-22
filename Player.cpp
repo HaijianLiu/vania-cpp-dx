@@ -86,7 +86,7 @@ void Player::Update() {
 		this->move = false;
 	}
 	// jump
-	if (GetKeyboardPress(DIK_SPACE)) {
+	if (GetKeyboardTrigger(DIK_SPACE)) {
 		if (!this->air) {
 			this->verticalSpeed = this->jumpPower;
 			this->air = true;
@@ -169,7 +169,7 @@ void Player::FixedUpdate() {
 
 	/* Fire
 	..............................................................................*/
-	if (GetKeyboardPress(DIK_F)) {
+	if (GetKeyboardTrigger(DIK_F)) {
 		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
 			this->shoot = true;
 			for (unsigned int i = 0; i < this->bullets.size(); i++) {
