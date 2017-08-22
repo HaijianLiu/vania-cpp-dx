@@ -23,6 +23,7 @@ Scene* scene = new Scene();
 ------------------------------------------------------------------------------*/
 void Start() {
 	time->Start();
+	srand((unsigned)time->currentTime);
 	scene->Start();
 
 	#ifdef _DEBUG
