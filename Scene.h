@@ -6,9 +6,6 @@ class Scene {
 private:
 	// DirectX device
 	LPDIRECT3DDEVICE9 device;
-	// List of GetGameObject and Collider
-	std::vector<GameObject*> gameObjects;
-	std::vector<BoxCollider*> colliders;
 
 	// Texture
 	Texture texDefault = Texture("assets/default.png",32,32);
@@ -32,12 +29,19 @@ private:
 	void SetTile(GameObject* gameObject, int mapID, int tileID);
 
 public:
+	// List of GetGameObject and Collider
+	std::vector<GameObject*> gameObjects;
+	std::vector<BoxCollider*> colliders;
+
 	// Camera
 	Camera* camera;
 
 	// GameObject
 	Player* player;
 	std::vector<Ground*> grounds;
+	// Particle System
+	ParticleSystem* fxDestroy;
+	ParticleSystem* fxTail;
 
 
 	Scene();

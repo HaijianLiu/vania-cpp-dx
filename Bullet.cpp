@@ -18,8 +18,6 @@ Bullet::Bullet() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,4.0f,4.0f);
 	this->collider->trigger = true;
-	// Particle
-	this->fxDestroy = new ParticleSystem(40);
 	// Default GameObject active == true
 	this->gameObject->active = false;
 }
@@ -31,7 +29,6 @@ Bullet::Bullet() {
 Bullet::~Bullet() {
 	// delete objects
 	delete this->collider;
-	delete this->fxDestroy;
 }
 
 

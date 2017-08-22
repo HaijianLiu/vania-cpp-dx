@@ -19,6 +19,9 @@ Scene::Scene() {
 		}
 	}
 	this->player = new Player();
+	// Particle
+	this->fxDestroy = new ParticleSystem(40);
+	this->fxTail = new ParticleSystem(10);
 }
 
 
@@ -28,6 +31,8 @@ Scene::Scene() {
 Scene::~Scene() {
 	// delete GameObject
 	delete this->player;
+	delete this->fxDestroy;
+	delete this->fxTail;
 
 	// delete Layer GameObjects
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
@@ -73,9 +78,12 @@ void Scene::Start() {
 	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->device = this->device;
 	this->player->animJump->sprite->texture = this->texPlayerJump;
+	this->fxDestroy->LinkTexture(this->texDefault);
+	this->fxTail->LinkTexture(this->texDefault);
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
 		this->player->bullets[i]->sprite->texture = this->texBullet;
-		this->player->bullets[i]->fxDestroy->LinkTexture(this->texDefault);
+		this->player->bullets[i]->fxDestroy = this->fxDestroy;
+		this->player->bullets[i]->fxTail = this->fxTail;
 	}
 
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {

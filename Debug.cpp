@@ -28,7 +28,9 @@ void Debug::Draw() {
 	<< "Delta Time: " << this->time->deltaTime << "\n"
 	<< "Camera Position: " << this->scene->camera->position.x << ", " << this->scene->camera->position.y << "\n"
 	<< "Player Position: " << this->scene->player->transform->position.x << ", " << this->scene->player->transform->position.y << "\n"
-	<< "Player Air: " << this->scene->player->air << "\n";
+	<< "Player Air: " << this->scene->player->air << "\n"
+	<< "GameObjects: " << this->scene->gameObjects.size() << "\n"
+	<< "Colliders: " << this->scene->colliders.size() << "\n";
 
 	// Draw
 	this->font->DrawText(NULL,this->sout.str().c_str(),-1,&this->rect,DT_LEFT,D3DCOLOR_RGBA(0xff,0xff,0xff,0xff));

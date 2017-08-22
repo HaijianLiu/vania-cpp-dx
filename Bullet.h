@@ -14,6 +14,7 @@ public:
 	BoxCollider* collider;
 	// Particle System
 	ParticleSystem* fxDestroy;
+	ParticleSystem* fxTail;
 
 	// Parameter
 	float speed = 3.0f;
