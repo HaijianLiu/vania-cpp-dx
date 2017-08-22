@@ -21,7 +21,7 @@ Scene::Scene() {
 	this->player = new Player();
 	// Particle
 	this->fxDestroy = new ParticleSystem(40);
-	this->fxTail = new ParticleSystem(10);
+	this->fxTail = new ParticleSystem(100);
 }
 
 
@@ -46,6 +46,7 @@ Scene::~Scene() {
 	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
 	if (this->texPlayerJump.texture != NULL) this->texPlayerJump.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
+	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
 
 	// Clear Global GameObject and Collider
 	// ...
@@ -70,6 +71,7 @@ void Scene::Start() {
 	LoadTexture(&this->texPlayerRun);
 	LoadTexture(&this->texPlayerJump);
 	LoadTexture(&this->texBullet);
+	LoadTexture(&this->texFxDestroy);
 
 	// Link GameObjects device && texture
 	this->player->animIdle->sprite->device = this->device;
@@ -78,7 +80,7 @@ void Scene::Start() {
 	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->device = this->device;
 	this->player->animJump->sprite->texture = this->texPlayerJump;
-	this->fxDestroy->LinkTexture(this->texDefault);
+	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
 		this->player->bullets[i]->sprite->texture = this->texBullet;

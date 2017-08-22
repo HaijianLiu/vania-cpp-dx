@@ -17,11 +17,6 @@ Particle::Particle() {
 	this->sprite->slice = Slice(0,0,0,32,32);
 	// Default GameObject active == true
 	this->gameObject->active = false;
-
-	this->sprite->vertex[0].diffuse = D3DCOLOR_RGBA(242,165,63,255);
-	this->sprite->vertex[1].diffuse = D3DCOLOR_RGBA(242,165,63,255);
-	this->sprite->vertex[2].diffuse = D3DCOLOR_RGBA(242,165,63,255);
-	this->sprite->vertex[3].diffuse = D3DCOLOR_RGBA(242,165,63,255);
 }
 
 
@@ -96,7 +91,7 @@ void Particle::Instantiate(Transform* transform) {
 	this->gameObject->active = true;
 	this->birthTime = this->time->currentTime;
 	this->transform->position = transform->position;
-	this->startAngle = RandomRange(0.0f,2.0f*PI);
+	this->startAngle = RandomRange(this->startAngleRange.x, this->startAngleRange.y);
 	this->startLifeTime = RandomRange(this->startLifeTimeRange.x, this->startLifeTimeRange.y);
 	this->startSpeed = RandomRange(this->startSpeedRange.x, this->startSpeedRange.y);
 	this->startSize = RandomRange(this->startSizeRange.x, this->startSizeRange.y) * UNIT_TO_PIXEL;

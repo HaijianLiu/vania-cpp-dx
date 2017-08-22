@@ -22,6 +22,7 @@ public:
 
 	// status
 	bool right = true;
+	D3DXVECTOR3 lastPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	// Constructors
 	Bullet();

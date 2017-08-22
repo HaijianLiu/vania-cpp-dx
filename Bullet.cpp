@@ -36,6 +36,19 @@ Bullet::~Bullet() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Bullet::Start() {
+	// Particle System Parameters
+	this->fxTail->rateOverTime = false;
+	this->fxTail->SetStartLifeTimeRange(1.0f,2.0f);
+	this->fxTail->SetStartSpeedRange(0.02f,0.2f);
+	this->fxTail->SetStartSizeRange(0.01f,0.02f);
+	this->fxTail->SetStartAngleRange(0.0f,2.0f*PI);
+	this->fxTail->SetGravity(0.0f);
+	this->fxTail->SetColor(63,140,242,255);
+	this->fxDestroy->SetStartLifeTimeRange(0.1f,0.4f);
+	this->fxDestroy->SetStartSpeedRange(0.2f,1.0f);
+	this->fxDestroy->SetStartSizeRange(0.05f,0.1f);
+	this->fxDestroy->SetGravity(0.0f);
+	// this->fxDestroy->SetColor(113,214,247,10);
 	// Animation MakeFrame()
 }
 
@@ -57,6 +70,13 @@ void Bullet::Update() {
 		this->transform->position.x -= this->speed * this->time->deltaTime;
 	}
 
+	/* Particle System
+	..............................................................................*/
+	if (DistancePow(this->lastPosition, this->transform->position) >= pow(1.0f / (float)this->fxTail->rate, 2.0f)) {
+		this->fxTail->Instantiate(this->transform);
+		this->lastPosition = this->transform->position;
+	}
+
 	// Animation SetTexture() || Sprite SetTexture()
 	this->sprite->SetTexture();
 }
@@ -67,6 +87,8 @@ void Bullet::Update() {
 ------------------------------------------------------------------------------*/
 void Bullet::OnTriggerEnter(BoxCollider* other) {
 	this->gameObject->active = false;
+	/* Particle System
+	..............................................................................*/
 	this->fxDestroy->Instantiate(this->transform);
 }
 

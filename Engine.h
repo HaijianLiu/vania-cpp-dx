@@ -137,6 +137,7 @@ std::vector<GameObject*> CopyGameObjects();
 // Engine.cpp
 float RandomRange(float min, float max);
 void Destroy(GameObject* gameObject, float time);
+float DistancePow(D3DXVECTOR3 a, D3DXVECTOR3 b);
 
 
 #endif

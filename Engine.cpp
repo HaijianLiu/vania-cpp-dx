@@ -10,3 +10,7 @@ void Destroy(GameObject* gameObject, float time) {
 		gameObject->active = false;
 	}
 }
+
+float DistancePow(D3DXVECTOR3 a, D3DXVECTOR3 b) {
+	return pow(a.x - b.x, 2.0f) + pow(a.y - b.y, 2.0f) + pow(a.z - b.z, 2.0f);
+}

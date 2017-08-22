@@ -14,6 +14,7 @@ private:
 	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
 	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
 	Texture texBullet = Texture("assets/bullet.png",4,4);
+	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
 
 	// Map Data
 	Int2D mapSize = Int2D(20,20);
