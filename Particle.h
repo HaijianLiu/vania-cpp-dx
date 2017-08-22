@@ -12,12 +12,19 @@ public:
 	GameObject* gameObject;
 
 	// Parameter
-	float speed = 3.0f;
-	float lifeTime = 2.0f;
+	float gravity = 0.0f;
+	Float2D startLifeTimeRange = Float2D(1.0f,3.0f);
+	Float2D startSpeedRange = Float2D(0.01f,0.1f);
+	Float2D startSizeRange = Float2D(0.01f,0.1f);
+	Float2D sizeOverLifeRange = Float2D(1.0f,0.0f);
+
 
 	// status
-	bool right = true;
 	DWORD birthTime;
+	float startLifeTime;
+	float startSpeed;
+	float startSize;
+	float sizeOverLife;
 
 	// Constructors
 	Particle();
@@ -31,6 +38,8 @@ public:
 
 	// Functions
 	void Destroy(GameObject* gameObject, float time);
+	float RandomRange(float min, float max);
+	void Instantiate(Transform* transform);
 };
 
 

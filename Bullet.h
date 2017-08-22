@@ -12,6 +12,7 @@ public:
 	GameObject* gameObject;
 	// Collider
 	BoxCollider* collider;
+	Particle* particle;
 	// Animation
 
 	// Parameter

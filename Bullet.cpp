@@ -18,6 +18,8 @@ Bullet::Bullet() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,4.0f,4.0f);
 	this->collider->trigger = true;
+	// Particle
+	this->particle = new Particle();
 	// Default GameObject active == true
 	this->gameObject->active = false;
 }
@@ -29,6 +31,7 @@ Bullet::Bullet() {
 Bullet::~Bullet() {
 	// delete objects
 	delete this->collider;
+	delete this->particle;
 }
 
 
@@ -50,16 +53,15 @@ void Bullet::Update() {
 
 	/* Transform
 	..............................................................................*/
-	if (this->gameObject->active) {
-		if (this->right) {
-			this->transform->position.x += this->speed * this->time->deltaTime;
-		}
-		else {
-			this->transform->position.x -= this->speed * this->time->deltaTime;
-		}
-		// Animation SetTexture() || Sprite SetTexture()
-		this->sprite->SetTexture();
+	if (this->right) {
+		this->transform->position.x += this->speed * this->time->deltaTime;
 	}
+	else {
+		this->transform->position.x -= this->speed * this->time->deltaTime;
+	}
+
+	// Animation SetTexture() || Sprite SetTexture()
+	this->sprite->SetTexture();
 }
 
 
@@ -68,6 +70,7 @@ void Bullet::Update() {
 ------------------------------------------------------------------------------*/
 void Bullet::OnTriggerEnter(BoxCollider* other) {
 	this->gameObject->active = false;
+	this->particle->Instantiate(this->transform);
 }
 
 

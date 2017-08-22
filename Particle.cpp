@@ -42,14 +42,10 @@ void Particle::Start() {
 void Particle::Update() {
 	/* Destroy
 	..............................................................................*/
-	Destroy(this->gameObject, this->lifeTime);
+	Destroy(this->gameObject, this->startLifeTime);
 
-	/* Transform
-	..............................................................................*/
-	if (this->gameObject->active) {
-		// Animation SetTexture() || Sprite SetTexture()
-		this->sprite->SetTexture();
-	}
+	// Animation SetTexture() || Sprite SetTexture()
+	this->sprite->SetTexture();
 }
 
 
@@ -57,7 +53,7 @@ void Particle::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Particle::OnTriggerEnter(BoxCollider* other) {
-	
+
 }
 
 
@@ -76,4 +72,18 @@ void Particle::Destroy(GameObject* gameObject, float time) {
 	if ((float)this->time->currentTime - (float)this->birthTime > time * 1000.0f) {
 		this->gameObject->active = false;
 	}
+}
+
+float Particle::RandomRange(float min, float max) {
+	return min + (float)(rand()%1000)/999.0f * (max - min);
+}
+
+void Particle::Instantiate(Transform* transform) {
+	this->gameObject->active = true;
+	this->birthTime = this->time->currentTime;
+	this->transform->position = transform->position;
+	this->startLifeTime = RandomRange(this->startLifeTimeRange.x, this->startLifeTimeRange.y);
+	this->startSpeed = RandomRange(this->startSpeedRange.x, this->startSpeedRange.y);
+	this->startSize = RandomRange(this->startSizeRange.x, this->startSizeRange.y) * UNIT_TO_PIXEL;
+	this->transform->size = Int2D((int)this->startSize, (int)this->startSize);
 }
