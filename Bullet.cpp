@@ -19,7 +19,7 @@ Bullet::Bullet() {
 	this->collider = new BoxCollider(this,0.0f,0.0f,4.0f,4.0f);
 	this->collider->trigger = true;
 	// Particle
-	this->particle = new Particle();
+	this->fxDestroy = new ParticleSystem(40);
 	// Default GameObject active == true
 	this->gameObject->active = false;
 }
@@ -31,7 +31,7 @@ Bullet::Bullet() {
 Bullet::~Bullet() {
 	// delete objects
 	delete this->collider;
-	delete this->particle;
+	delete this->fxDestroy;
 }
 
 
@@ -70,7 +70,7 @@ void Bullet::Update() {
 ------------------------------------------------------------------------------*/
 void Bullet::OnTriggerEnter(BoxCollider* other) {
 	this->gameObject->active = false;
-	this->particle->Instantiate(this->transform);
+	this->fxDestroy->Instantiate(this->transform);
 }
 
 

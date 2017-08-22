@@ -102,6 +102,7 @@ struct Texture {
 #include "BoxCollider.h"
 #include "Animation.h"
 #include "Particle.h"
+#include "ParticleSystem.h"
 
 /*------------------------------------------------------------------------------
 < Game Object classes >

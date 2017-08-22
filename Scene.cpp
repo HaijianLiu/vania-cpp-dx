@@ -75,7 +75,7 @@ void Scene::Start() {
 	this->player->animJump->sprite->texture = this->texPlayerJump;
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
 		this->player->bullets[i]->sprite->texture = this->texBullet;
-		this->player->bullets[i]->particle->sprite->texture = this->texDefault;
+		this->player->bullets[i]->fxDestroy->LinkTexture(this->texDefault);
 	}
 
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {

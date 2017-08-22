@@ -12,8 +12,8 @@ public:
 	GameObject* gameObject;
 	// Collider
 	BoxCollider* collider;
-	Particle* particle;
-	// Animation
+	// Particle System
+	ParticleSystem* fxDestroy;
 
 	// Parameter
 	float speed = 3.0f;

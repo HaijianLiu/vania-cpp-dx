@@ -12,14 +12,14 @@ public:
 	GameObject* gameObject;
 
 	// Parameter
-	float gravity = 0.0f;
-	Float2D startLifeTimeRange = Float2D(1.0f,3.0f);
-	Float2D startSpeedRange = Float2D(0.05f,0.5f);
+	Float2D startLifeTimeRange = Float2D(0.2f,0.5f);
+	Float2D startSpeedRange = Float2D(0.1f,1.0f);
 	Float2D startSizeRange = Float2D(0.01f,0.1f);
-	bool sizeOverLifeTime = true;
-
 
 	// status
+	float gravity = 1.5f;
+	float verticalSpeed = 0.0f;
+	bool sizeOverLifeTime = true;
 	float startAngle;
 	float startLifeTime;
 	float startSpeed;
