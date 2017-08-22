@@ -11,6 +11,7 @@ private:
 	std::vector<BoxCollider*> colliders;
 
 	// Texture
+	Texture texDefault = Texture("assets/white-32.png",32,32);
 	Texture texTile = Texture("assets/tilesets.png",624,160);
 	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
 	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);

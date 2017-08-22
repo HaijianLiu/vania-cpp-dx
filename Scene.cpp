@@ -35,6 +35,7 @@ Scene::~Scene() {
 	}
 
 	// delete Texture
+	if (this->texDefault.texture != NULL) this->texDefault.texture->Release();
 	if (this->texTile.texture != NULL) this->texTile.texture->Release();
 	if (this->texPlayerIdle.texture != NULL) this->texPlayerIdle.texture->Release();
 	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
@@ -58,6 +59,7 @@ void Scene::Start() {
 	this->colliders = CopyColliders();
 
 	// LoadTexture
+	LoadTexture(&this->texDefault);
 	LoadTexture(&this->texTile);
 	LoadTexture(&this->texPlayerIdle);
 	LoadTexture(&this->texPlayerRun);
@@ -65,7 +67,6 @@ void Scene::Start() {
 	LoadTexture(&this->texBullet);
 
 	// Link GameObjects device && texture
-	this->player->sprite->device = this->device;
 	this->player->animIdle->sprite->device = this->device;
 	this->player->animIdle->sprite->texture = this->texPlayerIdle;
 	this->player->animRun->sprite->device = this->device;
@@ -73,12 +74,11 @@ void Scene::Start() {
 	this->player->animJump->sprite->device = this->device;
 	this->player->animJump->sprite->texture = this->texPlayerJump;
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
-		this->player->bullets[i]->sprite->device = this->device;
 		this->player->bullets[i]->sprite->texture = this->texBullet;
+		this->player->bullets[i]->particle->sprite->texture = this->texDefault;
 	}
 
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
-		this->grounds[i]->sprite->device = this->device;
 		this->grounds[i]->sprite->texture = this->texTile;
 	}
 
