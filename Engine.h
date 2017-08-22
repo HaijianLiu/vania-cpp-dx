@@ -38,6 +38,7 @@
 #define PIXEL_SCALE (1.5f)
 #define PIXEL_TO_UNIT (0.01f)
 #define UNIT_TO_PIXEL (100)
+#define PI (3.142f)
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 
 

@@ -9,7 +9,7 @@ private:
 public:
 	D3DXVECTOR3 position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	Int2D size = Int2D(16,16);
+	Float2D scale = Float2D(16.0f,16.0f);
 
 	Transform ();
 	virtual ~Transform ();

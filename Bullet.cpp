@@ -12,7 +12,7 @@ Bullet::Bullet() {
 	this->gameObject = this;
 
 	// Transform Size in real pixel (Int2D)
-	this->transform->size = Int2D(4,4);
+	this->transform->scale = Float2D(4.0f,4.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
 	this->sprite->slice = Slice(0,0,0,4,4);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?

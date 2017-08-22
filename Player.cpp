@@ -12,7 +12,7 @@ Player::Player() {
 	this->gameObject = this;
 
 	// Transform Size in real pixel (Int2D)
-	this->transform->size = Int2D(80,80);
+	this->transform->scale = Float2D(80.0f,80.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
 	this->animIdle = new Animation(3,1,15);
 	this->animRun = new Animation(10,1,4);
