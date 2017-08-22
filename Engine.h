@@ -65,6 +65,16 @@ struct Int2D {
 	}
 };
 
+struct Float2D {
+	float x;
+	float y;
+	Float2D(){};
+	Float2D(float x, float y) {
+		this->x = x;
+		this->y = y;
+	}
+};
+
 struct Texture {
 	LPDIRECT3DTEXTURE9 texture;
 	const char* path;
