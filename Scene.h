@@ -11,6 +11,7 @@ private:
 	Texture texDefault = Texture("assets/default.png",32,32);
 	Texture texTile = Texture("assets/tilesets.png",624,160);
 	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
+	Texture texPlayerShoot = Texture("assets/player-shoot.png",240,80);
 	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
 	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
 	Texture texBullet = Texture("assets/bullet.png",4,4);

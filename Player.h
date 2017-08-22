@@ -16,6 +16,7 @@ public:
 	BoxCollider* collHorizonCheck;
 	// Animation
 	Animation* animIdle;
+	Animation* animShoot;
 	Animation* animRun;
 	Animation* animJump;
 	// Camera
@@ -33,6 +34,7 @@ public:
 	bool move = false;
 	bool right = true;
 	bool air = true;
+	bool shoot = false;
 	float verticalSpeed = 0.0f;
 
 	// Constructors

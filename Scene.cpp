@@ -43,6 +43,7 @@ Scene::~Scene() {
 	if (this->texDefault.texture != NULL) this->texDefault.texture->Release();
 	if (this->texTile.texture != NULL) this->texTile.texture->Release();
 	if (this->texPlayerIdle.texture != NULL) this->texPlayerIdle.texture->Release();
+	if (this->texPlayerShoot.texture != NULL) this->texPlayerShoot.texture->Release();
 	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
 	if (this->texPlayerJump.texture != NULL) this->texPlayerJump.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
@@ -68,6 +69,7 @@ void Scene::Start() {
 	LoadTexture(&this->texDefault);
 	LoadTexture(&this->texTile);
 	LoadTexture(&this->texPlayerIdle);
+	LoadTexture(&this->texPlayerShoot);
 	LoadTexture(&this->texPlayerRun);
 	LoadTexture(&this->texPlayerJump);
 	LoadTexture(&this->texBullet);
@@ -76,6 +78,8 @@ void Scene::Start() {
 	// Link GameObjects device && texture
 	this->player->animIdle->sprite->device = this->device;
 	this->player->animIdle->sprite->texture = this->texPlayerIdle;
+	this->player->animShoot->sprite->device = this->device;
+	this->player->animShoot->sprite->texture = this->texPlayerShoot;
 	this->player->animRun->sprite->device = this->device;
 	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->device = this->device;

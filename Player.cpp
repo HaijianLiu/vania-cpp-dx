@@ -15,6 +15,7 @@ Player::Player() {
 	this->transform->scale = Float2D(80.0f,80.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
 	this->animIdle = new Animation(3,1,15);
+	this->animShoot = new Animation(3,1,4);
 	this->animRun = new Animation(10,1,4);
 	this->animJump = new Animation(6,1,4);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
@@ -39,6 +40,7 @@ Player::Player() {
 Player::~Player() {
 	// delete objects
 	delete this->animIdle;
+	delete this->animShoot;
 	delete this->animRun;
 	delete this->animJump;
 	delete this->collGroundCheck;
@@ -56,6 +58,7 @@ Player::~Player() {
 void Player::Start() {
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animIdle->MakeFrame();
+	this->animShoot->MakeFrame();
 	this->animRun->MakeFrame();
 	this->animJump->MakeFrame();
 }
@@ -99,6 +102,9 @@ void Player::Update() {
 	/* Animation
 	..............................................................................*/
 	// Animation SetTexture() || Sprite SetTexture()
+	if ((float)this->time->currentTime > (float)this->lastFire + 200.0f) {
+		this->shoot = false;
+	}
 	if (this->air) {
 		this->animJump->sprite->flipX = !this->right;
 		this->animJump->SetTexture(this->sprite->vertex);
@@ -111,9 +117,16 @@ void Player::Update() {
 			this->sprite->texture = this->animRun->sprite->texture;
 		}
 		if (!this->move) {
-			this->animIdle->sprite->flipX = !this->right;
-			this->animIdle->SetTexture(this->sprite->vertex);
-			this->sprite->texture = this->animIdle->sprite->texture;
+			if (this->shoot) {
+				this->animShoot->sprite->flipX = !this->right;
+				this->animShoot->SetTexture(this->sprite->vertex);
+				this->sprite->texture = this->animShoot->sprite->texture;
+			}
+			else{
+				this->animIdle->sprite->flipX = !this->right;
+				this->animIdle->SetTexture(this->sprite->vertex);
+				this->sprite->texture = this->animIdle->sprite->texture;
+			}
 		}
 	}
 }
@@ -158,6 +171,7 @@ void Player::FixedUpdate() {
 	..............................................................................*/
 	if (GetKeyboardPress(DIK_F)) {
 		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
+			this->shoot = true;
 			for (unsigned int i = 0; i < this->bullets.size(); i++) {
 				if (!this->bullets[i]->gameObject->active) {
 					this->lastFire = this->time->currentTime;
