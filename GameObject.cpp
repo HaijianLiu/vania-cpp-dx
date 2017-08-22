@@ -13,6 +13,7 @@ GameObject::~GameObject() {
 
 void GameObject::PreStart() {
 	this->time = GetTime();
+	this->sprite->device = GetDevice();
 }
 
 void GameObject::UpdateTransform() {
