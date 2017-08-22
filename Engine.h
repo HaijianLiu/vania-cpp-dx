@@ -123,13 +123,18 @@ struct Texture {
 /*------------------------------------------------------------------------------
 < Global Functions >
 ------------------------------------------------------------------------------*/
+// Window.cpp
 LPDIRECT3DDEVICE9 GetDevice();
+// main.cpp
 Time* GetTime();
 Camera* GetCamera();
 std::vector<BoxCollider*>* GetColliders();
 std::vector<GameObject*>* GetGameObjects();
 std::vector<BoxCollider*> CopyColliders();
 std::vector<GameObject*> CopyGameObjects();
+// Engine.cpp
+float RandomRange(float min, float max);
+void Destroy(GameObject* gameObject, float time);
 
 
 #endif

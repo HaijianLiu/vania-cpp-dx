@@ -68,16 +68,6 @@ void Particle::FixedUpdate() {
 /*------------------------------------------------------------------------------
 < Functions >
 ------------------------------------------------------------------------------*/
-void Particle::Destroy(GameObject* gameObject, float time) {
-	if ((float)this->time->currentTime - (float)this->birthTime > time * 1000.0f) {
-		this->gameObject->active = false;
-	}
-}
-
-float Particle::RandomRange(float min, float max) {
-	return min + (float)(rand()%1000)/999.0f * (max - min);
-}
-
 void Particle::Instantiate(Transform* transform) {
 	this->gameObject->active = true;
 	this->birthTime = this->time->currentTime;

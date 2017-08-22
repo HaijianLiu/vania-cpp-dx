@@ -20,7 +20,6 @@ public:
 
 
 	// status
-	DWORD birthTime;
 	float startLifeTime;
 	float startSpeed;
 	float startSize;
@@ -37,8 +36,6 @@ public:
 	void FixedUpdate();
 
 	// Functions
-	void Destroy(GameObject* gameObject, float time);
-	float RandomRange(float min, float max);
 	void Instantiate(Transform* transform);
 };
 

@@ -85,8 +85,3 @@ void Bullet::FixedUpdate() {
 /*------------------------------------------------------------------------------
 < Functions >
 ------------------------------------------------------------------------------*/
-void Bullet::Destroy(GameObject* gameObject, float time) {
-	if ((float)this->time->currentTime - (float)this->birthTime > time * 1000.0f) {
-		this->gameObject->active = false;
-	}
-}

@@ -21,7 +21,6 @@ public:
 
 	// status
 	bool right = true;
-	DWORD birthTime;
 
 	// Constructors
 	Bullet();
@@ -34,7 +33,6 @@ public:
 	void FixedUpdate();
 
 	// Functions
-	void Destroy(GameObject* gameObject, float time);
 };
 
 #endif
