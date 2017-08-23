@@ -10,8 +10,15 @@ Scene::Scene() {
 
 	// Load Map Data
 	Scene::LoadMapData("map/scene_Ground.csv", this->groundData);
+	Scene::LoadMapData("map/scene_BackGround.csv", this->backGroundData);
 
 	// GameObject Order in Layers
+	for (unsigned int i = 0; i < this->backGroundData.size(); i++) {
+		if (backGroundData[i] != -1) {
+			this->backGrounds.push_back(new BackGround());
+			Scene::SetTile(this->backGrounds.back(), i, backGroundData[i]);
+		}
+	}
 	for (unsigned int i = 0; i < this->groundData.size(); i++) {
 		if (groundData[i] != -1) {
 			this->grounds.push_back(new Ground());
@@ -37,6 +44,9 @@ Scene::~Scene() {
 	// delete Layer GameObjects
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
 		delete this->grounds[i];
+	}
+	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
+		delete this->backGrounds[i];
 	}
 
 	// delete Texture
@@ -94,6 +104,9 @@ void Scene::Start() {
 
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
 		this->grounds[i]->sprite->texture = this->texTile;
+	}
+	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
+		this->backGrounds[i]->sprite->texture = this->texTile;
 	}
 
 

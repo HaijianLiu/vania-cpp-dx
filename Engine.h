@@ -31,8 +31,8 @@
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
-#define SCREEN_WIDTH (800)
-#define SCREEN_HEIGHT (600)
+#define SCREEN_WIDTH (960)
+#define SCREEN_HEIGHT (704)
 #define SCREEN_WIDTH_CENTER (SCREEN_WIDTH / 2)
 #define SCREEN_HEIGHT_CENTER (SCREEN_HEIGHT / 2)
 #define PIXEL_SCALE (2)
@@ -110,6 +110,7 @@ struct Texture {
 #include "Bullet.h"
 #include "Player.h"
 #include "Ground.h"
+#include "BackGround.h"
 
 /*------------------------------------------------------------------------------
 < Scene classes >
