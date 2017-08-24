@@ -19,9 +19,13 @@ public:
 	Animation* animShoot;
 	Animation* animRun;
 	Animation* animJump;
+	Animation* animDuck;
+	Animation* animDuckFire;
 	// None Object
 	NoneObject* leftFire;
 	NoneObject* rightFire;
+	NoneObject* leftDuckFire;
+	NoneObject* rightDuckFire;
 	// Camera
 	Camera* camera;
 	// Bullet
@@ -38,6 +42,7 @@ public:
 	bool right = true;
 	bool air = true;
 	bool shoot = false;
+	bool duck = false;
 	float verticalSpeed = 0.0f;
 
 	// Constructors

@@ -18,6 +18,8 @@ Player::Player() {
 	this->animShoot = new Animation(3,1,4);
 	this->animRun = new Animation(10,1,4);
 	this->animJump = new Animation(6,1,4);
+	this->animDuck = new Animation(1,1,60);
+	this->animDuckFire = new Animation(3,1,4);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,1.0f,5.0f);
 	this->collGroundCheck->trigger = true;
@@ -28,6 +30,8 @@ Player::Player() {
 	// None Object
 	this->leftFire = new NoneObject(this,-0.2f,-0.015f);
 	this->rightFire = new NoneObject(this,0.2f,-0.015f);
+	this->leftDuckFire = new NoneObject(this,-0.2f,0.1f);
+	this->rightDuckFire = new NoneObject(this,0.2f,0.1f);
 	// Camera
 	this->camera = GetCamera();
 	// Bullet
@@ -46,11 +50,15 @@ Player::~Player() {
 	delete this->animShoot;
 	delete this->animRun;
 	delete this->animJump;
+	delete this->animDuck;
+	delete this->animDuckFire;
 	delete this->collGroundCheck;
 	delete this->collCeilingCheck;
 	delete this->collHorizonCheck;
 	delete this->leftFire;
 	delete this->rightFire;
+	delete this->leftDuckFire;
+	delete this->rightDuckFire;
 	for (unsigned int i = 0; i < this->bullets.size(); i++) {
 		delete this->bullets[i];
 	}
@@ -66,6 +74,8 @@ void Player::Start() {
 	this->animShoot->MakeFrame();
 	this->animRun->MakeFrame();
 	this->animJump->MakeFrame();
+	this->animDuck->MakeFrame();
+	this->animDuckFire->MakeFrame();
 }
 
 
@@ -97,7 +107,18 @@ void Player::Update() {
 			this->air = true;
 		}
 	}
-	// gravity
+	// duck
+	if (GetKeyboardPress(DIK_DOWN)) {
+		if (!this->air) {
+			this->duck = true;
+		}
+	}
+	else {
+		this->duck = false;
+	}
+
+	/* Gravity
+	..............................................................................*/
 	this->verticalSpeed -= this->gravity * this->time->deltaTime;
 	this->transform->position.y -= this->verticalSpeed * this->time->deltaTime;
 	if (this->verticalSpeed < -1.0f) {
@@ -122,15 +143,29 @@ void Player::Update() {
 			this->sprite->texture = this->animRun->sprite->texture;
 		}
 		if (!this->move) {
-			if (this->shoot) {
-				this->animShoot->sprite->flipX = !this->right;
-				this->animShoot->SetTexture(this->sprite->vertex);
-				this->sprite->texture = this->animShoot->sprite->texture;
+			if (this->duck) {
+				if (this->shoot) {
+					this->animDuckFire->sprite->flipX = !this->right;
+					this->animDuckFire->SetTexture(this->sprite->vertex);
+					this->sprite->texture = this->animDuckFire->sprite->texture;
+				}
+				else {
+					this->animDuck->sprite->flipX = !this->right;
+					this->animDuck->SetTexture(this->sprite->vertex);
+					this->sprite->texture = this->animDuck->sprite->texture;
+				}
 			}
-			else{
-				this->animIdle->sprite->flipX = !this->right;
-				this->animIdle->SetTexture(this->sprite->vertex);
-				this->sprite->texture = this->animIdle->sprite->texture;
+			else {
+				if (this->shoot) {
+					this->animShoot->sprite->flipX = !this->right;
+					this->animShoot->SetTexture(this->sprite->vertex);
+					this->sprite->texture = this->animShoot->sprite->texture;
+				}
+				else{
+					this->animIdle->sprite->flipX = !this->right;
+					this->animIdle->SetTexture(this->sprite->vertex);
+					this->sprite->texture = this->animIdle->sprite->texture;
+				}
 			}
 		}
 	}
@@ -184,10 +219,20 @@ void Player::FixedUpdate() {
 					this->bullets[i]->right = this->right;
 					this->bullets[i]->gameObject->active = true;
 					if (this->right) {
-						this->bullets[i]->transform->position = this->rightFire->transform->position;
+						if (this->duck && !this->move && !this->air) {
+							this->bullets[i]->transform->position = this->rightDuckFire->transform->position;
+						}
+						else {
+							this->bullets[i]->transform->position = this->rightFire->transform->position;
+						}
 					}
 					else {
-						this->bullets[i]->transform->position = this->leftFire->transform->position;
+						if (this->duck && !this->move && !this->air) {
+							this->bullets[i]->transform->position = this->leftDuckFire->transform->position;
+						}
+						else {
+							this->bullets[i]->transform->position = this->leftFire->transform->position;
+						}
 					}
 					break;
 				}

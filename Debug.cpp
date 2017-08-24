@@ -28,7 +28,9 @@ void Debug::Draw() {
 	<< "Delta Time: " << this->time->deltaTime << "\n"
 	<< "Camera Position: " << this->scene->camera->position.x << ", " << this->scene->camera->position.y << "\n"
 	<< "Player Position: " << this->scene->player->transform->position.x << ", " << this->scene->player->transform->position.y << "\n"
+	<< "Player Move: " << this->scene->player->move << "\n"
 	<< "Player Air: " << this->scene->player->air << "\n"
+	<< "Player Duck: " << this->scene->player->duck << "\n"
 	<< "GameObjects: " << this->scene->gameObjects.size() << "\n"
 	<< "Colliders: " << this->scene->colliders.size() << "\n";
 

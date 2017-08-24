@@ -56,6 +56,8 @@ Scene::~Scene() {
 	if (this->texPlayerShoot.texture != NULL) this->texPlayerShoot.texture->Release();
 	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
 	if (this->texPlayerJump.texture != NULL) this->texPlayerJump.texture->Release();
+	if (this->texPlayerDuck.texture != NULL) this->texPlayerDuck.texture->Release();
+	if (this->texPlayerDuckFire.texture != NULL) this->texPlayerDuckFire.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
 	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
 
@@ -82,6 +84,8 @@ void Scene::Start() {
 	LoadTexture(&this->texPlayerShoot);
 	LoadTexture(&this->texPlayerRun);
 	LoadTexture(&this->texPlayerJump);
+	LoadTexture(&this->texPlayerDuck);
+	LoadTexture(&this->texPlayerDuckFire);
 	LoadTexture(&this->texBullet);
 	LoadTexture(&this->texFxDestroy);
 
@@ -94,6 +98,10 @@ void Scene::Start() {
 	this->player->animRun->sprite->texture = this->texPlayerRun;
 	this->player->animJump->sprite->device = this->device;
 	this->player->animJump->sprite->texture = this->texPlayerJump;
+	this->player->animDuck->sprite->device = this->device;
+	this->player->animDuck->sprite->texture = this->texPlayerDuck;
+	this->player->animDuckFire->sprite->device = this->device;
+	this->player->animDuckFire->sprite->texture = this->texPlayerDuckFire;
 	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
@@ -160,7 +168,7 @@ void Scene::Update() {
 void Scene::Draw() {
 	// Draw GameObject && Draw Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
-		if (this->gameObjects[i]->active || this->gameObjects[i]->draw) {
+		if (this->gameObjects[i]->active && this->gameObjects[i]->draw) {
 			this->gameObjects[i]->Draw();
 		}
 	}
