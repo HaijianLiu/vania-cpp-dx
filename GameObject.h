@@ -12,6 +12,7 @@ public:
 	Transform* transform;
 	Sprite* sprite;
 	bool active = true;
+	bool draw = true;
 	DWORD birthTime;
 
 	GameObject();

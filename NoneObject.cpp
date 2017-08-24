@@ -14,11 +14,7 @@ NoneObject::NoneObject(GameObject* parent, float x, float y) {
 	this->parent = parent;
 	this->offset.x = x;
 	this->offset.y = y;
-
-	// Transform Size in real pixel (Int2D)
-				// get from scene mapData
-	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
-				// get from scene mapData
+	this->draw = false;
 }
 
 
@@ -43,7 +39,6 @@ void NoneObject::Start() {
 ------------------------------------------------------------------------------*/
 void NoneObject::Update() {
 	// Animation SetTexture() || Sprite SetTexture()
-	// this->sprite->SetTexture();
 }
 
 
@@ -61,5 +56,4 @@ void NoneObject::OnTriggerEnter(BoxCollider* other) {
 void NoneObject::FixedUpdate() {
 	this->transform->position.x = this->parent->transform->position.x + this->offset.x;
 	this->transform->position.y = this->parent->transform->position.y + this->offset.y;
-
 }
