@@ -26,6 +26,7 @@ Scene::Scene() {
 		}
 	}
 	this->player = new Player();
+	this->crab = new Crab();
 	// Particle
 	this->fxDestroy = new ParticleSystem(40);
 	this->fxTail = new ParticleSystem(100);
@@ -40,6 +41,7 @@ Scene::~Scene() {
 	delete this->player;
 	delete this->fxDestroy;
 	delete this->fxTail;
+	delete this->crab;
 
 	// delete Layer GameObjects
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
@@ -60,6 +62,7 @@ Scene::~Scene() {
 	if (this->texPlayerDuckFire.texture != NULL) this->texPlayerDuckFire.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
 	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
+	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
 
 	// Clear Global GameObject and Collider
 	// ...
@@ -88,6 +91,7 @@ void Scene::Start() {
 	LoadTexture(&this->texPlayerDuckFire);
 	LoadTexture(&this->texBullet);
 	LoadTexture(&this->texFxDestroy);
+	LoadTexture(&this->texCrabWalk);
 
 	// Link GameObjects device && texture
 	this->player->animIdle->sprite->device = this->device;
@@ -102,6 +106,8 @@ void Scene::Start() {
 	this->player->animDuck->sprite->texture = this->texPlayerDuck;
 	this->player->animDuckFire->sprite->device = this->device;
 	this->player->animDuckFire->sprite->texture = this->texPlayerDuckFire;
+	this->crab->animWalk->sprite->device = this->device;
+	this->crab->animWalk->sprite->texture = this->texCrabWalk;
 	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {

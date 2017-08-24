@@ -110,6 +110,7 @@ struct Texture {
 ------------------------------------------------------------------------------*/
 #include "Bullet.h"
 #include "Player.h"
+#include "Crab.h"
 #include "Ground.h"
 #include "BackGround.h"
 
