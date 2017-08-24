@@ -120,6 +120,9 @@ void Player::Update() {
 	/* Gravity
 	..............................................................................*/
 	this->verticalSpeed -= this->gravity * this->time->deltaTime;
+	if (this->verticalSpeed <= - 0.9f * this->jumpPower) {
+		this->verticalSpeed = - 0.9f * this->jumpPower;
+	}
 	this->transform->position.y -= this->verticalSpeed * this->time->deltaTime;
 	if (this->verticalSpeed < -1.0f) {
 		this->air = true;
