@@ -25,6 +25,9 @@ Player::Player() {
 	this->collCeilingCheck->trigger = true;
 	this->collHorizonCheck = new BoxCollider(this,0.0f,0.06f,18.0f,32.0f);
 	this->collHorizonCheck->trigger = true;
+	// None Object
+	this->leftFire = new NoneObject(this,-0.2f,-0.015f);
+	this->rightFire = new NoneObject(this,0.2f,-0.015f);
 	// Camera
 	this->camera = GetCamera();
 	// Bullet
@@ -46,6 +49,8 @@ Player::~Player() {
 	delete this->collGroundCheck;
 	delete this->collCeilingCheck;
 	delete this->collHorizonCheck;
+	delete this->leftFire;
+	delete this->rightFire;
 	for (unsigned int i = 0; i < this->bullets.size(); i++) {
 		delete this->bullets[i];
 	}
@@ -179,12 +184,11 @@ void Player::FixedUpdate() {
 					this->bullets[i]->right = this->right;
 					this->bullets[i]->gameObject->active = true;
 					if (this->right) {
-						this->bullets[i]->transform->position.x = this->transform->position.x + 0.2f;
+						this->bullets[i]->transform->position = this->rightFire->transform->position;
 					}
 					else {
-						this->bullets[i]->transform->position.x = this->transform->position.x - 0.2f;
+						this->bullets[i]->transform->position = this->leftFire->transform->position;
 					}
-					this->bullets[i]->transform->position.y = this->transform->position.y - 0.015f;
 					break;
 				}
 			}

@@ -19,6 +19,9 @@ public:
 	Animation* animShoot;
 	Animation* animRun;
 	Animation* animJump;
+	// None Object
+	NoneObject* leftFire;
+	NoneObject* rightFire;
 	// Camera
 	Camera* camera;
 	// Bullet

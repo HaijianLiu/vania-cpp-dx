@@ -103,6 +103,7 @@ struct Texture {
 #include "Animation.h"
 #include "Particle.h"
 #include "ParticleSystem.h"
+#include "NoneObject.h"
 
 /*------------------------------------------------------------------------------
 < Game Object classes >
