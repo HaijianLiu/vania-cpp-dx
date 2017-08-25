@@ -10,6 +10,8 @@ Ground::Ground() {
 	this->gameObjects->push_back(this);
 	// Get GetGameObject pointer
 	this->gameObject = this;
+	// Draw
+	this->draw = false;
 
 	// Transform Size in real pixel (Int2D)
 				// get from scene mapData
@@ -43,7 +45,7 @@ void Ground::Start() {
 void Ground::Update() {
 
 	// Animation SetTexture() || Sprite SetTexture()
-	this->sprite->SetTexture();
+	// this->sprite->SetTexture();
 }
 
 

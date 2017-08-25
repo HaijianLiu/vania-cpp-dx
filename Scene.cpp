@@ -116,9 +116,6 @@ void Scene::Start() {
 		this->player->bullets[i]->fxTail = this->fxTail;
 	}
 
-	for (unsigned int i = 0; i < this->grounds.size(); i++) {
-		this->grounds[i]->sprite->texture = this->texTile;
-	}
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->texTile;
 	}
