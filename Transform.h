@@ -2,6 +2,8 @@
 #ifndef _TRANSFORM_H_
 #define _TRANSFORM_H_
 
+class Camera;
+
 class Transform {
 private:
 	Camera* camera;
@@ -12,7 +14,7 @@ public:
 	Float2D scale = Float2D(16.0f,16.0f);
 
 	Transform ();
-	virtual ~Transform ();
+	~Transform ();
 
 	void Update(Vertex2D* vertex);
 	void Update(Vertex2D* vertex, int sizeX, int sizeY);

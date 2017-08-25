@@ -7,9 +7,12 @@ private:
 
 public:
 	D3DXVECTOR2 position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	GameObject* target;
 
 	Camera();
-	virtual ~Camera();
+	~Camera();
+
+	void Update();
 };
 
 #endif

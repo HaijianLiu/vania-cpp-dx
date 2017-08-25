@@ -34,6 +34,7 @@ Player::Player() {
 	this->rightDuckFire = new NoneObject(this,0.2f,0.1f);
 	// Camera
 	this->camera = GetCamera();
+	this->camera->target = this;
 	// Bullet
 	for (int i = 0; i < 16; i++) {
 		this->bullets.push_back(new Bullet());
@@ -207,8 +208,8 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 void Player::FixedUpdate() {
 	/* Camera
 	..............................................................................*/
-	this->camera->position.x = this->transform->position.x;
-	this->camera->position.y = this->transform->position.y;
+	// this->camera->position.x = this->transform->position.x;
+	// this->camera->position.y = this->transform->position.y;
 
 	/* Fire
 	..............................................................................*/
