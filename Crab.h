@@ -18,12 +18,12 @@ public:
 
 	// Parameter
 	float gravity = 9.8f;
-	float speed = 1.0f;
+	float speed = 0.3f;
 	float jumpPower = 4.0f;
 
 	// status
 	bool move = false;
-	bool right = true;
+	bool right = false;
 	bool air = true;
 	float verticalSpeed = 0.0f;
 

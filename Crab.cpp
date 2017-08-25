@@ -52,18 +52,11 @@ void Crab::Update() {
 	/* Transform
 	..............................................................................*/
 	// move
-	if (GetKeyboardPress(DIK_LEFT)) {
-		this->move = true;
-		this->right = false;
+	if (!this->right) {
 		this->transform->position.x -= this->speed * this->time->deltaTime;
 	}
-	else if (GetKeyboardPress(DIK_RIGHT)) {
-		this->move = true;
-		this->right = true;
-		this->transform->position.x += this->speed * this->time->deltaTime;
-	}
 	else {
-		this->move = false;
+		this->transform->position.x += this->speed * this->time->deltaTime;
 	}
 
 	/* Gravity
@@ -80,7 +73,7 @@ void Crab::Update() {
 	/* Animation
 	..............................................................................*/
 	// Animation SetTexture() || Sprite SetTexture()
-	this->animWalk->sprite->flipX = !this->right;
+	this->animWalk->sprite->flipX = this->right;
 	this->animWalk->SetTexture(this->sprite->vertex);
 	this->sprite->texture = this->animWalk->sprite->texture;
 }
@@ -100,9 +93,11 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 	if (this->collHorizonCheck->enter == true) {
 		if (this->transform->position.x > other->gameObject->transform->position.x) {
 			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+			this->right = true;
 		}
 		if (this->transform->position.x < other->gameObject->transform->position.x) {
 			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+			this->right = false;
 		}
 	}
 }
