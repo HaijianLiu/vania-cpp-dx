@@ -6,7 +6,7 @@
 
 class Debug {
 private:
-	Scene* scene;
+	SceneManager* sceneManager;
 	Time* time;
 
 	LPD3DXFONT font = NULL;
@@ -15,7 +15,7 @@ private:
 	std::stringstream sout;
 
 public:
-	Debug(Scene* scene);
+	Debug(SceneManager* sceneManager);
 	~Debug();
 
 	void Start();

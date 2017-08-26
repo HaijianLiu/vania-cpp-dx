@@ -139,6 +139,8 @@ std::vector<BoxCollider*>* GetColliders();
 std::vector<GameObject*>* GetGameObjects();
 std::vector<BoxCollider*> CopyColliders();
 std::vector<GameObject*> CopyGameObjects();
+unsigned int GetCollidersSize();
+unsigned int GetGameObjectsSize();
 // Engine.cpp
 float RandomRange(float min, float max);
 void Destroy(GameObject* gameObject, float time);

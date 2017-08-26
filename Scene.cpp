@@ -7,13 +7,19 @@
 Scene::Scene() {
 	// Camera
 	this->camera = GetCamera();
+	// get start size
+	this->gpGameObjects = GetGameObjects();
+	this->gpColliders = GetColliders();
+	this->startGameObjectsSize = GetGameObjectsSize();
+	this->startCollidersSize = GetCollidersSize();
 
+
+	/*............................................................................*/
 	// Load Map Data
 	Scene::LoadMapData("map/scene_Camera.csv", this->cameraData);
 	Scene::LoadMapData("map/scene_Ground.csv", this->groundData);
 	Scene::LoadMapData("map/scene_BackGround.csv", this->backGroundData);
-
-	// GameObject Order in Layers
+	// push_back to scene map Objects (Order in Layer Order)
 	for (unsigned int i = 0; i < this->cameraData.size(); i++) {
 		if (this->cameraData[i] != -1) {
 			this->camera->range.push_back(new NoneObject());
@@ -32,11 +38,18 @@ Scene::Scene() {
 			Scene::SetTile(this->grounds.back(), i, this->groundData[i]);
 		}
 	}
-	this->player = new Player();
-	this->crab = new Crab();
-	// Particle
-	this->fxDestroy = new ParticleSystem(40);
-	this->fxTail = new ParticleSystem(100);
+	/*............................................................................*/
+
+
+	// Get GameObject && Get Collider && reset
+	this->gameObjects = CopyGameObjects();
+	this->colliders = CopyColliders();
+	for (int i = 0; i < this->gpGameObjects->size() - this->startGameObjectsSize; i++) {
+		this->gpGameObjects->pop_back();
+	}
+	for (int i = 0; i < this->gpColliders->size() - this->startCollidersSize; i++) {
+		this->gpColliders->pop_back();
+	}
 }
 
 
@@ -44,12 +57,6 @@ Scene::Scene() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene::~Scene() {
-	// delete GameObject
-	delete this->player;
-	delete this->fxDestroy;
-	delete this->fxTail;
-	delete this->crab;
-
 	// delete Layer GameObjects
 	for (unsigned int i = 0; i < this->grounds.size(); i++) {
 		delete this->grounds[i];
@@ -57,23 +64,6 @@ Scene::~Scene() {
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		delete this->backGrounds[i];
 	}
-
-	// delete Texture
-	if (this->texDefault.texture != NULL) this->texDefault.texture->Release();
-	if (this->texTile.texture != NULL) this->texTile.texture->Release();
-	if (this->texPlayerIdle.texture != NULL) this->texPlayerIdle.texture->Release();
-	if (this->texPlayerShoot.texture != NULL) this->texPlayerShoot.texture->Release();
-	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
-	if (this->texPlayerJump.texture != NULL) this->texPlayerJump.texture->Release();
-	if (this->texPlayerDuck.texture != NULL) this->texPlayerDuck.texture->Release();
-	if (this->texPlayerDuckFire.texture != NULL) this->texPlayerDuckFire.texture->Release();
-	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
-	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
-	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
-
-	// Clear Global GameObject and Collider
-	// ...
-
 }
 
 
@@ -81,50 +71,9 @@ Scene::~Scene() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene::Start() {
-	// GetDevice
-	this->device = GetDevice();
-	// Get GameObject && Get Collider
-	this->gameObjects = CopyGameObjects();
-	this->colliders = CopyColliders();
-
-	// LoadTexture
-	LoadTexture(&this->texDefault);
-	LoadTexture(&this->texTile);
-	LoadTexture(&this->texPlayerIdle);
-	LoadTexture(&this->texPlayerShoot);
-	LoadTexture(&this->texPlayerRun);
-	LoadTexture(&this->texPlayerJump);
-	LoadTexture(&this->texPlayerDuck);
-	LoadTexture(&this->texPlayerDuckFire);
-	LoadTexture(&this->texBullet);
-	LoadTexture(&this->texFxDestroy);
-	LoadTexture(&this->texCrabWalk);
-
-	// Link GameObjects device && texture
-	this->player->animIdle->sprite->device = this->device;
-	this->player->animIdle->sprite->texture = this->texPlayerIdle;
-	this->player->animShoot->sprite->device = this->device;
-	this->player->animShoot->sprite->texture = this->texPlayerShoot;
-	this->player->animRun->sprite->device = this->device;
-	this->player->animRun->sprite->texture = this->texPlayerRun;
-	this->player->animJump->sprite->device = this->device;
-	this->player->animJump->sprite->texture = this->texPlayerJump;
-	this->player->animDuck->sprite->device = this->device;
-	this->player->animDuck->sprite->texture = this->texPlayerDuck;
-	this->player->animDuckFire->sprite->device = this->device;
-	this->player->animDuckFire->sprite->texture = this->texPlayerDuckFire;
-	this->crab->animWalk->sprite->device = this->device;
-	this->crab->animWalk->sprite->texture = this->texCrabWalk;
-	this->fxDestroy->LinkTexture(this->texFxDestroy);
-	this->fxTail->LinkTexture(this->texDefault);
-	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
-		this->player->bullets[i]->sprite->texture = this->texBullet;
-		this->player->bullets[i]->fxDestroy = this->fxDestroy;
-		this->player->bullets[i]->fxTail = this->fxTail;
-	}
 
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		this->backGrounds[i]->sprite->texture = this->texTile;
+		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
 	}
 
 
@@ -228,19 +177,6 @@ void Scene::CheckCollider() {
 			}
 		}
 	}
-}
-
-
-/*------------------------------------------------------------------------------
-< LoadTexture >
-------------------------------------------------------------------------------*/
-void Scene::LoadTexture(Texture* texture) {
-	D3DXCreateTextureFromFileEx(
-		this->device, texture->path,
-		texture->size.x, texture->size.y,
-		1, 0,
-		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
-		&texture->texture);
 }
 
 

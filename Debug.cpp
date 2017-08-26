@@ -3,8 +3,8 @@
 
 #ifdef _DEBUG
 
-Debug::Debug(Scene* scene) {
-	this->scene = scene;
+Debug::Debug(SceneManager* sceneManager) {
+	this->sceneManager = sceneManager;
 	this->time = GetTime();
 }
 Debug::~Debug() {
@@ -26,13 +26,13 @@ void Debug::Draw() {
 	this->sout
 	<< "FPS: " << this->time->countFPS << "\n"
 	<< "Delta Time: " << this->time->deltaTime << "\n"
-	<< "Camera Position: " << this->scene->camera->position.x << ", " << this->scene->camera->position.y << "\n"
-	<< "Player Position: " << this->scene->player->transform->position.x << ", " << this->scene->player->transform->position.y << "\n"
-	<< "Player Move: " << this->scene->player->move << "\n"
-	<< "Player Air: " << this->scene->player->air << "\n"
-	<< "Player Duck: " << this->scene->player->duck << "\n"
-	<< "GameObjects: " << this->scene->gameObjects.size() << "\n"
-	<< "Colliders: " << this->scene->colliders.size() << "\n";
+	<< "Camera Position: " << this->sceneManager->camera->position.x << ", " << this->sceneManager->camera->position.y << "\n"
+	<< "Player Position: " << this->sceneManager->player->transform->position.x << ", " << this->sceneManager->player->transform->position.y << "\n"
+	<< "Player Move: " << this->sceneManager->player->move << "\n"
+	<< "Player Air: " << this->sceneManager->player->air << "\n"
+	<< "Player Duck: " << this->sceneManager->player->duck << "\n"
+	<< "GameObjects: " << this->sceneManager->scene->gameObjects.size() << "\n"
+	<< "Colliders: " << this->sceneManager->scene->colliders.size() << "\n";
 
 	// Draw
 	this->font->DrawText(NULL,this->sout.str().c_str(),-1,&this->rect,DT_LEFT,D3DCOLOR_RGBA(0xff,0xff,0xff,0xff));

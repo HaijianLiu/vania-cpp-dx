@@ -2,28 +2,21 @@
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
+class SceneManager;
+
 class Scene {
 private:
-	// DirectX device
-	LPDIRECT3DDEVICE9 device;
 
 public:
 	// List of GetGameObject and Collider
+	std::vector<GameObject*>* gpGameObjects;
+	std::vector<BoxCollider*>* gpColliders;
 	std::vector<GameObject*> gameObjects;
 	std::vector<BoxCollider*> colliders;
+	unsigned int startGameObjectsSize;
+	unsigned int startCollidersSize;
 
-	// Texture
-	Texture texDefault = Texture("assets/default.png",32,32);
-	Texture texTile = Texture("assets/tilesets.png",384,192);
-	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
-	Texture texPlayerShoot = Texture("assets/player-shoot.png",240,80);
-	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
-	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
-	Texture texPlayerDuck = Texture("assets/player-duck.png",80,80);
-	Texture texPlayerDuckFire = Texture("assets/player-duck-shoot.png",240,80);
-	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
-	Texture texBullet = Texture("assets/bullet.png",4,4);
-	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
+	SceneManager* sceneManager;
 
 	// Map Data
 	Int2D mapSize = Int2D(100,11);
@@ -35,15 +28,8 @@ public:
 
 	// Camera
 	Camera* camera;
-
-	// GameObject
-	Player* player;
-	Crab* crab;
 	std::vector<Ground*> grounds;
 	std::vector<BackGround*> backGrounds;
-	// Particle System
-	ParticleSystem* fxDestroy;
-	ParticleSystem* fxTail;
 
 
 	Scene();
