@@ -21,11 +21,11 @@ public:
 	Animation* animJump;
 	Animation* animDuck;
 	Animation* animDuckFire;
-	// None Object
-	NoneObject* leftFire;
-	NoneObject* rightFire;
-	NoneObject* leftDuckFire;
-	NoneObject* rightDuckFire;
+	// offset Object
+	OffsetObject* leftFire;
+	OffsetObject* rightFire;
+	OffsetObject* leftDuckFire;
+	OffsetObject* rightDuckFire;
 	// Camera
 	Camera* camera;
 	// Bullet

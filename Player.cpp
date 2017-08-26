@@ -21,17 +21,17 @@ Player::Player() {
 	this->animDuck = new Animation(1,1,60);
 	this->animDuckFire = new Animation(3,1,4);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
-	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,4.0f,4.0f);
+	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,8.0f,4.0f);
 	this->collGroundCheck->trigger = true;
 	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.09f,1.0f,5.0f);
 	this->collCeilingCheck->trigger = true;
-	this->collHorizonCheck = new BoxCollider(this,0.0f,0.06f,18.0f,32.0f);
+	this->collHorizonCheck = new BoxCollider(this,0.0f,0.06f,24.0f,32.0f);
 	this->collHorizonCheck->trigger = true;
 	// None Object
-	this->leftFire = new NoneObject(this,-0.2f,-0.015f);
-	this->rightFire = new NoneObject(this,0.2f,-0.015f);
-	this->leftDuckFire = new NoneObject(this,-0.2f,0.1f);
-	this->rightDuckFire = new NoneObject(this,0.2f,0.1f);
+	this->leftFire = new OffsetObject(this,-0.2f,-0.015f);
+	this->rightFire = new OffsetObject(this,0.2f,-0.015f);
+	this->leftDuckFire = new OffsetObject(this,-0.2f,0.1f);
+	this->rightDuckFire = new OffsetObject(this,0.2f,0.1f);
 	// Camera
 	this->camera = GetCamera();
 	this->camera->target = this;

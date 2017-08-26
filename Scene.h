@@ -29,6 +29,7 @@ public:
 	Int2D mapSize = Int2D(100,11);
 	int tilePixel = 16;
 	Int2D tileSize = Int2D(384/16,192/16);
+	std::vector<int> cameraData;
 	std::vector<int> groundData;
 	std::vector<int> backGroundData;
 

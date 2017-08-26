@@ -9,20 +9,27 @@ Scene::Scene() {
 	this->camera = GetCamera();
 
 	// Load Map Data
+	Scene::LoadMapData("map/scene_Camera.csv", this->cameraData);
 	Scene::LoadMapData("map/scene_Ground.csv", this->groundData);
 	Scene::LoadMapData("map/scene_BackGround.csv", this->backGroundData);
 
 	// GameObject Order in Layers
+	for (unsigned int i = 0; i < this->cameraData.size(); i++) {
+		if (this->cameraData[i] != -1) {
+			this->camera->range.push_back(new NoneObject());
+			Scene::SetTile(this->camera->range.back(), i, this->cameraData[i]);
+		}
+	}
 	for (unsigned int i = 0; i < this->backGroundData.size(); i++) {
-		if (backGroundData[i] != -1) {
+		if (this->backGroundData[i] != -1) {
 			this->backGrounds.push_back(new BackGround());
-			Scene::SetTile(this->backGrounds.back(), i, backGroundData[i]);
+			Scene::SetTile(this->backGrounds.back(), i, this->backGroundData[i]);
 		}
 	}
 	for (unsigned int i = 0; i < this->groundData.size(); i++) {
-		if (groundData[i] != -1) {
+		if (this->groundData[i] != -1) {
 			this->grounds.push_back(new Ground());
-			Scene::SetTile(this->grounds.back(), i, groundData[i]);
+			Scene::SetTile(this->grounds.back(), i, this->groundData[i]);
 		}
 	}
 	this->player = new Player();

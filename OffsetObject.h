@@ -1,8 +1,8 @@
 ﻿
-#ifndef _NONE_OBJECT_H_
-#define _NONE_OBJECT_H_
+#ifndef _OFFSET_OBJECT_H_
+#define _OFFSET_OBJECT_H_
 
-class NoneObject : public GameObject {
+class OffsetObject : public GameObject {
 private:
 	// List of GameObjects
 	std::vector<GameObject*>* gameObjects;
@@ -11,9 +11,12 @@ public:
 	// GameObject
 	GameObject* gameObject;
 
+	GameObject* parent;
+	Float2D offset;
+
 	// Constructors
-	NoneObject();
-	~NoneObject();
+	OffsetObject(GameObject* parent, float x, float y);
+	~OffsetObject();
 
 	// virtual Functions
 	void Start();

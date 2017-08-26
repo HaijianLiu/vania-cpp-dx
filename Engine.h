@@ -98,12 +98,13 @@ struct Texture {
 #include "Transform.h"
 #include "Sprite.h"
 #include "GameObject.h"
+#include "NoneObject.h"
+#include "OffsetObject.h"
 #include "Camera.h"
 #include "BoxCollider.h"
 #include "Animation.h"
 #include "Particle.h"
 #include "ParticleSystem.h"
-#include "NoneObject.h"
 
 /*------------------------------------------------------------------------------
 < Game Object classes >

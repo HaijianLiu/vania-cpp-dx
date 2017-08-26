@@ -36,6 +36,9 @@ void Start() {
 ------------------------------------------------------------------------------*/
 void Delete() {
 	delete scene;
+	for (unsigned int i = 0; i < camera->range.size(); i++) {
+		delete camera->range[i];
+	}
 	delete camera;
 	delete time;
 
