@@ -12,42 +12,19 @@ Scene::Scene() {
 	this->gpColliders = GetColliders();
 	this->startGameObjectsSize = GetGameObjectsSize();
 	this->startCollidersSize = GetCollidersSize();
+}
 
-
-	/*............................................................................*/
-	// Load Map Data
-	Scene::LoadMapData("map/scene_Camera.csv", this->cameraData);
-	Scene::LoadMapData("map/scene_Ground.csv", this->groundData);
-	Scene::LoadMapData("map/scene_BackGround.csv", this->backGroundData);
-	// push_back to scene map Objects (Order in Layer Order)
-	for (unsigned int i = 0; i < this->cameraData.size(); i++) {
-		if (this->cameraData[i] != -1) {
-			this->camera->range.push_back(new NoneObject());
-			Scene::SetTile(this->camera->range.back(), i, this->cameraData[i]);
-		}
-	}
-	for (unsigned int i = 0; i < this->backGroundData.size(); i++) {
-		if (this->backGroundData[i] != -1) {
-			this->backGrounds.push_back(new BackGround());
-			Scene::SetTile(this->backGrounds.back(), i, this->backGroundData[i]);
-		}
-	}
-	for (unsigned int i = 0; i < this->groundData.size(); i++) {
-		if (this->groundData[i] != -1) {
-			this->grounds.push_back(new Ground());
-			Scene::SetTile(this->grounds.back(), i, this->groundData[i]);
-		}
-	}
-	/*............................................................................*/
-
-
+void Scene::ResetGameObjectsAndColliders() {
 	// Get GameObject && Get Collider && reset
 	this->gameObjects = CopyGameObjects();
 	this->colliders = CopyColliders();
-	for (int i = 0; i < this->gpGameObjects->size() - this->startGameObjectsSize; i++) {
+
+	int size = this->gpGameObjects->size() - this->startGameObjectsSize;
+	for (int i = 0; i < size; i++) {
 		this->gpGameObjects->pop_back();
 	}
-	for (int i = 0; i < this->gpColliders->size() - this->startCollidersSize; i++) {
+	size = this->gpColliders->size() - this->startCollidersSize;
+	for (int i = 0; i < size; i++) {
 		this->gpColliders->pop_back();
 	}
 }
@@ -57,13 +34,7 @@ Scene::Scene() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene::~Scene() {
-	// delete Layer GameObjects
-	for (unsigned int i = 0; i < this->grounds.size(); i++) {
-		delete this->grounds[i];
-	}
-	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		delete this->backGrounds[i];
-	}
+
 }
 
 
@@ -71,16 +42,6 @@ Scene::~Scene() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene::Start() {
-
-	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
-	}
-
-
-
-	/*------------------------------------------------------------------------------
-	< ............................................................................ >
-	------------------------------------------------------------------------------*/
 	// Start GameObject && Start Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
 		this->gameObjects[i]->PreStart();

@@ -16,7 +16,7 @@ SceneManager::SceneManager() {
 	// Enemy
 	this->crab = new Crab();
 	// Scene
-	this->scene = new Scene();
+	this->scene = new Scene01();
 }
 
 
@@ -87,6 +87,7 @@ void SceneManager::Start() {
 	this->crab->animWalk->sprite->device = this->device;
 	this->crab->animWalk->sprite->texture = this->texCrabWalk;
 
+	// scene->Start
 	this->scene->Start();
 }
 

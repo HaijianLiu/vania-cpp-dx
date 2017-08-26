@@ -15,34 +15,29 @@ public:
 	std::vector<BoxCollider*> colliders;
 	unsigned int startGameObjectsSize;
 	unsigned int startCollidersSize;
-
+	// SceneManager
 	SceneManager* sceneManager;
 
 	// Map Data
-	Int2D mapSize = Int2D(100,11);
+	Int2D mapSize = Int2D(0,0);
 	int tilePixel = 16;
-	Int2D tileSize = Int2D(384/16,192/16);
-	std::vector<int> cameraData;
-	std::vector<int> groundData;
-	std::vector<int> backGroundData;
+	Int2D tileSize = Int2D(0,0);
 
 	// Camera
 	Camera* camera;
-	std::vector<Ground*> grounds;
-	std::vector<BackGround*> backGrounds;
 
 
 	Scene();
-	~Scene();
+	virtual ~Scene();
 
-	void Start();
+	virtual void Start();
+	void ResetGameObjectsAndColliders();
 	void Update();
 	void Draw();
 
 	// Functions
 	bool CheckCollision(BoxCollider* a, BoxCollider* b);
 	void CheckCollider();
-	void LoadTexture(Texture* texture);
 	bool LoadMapData(const char* path, std::vector<int>& data);
 	void SetTile(GameObject* gameObject, int mapID, int tileID);
 };
