@@ -16,7 +16,9 @@ SceneManager::SceneManager() {
 	// Enemy
 	this->crab = new Crab();
 	// Scene
-	this->scene = new Scene01();
+	scenes.push_back(new Scene01());
+	scenes.push_back(new Scene02());
+	this->activeScene = this->scenes[0];
 }
 
 
@@ -28,7 +30,9 @@ SceneManager::~SceneManager() {
 	delete this->fxDestroy;
 	delete this->fxTail;
 	delete this->crab;
-	delete this->scene;
+	for (unsigned int i = 0; i < this->scenes.size(); i++) {
+		this->scenes.pop_back();
+	}
 	// delete Texture
 	if (this->texDefault.texture != NULL) this->texDefault.texture->Release();
 	if (this->texTile.texture != NULL) this->texTile.texture->Release();
@@ -51,7 +55,9 @@ void SceneManager::Start() {
 	// GetDevice
 	this->device = GetDevice();
 	// set SceneManager in scene
-	this->scene->sceneManager = this;
+	for (unsigned int i = 0; i < this->scenes.size(); i++) {
+		this->scenes[i]->sceneManager = this;
+	}
 	// LoadTexture
 	LoadTexture(&this->texDefault);
 	LoadTexture(&this->texTile);
@@ -88,7 +94,9 @@ void SceneManager::Start() {
 	this->crab->animWalk->sprite->texture = this->texCrabWalk;
 
 	// scene->Start
-	this->scene->Start();
+	for (unsigned int i = 0; i < this->scenes.size(); i++) {
+		this->scenes[i]->Start();
+	}
 }
 
 
@@ -96,7 +104,7 @@ void SceneManager::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneManager::Update() {
-	this->scene->Update();
+	this->activeScene->Update();
 }
 
 
@@ -104,7 +112,7 @@ void SceneManager::Update() {
 < Draw >
 ------------------------------------------------------------------------------*/
 void SceneManager::Draw() {
-	this->scene->Draw();
+	this->activeScene->Draw();
 }
 
 

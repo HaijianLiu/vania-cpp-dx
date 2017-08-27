@@ -32,7 +32,9 @@ public:
 	Crab* crab;
 
 	// Scene
-	Scene* scene;
+	Scene* activeScene;
+	std::vector<Scene*> scenes;
+
 
 	SceneManager();
 	~SceneManager();
