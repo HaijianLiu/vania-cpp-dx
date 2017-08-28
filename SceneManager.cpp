@@ -32,7 +32,7 @@ SceneManager::~SceneManager() {
 	delete this->fxTail;
 	delete this->crab;
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
-		this->scenes.pop_back();
+		delete this->scenes[i];
 	}
 	// delete Texture
 	if (this->texDefault.texture != NULL) this->texDefault.texture->Release();
