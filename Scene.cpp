@@ -14,12 +14,49 @@ Scene::Scene() {
 	this->startCollidersSize = GetCollidersSize();
 }
 
-void Scene::ResetGameObjectsAndColliders() {
-	// Get GameObject && Get Collider && reset
+void Scene::SetScene() {
+	// Load Map Data
+	std::vector<int> cameraData;
+	std::vector<int> groundData;
+	std::vector<int> backGroundData;
+	std::vector<int> rangeData;
+	Scene::LoadMapData(this->cameraPath, cameraData);
+	Scene::LoadMapData(this->groundPath, groundData);
+	Scene::LoadMapData(this->backGroundPath, backGroundData);
+	Scene::LoadMapData(this->rangePath, rangeData);
+
+	// push_back to scene map Objects (Order in Layer Order)
+	for (unsigned int i = 0; i < cameraData.size(); i++) {
+		if (cameraData[i] != -1) {
+			this->camera->range.push_back(new NoneObject());
+			Scene::SetTile(this->camera->range.back(), i, cameraData[i]);
+		}
+	}
+	for (unsigned int i = 0; i < backGroundData.size(); i++) {
+		if (backGroundData[i] != -1) {
+			this->backGrounds.push_back(new BackGround());
+			Scene::SetTile(this->backGrounds.back(), i, backGroundData[i]);
+		}
+	}
+	for (unsigned int i = 0; i < groundData.size(); i++) {
+		if (groundData[i] != -1) {
+			this->grounds.push_back(new Ground());
+			Scene::SetTile(this->grounds.back(), i, groundData[i]);
+		}
+	}
+	for (unsigned int i = 0; i < rangeData.size(); i++) {
+		if (rangeData[i] != -1) {
+			this->range.push_back(new NoneObject());
+			Scene::SetTile(this->range.back(), i, rangeData[i]);
+		}
+	}
+
+	// Get GameObject && Get Collider
 	this->gameObjects = CopyGameObjects();
 	this->colliders = CopyColliders();
-
-	int size = this->gpGameObjects->size() - this->startGameObjectsSize;
+	// reset global gameObjects
+	int size;
+	size = this->gpGameObjects->size() - this->startGameObjectsSize;
 	for (int i = 0; i < size; i++) {
 		this->gpGameObjects->pop_back();
 	}
@@ -34,7 +71,16 @@ void Scene::ResetGameObjectsAndColliders() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene::~Scene() {
-
+	// delete Map GameObjects
+	for (unsigned int i = 0; i < this->grounds.size(); i++) {
+		delete this->grounds[i];
+	}
+	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
+		delete this->backGrounds[i];
+	}
+	for (unsigned int i = 0; i < this->range.size(); i++) {
+		delete this->range[i];
+	}
 }
 
 
