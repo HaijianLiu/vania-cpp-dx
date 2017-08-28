@@ -12,6 +12,7 @@ Functions
 bool InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HRESULT InitDirectX(HWND hWnd, BOOL bWindow);
+HRESULT InitSound(HWND hWnd);
 bool CheckBreak();
 void ClearWindow();
 bool WindowBeginScene();

@@ -6,6 +6,7 @@ Global variables
 ------------------------------------------------------------------------------*/
 LPDIRECT3D9 gD3D = NULL;
 LPDIRECT3DDEVICE9 gD3DDevice = NULL;
+IDirectSound8* gDirectSound = NULL;
 HWND hWnd;
 MSG  msg;
 WNDCLASSEX wcex;
@@ -15,6 +16,9 @@ Functions
 ------------------------------------------------------------------------------*/
 LPDIRECT3DDEVICE9 GetDevice() {
 	return gD3DDevice;
+}
+IDirectSound8* GetDirectSound() {
+	return gDirectSound;
 }
 
 
@@ -34,6 +38,7 @@ void PresentWindow() {
 }
 
 int DeleteWindow() {
+	if (gDirectSound != NULL) gDirectSound->Release();
 	if (gD3DDevice != NULL) gD3DDevice->Release();
 	if (gD3D != NULL) gD3D->Release();
 	UninitInput();
@@ -88,6 +93,7 @@ bool InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, i
 	UpdateWindow(hWnd);
 
 	InitInput(hInstance,hWnd);
+	InitSound(hWnd);
 
 	return true;
 }
@@ -186,6 +192,16 @@ HRESULT InitDirectX(HWND hWnd, BOOL bWindow) {
 	gD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);
 	gD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
 	gD3DDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
+
+	return S_OK;
+}
+
+HRESULT InitSound(HWND hWnd) {
+	// Create DirectSound
+	if (FAILED(DirectSoundCreate8(NULL, &gDirectSound, NULL))) return E_FAIL;
+
+	// Set Cooperative Level
+	if (FAILED(gDirectSound->SetCooperativeLevel(hWnd, DSSCL_PRIORITY))) return E_FAIL;
 
 	return S_OK;
 }

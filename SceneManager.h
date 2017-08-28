@@ -20,14 +20,18 @@ public:
 	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
 	Texture texBullet = Texture("assets/bullet.png",4,4);
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
+	// Audio
+	Audio* audBGM;
 
 	// Camera
 	Camera* camera;
+	
 	// GameObject
 	Player* player;
 	// Particle System
 	ParticleSystem* fxDestroy;
 	ParticleSystem* fxTail;
+
 	// Enemy
 	Crab* crab;
 

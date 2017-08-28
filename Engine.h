@@ -16,6 +16,7 @@
 #include <tchar.h>
 // Windows & DirectX
 #include "windows.h"
+#include "dsound.h"
 #include "mmsystem.h"
 #include "d3dx9.h"
 #include "dinput.h"
@@ -24,6 +25,7 @@
 	#pragma comment (lib, "d3dx9.lib")
 	#pragma comment (lib, "dinput8.lib")
 	#pragma comment (lib, "dxguid.lib")
+	#pragma comment ( lib, "dsound.lib" )
 	#pragma comment (lib, "winmm.lib")
 #endif
 
@@ -94,6 +96,7 @@ struct Texture {
 ------------------------------------------------------------------------------*/
 #include "Window.h"
 #include "Input.h"
+#include "Audio.h"
 #include "Time.h"
 #include "Transform.h"
 #include "Sprite.h"
@@ -134,6 +137,7 @@ struct Texture {
 ------------------------------------------------------------------------------*/
 // Window.cpp
 LPDIRECT3DDEVICE9 GetDevice();
+IDirectSound8* GetDirectSound();
 // main.cpp
 Time* GetTime();
 Camera* GetCamera();

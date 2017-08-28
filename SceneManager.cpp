@@ -5,6 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 SceneManager::SceneManager() {
+	// Audio
+	this->audBGM = new Audio("assets/Sound/BGM/sample001.wav");
 	// Camera
 	this->camera = GetCamera();
 
@@ -27,6 +29,7 @@ SceneManager::SceneManager() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
+	delete this->audBGM;
 	delete this->player;
 	delete this->fxDestroy;
 	delete this->fxTail;
@@ -59,18 +62,22 @@ void SceneManager::Start() {
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->sceneManager = this;
 	}
+
+	// LoadAudio
+	this->audBGM->LoadAudio();
+	this->audBGM->Play();
 	// LoadTexture
-	LoadTexture(&this->texDefault);
-	LoadTexture(&this->texTile);
-	LoadTexture(&this->texPlayerIdle);
-	LoadTexture(&this->texPlayerShoot);
-	LoadTexture(&this->texPlayerRun);
-	LoadTexture(&this->texPlayerJump);
-	LoadTexture(&this->texPlayerDuck);
-	LoadTexture(&this->texPlayerDuckFire);
-	LoadTexture(&this->texBullet);
-	LoadTexture(&this->texFxDestroy);
-	LoadTexture(&this->texCrabWalk);
+	SceneManager::LoadTexture(&this->texDefault);
+	SceneManager::LoadTexture(&this->texTile);
+	SceneManager::LoadTexture(&this->texPlayerIdle);
+	SceneManager::LoadTexture(&this->texPlayerShoot);
+	SceneManager::LoadTexture(&this->texPlayerRun);
+	SceneManager::LoadTexture(&this->texPlayerJump);
+	SceneManager::LoadTexture(&this->texPlayerDuck);
+	SceneManager::LoadTexture(&this->texPlayerDuckFire);
+	SceneManager::LoadTexture(&this->texBullet);
+	SceneManager::LoadTexture(&this->texFxDestroy);
+	SceneManager::LoadTexture(&this->texCrabWalk);
 	// Link GameObjects device && texture
 	this->player->animIdle->sprite->device = this->device;
 	this->player->animIdle->sprite->texture = this->texPlayerIdle;
