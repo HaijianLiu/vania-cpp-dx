@@ -16,7 +16,7 @@ public:
 	DWORD birthTime;
 
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 
 	void PreStart();
 	void UpdateTransform();
