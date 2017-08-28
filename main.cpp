@@ -7,6 +7,7 @@
 std::vector<GameObject*> gameObjects;
 std::vector<BoxCollider*> colliders;
 
+
 /*------------------------------------------------------------------------------
 < Game Objects >
 ------------------------------------------------------------------------------*/
@@ -17,6 +18,7 @@ SceneManager* sceneManager = new SceneManager();
 #ifdef _DEBUG
 	Debug* debug = new Debug(sceneManager);
 #endif
+
 
 /*------------------------------------------------------------------------------
 < Start >
@@ -31,14 +33,12 @@ void Start() {
 	#endif
 }
 
+
 /*------------------------------------------------------------------------------
 < Delete >
 ------------------------------------------------------------------------------*/
 void Delete() {
 	delete sceneManager;
-	for (unsigned int i = 0; i < camera->range.size(); i++) {
-		delete camera->range[i];
-	}
 	delete camera;
 	delete time;
 
@@ -47,19 +47,21 @@ void Delete() {
 	#endif
 }
 
+
 /*------------------------------------------------------------------------------
 < Update >
 ------------------------------------------------------------------------------*/
-void Update(void) {
+void Update() {
 	UpdateInput();
 	time->Update();
 	sceneManager->Update();
 }
 
+
 /*------------------------------------------------------------------------------
 < Draw >
 ------------------------------------------------------------------------------*/
-void Draw(void) {
+void Draw() {
 	ClearWindow();
 	if(WindowBeginScene()) {
 		sceneManager->Draw();
@@ -72,6 +74,7 @@ void Draw(void) {
 	}
 	PresentWindow();
 }
+
 
 /*------------------------------------------------------------------------------
 < Get Functions >
@@ -100,6 +103,7 @@ unsigned int GetCollidersSize() {
 unsigned int GetGameObjectsSize() {
 	return gameObjects.size();
 }
+
 
 /*==============================================================================
 < main >

@@ -5,7 +5,9 @@ Camera::Camera() {
 
 }
 Camera::~Camera() {
-
+	for (unsigned int i = 0; i < this->range.size(); i++) {
+		delete this->range[i];
+	}
 }
 
 void Camera::Update() {
