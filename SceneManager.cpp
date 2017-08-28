@@ -11,7 +11,9 @@ SceneManager::SceneManager() {
 	this->fxDestroy = new ParticleSystem(40);
 	this->fxTail = new ParticleSystem(100);
 	// Audio
-	this->audShoot = new Audio("assets/Sound/SE/shot000.wav");
+	for (unsigned int i = 0; i < 4; i++) {
+		this->audShoot.push_back(new Audio("assets/Sound/SE/shot000.wav"));
+	}
 	// Camera
 	this->camera = GetCamera();
 	// Enemy
@@ -28,7 +30,9 @@ SceneManager::SceneManager() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
-	delete this->audShoot;
+	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
+		delete this->audShoot[i];
+	}
 	delete this->player;
 	delete this->fxDestroy;
 	delete this->fxTail;
@@ -64,10 +68,11 @@ void SceneManager::Start() {
 	// Camera target
 	this->camera->target = this->player;
 
-	// Load Audio
-	this->audShoot->LoadAudio();
-	// Link Audio
-	this->player->audShoot = this->audShoot;
+	// Audio
+	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
+		this->audShoot[i]->LoadAudio();
+		this->player->audShoot.push_back(this->audShoot[i]);
+	}
 	// LoadTexture
 	SceneManager::LoadTexture(&this->texDefault);
 	SceneManager::LoadTexture(&this->texTile);

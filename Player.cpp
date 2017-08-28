@@ -203,13 +203,17 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 < Fixed Update >
 ------------------------------------------------------------------------------*/
 void Player::FixedUpdate() {
-
 	/* Fire
 	..............................................................................*/
 	if (GetKeyboardTrigger(DIK_F)) {
 		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
 			this->shoot = true;
-			this->audShoot->Play();
+			for (unsigned int i = 0; i < this->audShoot.size(); i++) {
+				if (!this->audShoot[i]->Playing()) {
+					this->audShoot[i]->Play();
+					break;
+				}
+			}
 			for (unsigned int i = 0; i < this->bullets.size(); i++) {
 				if (!this->bullets[i]->gameObject->active) {
 					this->lastFire = this->time->currentTime;

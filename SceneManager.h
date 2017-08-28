@@ -21,7 +21,7 @@ public:
 	Texture texBullet = Texture("assets/bullet.png",4,4);
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
 	// Audio
-	Audio* audShoot;
+	std::vector<Audio*> audShoot;
 
 	// Camera
 	Camera* camera;

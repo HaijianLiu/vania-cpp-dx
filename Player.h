@@ -22,7 +22,7 @@ public:
 	Animation* animDuck;
 	Animation* animDuckFire;
 	// Audio
-	Audio* audShoot;
+	std::vector<Audio*> audShoot;
 	// offset Object
 	OffsetObject* leftFire;
 	OffsetObject* rightFire;
