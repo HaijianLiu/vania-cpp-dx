@@ -32,9 +32,6 @@ Player::Player() {
 	this->rightFire = new OffsetObject(this,0.2f,-0.015f);
 	this->leftDuckFire = new OffsetObject(this,-0.2f,0.1f);
 	this->rightDuckFire = new OffsetObject(this,0.2f,0.1f);
-	// Camera
-	this->camera = GetCamera();
-	this->camera->target = this;
 	// Bullet
 	for (int i = 0; i < 16; i++) {
 		this->bullets.push_back(new Bullet());
@@ -206,16 +203,13 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 < Fixed Update >
 ------------------------------------------------------------------------------*/
 void Player::FixedUpdate() {
-	/* Camera
-	..............................................................................*/
-	// this->camera->position.x = this->transform->position.x;
-	// this->camera->position.y = this->transform->position.y;
 
 	/* Fire
 	..............................................................................*/
 	if (GetKeyboardTrigger(DIK_F)) {
 		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
 			this->shoot = true;
+			this->audShoot->Play();
 			for (unsigned int i = 0; i < this->bullets.size(); i++) {
 				if (!this->bullets[i]->gameObject->active) {
 					this->lastFire = this->time->currentTime;

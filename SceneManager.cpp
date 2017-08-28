@@ -5,16 +5,15 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 SceneManager::SceneManager() {
-	// Audio
-	this->audBGM = new Audio("assets/Sound/BGM/sample001.wav");
-	// Camera
-	this->camera = GetCamera();
-
 	// Player
 	this->player = new Player();
 	// Particle
 	this->fxDestroy = new ParticleSystem(40);
 	this->fxTail = new ParticleSystem(100);
+	// Audio
+	this->audShoot = new Audio("assets/Sound/SE/shot000.wav");
+	// Camera
+	this->camera = GetCamera();
 	// Enemy
 	this->crab = new Crab();
 	// Scene
@@ -29,7 +28,7 @@ SceneManager::SceneManager() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
-	delete this->audBGM;
+	delete this->audShoot;
 	delete this->player;
 	delete this->fxDestroy;
 	delete this->fxTail;
@@ -62,10 +61,13 @@ void SceneManager::Start() {
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->sceneManager = this;
 	}
+	// Camera target
+	this->camera->target = this->player;
 
-	// LoadAudio
-	this->audBGM->LoadAudio();
-	this->audBGM->Play();
+	// Load Audio
+	this->audShoot->LoadAudio();
+	// Link Audio
+	this->player->audShoot = this->audShoot;
 	// LoadTexture
 	SceneManager::LoadTexture(&this->texDefault);
 	SceneManager::LoadTexture(&this->texTile);
@@ -78,7 +80,7 @@ void SceneManager::Start() {
 	SceneManager::LoadTexture(&this->texBullet);
 	SceneManager::LoadTexture(&this->texFxDestroy);
 	SceneManager::LoadTexture(&this->texCrabWalk);
-	// Link GameObjects device && texture
+	// Link device && texture
 	this->player->animIdle->sprite->device = this->device;
 	this->player->animIdle->sprite->texture = this->texPlayerIdle;
 	this->player->animShoot->sprite->device = this->device;

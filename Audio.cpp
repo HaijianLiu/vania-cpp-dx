@@ -78,3 +78,16 @@ bool Audio::LoadAudio() {
 void Audio::Play() {
 	this->soundBuffer->Play(0, 0, this->loop);
 }
+
+bool Audio::Playing() {
+	DWORD status;
+	this->soundBuffer->GetStatus(&status);
+	if (status & DSBSTATUS_PLAYING) return true;
+	return false;
+}
+
+void Audio::Stop() {
+	DWORD status;
+	this->soundBuffer->GetStatus(&status);
+	if (status & DSBSTATUS_PLAYING ) this->soundBuffer->Stop();
+}

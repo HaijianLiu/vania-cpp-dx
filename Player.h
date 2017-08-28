@@ -21,13 +21,13 @@ public:
 	Animation* animJump;
 	Animation* animDuck;
 	Animation* animDuckFire;
+	// Audio
+	Audio* audShoot;
 	// offset Object
 	OffsetObject* leftFire;
 	OffsetObject* rightFire;
 	OffsetObject* leftDuckFire;
 	OffsetObject* rightDuckFire;
-	// Camera
-	Camera* camera;
 	// Bullet
 	std::vector<Bullet*> bullets;
 	DWORD lastFire = 0;

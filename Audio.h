@@ -16,6 +16,8 @@ public:
 
 	bool LoadAudio();
 	void Play();
+	bool Playing();
+	void Stop();
 };
 
 #endif

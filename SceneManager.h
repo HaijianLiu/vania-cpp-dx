@@ -21,11 +21,11 @@ public:
 	Texture texBullet = Texture("assets/bullet.png",4,4);
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
 	// Audio
-	Audio* audBGM;
+	Audio* audShoot;
 
 	// Camera
 	Camera* camera;
-	
+
 	// GameObject
 	Player* player;
 	// Particle System
