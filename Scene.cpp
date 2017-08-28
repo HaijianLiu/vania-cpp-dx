@@ -134,9 +134,9 @@ void Scene::Update() {
 ------------------------------------------------------------------------------*/
 void Scene::Draw() {
 	// Draw GameObject && Draw Collider (_DEBUG)
-	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
-		if (this->gameObjects[i]->active && this->gameObjects[i]->draw) {
-			this->gameObjects[i]->Draw();
+	for (unsigned int i = this->gameObjects.size(); i > 0; i--) {
+		if (this->gameObjects[i-1]->active && this->gameObjects[i-1]->draw) {
+			this->gameObjects[i-1]->Draw();
 		}
 	}
 	#ifdef _DEBUG
