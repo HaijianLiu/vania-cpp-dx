@@ -32,7 +32,7 @@ public:
 
 	virtual void Start();
 	void ResetGameObjectsAndColliders();
-	void Update();
+	virtual void Update();
 	void Draw();
 
 	// Functions

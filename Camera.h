@@ -10,6 +10,7 @@ public:
 	GameObject* target;
 
 	std::vector<NoneObject*> range;
+	unsigned int activeRange;
 
 	Camera();
 	~Camera();

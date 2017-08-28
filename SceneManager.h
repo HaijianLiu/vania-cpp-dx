@@ -32,7 +32,7 @@ public:
 	Crab* crab;
 
 	// Scene
-	Scene* activeScene;
+	unsigned int activeScene;
 	std::vector<Scene*> scenes;
 
 
@@ -45,6 +45,7 @@ public:
 
 	// Functions
 	void LoadTexture(Texture* texture);
+	void SetActiveScene(unsigned int i);
 
 };
 

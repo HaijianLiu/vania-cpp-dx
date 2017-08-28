@@ -30,9 +30,9 @@ void Debug::Draw() {
 	<< "Player Position: " << this->sceneManager->player->transform->position.x << ", " << this->sceneManager->player->transform->position.y << "\n"
 	<< "Player Move: " << this->sceneManager->player->move << "\n"
 	<< "Player Air: " << this->sceneManager->player->air << "\n"
-	<< "Player Duck: " << this->sceneManager->player->duck << "\n"
-	<< "GameObjects: " << this->sceneManager->scene->gameObjects.size() << "\n"
-	<< "Colliders: " << this->sceneManager->scene->colliders.size() << "\n";
+	<< "Player Duck: " << this->sceneManager->player->duck << "\n";
+	// << "GameObjects: " << this->sceneManager->scene->gameObjects.size() << "\n"
+	// << "Colliders: " << this->sceneManager->scene->colliders.size() << "\n";
 
 	// Draw
 	this->font->DrawText(NULL,this->sout.str().c_str(),-1,&this->rect,DT_LEFT,D3DCOLOR_RGBA(0xff,0xff,0xff,0xff));

@@ -18,7 +18,8 @@ SceneManager::SceneManager() {
 	// Scene
 	scenes.push_back(new Scene01());
 	scenes.push_back(new Scene02());
-	this->activeScene = this->scenes[0];
+	// active Scene
+	SceneManager::SetActiveScene(0);
 }
 
 
@@ -104,7 +105,7 @@ void SceneManager::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneManager::Update() {
-	this->activeScene->Update();
+	this->scenes[this->activeScene]->Update();
 }
 
 
@@ -112,7 +113,7 @@ void SceneManager::Update() {
 < Draw >
 ------------------------------------------------------------------------------*/
 void SceneManager::Draw() {
-	this->activeScene->Draw();
+	this->scenes[this->activeScene]->Draw();
 }
 
 
@@ -126,4 +127,9 @@ void SceneManager::LoadTexture(Texture* texture) {
 		1, 0,
 		D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0xFF000000, NULL, NULL,
 		&texture->texture);
+}
+
+void SceneManager::SetActiveScene(unsigned int i) {
+	this->activeScene = i;
+	this->camera->activeRange = i;
 }

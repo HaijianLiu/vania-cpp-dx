@@ -10,13 +10,16 @@ public:
 	std::vector<int> cameraData;
 	std::vector<int> groundData;
 	std::vector<int> backGroundData;
+	std::vector<int> rangeData;
 	std::vector<Ground*> grounds;
 	std::vector<BackGround*> backGrounds;
+	std::vector<NoneObject*> range;
 
 	Scene01();
 	~Scene01();
 
 	void Start();
+	void Update();
 
 };
 
