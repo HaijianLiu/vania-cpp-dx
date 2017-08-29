@@ -11,6 +11,17 @@ Scene00::Scene00() {
 	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
 	this->rangePath = "map/scene_Scene00-Range.csv";
 
+	// Load Map Data
+	std::vector<int> playerData;
+	Scene::LoadMapData("map/scene_Scene00-Player.csv", playerData);
+	// push_back to scene map Objects (Order in Layer Order)
+	for (unsigned int i = 0; i < playerData.size(); i++) {
+		if (playerData[i] != -1) {
+			this->player.push_back(new NoneObject());
+			Scene::SetTile(this->player.back(), i, playerData[i]);
+		}
+	}
+
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
 }
@@ -20,7 +31,7 @@ Scene00::Scene00() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene00::~Scene00() {
-
+	delete this->player[0];
 }
 
 
@@ -32,6 +43,10 @@ void Scene00::Start() {
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
 	}
+
+	// Set Player position
+	this->sceneManager->player->transform->position.x = this->player[0]->transform->position.x;
+	this->sceneManager->player->transform->position.y = this->player[0]->transform->position.y;
 
 	// Start
 	Scene::Start();

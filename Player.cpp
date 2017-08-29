@@ -23,10 +23,13 @@ Player::Player() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,8.0f,4.0f);
 	this->collGroundCheck->trigger = true;
+	this->collGroundCheck->tag = "player";
 	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.09f,1.0f,5.0f);
 	this->collCeilingCheck->trigger = true;
+	this->collCeilingCheck->tag = "player";
 	this->collHorizonCheck = new BoxCollider(this,0.0f,0.06f,24.0f,32.0f);
 	this->collHorizonCheck->trigger = true;
+	this->collHorizonCheck->tag = "player";
 	// None Object
 	this->leftFire = new OffsetObject(this,-0.2f,-0.015f);
 	this->rightFire = new OffsetObject(this,0.2f,-0.015f);
@@ -118,8 +121,8 @@ void Player::Update() {
 	/* Gravity
 	..............................................................................*/
 	this->verticalSpeed -= this->gravity * this->time->deltaTime;
-	if (this->verticalSpeed <= - 0.9f * this->jumpPower) {
-		this->verticalSpeed = - 0.9f * this->jumpPower;
+	if (this->verticalSpeed <= - 0.8f * this->jumpPower) {
+		this->verticalSpeed = - 0.8f * this->jumpPower;
 	}
 	this->transform->position.y -= this->verticalSpeed * this->time->deltaTime;
 	if (this->verticalSpeed < -1.0f) {
@@ -177,24 +180,26 @@ void Player::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Player::OnTriggerEnter(BoxCollider* other) {
-	/* Transform
+	/* Transform if tag = "ground"
 	..............................................................................*/
-	if (this->collGroundCheck->enter == true) {
-		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
-		this->air = false;
-		this->verticalSpeed = 0.0f;
-	}
-	if (this->collHorizonCheck->enter == true) {
-		if (this->transform->position.x > other->gameObject->transform->position.x) {
-			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+	if (other->tag == "ground") {
+		if (this->collGroundCheck->enter == true) {
+			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
+			this->air = false;
+			this->verticalSpeed = 0.0f;
 		}
-		if (this->transform->position.x < other->gameObject->transform->position.x) {
-			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+		if (this->collHorizonCheck->enter == true) {
+			if (this->transform->position.x > other->gameObject->transform->position.x) {
+				this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+			}
+			if (this->transform->position.x < other->gameObject->transform->position.x) {
+				this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+			}
 		}
-	}
-	if (this->collCeilingCheck->enter == true) {
-		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y + other->halfSize.y * PIXEL_TO_UNIT - this->collCeilingCheck->offset.y + this->collCeilingCheck->halfSize.y * PIXEL_TO_UNIT;
-		this->verticalSpeed = 0.0f;
+		if (this->collCeilingCheck->enter == true) {
+			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y + other->halfSize.y * PIXEL_TO_UNIT - this->collCeilingCheck->offset.y + this->collCeilingCheck->halfSize.y * PIXEL_TO_UNIT;
+			this->verticalSpeed = 0.0f;
+		}
 	}
 }
 

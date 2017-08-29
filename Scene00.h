@@ -6,6 +6,8 @@ class Scene00 : public Scene {
 private:
 
 public:
+	std::vector<GameObject*> player;
+
 	Scene00();
 	~Scene00();
 

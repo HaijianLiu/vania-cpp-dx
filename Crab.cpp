@@ -18,8 +18,10 @@ Crab::Crab() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.14f,1.0f,4.0f);
 	this->collGroundCheck->trigger = true;
+	this->collGroundCheck->tag = "enemy";
 	this->collHorizonCheck = new BoxCollider(this,0.0f,0.0f,28.0f,28.0f);
 	this->collHorizonCheck->trigger = true;
+	this->collHorizonCheck->tag = "enemy";
 }
 
 
@@ -83,21 +85,23 @@ void Crab::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Crab::OnTriggerEnter(BoxCollider* other) {
-	/* Transform
+	/* Transform if tag = "ground"
 	..............................................................................*/
-	if (this->collGroundCheck->enter == true) {
-		this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
-		this->air = false;
-		this->verticalSpeed = 0.0f;
-	}
-	if (this->collHorizonCheck->enter == true) {
-		if (this->transform->position.x > other->gameObject->transform->position.x) {
-			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
-			this->right = true;
+	if (other->tag == "ground") {
+		if (this->collGroundCheck->enter == true) {
+			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
+			this->air = false;
+			this->verticalSpeed = 0.0f;
 		}
-		if (this->transform->position.x < other->gameObject->transform->position.x) {
-			this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
-			this->right = false;
+		if (this->collHorizonCheck->enter == true) {
+			if (this->transform->position.x > other->gameObject->transform->position.x) {
+				this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+				this->right = true;
+			}
+			if (this->transform->position.x < other->gameObject->transform->position.x) {
+				this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
+				this->right = false;
+			}
 		}
 	}
 }

@@ -172,14 +172,13 @@ bool Scene::CheckCollision(BoxCollider* a, BoxCollider* b) {
 }
 void Scene::CheckCollider() {
 	for (unsigned int i = 0; i < this->colliders.size(); i++) {
-		if (this->colliders[i]->trigger && this->colliders[i]->gameObject->active) {
+		if (this->colliders[i]->trigger && this->colliders[i]->gameObject->active && this->colliders[i]->active) {
 			for (unsigned int j = 0; j < this->colliders.size(); j++) {
 				bool collision = CheckCollision(this->colliders[i],this->colliders[j]);
-				if (i != j && collision && this->colliders[j]->trigger == false && this->colliders[j]->gameObject->active) {
+				if (i != j && collision && this->colliders[j]->gameObject->active && this->colliders[j]->active) {
 					this->colliders[i]->enter = true;
 					this->colliders[i]->gameObject->OnTriggerEnter(this->colliders[j]);
 					this->colliders[i]->enter = false;
-					break;
 				}
 			}
 		}

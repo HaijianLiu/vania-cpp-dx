@@ -19,6 +19,7 @@ Ground::Ground() {
 				// get from scene mapData
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,16.0f,16.0f);
+	this->collider->tag = "ground";
 }
 
 

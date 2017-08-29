@@ -18,6 +18,7 @@ Bullet::Bullet() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,8.0f,8.0f);
 	this->collider->trigger = true;
+	this->collider->tag = "player";
 	// Default GameObject active == true
 	this->gameObject->active = false;
 }
@@ -86,10 +87,10 @@ void Bullet::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Bullet::OnTriggerEnter(BoxCollider* other) {
-	this->gameObject->active = false;
-	/* Particle System
-	..............................................................................*/
-	this->fxDestroy->Instantiate(this->transform);
+	if (other->tag != "player") {
+		this->gameObject->active = false;
+		this->fxDestroy->Instantiate(this->transform);
+	}
 }
 
 
