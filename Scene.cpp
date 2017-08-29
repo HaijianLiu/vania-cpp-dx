@@ -184,6 +184,9 @@ void Scene::CheckCollider() {
 					this->colliders[i]->enter = true;
 					this->colliders[i]->gameObject->OnTriggerEnter(this->colliders[j]);
 					this->colliders[i]->enter = false;
+					this->colliders[j]->enter = true;
+					this->colliders[j]->gameObject->OnTriggerEnter(this->colliders[i]);
+					this->colliders[j]->enter = false;
 				}
 			}
 		}

@@ -2,7 +2,7 @@
 #include "Engine.h"
 
 Sprite::Sprite() {
-
+	this->time = GetTime();
 }
 Sprite::~Sprite() {
 
@@ -53,9 +53,46 @@ void Sprite::SetTexture() {
 }
 
 void Sprite::Draw() {
+	Sprite::Effect();
 	this->device->SetFVF(FVF_VERTEX_2D);
 	this->device->SetTexture(0,this->texture.texture);
 	this->device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, this->vertex, sizeof(Vertex2D));
+}
+
+
+void Sprite::Effect() {
+	if (this->effect) {
+		if (this->flash) {
+			if (this->time->currentTime < this->startEffect + 500) {
+				if (this->time->currentTime % 200 < 100) {
+					this->vertex[0].diffuse = D3DCOLOR_RGBA(0,0,0,255);
+					this->vertex[1].diffuse = D3DCOLOR_RGBA(0,0,0,255);
+					this->vertex[2].diffuse = D3DCOLOR_RGBA(0,0,0,255);
+					this->vertex[3].diffuse = D3DCOLOR_RGBA(0,0,0,255);
+				}
+				else {
+					this->vertex[0].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+					this->vertex[1].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+					this->vertex[2].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+					this->vertex[3].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+				}
+			}
+			else {
+				this->vertex[0].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+				this->vertex[1].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+				this->vertex[2].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+				this->vertex[3].diffuse = D3DCOLOR_RGBA(255,255,255,255);
+				this->effect = false;
+				this->flash = false;
+			}
+		}
+	}
+}
+
+void Sprite::Flash() {
+	this->effect = true;
+	this->flash = true;
+	this->startEffect = this->time->currentTime;
 }
 
 

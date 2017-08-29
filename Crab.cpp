@@ -103,6 +103,12 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 			}
 		}
 	}
+	/* Damage if tag = "bullet"
+	..............................................................................*/
+	if (other->tag == "bullet") {
+		this->sprite->Flash();
+		this->hp -= 40;
+	}
 }
 
 
@@ -110,5 +116,7 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 < Fixed Update >
 ------------------------------------------------------------------------------*/
 void Crab::FixedUpdate() {
-
+	if (this->hp <= 0) {
+		this->active = false;
+	}
 }

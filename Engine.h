@@ -54,7 +54,7 @@ struct Vertex2D {
 	D3DXVECTOR2 texCoord;
 	Vertex2D() {
 		this->rhw = 1.0f;
-		this->diffuse = D3DCOLOR_RGBA(255, 255, 255, 0);
+		this->diffuse = D3DCOLOR_RGBA(255, 255, 255, 255);
 	};
 };
 

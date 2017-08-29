@@ -16,6 +16,11 @@ struct Slice {
 
 class Sprite {
 private:
+	Time* time;
+	bool effect = false;
+	DWORD startEffect = 0;
+	bool flash = false;
+	void Effect();
 
 public:
 	LPDIRECT3DDEVICE9 device;
@@ -38,6 +43,8 @@ public:
 	void SetTexture();
 
 	void Draw();
+
+	void Flash();
 
 	#ifdef _DEBUG
 		Sprite(int imageSizeX, int imageSizeY);
