@@ -18,6 +18,7 @@ public:
 	Texture texPlayerJump = Texture("assets/player-jump.png",480,80);
 	Texture texPlayerDuck = Texture("assets/player-duck.png",80,80);
 	Texture texPlayerDuckFire = Texture("assets/player-duck-shoot.png",240,80);
+	Texture texPlayerHurt = Texture("assets/player-hurt.png",80,80);
 	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
 	Texture texBullet = Texture("assets/bullet.png",4,4);
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);

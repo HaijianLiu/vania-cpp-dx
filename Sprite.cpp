@@ -63,7 +63,7 @@ void Sprite::Draw() {
 void Sprite::Effect() {
 	if (this->effect) {
 		if (this->flash) {
-			if (this->time->currentTime < this->startEffect + 500) {
+			if (this->time->currentTime < this->startEffect + this->flashTime * 1000.0f) {
 				if (this->time->currentTime % 200 < 100) {
 					this->vertex[0].diffuse = D3DCOLOR_RGBA(0,0,0,255);
 					this->vertex[1].diffuse = D3DCOLOR_RGBA(0,0,0,255);

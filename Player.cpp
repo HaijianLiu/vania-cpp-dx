@@ -13,6 +13,7 @@ Player::Player() {
 
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(80.0f,80.0f);
+	this->sprite->flashTime = this->hurtColdDown;
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
 	this->animIdle = new Animation(3,1,15);
 	this->animShoot = new Animation(3,1,4);
@@ -20,6 +21,7 @@ Player::Player() {
 	this->animJump = new Animation(6,1,4);
 	this->animDuck = new Animation(1,1,60);
 	this->animDuckFire = new Animation(3,1,4);
+	this->animHurt = new Animation(1,1,60);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,8.0f,4.0f);
 	this->collGroundCheck->trigger = true;
@@ -53,6 +55,7 @@ Player::~Player() {
 	delete this->animJump;
 	delete this->animDuck;
 	delete this->animDuckFire;
+	delete this->animHurt;
 	delete this->collGroundCheck;
 	delete this->collCeilingCheck;
 	delete this->collHorizonCheck;
@@ -77,6 +80,7 @@ void Player::Start() {
 	this->animJump->MakeFrame();
 	this->animDuck->MakeFrame();
 	this->animDuckFire->MakeFrame();
+	this->animHurt->MakeFrame();
 }
 
 
@@ -87,35 +91,45 @@ void Player::Update() {
 
 	/* Transform
 	..............................................................................*/
-	// move
-	if (GetKeyboardPress(DIK_LEFT)) {
-		this->move = true;
-		this->right = false;
-		this->transform->position.x -= this->speed * this->time->deltaTime;
-	}
-	else if (GetKeyboardPress(DIK_RIGHT)) {
-		this->move = true;
-		this->right = true;
-		this->transform->position.x += this->speed * this->time->deltaTime;
-	}
-	else {
-		this->move = false;
-	}
-	// jump
-	if (GetKeyboardTrigger(DIK_SPACE)) {
-		if (!this->air) {
-			this->verticalSpeed = this->jumpPower;
-			this->air = true;
+	if (!this->hurt) {
+		// move
+		if (GetKeyboardPress(DIK_LEFT)) {
+			this->move = true;
+			this->right = false;
+			this->transform->position.x -= this->speed * this->time->deltaTime;
+		}
+		else if (GetKeyboardPress(DIK_RIGHT)) {
+			this->move = true;
+			this->right = true;
+			this->transform->position.x += this->speed * this->time->deltaTime;
+		}
+		else {
+			this->move = false;
+		}
+		// jump
+		if (GetKeyboardTrigger(DIK_SPACE)) {
+			if (!this->air) {
+				this->verticalSpeed = this->jumpPower;
+				this->air = true;
+			}
+		}
+		// duck
+		if (GetKeyboardPress(DIK_DOWN)) {
+			if (!this->air) {
+				this->duck = true;
+			}
+		}
+		else {
+			this->duck = false;
 		}
 	}
-	// duck
-	if (GetKeyboardPress(DIK_DOWN)) {
-		if (!this->air) {
-			this->duck = true;
-		}
-	}
 	else {
-		this->duck = false;
+		if (this->right) {
+			this->transform->position.x -= this->backSpeed * this->time->deltaTime;
+		}
+		else {
+			this->transform->position.x += this->backSpeed * this->time->deltaTime;
+		}
 	}
 
 	/* Gravity
@@ -135,43 +149,54 @@ void Player::Update() {
 	if ((float)this->time->currentTime > (float)this->lastFire + 200.0f) {
 		this->shoot = false;
 	}
-	if (this->air) {
-		this->animJump->sprite->flipX = !this->right;
-		this->animJump->SetTexture(this->sprite->vertex);
-		this->sprite->texture = this->animJump->sprite->texture;
+	if ((float)this->time->currentTime > (float)this->lastHurt + 0.3f * this->hurtColdDown * 1000.0f) {
+		this->hurt = false;
 	}
-	else {
-		if (this->move) {
-			this->animRun->sprite->flipX = !this->right;
-			this->animRun->SetTexture(this->sprite->vertex);
-			this->sprite->texture = this->animRun->sprite->texture;
+
+	if (!this->hurt) {
+		if (this->air) {
+			this->animJump->sprite->flipX = !this->right;
+			this->animJump->SetTexture(this->sprite->vertex);
+			this->sprite->texture = this->animJump->sprite->texture;
 		}
-		if (!this->move) {
-			if (this->duck) {
-				if (this->shoot) {
-					this->animDuckFire->sprite->flipX = !this->right;
-					this->animDuckFire->SetTexture(this->sprite->vertex);
-					this->sprite->texture = this->animDuckFire->sprite->texture;
+		else {
+			if (this->move) {
+				this->animRun->sprite->flipX = !this->right;
+				this->animRun->SetTexture(this->sprite->vertex);
+				this->sprite->texture = this->animRun->sprite->texture;
+			}
+			if (!this->move) {
+				if (this->duck) {
+					if (this->shoot) {
+						this->animDuckFire->sprite->flipX = !this->right;
+						this->animDuckFire->SetTexture(this->sprite->vertex);
+						this->sprite->texture = this->animDuckFire->sprite->texture;
+					}
+					else {
+						this->animDuck->sprite->flipX = !this->right;
+						this->animDuck->SetTexture(this->sprite->vertex);
+						this->sprite->texture = this->animDuck->sprite->texture;
+					}
 				}
 				else {
-					this->animDuck->sprite->flipX = !this->right;
-					this->animDuck->SetTexture(this->sprite->vertex);
-					this->sprite->texture = this->animDuck->sprite->texture;
-				}
-			}
-			else {
-				if (this->shoot) {
-					this->animShoot->sprite->flipX = !this->right;
-					this->animShoot->SetTexture(this->sprite->vertex);
-					this->sprite->texture = this->animShoot->sprite->texture;
-				}
-				else{
-					this->animIdle->sprite->flipX = !this->right;
-					this->animIdle->SetTexture(this->sprite->vertex);
-					this->sprite->texture = this->animIdle->sprite->texture;
+					if (this->shoot) {
+						this->animShoot->sprite->flipX = !this->right;
+						this->animShoot->SetTexture(this->sprite->vertex);
+						this->sprite->texture = this->animShoot->sprite->texture;
+					}
+					else{
+						this->animIdle->sprite->flipX = !this->right;
+						this->animIdle->SetTexture(this->sprite->vertex);
+						this->sprite->texture = this->animIdle->sprite->texture;
+					}
 				}
 			}
 		}
+	}
+	else {
+		this->animHurt->sprite->flipX = !this->right;
+		this->animHurt->SetTexture(this->sprite->vertex);
+		this->sprite->texture = this->animHurt->sprite->texture;
 	}
 }
 
@@ -201,6 +226,22 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 			this->verticalSpeed = 0.0f;
 		}
 	}
+	/* Shield if tag = "enemy"
+	..............................................................................*/
+	if (other->tag == "enemy") {
+		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtColdDown * 1000.0f) {
+			this->hurt = true;
+			if (other->gameObject->transform->position.x > this->transform->position.x) {
+				this->right = true;
+			}
+			else {
+				this->right = false;
+			}
+			this->lastHurt = this->time->currentTime;
+			this->verticalSpeed = 0.5f * this->jumpPower;
+			this->sprite->Flash();
+		}
+	}
 }
 
 
@@ -210,38 +251,40 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 void Player::FixedUpdate() {
 	/* Fire
 	..............................................................................*/
-	if (GetKeyboardTrigger(DIK_F)) {
-		if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
-			this->shoot = true;
-			for (unsigned int i = 0; i < this->audShoot.size(); i++) {
-				if (!this->audShoot[i]->Playing()) {
-					this->audShoot[i]->Play();
-					break;
+	if (!this->hurt) {
+		if (GetKeyboardTrigger(DIK_F)) {
+			if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
+				this->shoot = true;
+				for (unsigned int i = 0; i < this->audShoot.size(); i++) {
+					if (!this->audShoot[i]->Playing()) {
+						this->audShoot[i]->Play();
+						break;
+					}
 				}
-			}
-			for (unsigned int i = 0; i < this->bullets.size(); i++) {
-				if (!this->bullets[i]->gameObject->active) {
-					this->lastFire = this->time->currentTime;
-					this->bullets[i]->birthTime = this->time->currentTime;
-					this->bullets[i]->right = this->right;
-					this->bullets[i]->gameObject->active = true;
-					if (this->right) {
-						if (this->duck && !this->move && !this->air) {
-							this->bullets[i]->transform->position = this->rightDuckFire->transform->position;
+				for (unsigned int i = 0; i < this->bullets.size(); i++) {
+					if (!this->bullets[i]->gameObject->active) {
+						this->lastFire = this->time->currentTime;
+						this->bullets[i]->birthTime = this->time->currentTime;
+						this->bullets[i]->right = this->right;
+						this->bullets[i]->gameObject->active = true;
+						if (this->right) {
+							if (this->duck && !this->move && !this->air) {
+								this->bullets[i]->transform->position = this->rightDuckFire->transform->position;
+							}
+							else {
+								this->bullets[i]->transform->position = this->rightFire->transform->position;
+							}
 						}
 						else {
-							this->bullets[i]->transform->position = this->rightFire->transform->position;
+							if (this->duck && !this->move && !this->air) {
+								this->bullets[i]->transform->position = this->leftDuckFire->transform->position;
+							}
+							else {
+								this->bullets[i]->transform->position = this->leftFire->transform->position;
+							}
 						}
+						break;
 					}
-					else {
-						if (this->duck && !this->move && !this->air) {
-							this->bullets[i]->transform->position = this->leftDuckFire->transform->position;
-						}
-						else {
-							this->bullets[i]->transform->position = this->leftFire->transform->position;
-						}
-					}
-					break;
 				}
 			}
 		}

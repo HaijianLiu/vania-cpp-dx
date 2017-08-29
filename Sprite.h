@@ -32,6 +32,7 @@ public:
 	std::vector<Slice> frames;
 
 	bool flipX = false;
+	float flashTime = 0.5f;
 
 	Sprite();
 	~Sprite();

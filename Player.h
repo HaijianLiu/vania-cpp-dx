@@ -21,6 +21,7 @@ public:
 	Animation* animJump;
 	Animation* animDuck;
 	Animation* animDuckFire;
+	Animation* animHurt;
 	// Audio
 	std::vector<Audio*> audShoot;
 	// offset Object
@@ -30,19 +31,23 @@ public:
 	OffsetObject* rightDuckFire;
 	// Bullet
 	std::vector<Bullet*> bullets;
-	DWORD lastFire = 0;
 
 	// Parameter
 	float gravity = 9.8f;
 	float speed = 1.0f;
 	float jumpPower = 4.0f;
 	float fireColdDown = 0.1f;
+	float hurtColdDown = 1.0f;
+	float backSpeed = 0.5f;
 	// status
 	bool move = false;
 	bool right = true;
 	bool air = true;
 	bool shoot = false;
 	bool duck = false;
+	bool hurt = false;
+	DWORD lastFire = 0;
+	DWORD lastHurt = 0;
 	float verticalSpeed = 0.0f;
 
 	// Constructors

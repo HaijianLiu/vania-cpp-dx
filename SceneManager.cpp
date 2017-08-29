@@ -47,6 +47,7 @@ SceneManager::~SceneManager() {
 	if (this->texPlayerJump.texture != NULL) this->texPlayerJump.texture->Release();
 	if (this->texPlayerDuck.texture != NULL) this->texPlayerDuck.texture->Release();
 	if (this->texPlayerDuckFire.texture != NULL) this->texPlayerDuckFire.texture->Release();
+	if (this->texPlayerHurt.texture != NULL) this->texPlayerHurt.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
 	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
 	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
@@ -80,6 +81,7 @@ void SceneManager::Start() {
 	SceneManager::LoadTexture(&this->texPlayerJump);
 	SceneManager::LoadTexture(&this->texPlayerDuck);
 	SceneManager::LoadTexture(&this->texPlayerDuckFire);
+	SceneManager::LoadTexture(&this->texPlayerHurt);
 	SceneManager::LoadTexture(&this->texBullet);
 	SceneManager::LoadTexture(&this->texFxDestroy);
 	SceneManager::LoadTexture(&this->texCrabWalk);
@@ -96,6 +98,8 @@ void SceneManager::Start() {
 	this->player->animDuck->sprite->texture = this->texPlayerDuck;
 	this->player->animDuckFire->sprite->device = this->device;
 	this->player->animDuckFire->sprite->texture = this->texPlayerDuckFire;
+	this->player->animHurt->sprite->device = this->device;
+	this->player->animHurt->sprite->texture = this->texPlayerHurt;
 	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
 	for (unsigned int i = 0; i < this->player->bullets.size(); i++) {
@@ -103,7 +107,7 @@ void SceneManager::Start() {
 		this->player->bullets[i]->fxDestroy = this->fxDestroy;
 		this->player->bullets[i]->fxTail = this->fxTail;
 	}
-	
+
 	// scene->Start
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->Start();
