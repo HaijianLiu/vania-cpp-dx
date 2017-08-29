@@ -4,10 +4,11 @@
 
 class SceneManager {
 private:
+
+public:
 	// DirectX device
 	LPDIRECT3DDEVICE9 device;
 
-public:
 	// Texture
 	Texture texDefault = Texture("assets/default.png",32,32);
 	Texture texTile = Texture("assets/tilesets.png",384,192);

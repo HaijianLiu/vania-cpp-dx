@@ -12,15 +12,18 @@ Scene00::Scene00() {
 	this->rangePath = "map/scene_Scene00-Range.csv";
 
 	// Load Map Data
-	std::vector<int> playerData;
-	Scene::LoadMapData("map/scene_Scene00-Player.csv", playerData);
+	std::vector<int> playerPositionData;
+	Scene::LoadMapData("map/scene_Scene00-Player.csv", playerPositionData);
 	// push_back to scene map Objects (Order in Layer Order)
-	for (unsigned int i = 0; i < playerData.size(); i++) {
-		if (playerData[i] != -1) {
-			this->player.push_back(new NoneObject());
-			Scene::SetTile(this->player.back(), i, playerData[i]);
+	for (unsigned int i = 0; i < playerPositionData.size(); i++) {
+		if (playerPositionData[i] != -1) {
+			this->playerPosition.push_back(new NoneObject());
+			Scene::SetTile(this->playerPosition.back(), i, playerPositionData[i]);
 		}
 	}
+
+	// Enemy
+	this->crab = new Crab();
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -31,7 +34,10 @@ Scene00::Scene00() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene00::~Scene00() {
-	delete this->player[0];
+	for (unsigned int i = 0; i < this->playerPosition.size(); i++) {
+		delete this->playerPosition[i];
+	}
+	delete this->crab;
 }
 
 
@@ -43,10 +49,12 @@ void Scene00::Start() {
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
 	}
+	this->crab->animWalk->sprite->device = this->sceneManager->device;
+	this->crab->animWalk->sprite->texture = this->sceneManager->texCrabWalk;
 
 	// Set Player position
-	this->sceneManager->player->transform->position.x = this->player[0]->transform->position.x;
-	this->sceneManager->player->transform->position.y = this->player[0]->transform->position.y;
+	this->sceneManager->player->transform->position.x = this->playerPosition[0]->transform->position.x;
+	this->sceneManager->player->transform->position.y = this->playerPosition[0]->transform->position.y;
 
 	// Start
 	Scene::Start();

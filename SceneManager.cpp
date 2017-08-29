@@ -16,8 +16,6 @@ SceneManager::SceneManager() {
 	}
 	// Camera
 	this->camera = GetCamera();
-	// Enemy
-	this->crab = new Crab();
 	// Scene
 	scenes.push_back(new Scene00());
 	scenes.push_back(new Scene01());
@@ -37,7 +35,6 @@ SceneManager::~SceneManager() {
 	delete this->player;
 	delete this->fxDestroy;
 	delete this->fxTail;
-	delete this->crab;
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		delete this->scenes[i];
 	}
@@ -106,9 +103,7 @@ void SceneManager::Start() {
 		this->player->bullets[i]->fxDestroy = this->fxDestroy;
 		this->player->bullets[i]->fxTail = this->fxTail;
 	}
-	this->crab->animWalk->sprite->device = this->device;
-	this->crab->animWalk->sprite->texture = this->texCrabWalk;
-
+	
 	// scene->Start
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->Start();

@@ -6,7 +6,10 @@ class Scene00 : public Scene {
 private:
 
 public:
-	std::vector<GameObject*> player;
+	std::vector<NoneObject*> playerPosition;
+
+	// Enemy
+	Crab* crab;
 
 	Scene00();
 	~Scene00();
