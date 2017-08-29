@@ -14,6 +14,8 @@ SceneManager::SceneManager() {
 	for (unsigned int i = 0; i < 4; i++) {
 		this->audShoot.push_back(new Audio("assets/Sound/SE/shot000.wav"));
 	}
+	this->sceneBGM = new Audio("assets/Sound/BGM/Venus.wav");
+	this->sceneBGM->loop = true;
 	// Camera
 	this->camera = GetCamera();
 	// Scene
@@ -72,6 +74,7 @@ void SceneManager::Start() {
 		this->audShoot[i]->LoadAudio();
 		this->player->audShoot.push_back(this->audShoot[i]);
 	}
+	this->sceneBGM->LoadAudio();
 	// LoadTexture
 	SceneManager::LoadTexture(&this->texDefault);
 	SceneManager::LoadTexture(&this->texTile);
@@ -109,6 +112,7 @@ void SceneManager::Start() {
 	}
 
 	// scene->Start
+	this->sceneBGM->Play();
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->Start();
 	}
