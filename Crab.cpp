@@ -40,7 +40,6 @@ Crab::~Crab() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Crab::Start() {
-	this->transform->position.x = 1.0f;
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animWalk->MakeFrame();
 }
@@ -87,7 +86,7 @@ void Crab::Update() {
 void Crab::OnTriggerEnter(BoxCollider* other) {
 	/* Transform if tag = "ground"
 	..............................................................................*/
-	if (other->tag == "ground") {
+	if (other->tag == "ground" || other->tag == "ai") {
 		if (this->collGroundCheck->enter == true) {
 			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 			this->air = false;

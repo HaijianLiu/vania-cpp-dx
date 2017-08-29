@@ -29,7 +29,7 @@ void Scene::SetScene() {
 	for (unsigned int i = 0; i < cameraData.size(); i++) {
 		if (cameraData[i] != -1) {
 			this->camera->range.push_back(new NoneObject());
-			Scene::SetTile(this->camera->range.back(), i, cameraData[i]);
+			Scene::SetPosition(this->camera->range.back(), i);
 		}
 	}
 	for (unsigned int i = 0; i < backGroundData.size(); i++) {
@@ -47,7 +47,7 @@ void Scene::SetScene() {
 	for (unsigned int i = 0; i < rangeData.size(); i++) {
 		if (rangeData[i] != -1) {
 			this->range.push_back(new NoneObject());
-			Scene::SetTile(this->range.back(), i, rangeData[i]);
+			Scene::SetPosition(this->range.back(), i);
 		}
 	}
 
@@ -88,6 +88,11 @@ Scene::~Scene() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene::Start() {
+	// Link Texture
+	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
+		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
+	}
+
 	// Start GameObject && Start Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
 		this->gameObjects[i]->PreStart();
@@ -209,4 +214,9 @@ void Scene::SetTile(GameObject* gameObject, int mapID, int tileID) {
 	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 	gameObject->transform->scale = Float2D((float)this->tilePixel, (float)this->tilePixel);
 	gameObject->sprite->slice = Slice(tileID, tileID % this->tileSize.x * this->tilePixel , tileID / this->tileSize.x * this->tilePixel, this->tilePixel, this->tilePixel);
+}
+
+void Scene::SetPosition(GameObject* gameObject, int mapID) {
+	gameObject->transform->position.x = mapID % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
+	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 }

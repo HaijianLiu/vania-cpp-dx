@@ -9,7 +9,8 @@ public:
 	std::vector<NoneObject*> playerPosition;
 
 	// Enemy
-	Crab* crab;
+	std::vector<Crab*> crabs;
+	std::vector<Ground*> ai;
 
 	Scene00();
 	~Scene00();

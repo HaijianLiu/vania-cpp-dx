@@ -14,16 +14,31 @@ Scene00::Scene00() {
 	// Load Map Data
 	std::vector<int> playerPositionData;
 	Scene::LoadMapData("map/scene_Scene00-Player.csv", playerPositionData);
-	// push_back to scene map Objects (Order in Layer Order)
 	for (unsigned int i = 0; i < playerPositionData.size(); i++) {
 		if (playerPositionData[i] != -1) {
 			this->playerPosition.push_back(new NoneObject());
-			Scene::SetTile(this->playerPosition.back(), i, playerPositionData[i]);
+			Scene::SetPosition(this->playerPosition.back(), i);
 		}
 	}
 
 	// Enemy
-	this->crab = new Crab();
+	std::vector<int> crabData;
+	Scene::LoadMapData("map/scene_Scene00-Crab.csv", crabData);
+	for (unsigned int i = 0; i < crabData.size(); i++) {
+		if (crabData[i] != -1) {
+			this->crabs.push_back(new Crab());
+			Scene::SetPosition(this->crabs.back(), i);
+		}
+	}
+	std::vector<int> aiData;
+	Scene::LoadMapData("map/scene_Scene00-AI.csv", aiData);
+	for (unsigned int i = 0; i < aiData.size(); i++) {
+		if (aiData[i] != -1) {
+			this->ai.push_back(new Ground());
+			Scene::SetTile(this->ai.back(), i, aiData[i]);
+			this->ai.back()->collider->tag = "ai";
+		}
+	}
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -34,10 +49,9 @@ Scene00::Scene00() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene00::~Scene00() {
-	for (unsigned int i = 0; i < this->playerPosition.size(); i++) {
-		delete this->playerPosition[i];
-	}
-	delete this->crab;
+	for (unsigned int i = 0; i < this->playerPosition.size(); i++) delete this->playerPosition[i];
+	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
+	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
 }
 
 
@@ -46,11 +60,10 @@ Scene00::~Scene00() {
 ------------------------------------------------------------------------------*/
 void Scene00::Start() {
 	// Link Texture
-	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
+	for (unsigned int i = 0; i < this->crabs.size(); i++) {
+		this->crabs[i]->animWalk->sprite->device = this->sceneManager->device;
+		this->crabs[i]->animWalk->sprite->texture = this->sceneManager->texCrabWalk;
 	}
-	this->crab->animWalk->sprite->device = this->sceneManager->device;
-	this->crab->animWalk->sprite->texture = this->sceneManager->texCrabWalk;
 
 	// Set Player position
 	this->sceneManager->player->transform->position.x = this->playerPosition[0]->transform->position.x;

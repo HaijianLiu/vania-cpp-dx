@@ -48,6 +48,7 @@ public:
 	void CheckCollider();
 	bool LoadMapData(const char* path, std::vector<int>& data);
 	void SetTile(GameObject* gameObject, int mapID, int tileID);
+	void SetPosition(GameObject* gameObject, int mapID);
 };
 
 #endif
