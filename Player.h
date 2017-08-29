@@ -24,6 +24,7 @@ public:
 	Animation* animHurt;
 	// Audio
 	std::vector<Audio*> audShoot;
+	Audio* audLanding;
 	// offset Object
 	OffsetObject* leftFire;
 	OffsetObject* rightFire;

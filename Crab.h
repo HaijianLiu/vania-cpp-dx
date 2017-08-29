@@ -15,6 +15,8 @@ public:
 	BoxCollider* collHorizonCheck;
 	// Animation
 	Animation* animWalk;
+	// Audio
+	Audio* audEnemyDamage;
 
 	// Parameter
 	float gravity = 9.8f;

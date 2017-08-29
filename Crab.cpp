@@ -108,6 +108,7 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "bullet") {
 		this->sprite->Flash();
 		this->hp -= 40;
+		this->audEnemyDamage->Play();
 	}
 }
 

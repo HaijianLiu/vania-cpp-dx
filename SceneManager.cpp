@@ -12,10 +12,12 @@ SceneManager::SceneManager() {
 	this->fxTail = new ParticleSystem(100);
 	// Audio
 	for (unsigned int i = 0; i < 4; i++) {
-		this->audShoot.push_back(new Audio("assets/Sound/SE/shot000.wav"));
+		this->audShoot.push_back(new Audio("assets/Sound/SE/sfx_weapon_singleshot13.wav"));
 	}
-	this->sceneBGM = new Audio("assets/Sound/BGM/Venus.wav");
-	this->sceneBGM->loop = true;
+	this->audSceneBGM = new Audio("assets/Sound/BGM/Venus.wav");
+	this->audSceneBGM->loop = true;
+	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
+	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_damage3.wav");
 	// Camera
 	this->camera = GetCamera();
 	// Scene
@@ -31,12 +33,19 @@ SceneManager::SceneManager() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
+	// Audio
 	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
 		delete this->audShoot[i];
 	}
+	delete this->audSceneBGM;
+	delete this->audLanding;
+	delete this->audEnemyDamage;
+	// Player
 	delete this->player;
+	// Particle
 	delete this->fxDestroy;
 	delete this->fxTail;
+	// Scene
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		delete this->scenes[i];
 	}
@@ -74,7 +83,10 @@ void SceneManager::Start() {
 		this->audShoot[i]->LoadAudio();
 		this->player->audShoot.push_back(this->audShoot[i]);
 	}
-	this->sceneBGM->LoadAudio();
+	this->audSceneBGM->LoadAudio();
+	this->audLanding->LoadAudio();
+	this->player->audLanding = this->audLanding;
+	this->audEnemyDamage->LoadAudio();
 	// LoadTexture
 	SceneManager::LoadTexture(&this->texDefault);
 	SceneManager::LoadTexture(&this->texTile);
@@ -112,7 +124,7 @@ void SceneManager::Start() {
 	}
 
 	// scene->Start
-	this->sceneBGM->Play();
+	// this->audSceneBGM->Play();
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->Start();
 	}

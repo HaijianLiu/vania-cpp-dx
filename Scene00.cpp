@@ -59,10 +59,11 @@ Scene00::~Scene00() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene00::Start() {
-	// Link Texture
+	// Link Resourse
 	for (unsigned int i = 0; i < this->crabs.size(); i++) {
 		this->crabs[i]->animWalk->sprite->device = this->sceneManager->device;
 		this->crabs[i]->animWalk->sprite->texture = this->sceneManager->texCrabWalk;
+		this->crabs[i]->audEnemyDamage = this->sceneManager->audEnemyDamage;
 	}
 
 	// Set Player position

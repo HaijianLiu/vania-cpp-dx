@@ -211,6 +211,9 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 		if (this->collGroundCheck->enter == true) {
 			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 			this->air = false;
+			if (this->verticalSpeed <= -0.2f * this->jumpPower) {
+				this->audLanding->Play();
+			}
 			this->verticalSpeed = 0.0f;
 		}
 		if (this->collHorizonCheck->enter == true) {

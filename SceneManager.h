@@ -24,7 +24,9 @@ public:
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
 	// Audio
 	std::vector<Audio*> audShoot;
-	Audio* sceneBGM;
+	Audio* audSceneBGM;
+	Audio* audLanding;
+	Audio* audEnemyDamage;
 
 	// Camera
 	Camera* camera;

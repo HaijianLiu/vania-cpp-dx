@@ -14,7 +14,7 @@ public:
 	bool active = true;
 	bool draw = true;
 	DWORD birthTime = 0;
-	
+
 	GameObject();
 	virtual ~GameObject();
 
