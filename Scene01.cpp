@@ -5,11 +5,6 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Scene01::Scene01() {
-	// Set Map Data Info
-	this->mapSize = Int2D(100,11);
-	this->tilePixel = 16;
-	this->tileSize = Int2D(384/16,192/16);
-
 	// Set Map path
 	this->cameraPath = "map/scene_Scene01-Camera.csv";
 	this->groundPath = "map/scene_Scene01-Ground.csv";

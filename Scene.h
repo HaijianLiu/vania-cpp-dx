@@ -22,9 +22,9 @@ public:
 	Camera* camera;
 
 	// Map Data
-	Int2D mapSize = Int2D(0,0);
+	Int2D mapSize = Int2D(100,15);
 	int tilePixel = 16;
-	Int2D tileSize = Int2D(0,0);
+	Int2D tileSize = Int2D(384/16,192/16);
 	// Map path
 	const char* cameraPath;
 	const char* groundPath;

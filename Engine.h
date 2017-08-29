@@ -33,13 +33,13 @@
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
-#define SCREEN_WIDTH (960)
-#define SCREEN_HEIGHT (704)
-#define SCREEN_WIDTH_CENTER (SCREEN_WIDTH / 2)
-#define SCREEN_HEIGHT_CENTER (SCREEN_HEIGHT / 2)
 #define PIXEL_SCALE (2)
 #define PIXEL_TO_UNIT (0.01f)
 #define UNIT_TO_PIXEL (100)
+#define SCREEN_WIDTH (25 * 16 * PIXEL_SCALE)
+#define SCREEN_HEIGHT (15 * 16 * PIXEL_SCALE)
+#define SCREEN_WIDTH_CENTER (SCREEN_WIDTH / 2)
+#define SCREEN_HEIGHT_CENTER (SCREEN_HEIGHT / 2)
 #define PI (3.142f)
 #define	FVF_VERTEX_2D	(D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 
@@ -92,7 +92,7 @@ struct Texture {
 
 
 /*------------------------------------------------------------------------------
-< Engine classes >
+< Engine >
 ------------------------------------------------------------------------------*/
 #include "Window.h"
 #include "Input.h"
@@ -110,7 +110,7 @@ struct Texture {
 #include "ParticleSystem.h"
 
 /*------------------------------------------------------------------------------
-< Game Object classes >
+< GameObject >
 ------------------------------------------------------------------------------*/
 #include "Bullet.h"
 #include "Player.h"
@@ -119,15 +119,16 @@ struct Texture {
 #include "BackGround.h"
 
 /*------------------------------------------------------------------------------
-< Scene classes >
+< Scene >
 ------------------------------------------------------------------------------*/
 #include "Scene.h"
+#include "Scene00.h"
 #include "Scene01.h"
 #include "Scene02.h"
 #include "SceneManager.h"
 
 /*------------------------------------------------------------------------------
-< Debug classes >
+< Debug >
 ------------------------------------------------------------------------------*/
 #include "Debug.h"
 

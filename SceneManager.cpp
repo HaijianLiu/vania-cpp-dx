@@ -19,6 +19,7 @@ SceneManager::SceneManager() {
 	// Enemy
 	this->crab = new Crab();
 	// Scene
+	scenes.push_back(new Scene00());
 	scenes.push_back(new Scene01());
 	scenes.push_back(new Scene02());
 	// active Scene

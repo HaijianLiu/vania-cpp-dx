@@ -4,12 +4,12 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Scene02::Scene02() {
+Scene00::Scene00() {
 	// Set Map path
-	this->cameraPath = "map/scene_Scene02-Camera.csv";
-	this->groundPath = "map/scene_Scene02-Ground.csv";
-	this->backGroundPath = "map/scene_Scene02-BackGround.csv";
-	this->rangePath = "map/scene_Scene02-Range.csv";
+	this->cameraPath = "map/scene_Scene00-Camera.csv";
+	this->groundPath = "map/scene_Scene00-Ground.csv";
+	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
+	this->rangePath = "map/scene_Scene00-Range.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -19,7 +19,7 @@ Scene02::Scene02() {
 /*------------------------------------------------------------------------------
 < Destructor >
 ------------------------------------------------------------------------------*/
-Scene02::~Scene02() {
+Scene00::~Scene00() {
 
 }
 
@@ -27,13 +27,13 @@ Scene02::~Scene02() {
 /*------------------------------------------------------------------------------
 < Start >
 ------------------------------------------------------------------------------*/
-void Scene02::Start() {
+void Scene00::Start() {
 	// Link Texture
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
 	}
 
-	// Start GameObject && Start Collider (_DEBUG)
+	// Start
 	Scene::Start();
 }
 
@@ -41,12 +41,12 @@ void Scene02::Start() {
 /*------------------------------------------------------------------------------
 < Update >
 ------------------------------------------------------------------------------*/
-void Scene02::Update() {
+void Scene00::Update() {
 	// Update
 	Scene::Update();
 
 	// Check Switch Scene
-	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
-		this->sceneManager->SetActiveScene(0);
+	if (this->sceneManager->player->transform->position.x > this->range[1]->transform->position.x) {
+		this->sceneManager->SetActiveScene(1);
 	}
 }
