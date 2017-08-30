@@ -30,6 +30,7 @@ public:
 	std::vector<Audio*> audShoot;
 	Audio* audSceneBGM;
 	Audio* audLanding;
+	Audio* audPlayerHurt;
 	Audio* audEnemyDamage;
 	Audio* audEnemyDestroy;
 	// Particle System

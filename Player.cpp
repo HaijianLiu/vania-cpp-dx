@@ -98,6 +98,7 @@ void Player::Start() {
 	}
 	// Audio
 	this->audShoot = this->resources->audShoot;
+	this->audPlayerHurt = this->resources->audPlayerHurt;
 	this->audLanding = this->resources->audLanding;
 
 
@@ -262,6 +263,7 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "enemy") {
 		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtColdDown * 1000.0f) {
 			this->hurt = true;
+			this->audPlayerHurt->Play();
 			if (other->gameObject->transform->position.x > this->transform->position.x) {
 				this->right = true;
 			}
