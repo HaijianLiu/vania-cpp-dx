@@ -5,12 +5,6 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Player::Player() {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
-
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(80.0f,80.0f);
 	this->sprite->flashTime = this->hurtColdDown;
@@ -282,11 +276,11 @@ void Player::FixedUpdate() {
 					}
 				}
 				for (unsigned int i = 0; i < this->bullets.size(); i++) {
-					if (!this->bullets[i]->gameObject->active) {
+					if (!this->bullets[i]->active) {
 						this->lastFire = this->time->currentTime;
 						this->bullets[i]->birthTime = this->time->currentTime;
 						this->bullets[i]->right = this->right;
-						this->bullets[i]->gameObject->active = true;
+						this->bullets[i]->active = true;
 						if (this->right) {
 							if (this->duck && !this->move && !this->air) {
 								this->bullets[i]->transform->position = this->rightDuckFire->transform->position;

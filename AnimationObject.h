@@ -4,12 +4,8 @@
 
 class AnimationObject : public GameObject {
 private:
-	// List of GameObjects
-	std::vector<GameObject*>* gameObjects;
 
 public:
-	// GameObject
-	GameObject* gameObject;
 	// Animation
 	Animation* animation;
 	bool loop = false;

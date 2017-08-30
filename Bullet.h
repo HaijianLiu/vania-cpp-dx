@@ -4,12 +4,8 @@
 
 class Bullet : public GameObject {
 private:
-	// List of GameObjects
-	std::vector<GameObject*>* gameObjects;
 
 public:
-	// GameObject
-	GameObject* gameObject;
 	// Collider
 	BoxCollider* collider;
 

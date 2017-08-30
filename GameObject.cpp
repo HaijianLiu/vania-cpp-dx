@@ -3,6 +3,10 @@
 #include "GameObject.h"
 
 GameObject::GameObject() {
+	// GetGameObjects and push_back
+	this->gameObjects = GetGameObjects();
+	this->gameObjects->push_back(this);
+	
 	this->transform = new Transform();
 	this->sprite = new Sprite();
 }

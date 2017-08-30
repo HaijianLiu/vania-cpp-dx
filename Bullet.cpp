@@ -5,12 +5,6 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Bullet::Bullet() {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
-
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(4.0f,4.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
@@ -20,7 +14,7 @@ Bullet::Bullet() {
 	this->collider->trigger = true;
 	this->collider->tag = "bullet";
 	// Default GameObject active == true
-	this->gameObject->active = false;
+	this->active = false;
 }
 
 
@@ -49,7 +43,7 @@ void Bullet::Start() {
 void Bullet::Update() {
 	/* Destroy
 	..............................................................................*/
-	Destroy(this->gameObject, this->lifeTime);
+	Destroy(this, this->lifeTime);
 
 	/* Transform
 	..............................................................................*/

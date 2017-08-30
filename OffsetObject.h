@@ -4,13 +4,8 @@
 
 class OffsetObject : public GameObject {
 private:
-	// List of GameObjects
-	std::vector<GameObject*>* gameObjects;
 
 public:
-	// GameObject
-	GameObject* gameObject;
-
 	GameObject* parent;
 	Float2D offset;
 

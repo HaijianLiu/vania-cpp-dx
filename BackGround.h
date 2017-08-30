@@ -4,13 +4,8 @@
 
 class BackGround : public GameObject {
 private:
-	// List of GameObjects
-	std::vector<GameObject*>* gameObjects;
 
 public:
-	// GameObject
-	GameObject* gameObject;
-
 	// Constructors
 	BackGround();
 	~BackGround();

@@ -5,13 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 AnimationObject::AnimationObject(int sizeX, int sizeY, int divideX, int divideY, int sampleTime) {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
+	// Set GameObject
 	this->active = false;
-
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D((float)sizeX, (float)sizeY);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel

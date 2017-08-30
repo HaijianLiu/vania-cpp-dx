@@ -5,14 +5,9 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Ground::Ground() {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
-	// Draw
+	// Set GameObject
 	this->draw = false;
-
+	
 	// Transform Size in real pixel (Int2D)
 				// get from scene mapData
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel

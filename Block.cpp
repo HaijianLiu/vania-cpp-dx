@@ -5,12 +5,6 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Block::Block() {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
-
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(16.0f,16.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
@@ -68,7 +62,7 @@ void Block::OnTriggerEnter(BoxCollider* other) {
 		this->hp -= 40;
 	}
 	if (other->tag == "ground check") {
-		this->hp -= 100 * this->time->deltaTime;
+		this->hp -= 100 * (int)this->time->deltaTime;
 	}
 }
 

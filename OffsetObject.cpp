@@ -5,11 +5,6 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 OffsetObject::OffsetObject(GameObject* parent, float x, float y) {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
 	// Set GameObject
 	this->draw = false;
 
