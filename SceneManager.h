@@ -30,6 +30,7 @@ public:
 	Audio* audSceneBGM;
 	Audio* audLanding;
 	Audio* audEnemyDamage;
+	Audio* audEnemyDestroy;
 
 	// Camera
 	Camera* camera;

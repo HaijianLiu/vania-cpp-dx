@@ -65,6 +65,7 @@ void Scene00::Start() {
 		this->crabs[i]->animWalk->sprite->texture = this->sceneManager->texCrabWalk;
 		this->crabs[i]->enemyDestroy = this->sceneManager->enemyDestroy;
 		this->crabs[i]->audEnemyDamage = this->sceneManager->audEnemyDamage;
+		this->crabs[i]->audEnemyDestroy = this->sceneManager->audEnemyDestroy;
 	}
 
 	// Set Player position

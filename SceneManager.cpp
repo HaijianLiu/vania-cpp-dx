@@ -12,12 +12,13 @@ SceneManager::SceneManager() {
 	this->fxTail = new ParticleSystem(100);
 	// Audio
 	for (unsigned int i = 0; i < 4; i++) {
-		this->audShoot.push_back(new Audio("assets/Sound/SE/sfx_weapon_singleshot13.wav"));
+		this->audShoot.push_back(new Audio("assets/Sound/SE/sfx_wpn_laser8.wav"));
 	}
 	this->audSceneBGM = new Audio("assets/Sound/BGM/Venus.wav");
 	this->audSceneBGM->loop = true;
 	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_damage3.wav");
+	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
 	// Animation Object
 	this->enemyDestroy = new AnimationObject(64,64,6,1,4);
 	// Camera
@@ -42,6 +43,7 @@ SceneManager::~SceneManager() {
 	delete this->audSceneBGM;
 	delete this->audLanding;
 	delete this->audEnemyDamage;
+	delete this->audEnemyDestroy;
 	// Player
 	delete this->player;
 	// Particle
@@ -92,6 +94,7 @@ void SceneManager::Start() {
 	this->audLanding->LoadAudio();
 	this->player->audLanding = this->audLanding;
 	this->audEnemyDamage->LoadAudio();
+	this->audEnemyDestroy->LoadAudio();
 	// LoadTexture
 	SceneManager::LoadTexture(&this->texDefault);
 	SceneManager::LoadTexture(&this->texTile);
