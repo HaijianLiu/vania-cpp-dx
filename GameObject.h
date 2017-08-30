@@ -11,15 +11,17 @@ private:
 	std::vector<GameObject*>* gameObjects;
 
 public:
+	// Global class
 	Time* time;
 	Resources* resources;
-
+	// function class
 	Transform* transform;
 	Sprite* sprite;
-
+	Status* status;
+	// status
+	DWORD birthTime = 0;
 	bool active = true;
 	bool draw = true;
-	DWORD birthTime = 0;
 
 	GameObject();
 	virtual ~GameObject();

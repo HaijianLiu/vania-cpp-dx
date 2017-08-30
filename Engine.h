@@ -100,6 +100,7 @@ struct Texture {
 #include "Time.h"
 #include "Transform.h"
 #include "Sprite.h"
+#include "Status.h"
 #include "GameObject.h"
 #include "NoneObject.h"
 #include "OffsetObject.h"

@@ -5,6 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Crab::Crab() {
+	// Status
+	this->status->hp = 100;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(48.0f,32.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
@@ -50,7 +52,7 @@ void Crab::Start() {
 void Crab::Update() {
 	/* Death
 	..............................................................................*/
-	if (this->hp <= 0) {
+	if (this->status->hp <= 0) {
 		this->active = false;
 		this->resources->audEnemyDestroy->Play();
 		Instantiate(this->resources->enemyDestroy, this->transform);
@@ -113,7 +115,7 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 	..............................................................................*/
 	if (other->tag == "bullet") {
 		this->sprite->Flash();
-		this->hp -= 40;
+		this->status->hp -= other->gameObject->status->damage;
 	}
 }
 

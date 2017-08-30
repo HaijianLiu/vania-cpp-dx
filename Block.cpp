@@ -5,6 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Block::Block() {
+	// Status
+	this->status->hp = 100;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(16.0f,16.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
@@ -37,13 +39,13 @@ void Block::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Block::Update() {
-	if (this->hp < 70 && this->hp >= 40) {
+	if (this->status->hp < 70 && this->status->hp >= 40) {
 		this->sprite->slice = Slice(0,16,0,16,16);
 	}
-	else if (this->hp < 40 && this->hp > 0) {
+	else if (this->status->hp < 40 && this->status->hp > 0) {
 		this->sprite->slice = Slice(0,32,0,16,16);
 	}
-	else if (this->hp <= 0) {
+	else if (this->status->hp <= 0) {
 		this->active = false;
 		this->resources->audEnemyDestroy->Play();
 		Instantiate(this->resources->enemyDestroy, this->transform);
@@ -59,10 +61,10 @@ void Block::Update() {
 ------------------------------------------------------------------------------*/
 void Block::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "bullet") {
-		this->hp -= 40;
+		this->status->hp -= other->gameObject->status->damage;
 	}
 	if (other->tag == "ground check") {
-		this->hp -= 100 * (int)this->time->deltaTime;
+		this->status->hp -= (int)(this->destroySpeed * this->time->deltaTime);
 	}
 }
 

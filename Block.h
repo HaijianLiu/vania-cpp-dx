@@ -10,7 +10,7 @@ public:
 	BoxCollider* collider;
 
 	// Parameter
-	int hp = 100;
+	int destroySpeed = 100;
 
 	// Constructors
 	Block();

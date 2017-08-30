@@ -17,7 +17,6 @@ public:
 	float gravity = 9.8f;
 	float speed = 0.3f;
 	float jumpPower = 4.0f;
-	float hp = 100;
 
 	// status
 	bool move = false;
