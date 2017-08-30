@@ -5,18 +5,12 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Particle::Particle() {
-	// GetGameObjects and push_back
-	this->gameObjects = GetGameObjects();
-	this->gameObjects->push_back(this);
-	// Get GetGameObject pointer
-	this->gameObject = this;
-
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(4.0f,4.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
 	this->sprite->slice = Slice(0,0,0,32,32);
 	// Default GameObject active == true
-	this->gameObject->active = false;
+	this->active = false;
 }
 
 
@@ -42,7 +36,7 @@ void Particle::Start() {
 void Particle::Update() {
 	/* Destroy
 	..............................................................................*/
-	Destroy(this->gameObject, this->startLifeTime);
+	Destroy(this, this->startLifeTime);
 
 	/* Transform
 	..............................................................................*/
@@ -88,7 +82,7 @@ void Particle::FixedUpdate() {
 < Functions >
 ------------------------------------------------------------------------------*/
 void Particle::Instantiate(Transform* transform) {
-	this->gameObject->active = true;
+	this->active = true;
 	this->birthTime = this->time->currentTime;
 	this->transform->position = transform->position;
 	this->startAngle = RandomRange(this->startAngleRange.x, this->startAngleRange.y);

@@ -4,13 +4,8 @@
 
 class Particle : public GameObject {
 private:
-	// List of GameObjects
-	std::vector<GameObject*>* gameObjects;
 
 public:
-	// GameObject
-	GameObject* gameObject;
-
 	// Parameter
 	Float2D startLifeTimeRange = Float2D(0.2f,0.5f);
 	Float2D startSpeedRange = Float2D(0.1f,1.0f);
