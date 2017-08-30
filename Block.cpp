@@ -47,8 +47,6 @@ void Block::Update() {
 	}
 	else if (this->status->hp <= 0) {
 		this->active = false;
-		this->resources->audEnemyDestroy->Play();
-		Instantiate(this->resources->enemyDestroy, this->transform);
 	}
 
 	// Animation SetTexture() || Sprite SetTexture()

@@ -17,10 +17,10 @@ Scene::Scene() {
 
 void Scene::SetScene() {
 	// Load Map Data
-	std::vector<int> cameraData;
-	std::vector<int> groundData;
-	std::vector<int> backGroundData;
-	std::vector<int> rangeData;
+	std::vector<Int2D> cameraData;
+	std::vector<Int2D> groundData;
+	std::vector<Int2D> backGroundData;
+	std::vector<Int2D> rangeData;
 	Scene::LoadMapData(this->cameraPath, cameraData);
 	Scene::LoadMapData(this->groundPath, groundData);
 	Scene::LoadMapData(this->backGroundPath, backGroundData);
@@ -28,28 +28,20 @@ void Scene::SetScene() {
 
 	// push_back to scene map Objects (Order in Layer Order)
 	for (unsigned int i = 0; i < cameraData.size(); i++) {
-		if (cameraData[i] != -1) {
-			this->camera->range.push_back(new NoneObject());
-			Scene::SetPosition(this->camera->range.back(), i);
-		}
+		this->camera->range.push_back(new NoneObject());
+		Scene::SetPosition(this->camera->range.back(), cameraData[i].x);
 	}
 	for (unsigned int i = 0; i < backGroundData.size(); i++) {
-		if (backGroundData[i] != -1) {
-			this->backGrounds.push_back(new BackGround());
-			Scene::SetTile(this->backGrounds.back(), i, backGroundData[i]);
-		}
+		this->backGrounds.push_back(new BackGround());
+		Scene::SetTile(this->backGrounds.back(), backGroundData[i].x, backGroundData[i].y);
 	}
 	for (unsigned int i = 0; i < groundData.size(); i++) {
-		if (groundData[i] != -1) {
-			this->grounds.push_back(new Ground());
-			Scene::SetTile(this->grounds.back(), i, groundData[i]);
-		}
+		this->grounds.push_back(new Ground());
+		Scene::SetTile(this->grounds.back(), groundData[i].x, groundData[i].y);
 	}
 	for (unsigned int i = 0; i < rangeData.size(); i++) {
-		if (rangeData[i] != -1) {
-			this->range.push_back(new NoneObject());
-			Scene::SetPosition(this->range.back(), i);
-		}
+		this->range.push_back(new NoneObject());
+		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 
 	// Get GameObject && Get Collider
@@ -198,14 +190,18 @@ void Scene::CheckCollider() {
 /*------------------------------------------------------------------------------
 < LoadMapData >
 ------------------------------------------------------------------------------*/
-bool Scene::LoadMapData(const char* path, std::vector<int>& data) {
+bool Scene::LoadMapData(const char* path, std::vector<Int2D>& data) {
 	FILE* file = fopen(path,"rb");
 	if (file == NULL) return false;
+	unsigned int counter = 0;
 	int num;
 
 	while (!feof(file)) {
 		if(fscanf(file, "%d,", &num) == 1){
-			data.push_back(num);
+			if (num != -1) {
+				data.push_back(Int2D(counter,num));
+			}
+			counter++;
 		}
 	}
 
