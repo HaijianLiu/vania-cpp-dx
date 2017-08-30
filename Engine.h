@@ -119,6 +119,7 @@ struct Texture {
 #include "Crab.h"
 #include "Ground.h"
 #include "BackGround.h"
+#include "Block.h"
 
 /*------------------------------------------------------------------------------
 < Scene >

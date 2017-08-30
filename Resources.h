@@ -24,6 +24,7 @@ public:
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
 	Texture texEnemyDestroy = Texture("assets/enemy-destroy.png",384,64);
 	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
+	Texture texBlock = Texture("assets/block.png",48,16);
 	// Animation Object
 	AnimationObject* enemyDestroy;
 	// Audio

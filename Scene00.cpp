@@ -39,6 +39,14 @@ Scene00::Scene00() {
 			this->ai.back()->collider->tag = "ai";
 		}
 	}
+	std::vector<int> blockData;
+	Scene::LoadMapData("map/scene_Scene00-Block.csv", blockData);
+	for (unsigned int i = 0; i < blockData.size(); i++) {
+		if (blockData[i] != -1) {
+			this->blocks.push_back(new Block());
+			Scene::SetPosition(this->blocks.back(), i);
+		}
+	}
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -52,6 +60,7 @@ Scene00::~Scene00() {
 	for (unsigned int i = 0; i < this->playerPosition.size(); i++) delete this->playerPosition[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
+	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];
 }
 
 

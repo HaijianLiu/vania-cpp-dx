@@ -25,11 +25,11 @@ Player::Player() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.21f,8.0f,4.0f);
 	this->collGroundCheck->trigger = true;
-	this->collGroundCheck->tag = "player";
-	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.09f,1.0f,5.0f);
+	this->collGroundCheck->tag = "ground check";
+	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.05f,4.0f,4.0f);
 	this->collCeilingCheck->trigger = true;
-	this->collCeilingCheck->tag = "player";
-	this->collHorizonCheck = new BoxCollider(this,0.0f,0.06f,24.0f,32.0f);
+	this->collCeilingCheck->tag = "ceiling check";
+	this->collHorizonCheck = new BoxCollider(this,0.0f,0.08f,24.0f,28.0f);
 	this->collHorizonCheck->trigger = true;
 	this->collHorizonCheck->tag = "player";
 	// None Object

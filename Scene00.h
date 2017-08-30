@@ -11,6 +11,7 @@ public:
 	// Enemy
 	std::vector<Crab*> crabs;
 	std::vector<Ground*> ai;
+	std::vector<Block*> blocks;
 
 	Scene00();
 	~Scene00();
