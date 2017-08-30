@@ -24,3 +24,7 @@ void GameObject::UpdateTransform() {
 void GameObject::Draw() {
 	this->sprite->Draw();
 }
+
+void GameObject::Reset() {
+
+}

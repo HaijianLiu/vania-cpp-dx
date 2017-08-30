@@ -29,8 +29,9 @@ Crab::Crab() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Crab::~Crab() {
-	// delete objects
+	// Animation
 	delete this->animWalk;
+	// Collider
 	delete this->collGroundCheck;
 	delete this->collHorizonCheck;
 }
@@ -49,6 +50,12 @@ void Crab::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Crab::Update() {
+	/* Death
+	..............................................................................*/
+	if (this->hp <= 0) {
+		this->active = false;
+		Instantiate(this->enemyDestroy, this->transform);
+	}
 
 	/* Transform
 	..............................................................................*/
@@ -117,7 +124,5 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 < Fixed Update >
 ------------------------------------------------------------------------------*/
 void Crab::FixedUpdate() {
-	if (this->hp <= 0) {
-		this->active = false;
-	}
+
 }

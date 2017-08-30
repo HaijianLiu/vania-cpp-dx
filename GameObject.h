@@ -21,6 +21,7 @@ public:
 	void PreStart();
 	void UpdateTransform();
 	void Draw();
+	void Reset();
 
 	virtual void Start() = 0;
 	virtual void Update() = 0;

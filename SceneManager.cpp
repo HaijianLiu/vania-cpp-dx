@@ -18,6 +18,8 @@ SceneManager::SceneManager() {
 	this->audSceneBGM->loop = true;
 	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_damage3.wav");
+	// Animation Object
+	this->enemyDestroy = new AnimationObject(64,64,6,1,4);
 	// Camera
 	this->camera = GetCamera();
 	// Scene
@@ -61,7 +63,10 @@ SceneManager::~SceneManager() {
 	if (this->texPlayerHurt.texture != NULL) this->texPlayerHurt.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
 	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
+	if (this->texEnemyDestroy.texture != NULL) this->texEnemyDestroy.texture->Release();
 	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
+	// Animation Object
+	delete this->enemyDestroy;
 }
 
 
@@ -99,6 +104,7 @@ void SceneManager::Start() {
 	SceneManager::LoadTexture(&this->texPlayerHurt);
 	SceneManager::LoadTexture(&this->texBullet);
 	SceneManager::LoadTexture(&this->texFxDestroy);
+	SceneManager::LoadTexture(&this->texEnemyDestroy);
 	SceneManager::LoadTexture(&this->texCrabWalk);
 	// Link device && texture
 	this->player->animIdle->sprite->device = this->device;
@@ -122,6 +128,9 @@ void SceneManager::Start() {
 		this->player->bullets[i]->fxDestroy = this->fxDestroy;
 		this->player->bullets[i]->fxTail = this->fxTail;
 	}
+	// Animation Object
+	this->enemyDestroy->animation->sprite->device = this->device;
+	this->enemyDestroy->animation->sprite->texture = this->texEnemyDestroy;
 
 	// scene->Start
 	// this->audSceneBGM->Play();

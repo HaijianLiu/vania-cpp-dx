@@ -15,6 +15,7 @@ public:
 	BoxCollider* collHorizonCheck;
 	// Animation
 	Animation* animWalk;
+	AnimationObject* enemyDestroy;
 	// Audio
 	Audio* audEnemyDamage;
 

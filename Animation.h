@@ -4,11 +4,11 @@
 
 class Animation {
 private:
-	int currentSprite;
-	int sampleTime;
-	int counter;
 
 public:
+	int sampleTime;
+	int currentSprite;
+	int counter;
 	Int2D spriteSize;
 	Int2D divide;
 	int spriteMax;

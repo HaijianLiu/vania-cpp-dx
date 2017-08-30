@@ -1,6 +1,13 @@
 ﻿
 #include "Engine.h"
 
+void Instantiate(GameObject* gameObject, Transform* transform) {
+	gameObject->transform->position.x = transform->position.x;
+	gameObject->transform->position.y = transform->position.y;
+	gameObject->active = true;
+	gameObject->Reset();
+}
+
 float RandomRange(float min, float max) {
 	return min + (float)(rand()%1000)/999.0f * (max - min);
 }
