@@ -18,7 +18,7 @@ public:
 
 	// Parameter
 	float speed = 3.0f;
-	float lifeTime = 2.0f;
+	float lifeTime = 1.0f;
 
 	// status
 	bool right = true;
