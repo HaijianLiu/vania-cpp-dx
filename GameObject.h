@@ -3,14 +3,18 @@
 #define _GAME_OBJECT_
 
 class BoxCollider;
+class Resources;
 
 class GameObject {
 private:
 
 public:
 	Time* time;
+	Resources* resources;
+
 	Transform* transform;
 	Sprite* sprite;
+
 	bool active = true;
 	bool draw = true;
 	DWORD birthTime = 0;

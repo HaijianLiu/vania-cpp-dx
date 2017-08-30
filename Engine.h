@@ -109,6 +109,7 @@ struct Texture {
 #include "AnimationObject.h"
 #include "Particle.h"
 #include "ParticleSystem.h"
+#include "Resources.h"
 
 /*------------------------------------------------------------------------------
 < GameObject >
@@ -143,6 +144,7 @@ IDirectSound8* GetDirectSound();
 // main.cpp
 Time* GetTime();
 Camera* GetCamera();
+Resources* GetResources();
 std::vector<BoxCollider*>* GetColliders();
 std::vector<GameObject*>* GetGameObjects();
 std::vector<BoxCollider*> CopyColliders();

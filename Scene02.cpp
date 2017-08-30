@@ -28,10 +28,6 @@ Scene02::~Scene02() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene02::Start() {
-	// Link Texture
-	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
-	}
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

@@ -59,20 +59,11 @@ Scene00::~Scene00() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene00::Start() {
-	// Link Resourse
-	for (unsigned int i = 0; i < this->crabs.size(); i++) {
-		this->crabs[i]->animWalk->sprite->device = this->sceneManager->device;
-		this->crabs[i]->animWalk->sprite->texture = this->sceneManager->texCrabWalk;
-		this->crabs[i]->enemyDestroy = this->sceneManager->enemyDestroy;
-		this->crabs[i]->audEnemyDamage = this->sceneManager->audEnemyDamage;
-		this->crabs[i]->audEnemyDestroy = this->sceneManager->audEnemyDestroy;
-	}
-
 	// Set Player position
 	this->sceneManager->player->transform->position.x = this->playerPosition[0]->transform->position.x;
 	this->sceneManager->player->transform->position.y = this->playerPosition[0]->transform->position.y;
 
-	// Start
+	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
 }
 

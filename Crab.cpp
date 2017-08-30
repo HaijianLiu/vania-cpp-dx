@@ -41,6 +41,18 @@ Crab::~Crab() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Crab::Start() {
+	/* Resources
+	..............................................................................*/
+	// Animation
+	this->animWalk->sprite->device = this->resources->device;
+	this->animWalk->sprite->texture = this->resources->texCrabWalk;
+	// AnimationObject
+	this->enemyDestroy = this->resources->enemyDestroy;
+	// Audio
+	this->audEnemyDamage = this->resources->audEnemyDamage;
+	this->audEnemyDestroy = this->resources->audEnemyDestroy;
+
+
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animWalk->MakeFrame();
 }

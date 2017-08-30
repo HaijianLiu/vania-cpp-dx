@@ -73,6 +73,34 @@ Player::~Player() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Player::Start() {
+	/* Resources
+	..............................................................................*/
+	// Animation
+	this->animIdle->sprite->device = this->resources->device;
+	this->animIdle->sprite->texture = this->resources->texPlayerIdle;
+	this->animShoot->sprite->device = this->resources->device;
+	this->animShoot->sprite->texture = this->resources->texPlayerShoot;
+	this->animRun->sprite->device = this->resources->device;
+	this->animRun->sprite->texture = this->resources->texPlayerRun;
+	this->animJump->sprite->device = this->resources->device;
+	this->animJump->sprite->texture = this->resources->texPlayerJump;
+	this->animDuck->sprite->device = this->resources->device;
+	this->animDuck->sprite->texture = this->resources->texPlayerDuck;
+	this->animDuckFire->sprite->device = this->resources->device;
+	this->animDuckFire->sprite->texture = this->resources->texPlayerDuckFire;
+	this->animHurt->sprite->device = this->resources->device;
+	this->animHurt->sprite->texture = this->resources->texPlayerHurt;
+	// Bullet
+	for (unsigned int i = 0; i < this->bullets.size(); i++) {
+		this->bullets[i]->sprite->texture = this->resources->texBullet;
+		this->bullets[i]->fxDestroy = this->resources->fxDestroy;
+		this->bullets[i]->fxTail = this->resources->fxTail;
+	}
+	// Audio
+	this->audShoot = this->resources->audShoot;
+	this->audLanding = this->resources->audLanding;
+
+
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animIdle->MakeFrame();
 	this->animShoot->MakeFrame();

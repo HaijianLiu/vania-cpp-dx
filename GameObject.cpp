@@ -13,6 +13,7 @@ GameObject::~GameObject() {
 
 void GameObject::PreStart() {
 	this->time = GetTime();
+	this->resources = GetResources();
 	this->birthTime = this->time->currentTime;
 	this->sprite->device = GetDevice();
 }

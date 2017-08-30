@@ -13,6 +13,7 @@ std::vector<BoxCollider*> colliders;
 ------------------------------------------------------------------------------*/
 Time* time = new Time();
 Camera* camera = new Camera();
+Resources* resources = new Resources();
 SceneManager* sceneManager = new SceneManager();
 
 #ifdef _DEBUG
@@ -26,6 +27,7 @@ SceneManager* sceneManager = new SceneManager();
 void Start() {
 	time->Start();
 	srand((unsigned)time->currentTime);
+	resources->Start();
 	sceneManager->Start();
 
 	#ifdef _DEBUG
@@ -38,6 +40,7 @@ void Start() {
 < Delete >
 ------------------------------------------------------------------------------*/
 void Delete() {
+	delete resources;
 	delete sceneManager;
 	delete camera;
 	delete time;
@@ -84,6 +87,9 @@ Time* GetTime() {
 }
 Camera* GetCamera() {
 	return camera;
+}
+Resources* GetResources() {
+	return resources;
 }
 std::vector<BoxCollider*>* GetColliders() {
 	return &colliders;

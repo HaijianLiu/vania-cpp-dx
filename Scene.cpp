@@ -7,6 +7,7 @@
 Scene::Scene() {
 	// Camera
 	this->camera = GetCamera();
+
 	// get start size
 	this->gpGameObjects = GetGameObjects();
 	this->gpColliders = GetColliders();
@@ -90,7 +91,7 @@ Scene::~Scene() {
 void Scene::Start() {
 	// Link Texture
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		this->backGrounds[i]->sprite->texture = this->sceneManager->texTile;
+		this->backGrounds[i]->sprite->texture = this->sceneManager->resources->texTile;
 	}
 
 	// Start GameObject && Start Collider (_DEBUG)
