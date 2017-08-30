@@ -73,9 +73,7 @@ Player::~Player() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Player::Start() {
-	/* Resources
-	..............................................................................*/
-	// Animation
+	// Resources
 	this->animIdle->sprite->device = this->resources->device;
 	this->animIdle->sprite->texture = this->resources->texPlayerIdle;
 	this->animShoot->sprite->device = this->resources->device;
@@ -90,17 +88,6 @@ void Player::Start() {
 	this->animDuckFire->sprite->texture = this->resources->texPlayerDuckFire;
 	this->animHurt->sprite->device = this->resources->device;
 	this->animHurt->sprite->texture = this->resources->texPlayerHurt;
-	// Bullet
-	for (unsigned int i = 0; i < this->bullets.size(); i++) {
-		this->bullets[i]->sprite->texture = this->resources->texBullet;
-		this->bullets[i]->fxDestroy = this->resources->fxDestroy;
-		this->bullets[i]->fxTail = this->resources->fxTail;
-	}
-	// Audio
-	this->audShoot = this->resources->audShoot;
-	this->audPlayerHurt = this->resources->audPlayerHurt;
-	this->audLanding = this->resources->audLanding;
-
 
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animIdle->MakeFrame();
@@ -241,7 +228,7 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 			this->air = false;
 			if (this->verticalSpeed <= -0.2f * this->jumpPower) {
-				this->audLanding->Play();
+				this->resources->audLanding->Play();
 			}
 			this->verticalSpeed = 0.0f;
 		}
@@ -263,7 +250,7 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "enemy") {
 		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtColdDown * 1000.0f) {
 			this->hurt = true;
-			this->audPlayerHurt->Play();
+			this->resources->audPlayerHurt->Play();
 			if (other->gameObject->transform->position.x > this->transform->position.x) {
 				this->right = true;
 			}
@@ -288,9 +275,9 @@ void Player::FixedUpdate() {
 		if (GetKeyboardTrigger(DIK_F)) {
 			if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
 				this->shoot = true;
-				for (unsigned int i = 0; i < this->audShoot.size(); i++) {
-					if (!this->audShoot[i]->Playing()) {
-						this->audShoot[i]->Play();
+				for (unsigned int i = 0; i < this->resources->audShoot.size(); i++) {
+					if (!this->resources->audShoot[i]->Playing()) {
+						this->resources->audShoot[i]->Play();
 						break;
 					}
 				}

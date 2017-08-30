@@ -16,9 +16,6 @@ public:
 	// Animation
 	Animation* animWalk;
 	AnimationObject* enemyDestroy;
-	// Audio
-	Audio* audEnemyDamage;
-	Audio* audEnemyDestroy;
 
 	// Parameter
 	float gravity = 9.8f;

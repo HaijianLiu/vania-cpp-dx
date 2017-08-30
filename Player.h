@@ -22,10 +22,6 @@ public:
 	Animation* animDuck;
 	Animation* animDuckFire;
 	Animation* animHurt;
-	// Audio
-	std::vector<Audio*> audShoot;
-	Audio* audLanding;
-	Audio* audPlayerHurt;
 	// offset Object
 	OffsetObject* leftFire;
 	OffsetObject* rightFire;

@@ -19,8 +19,19 @@ Resources::Resources() {
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_impact1.wav");
 	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
 	// ParticleSystem
-	this->fxDestroy = new ParticleSystem(40);
 	this->fxTail = new ParticleSystem(100);
+	this->fxTail->rateOverTime = false;
+	this->fxTail->SetStartLifeTimeRange(1.0f,2.0f);
+	this->fxTail->SetStartSpeedRange(0.02f,0.2f);
+	this->fxTail->SetStartSizeRange(0.01f,0.02f);
+	this->fxTail->SetStartAngleRange(0.0f,2.0f*PI);
+	this->fxTail->SetGravity(0.0f);
+	this->fxTail->SetColor(63,140,242,255);
+	this->fxDestroy = new ParticleSystem(40);
+	this->fxDestroy->SetStartLifeTimeRange(0.1f,0.4f);
+	this->fxDestroy->SetStartSpeedRange(0.2f,1.0f);
+	this->fxDestroy->SetStartSizeRange(0.05f,0.1f);
+	this->fxDestroy->SetGravity(0.0f);
 }
 
 

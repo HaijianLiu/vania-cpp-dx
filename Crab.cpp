@@ -41,17 +41,9 @@ Crab::~Crab() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Crab::Start() {
-	/* Resources
-	..............................................................................*/
-	// Animation
+	// Resources
 	this->animWalk->sprite->device = this->resources->device;
 	this->animWalk->sprite->texture = this->resources->texCrabWalk;
-	// AnimationObject
-	this->enemyDestroy = this->resources->enemyDestroy;
-	// Audio
-	this->audEnemyDamage = this->resources->audEnemyDamage;
-	this->audEnemyDestroy = this->resources->audEnemyDestroy;
-
 
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animWalk->MakeFrame();
@@ -66,7 +58,8 @@ void Crab::Update() {
 	..............................................................................*/
 	if (this->hp <= 0) {
 		this->active = false;
-		Instantiate(this->enemyDestroy, this->transform);
+		this->resources->audEnemyDestroy->Play();
+		Instantiate(this->resources->enemyDestroy, this->transform);
 	}
 
 	/* Transform
@@ -127,12 +120,6 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "bullet") {
 		this->sprite->Flash();
 		this->hp -= 40;
-		if (this->hp > 0) {
-			this->audEnemyDamage->Play();
-		}
-		else {
-			this->audEnemyDestroy->Play();
-		}
 	}
 }
 
