@@ -2,18 +2,6 @@
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
-struct Slice {
-	int tileID;
-	Int2D position;
-	Int2D size;
-	Slice() {};
-	Slice(int tileID, int x, int y, int w, int h) {
-		this->tileID = tileID;
-		this->position = Int2D(x,y);
-		this->size = Int2D(w,h);
-	}
-};
-
 class Sprite {
 private:
 	Time* time;

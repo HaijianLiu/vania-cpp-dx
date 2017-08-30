@@ -2,8 +2,6 @@
 #ifndef _TRANSFORM_H_
 #define _TRANSFORM_H_
 
-class Camera;
-
 class Transform {
 private:
 	Camera* camera;

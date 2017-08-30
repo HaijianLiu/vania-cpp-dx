@@ -2,8 +2,6 @@
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
-class SceneManager;
-
 class Scene {
 private:
 	// global GameObjects and Colliders parameter

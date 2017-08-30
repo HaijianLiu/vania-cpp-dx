@@ -2,9 +2,6 @@
 #ifndef _GAME_OBJECT_
 #define _GAME_OBJECT_
 
-class BoxCollider;
-class Resources;
-
 class GameObject {
 private:
 	// List of GameObjects
