@@ -19,6 +19,9 @@ Crab::Crab() {
 	this->collHorizonCheck = new BoxCollider(this,0.0f,0.0f,28.0f,28.0f);
 	this->collHorizonCheck->trigger = true;
 	this->collHorizonCheck->tag = "enemy";
+
+	// GameObject
+	this->orb = new Orb();
 }
 
 
@@ -31,6 +34,8 @@ Crab::~Crab() {
 	// Collider
 	delete this->collGroundCheck;
 	delete this->collHorizonCheck;
+	// GameObject
+	delete this->orb;
 }
 
 
@@ -57,6 +62,7 @@ void Crab::Update() {
 		this->active = false;
 		this->resources->audEnemyDestroy->Play();
 		Instantiate(this->resources->enemyDestroy, this->transform);
+		Instantiate(this->orb, this->transform);
 	}
 
 	/* Transform

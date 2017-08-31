@@ -70,7 +70,7 @@ void Bullet::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void Bullet::OnTriggerEnter(BoxCollider* other) {
-	if (other->tag != "player" && other->tag != "ai") {
+	if (other->tag != "player" && other->tag != "ai" && other->tag != "orb") {
 		this->active = false;
 		this->resources->fxDestroy->Instantiate(this->transform);
 	}

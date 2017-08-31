@@ -173,6 +173,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NoneObject.cpp" />
     <ClCompile Include="OffsetObject.cpp" />
+    <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="NoneObject.h" />
     <ClInclude Include="OffsetObject.h" />
+    <ClInclude Include="Orb.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />

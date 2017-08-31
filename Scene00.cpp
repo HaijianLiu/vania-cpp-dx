@@ -32,9 +32,6 @@ Scene00::Scene00() {
 ------------------------------------------------------------------------------*/
 Scene00::~Scene00() {
 	for (unsigned int i = 0; i < this->playerPosition.size(); i++) delete this->playerPosition[i];
-	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
-	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
-	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];
 }
 
 

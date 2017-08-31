@@ -88,15 +88,12 @@ void Scene::SetScene() {
 ------------------------------------------------------------------------------*/
 Scene::~Scene() {
 	// delete Map GameObjects
-	for (unsigned int i = 0; i < this->grounds.size(); i++) {
-		delete this->grounds[i];
-	}
-	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
-		delete this->backGrounds[i];
-	}
-	for (unsigned int i = 0; i < this->range.size(); i++) {
-		delete this->range[i];
-	}
+	for (unsigned int i = 0; i < this->range.size(); i++) delete this->range[i];
+	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
+	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
+	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];
+	for (unsigned int i = 0; i < this->grounds.size(); i++) delete this->grounds[i];
+	for (unsigned int i = 0; i < this->backGrounds.size(); i++) delete this->backGrounds[i];
 }
 
 

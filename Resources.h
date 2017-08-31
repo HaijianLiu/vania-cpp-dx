@@ -25,6 +25,7 @@ public:
 	Texture texEnemyDestroy = Texture("assets/enemy-destroy.png",192,32);
 	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
 	Texture texBlock = Texture("assets/block.png",48,16);
+	Texture texOrb = Texture("assets/score.png",48,16);
 	Texture texUIEnergyBG = Texture("assets/ui-energy.png",112,32);
 	// Animation Object
 	AnimationObject* enemyDestroy;
@@ -36,9 +37,11 @@ public:
 	Audio* audPlayerNoAmmo;
 	Audio* audEnemyDamage;
 	Audio* audEnemyDestroy;
+	Audio* audOrbGet;
 	// Particle System
 	ParticleSystem* fxDestroy;
 	ParticleSystem* fxTail;
+	ParticleSystem* fxOrb;
 
 
 	Resources();

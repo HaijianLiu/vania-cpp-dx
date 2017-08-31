@@ -19,6 +19,7 @@ Resources::Resources() {
 	this->audPlayerNoAmmo = new Audio("assets/Sound/SE/sfx_wpn_noammo1.wav");
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_impact1.wav");
 	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
+	this->audOrbGet = new Audio("assets/Sound/SE/sfx_sounds_powerup10.wav");
 	// ParticleSystem
 	this->fxTail = new ParticleSystem(100);
 	this->fxTail->rateOverTime = false;
@@ -33,6 +34,14 @@ Resources::Resources() {
 	this->fxDestroy->SetStartSpeedRange(0.2f,1.0f);
 	this->fxDestroy->SetStartSizeRange(0.05f,0.1f);
 	this->fxDestroy->SetGravity(0.0f);
+	this->fxOrb = new ParticleSystem(50);
+	this->fxOrb->rate = 1;
+	this->fxOrb->SetStartLifeTimeRange(0.5f,1.0f);
+	this->fxOrb->SetStartSpeedRange(0.01f,0.2f);
+	this->fxOrb->SetStartSizeRange(0.02f,0.04f);
+	this->fxOrb->SetStartAngleRange(0.0f,2.0f*PI);
+	this->fxOrb->SetGravity(-0.05f);
+	this->fxOrb->SetColor(170,255,255,255);
 }
 
 
@@ -55,6 +64,7 @@ Resources::~Resources() {
 	if (this->texEnemyDestroy.texture != NULL) this->texEnemyDestroy.texture->Release();
 	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
+	if (this->texOrb.texture != NULL) this->texOrb.texture->Release();
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
 	// AnimationObject
 	delete this->enemyDestroy;
@@ -68,9 +78,11 @@ Resources::~Resources() {
 	delete this->audPlayerNoAmmo;
 	delete this->audEnemyDamage;
 	delete this->audEnemyDestroy;
+	delete this->audOrbGet;
 	// ParticleSystem
 	delete this->fxDestroy;
 	delete this->fxTail;
+	delete this->fxOrb;
 }
 
 
@@ -96,6 +108,7 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texEnemyDestroy);
 	Resources::LoadTexture(&this->texCrabWalk);
 	Resources::LoadTexture(&this->texBlock);
+	Resources::LoadTexture(&this->texOrb);
 	Resources::LoadTexture(&this->texUIEnergyBG);
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;
@@ -110,9 +123,11 @@ void Resources::Start() {
 	this->audPlayerNoAmmo->LoadAudio();
 	this->audEnemyDamage->LoadAudio();
 	this->audEnemyDestroy->LoadAudio();
+	this->audOrbGet->LoadAudio();
 	// ParticleSystem
 	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
+	this->fxOrb->LinkTexture(this->texDefault);
 }
 
 

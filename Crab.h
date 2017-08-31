@@ -13,6 +13,9 @@ public:
 	Animation* animWalk;
 	AnimationObject* enemyDestroy;
 
+	// GameObject
+	Orb* orb;
+
 	// Parameter
 	float gravity = 9.8f;
 	float speed = 0.3f;
