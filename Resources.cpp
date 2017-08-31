@@ -54,6 +54,7 @@ Resources::~Resources() {
 	if (this->texEnemyDestroy.texture != NULL) this->texEnemyDestroy.texture->Release();
 	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
+	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
 	// AnimationObject
 	delete this->enemyDestroy;
 	// Audio
@@ -93,6 +94,7 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texEnemyDestroy);
 	Resources::LoadTexture(&this->texCrabWalk);
 	Resources::LoadTexture(&this->texBlock);
+	Resources::LoadTexture(&this->texUIEnergyBG);
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;
 	this->enemyDestroy->animation->sprite->texture = this->texEnemyDestroy;

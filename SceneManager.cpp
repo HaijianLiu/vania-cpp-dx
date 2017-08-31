@@ -10,6 +10,8 @@ SceneManager::SceneManager() {
 	// Resources
 	this->resources = GetResources();
 
+	// UIObject
+	this->uiEnergyBG = new UIObject(-144.0f,-104.0f,112.0f,32.0f);
 	// GameObject
 	this->player = new Player();
 	// Scene
@@ -26,6 +28,8 @@ SceneManager::SceneManager() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
+	// UIObject
+	delete this->uiEnergyBG;
 	// Player
 	delete this->player;
 	// Scene
@@ -45,6 +49,9 @@ void SceneManager::Start() {
 	}
 	// Camera target
 	this->camera->target = this->player;
+
+	// Resources
+	this->uiEnergyBG->sprite->texture = this->resources->texUIEnergyBG;
 
 	// Scene Start
 	// this->resources->audSceneBGM->Play();

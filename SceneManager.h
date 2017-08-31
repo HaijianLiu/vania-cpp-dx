@@ -11,6 +11,8 @@ public:
 	// Resources
 	Resources* resources;
 
+	// UIObject
+	UIObject* uiEnergyBG;
 	// GameObject
 	Player* player;
 	// Scene

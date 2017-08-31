@@ -59,6 +59,7 @@
 #include "NoneObject.h"
 #include "OffsetObject.h"
 #include "Camera.h"
+#include "UIObject.h"
 #include "BoxCollider.h"
 #include "Animation.h"
 #include "AnimationObject.h"
