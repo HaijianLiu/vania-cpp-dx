@@ -6,10 +6,6 @@
 ------------------------------------------------------------------------------*/
 Scene02::Scene02() {
 	// Set Map path
-	this->cameraPath = "map/scene_Scene02-Camera.csv";
-	this->groundPath = "map/scene_Scene02-Ground.csv";
-	this->backGroundPath = "map/scene_Scene02-BackGround.csv";
-	this->rangePath = "map/scene_Scene02-Range.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();

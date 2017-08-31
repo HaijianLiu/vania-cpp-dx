@@ -17,31 +17,54 @@ Scene::Scene() {
 
 void Scene::SetScene() {
 	// Load Map Data
-	std::vector<Int2D> cameraData;
-	std::vector<Int2D> groundData;
-	std::vector<Int2D> backGroundData;
-	std::vector<Int2D> rangeData;
-	Scene::LoadMapData(this->cameraPath, cameraData);
-	Scene::LoadMapData(this->groundPath, groundData);
-	Scene::LoadMapData(this->backGroundPath, backGroundData);
-	Scene::LoadMapData(this->rangePath, rangeData);
 
 	// push_back to scene map Objects (Order in Layer Order)
+	// range
+	std::vector<Int2D> cameraData;
+	Scene::LoadMapData(this->cameraPath, cameraData);
 	for (unsigned int i = 0; i < cameraData.size(); i++) {
 		this->camera->range.push_back(new NoneObject());
 		Scene::SetPosition(this->camera->range.back(), cameraData[i].x);
 	}
+	std::vector<Int2D> rangeData;
+	Scene::LoadMapData(this->rangePath, rangeData);
+	for (unsigned int i = 0; i < rangeData.size(); i++) {
+		this->range.push_back(new NoneObject());
+		Scene::SetPosition(this->range.back(), rangeData[i].x);
+	}
+	// Enemy
+	std::vector<Int2D> crabData;
+	Scene::LoadMapData(this->crabPath, crabData);
+	for (unsigned int i = 0; i < crabData.size(); i++) {
+		this->crabs.push_back(new Crab());
+		Scene::SetPosition(this->crabs.back(), crabData[i].x);
+	}
+	std::vector<Int2D> aiData;
+	Scene::LoadMapData(this->aiPath, aiData);
+	for (unsigned int i = 0; i < aiData.size(); i++) {
+		this->ai.push_back(new Ground());
+		Scene::SetTile(this->ai.back(), aiData[i].x, aiData[i].y);
+		this->ai.back()->collider->tag = "ai";
+	}
+	// Block
+	std::vector<Int2D> blockData;
+	Scene::LoadMapData(this->blockPath, blockData);
+	for (unsigned int i = 0; i < blockData.size(); i++) {
+		this->blocks.push_back(new Block());
+		Scene::SetPosition(this->blocks.back(), blockData[i].x);
+	}
+	// Map
+	std::vector<Int2D> backGroundData;
+	Scene::LoadMapData(this->backGroundPath, backGroundData);
 	for (unsigned int i = 0; i < backGroundData.size(); i++) {
 		this->backGrounds.push_back(new BackGround());
 		Scene::SetTile(this->backGrounds.back(), backGroundData[i].x, backGroundData[i].y);
 	}
+	std::vector<Int2D> groundData;
+	Scene::LoadMapData(this->groundPath, groundData);
 	for (unsigned int i = 0; i < groundData.size(); i++) {
 		this->grounds.push_back(new Ground());
 		Scene::SetTile(this->grounds.back(), groundData[i].x, groundData[i].y);
-	}
-	for (unsigned int i = 0; i < rangeData.size(); i++) {
-		this->range.push_back(new NoneObject());
-		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 
 	// Get GameObject && Get Collider

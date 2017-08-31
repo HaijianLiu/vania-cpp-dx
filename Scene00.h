@@ -8,11 +8,6 @@ private:
 public:
 	std::vector<NoneObject*> playerPosition;
 
-	// Enemy
-	std::vector<Crab*> crabs;
-	std::vector<Ground*> ai;
-	std::vector<Block*> blocks;
-
 	Scene00();
 	~Scene00();
 

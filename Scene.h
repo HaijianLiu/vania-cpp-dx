@@ -20,18 +20,24 @@ public:
 	Camera* camera;
 
 	// Map Data
-	Int2D mapSize = Int2D(100,15);
+	Int2D mapSize = Int2D(140,15);
 	int tilePixel = 16;
 	Int2D tileSize = Int2D(384/16,192/16);
 	// Map path
-	const char* cameraPath;
-	const char* groundPath;
-	const char* backGroundPath;
-	const char* rangePath;
+	const char* cameraPath = "map/scene_Scene-Null";
+	const char* rangePath = "map/scene_Scene-Null";
+	const char* crabPath = "map/scene_Scene-Null";
+	const char* aiPath = "map/scene_Scene-Null";
+	const char* blockPath = "map/scene_Scene-Null";
+	const char* groundPath = "map/scene_Scene-Null";
+	const char* backGroundPath = "map/scene_Scene-Null";
 	// Map Object
+	std::vector<NoneObject*> range;
+	std::vector<Crab*> crabs;
+	std::vector<Ground*> ai;
+	std::vector<Block*> blocks;
 	std::vector<Ground*> grounds;
 	std::vector<BackGround*> backGrounds;
-	std::vector<NoneObject*> range;
 
 	Scene();
 	virtual ~Scene();
