@@ -25,6 +25,8 @@ public:
 	OffsetObject* rightDuckFire;
 	// Bullet
 	std::vector<Bullet*> bullets;
+	// UIObject
+	UIObject* uiEnergy;
 
 	// Parameter
 	float gravity = 9.8f;
@@ -32,7 +34,10 @@ public:
 	float jumpPower = 4.0f;
 	float fireColdDown = 0.1f;
 	float hurtColdDown = 1.0f;
+	float freezeColdDown = 5.0f;
 	float backSpeed = 0.5f;
+	float shootEnergy = 20.0f;
+	float energyRegain = 20.0f;
 	// status
 	bool move = false;
 	bool right = true;
@@ -40,8 +45,10 @@ public:
 	bool shoot = false;
 	bool duck = false;
 	bool hurt = false;
+	bool freeze = false;
 	DWORD lastFire = 0;
 	DWORD lastHurt = 0;
+	DWORD lastFreeze = 0;
 	float verticalSpeed = 0.0f;
 
 	// Constructors

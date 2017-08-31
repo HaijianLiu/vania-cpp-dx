@@ -13,6 +13,7 @@ public:
 
 	// UIObject
 	UIObject* uiEnergyBG;
+	UIObject* uiEnergy;
 	// GameObject
 	Player* player;
 	// Scene

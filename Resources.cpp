@@ -16,6 +16,7 @@ Resources::Resources() {
 	this->audSceneBGM->loop = true;
 	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
 	this->audPlayerHurt = new Audio("assets/Sound/SE/sfx_sounds_error14.wav");
+	this->audPlayerNoAmmo = new Audio("assets/Sound/SE/sfx_wpn_noammo1.wav");
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_impact1.wav");
 	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
 	// ParticleSystem
@@ -64,6 +65,7 @@ Resources::~Resources() {
 	delete this->audSceneBGM;
 	delete this->audLanding;
 	delete this->audPlayerHurt;
+	delete this->audPlayerNoAmmo;
 	delete this->audEnemyDamage;
 	delete this->audEnemyDestroy;
 	// ParticleSystem
@@ -105,6 +107,7 @@ void Resources::Start() {
 	this->audSceneBGM->LoadAudio();
 	this->audLanding->LoadAudio();
 	this->audPlayerHurt->LoadAudio();
+	this->audPlayerNoAmmo->LoadAudio();
 	this->audEnemyDamage->LoadAudio();
 	this->audEnemyDestroy->LoadAudio();
 	// ParticleSystem

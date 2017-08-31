@@ -7,6 +7,7 @@
 Crab::Crab() {
 	// Status
 	this->status->hp = 100;
+	this->status->damage = 30;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(48.0f,32.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel

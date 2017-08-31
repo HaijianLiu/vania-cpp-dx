@@ -95,6 +95,13 @@ void Sprite::Flash() {
 	this->startEffect = this->time->currentTime;
 }
 
+void Sprite::SetColor(int r, int g, int b, int a) {
+	this->vertex[0].diffuse = D3DCOLOR_RGBA(r,g,b,a);
+	this->vertex[1].diffuse = D3DCOLOR_RGBA(r,g,b,a);
+	this->vertex[2].diffuse = D3DCOLOR_RGBA(r,g,b,a);
+	this->vertex[3].diffuse = D3DCOLOR_RGBA(r,g,b,a);
+}
+
 
 
 #ifdef _DEBUG

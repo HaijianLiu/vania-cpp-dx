@@ -34,6 +34,7 @@ public:
 	void Draw();
 
 	void Flash();
+	void SetColor(int r, int g, int b, int a);
 
 	#ifdef _DEBUG
 		Sprite(int imageSizeX, int imageSizeY);

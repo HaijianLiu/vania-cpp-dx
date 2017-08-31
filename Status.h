@@ -7,8 +7,8 @@ private:
 	/* data */
 
 public:
-	int hp = 0;
-	int damage = 0;
+	float hp = 0;
+	float damage = 0;
 
 	Status();
 	~Status();

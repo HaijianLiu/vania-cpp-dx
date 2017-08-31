@@ -33,6 +33,7 @@ public:
 	Audio* audSceneBGM;
 	Audio* audLanding;
 	Audio* audPlayerHurt;
+	Audio* audPlayerNoAmmo;
 	Audio* audEnemyDamage;
 	Audio* audEnemyDestroy;
 	// Particle System

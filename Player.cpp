@@ -5,6 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Player::Player() {
+	// Status
+	this->status->hp = 100;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(80.0f,80.0f);
 	this->sprite->flashTime = this->hurtColdDown;
@@ -99,6 +101,37 @@ void Player::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Player::Update() {
+	/* HP
+	..............................................................................*/
+	if (!this->freeze) {
+		this->status->hp += this->energyRegain * this->time->deltaTime;
+	}
+	else {
+		if (this->time->currentTime > this->lastFreeze + this->freezeColdDown * 1000.0f) {
+			this->freeze = false;
+		}
+	}
+	if (this->status->hp < 0) this->status->hp = 0;
+	if (this->status->hp > 100) this->status->hp = 100;
+
+	/* UIObject
+	..............................................................................*/
+	this->uiEnergy->offset = Float2D(-200.0f + 6.0f + 0.5f * this->status->hp,  -120.0f + 20.0f);
+	this->uiEnergy->transform->scale = Float2D(this->status->hp * 1.0f, 2.0f);
+	if (!this->freeze) {
+		if (this->status->hp > 60) {
+			this->uiEnergy->sprite->SetColor(0,255,255,255);
+		}
+		else if (this->status->hp > 20) {
+			this->uiEnergy->sprite->SetColor(255,192,0,255);
+		}
+		else {
+			this->uiEnergy->sprite->SetColor(255,79,108,255);
+		}
+	}
+	else {
+		this->uiEnergy->sprite->SetColor(100,100,100,255);
+	}
 
 	/* Transform
 	..............................................................................*/
@@ -245,6 +278,10 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "enemy") {
 		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtColdDown * 1000.0f) {
 			this->hurt = true;
+			this->lastHurt = this->time->currentTime;
+			this->freeze = true;
+			this->lastFreeze = this->time->currentTime;
+			this->status->hp -= other->gameObject->status->damage;
 			this->resources->audPlayerHurt->Play();
 			if (other->gameObject->transform->position.x > this->transform->position.x) {
 				this->right = true;
@@ -252,7 +289,6 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 			else {
 				this->right = false;
 			}
-			this->lastHurt = this->time->currentTime;
 			this->verticalSpeed = 0.5f * this->jumpPower;
 			this->sprite->Flash();
 		}
@@ -269,37 +305,43 @@ void Player::FixedUpdate() {
 	if (!this->hurt) {
 		if (GetKeyboardTrigger(DIK_F)) {
 			if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
-				this->shoot = true;
-				for (unsigned int i = 0; i < this->resources->audShoot.size(); i++) {
-					if (!this->resources->audShoot[i]->Playing()) {
-						this->resources->audShoot[i]->Play();
-						break;
+				if (this->status->hp > this->shootEnergy) {
+					this->shoot = true;
+					this->status->hp -= this->shootEnergy;
+					for (unsigned int i = 0; i < this->resources->audShoot.size(); i++) {
+						if (!this->resources->audShoot[i]->Playing()) {
+							this->resources->audShoot[i]->Play();
+							break;
+						}
+					}
+					for (unsigned int i = 0; i < this->bullets.size(); i++) {
+						if (!this->bullets[i]->active) {
+							this->lastFire = this->time->currentTime;
+							this->bullets[i]->birthTime = this->time->currentTime;
+							this->bullets[i]->right = this->right;
+							this->bullets[i]->active = true;
+							if (this->right) {
+								if (this->duck && !this->move && !this->air) {
+									this->bullets[i]->transform->position = this->rightDuckFire->transform->position;
+								}
+								else {
+									this->bullets[i]->transform->position = this->rightFire->transform->position;
+								}
+							}
+							else {
+								if (this->duck && !this->move && !this->air) {
+									this->bullets[i]->transform->position = this->leftDuckFire->transform->position;
+								}
+								else {
+									this->bullets[i]->transform->position = this->leftFire->transform->position;
+								}
+							}
+							break;
+						}
 					}
 				}
-				for (unsigned int i = 0; i < this->bullets.size(); i++) {
-					if (!this->bullets[i]->active) {
-						this->lastFire = this->time->currentTime;
-						this->bullets[i]->birthTime = this->time->currentTime;
-						this->bullets[i]->right = this->right;
-						this->bullets[i]->active = true;
-						if (this->right) {
-							if (this->duck && !this->move && !this->air) {
-								this->bullets[i]->transform->position = this->rightDuckFire->transform->position;
-							}
-							else {
-								this->bullets[i]->transform->position = this->rightFire->transform->position;
-							}
-						}
-						else {
-							if (this->duck && !this->move && !this->air) {
-								this->bullets[i]->transform->position = this->leftDuckFire->transform->position;
-							}
-							else {
-								this->bullets[i]->transform->position = this->leftFire->transform->position;
-							}
-						}
-						break;
-					}
+				else {
+					this->resources->audPlayerNoAmmo->Play();
 				}
 			}
 		}

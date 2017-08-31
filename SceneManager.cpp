@@ -11,9 +11,11 @@ SceneManager::SceneManager() {
 	this->resources = GetResources();
 
 	// UIObject
+	this->uiEnergy = new UIObject(-200.0f + 6.5f + 49.5f, -120.0f + 19.5f,100.0f,1.0f);
 	this->uiEnergyBG = new UIObject(-144.0f,-104.0f,112.0f,32.0f);
 	// GameObject
 	this->player = new Player();
+	this->player->uiEnergy = this->uiEnergy;
 	// Scene
 	scenes.push_back(new Scene00());
 	scenes.push_back(new Scene01());
@@ -29,6 +31,7 @@ SceneManager::SceneManager() {
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
 	// UIObject
+	delete this->uiEnergy;
 	delete this->uiEnergyBG;
 	// Player
 	delete this->player;
@@ -51,6 +54,7 @@ void SceneManager::Start() {
 	this->camera->target = this->player;
 
 	// Resources
+	this->uiEnergy->sprite->texture = this->resources->texDefault;
 	this->uiEnergyBG->sprite->texture = this->resources->texUIEnergyBG;
 
 	// Scene Start
