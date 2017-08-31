@@ -7,7 +7,7 @@
 ------------------------------------------------------------------------------*/
 Resources::Resources() {
 	// Animation Object
-	this->enemyDestroy = new AnimationObject(64,64,6,1,4);
+	this->enemyDestroy = new AnimationObject(32,32,6,1,4);
 	// Audio
 	for (unsigned int i = 0; i < 4; i++) {
 		this->audShoot.push_back(new Audio("assets/Sound/SE/sfx_wpn_laser8.wav"));

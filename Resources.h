@@ -22,7 +22,7 @@ public:
 	Texture texPlayerHurt = Texture("assets/player-hurt.png",80,80);
 	Texture texBullet = Texture("assets/bullet.png",4,4);
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
-	Texture texEnemyDestroy = Texture("assets/enemy-destroy.png",384,64);
+	Texture texEnemyDestroy = Texture("assets/enemy-destroy.png",192,32);
 	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
 	Texture texBlock = Texture("assets/block.png",48,16);
 	// Animation Object
