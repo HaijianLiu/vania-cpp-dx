@@ -28,6 +28,7 @@ public:
 	const char* rangePath = "map/scene_Scene-Null";
 	const char* crabPath = "map/scene_Scene-Null";
 	const char* aiPath = "map/scene_Scene-Null";
+	const char* orbPath = "map/scene_Scene-Null";
 	const char* blockPath = "map/scene_Scene-Null";
 	const char* groundPath = "map/scene_Scene-Null";
 	const char* backGroundPath = "map/scene_Scene-Null";
@@ -35,6 +36,7 @@ public:
 	std::vector<NoneObject*> range;
 	std::vector<Crab*> crabs;
 	std::vector<Ground*> ai;
+	std::vector<Orb*> orbs;
 	std::vector<Block*> blocks;
 	std::vector<Ground*> grounds;
 	std::vector<BackGround*> backGrounds;

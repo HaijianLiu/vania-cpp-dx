@@ -46,6 +46,15 @@ void Scene::SetScene() {
 		Scene::SetTile(this->ai.back(), aiData[i].x, aiData[i].y);
 		this->ai.back()->collider->tag = "ai";
 	}
+	// Orb
+	std::vector<Int2D> orbData;
+	Scene::LoadMapData(this->orbPath, orbData);
+	for (unsigned int i = 0; i < orbData.size(); i++) {
+		this->orbs.push_back(new Orb());
+		Scene::SetPosition(this->orbs.back(), orbData[i].x);
+		this->orbs.back()->active = true;
+		this->orbs.back()->sprite->slice = Slice(0,32,0,16,16);
+	}
 	// Block
 	std::vector<Int2D> blockData;
 	Scene::LoadMapData(this->blockPath, blockData);
@@ -91,6 +100,7 @@ Scene::~Scene() {
 	for (unsigned int i = 0; i < this->range.size(); i++) delete this->range[i];
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
+	for (unsigned int i = 0; i < this->orbs.size(); i++) delete this->orbs[i];
 	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];
 	for (unsigned int i = 0; i < this->grounds.size(); i++) delete this->grounds[i];
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) delete this->backGrounds[i];

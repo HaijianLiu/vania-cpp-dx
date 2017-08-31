@@ -10,6 +10,7 @@ Scene00::Scene00() {
 	this->rangePath = "map/scene_Scene00-Range.csv";
 	this->crabPath = "map/scene_Scene00-Crab.csv";
 	this->aiPath = "map/scene_Scene00-AI.csv";
+	this->orbPath = "map/scene_Scene00-Orb.csv";
 	this->blockPath = "map/scene_Scene00-Block.csv";
 	this->groundPath = "map/scene_Scene00-Ground.csv";
 	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
