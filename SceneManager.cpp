@@ -22,6 +22,10 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene02());
 	scenes.push_back(new Scene03());
 	scenes.push_back(new Scene04());
+	// set SceneManager in scene
+	for (unsigned int i = 0; i < this->scenes.size(); i++) {
+		this->scenes[i]->sceneManager = this;
+	}
 
 	// active Scene
 	SceneManager::SetActiveScene(0);
@@ -48,10 +52,6 @@ SceneManager::~SceneManager() {
 < Start >
 ------------------------------------------------------------------------------*/
 void SceneManager::Start() {
-	// set SceneManager in scene
-	for (unsigned int i = 0; i < this->scenes.size(); i++) {
-		this->scenes[i]->sceneManager = this;
-	}
 	// Camera target
 	this->camera->target = this->player;
 
@@ -89,5 +89,5 @@ void SceneManager::Draw() {
 void SceneManager::SetActiveScene(unsigned int i) {
 	this->activeScene = i;
 	this->camera->activeRange = i;
-	this->scenes[this->activeScene]->ReSet();
+	this->scenes[this->activeScene]->Reset();
 }

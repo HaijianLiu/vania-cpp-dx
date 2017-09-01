@@ -16,6 +16,7 @@ public:
 	AnimationObject* enemyDestroy;
 
 	// GameObject
+	GameObject* target;
 	Orb* orb;
 
 	// Parameter

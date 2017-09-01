@@ -102,6 +102,37 @@ void Scene::SetScene() {
 
 
 /*------------------------------------------------------------------------------
+< Reset >
+------------------------------------------------------------------------------*/
+void Scene::Reset() {
+	// Enemy
+	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
+		Scene::SetPosition(this->jumpers[i], this->jumperData[i].x);
+		this->jumpers[i]->active = true;
+		this->jumpers[i]->status->hp = 100;
+		this->jumpers[i]->orb->active = false;
+	}
+	for (unsigned int i = 0; i < this->flyers.size(); i++) {
+		Scene::SetPosition(this->flyers[i], this->flyerData[i].x);
+		this->flyers[i]->active = true;
+		this->flyers[i]->status->hp = 100;
+		this->flyers[i]->orb->active = false;
+	}
+	for (unsigned int i = 0; i < this->crabs.size(); i++) {
+		Scene::SetPosition(this->crabs[i], this->crabData[i].x);
+		this->crabs[i]->active = true;
+		this->crabs[i]->status->hp = 100;
+		this->crabs[i]->orb->active = false;
+	}
+	// Block
+	for (unsigned int i = 0; i < this->blocks.size(); i++) {
+		this->blocks[i]->active = true;
+		this->blocks[i]->status->hp = 100;
+	}
+}
+
+
+/*------------------------------------------------------------------------------
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene::~Scene() {
@@ -125,6 +156,10 @@ void Scene::Start() {
 	// Link Texture
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->resources->texTile;
+	}
+	// Link target
+	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
+		this->jumpers[i]->target = this->sceneManager->player;
 	}
 
 	// Start GameObject && Start Collider (_DEBUG)
@@ -260,25 +295,4 @@ void Scene::SetTile(GameObject* gameObject, int mapID, int tileID) {
 void Scene::SetPosition(GameObject* gameObject, int mapID) {
 	gameObject->transform->position.x = mapID % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
-}
-
-void Scene::ReSet() {
-	// Enemy
-	for (unsigned int i = 0; i < this->flyers.size(); i++) {
-		Scene::SetPosition(this->flyers[i], this->flyerData[i].x);
-		this->flyers[i]->active = true;
-		this->flyers[i]->status->hp = 100;
-		this->flyers[i]->orb->active = false;
-	}
-	for (unsigned int i = 0; i < this->crabs.size(); i++) {
-		Scene::SetPosition(this->crabs[i], this->crabData[i].x);
-		this->crabs[i]->active = true;
-		this->crabs[i]->status->hp = 100;
-		this->crabs[i]->orb->active = false;
-	}
-	// Block
-	for (unsigned int i = 0; i < this->blocks.size(); i++) {
-		this->blocks[i]->active = true;
-		this->blocks[i]->status->hp = 100;
-	}
 }

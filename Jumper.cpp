@@ -76,9 +76,14 @@ void Jumper::Update() {
 
 	/* Transform
 	..............................................................................*/
-	// move
 	if (!this->air) {
 		if (this->time->currentTime > this->lastJump + this->jumpColdDown * 1000.0f) {
+			if (this->target->transform->position.x > this->transform->position.x) {
+				this->right = true;
+			}
+			else {
+				this->right = false;
+			}
 			this->verticalSpeed = this->jumpPower;
 			this->air = true;
 			this->lastJump = this->time->currentTime;
