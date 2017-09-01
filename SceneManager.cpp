@@ -20,6 +20,7 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene00());
 	scenes.push_back(new Scene01());
 	scenes.push_back(new Scene02());
+	scenes.push_back(new Scene03());
 
 	// active Scene
 	SceneManager::SetActiveScene(0);
