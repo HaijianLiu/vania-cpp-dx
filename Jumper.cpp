@@ -4,19 +4,23 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Crab::Crab() {
+Jumper::Jumper() {
 	// Status
 	this->status->hp = 100;
 	this->status->damage = 30;
 	// Transform Size in real pixel (Int2D)
-	this->transform->scale = Float2D(48.0f,32.0f);
+	this->transform->scale = Float2D(47.0f,32.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
-	this->animWalk = new Animation(4,1,15);
+	this->animIdle = new Animation(4,1,15);
+	this->animJump = new Animation(1,1,60);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.14f,4.0f,4.0f);
 	this->collGroundCheck->trigger = true;
 	this->collGroundCheck->tag = "ground check";
-	this->collHorizonCheck = new BoxCollider(this,0.0f,0.03f,24.0f,24.0f);
+	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.05f,4.0f,4.0f);
+	this->collCeilingCheck->trigger = true;
+	this->collCeilingCheck->tag = "ceiling check";
+	this->collHorizonCheck = new BoxCollider(this,0.0f,0.05f,28.0f,20.0f);
 	this->collHorizonCheck->trigger = true;
 	this->collHorizonCheck->tag = "enemy";
 
@@ -28,11 +32,13 @@ Crab::Crab() {
 /*------------------------------------------------------------------------------
 < Destructor >
 ------------------------------------------------------------------------------*/
-Crab::~Crab() {
+Jumper::~Jumper() {
 	// Animation
-	delete this->animWalk;
+	delete this->animIdle;
+	delete this->animJump;
 	// Collider
 	delete this->collGroundCheck;
+	delete this->collCeilingCheck;
 	delete this->collHorizonCheck;
 	// GameObject
 	delete this->orb;
@@ -42,20 +48,23 @@ Crab::~Crab() {
 /*------------------------------------------------------------------------------
 < Start >
 ------------------------------------------------------------------------------*/
-void Crab::Start() {
+void Jumper::Start() {
 	// Resources
-	this->animWalk->sprite->device = this->resources->device;
-	this->animWalk->sprite->texture = this->resources->texCrabWalk;
+	this->animIdle->sprite->device = this->resources->device;
+	this->animIdle->sprite->texture = this->resources->texJumperIdle;
+	this->animJump->sprite->device = this->resources->device;
+	this->animJump->sprite->texture = this->resources->texJumperJump;
 
 	// Animation MakeFrame() || Sprite MakeSlice()
-	this->animWalk->MakeFrame();
+	this->animIdle->MakeFrame();
+	this->animJump->MakeFrame();
 }
 
 
 /*------------------------------------------------------------------------------
 < Update >
 ------------------------------------------------------------------------------*/
-void Crab::Update() {
+void Jumper::Update() {
 	/* Death
 	..............................................................................*/
 	if (this->status->hp <= 0) {
@@ -68,11 +77,20 @@ void Crab::Update() {
 	/* Transform
 	..............................................................................*/
 	// move
-	if (!this->right) {
-		this->transform->position.x -= this->speed * this->time->deltaTime;
+	if (!this->air) {
+		if (this->time->currentTime > this->lastJump + this->jumpColdDown * 1000.0f) {
+			this->verticalSpeed = this->jumpPower;
+			this->air = true;
+			this->lastJump = this->time->currentTime;
+		}
 	}
 	else {
-		this->transform->position.x += this->speed * this->time->deltaTime;
+		if (!this->right) {
+			this->transform->position.x -= this->speed * this->time->deltaTime;
+		}
+		else {
+			this->transform->position.x += this->speed * this->time->deltaTime;
+		}
 	}
 
 	/* Gravity
@@ -89,19 +107,26 @@ void Crab::Update() {
 	/* Animation
 	..............................................................................*/
 	// Animation SetTexture() || Sprite SetTexture()
-	this->animWalk->sprite->flipX = this->right;
-	this->animWalk->SetTexture(this->sprite->vertex);
-	this->sprite->texture = this->animWalk->sprite->texture;
+	if (this->air) {
+		this->animJump->sprite->flipX = this->right;
+		this->animJump->SetTexture(this->sprite->vertex);
+		this->sprite->texture = this->animJump->sprite->texture;
+	}
+	else {
+		this->animIdle->sprite->flipX = this->right;
+		this->animIdle->SetTexture(this->sprite->vertex);
+		this->sprite->texture = this->animIdle->sprite->texture;
+	}
 }
 
 
 /*------------------------------------------------------------------------------
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
-void Crab::OnTriggerEnter(BoxCollider* other) {
+void Jumper::OnTriggerEnter(BoxCollider* other) {
 	/* Transform if tag = "ground"
 	..............................................................................*/
-	if (other->tag == "ground" || other->tag == "ai") {
+	if (other->tag == "ground") {
 		if (this->collGroundCheck->enter == true) {
 			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 			this->air = false;
@@ -117,6 +142,10 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 				this->right = false;
 			}
 		}
+		if (this->collCeilingCheck->enter == true) {
+			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y + other->halfSize.y * PIXEL_TO_UNIT - this->collCeilingCheck->offset.y + this->collCeilingCheck->halfSize.y * PIXEL_TO_UNIT;
+			this->verticalSpeed = 0.0f;
+		}
 	}
 	/* Damage if tag = "bullet"
 	..............................................................................*/
@@ -130,6 +159,6 @@ void Crab::OnTriggerEnter(BoxCollider* other) {
 /*------------------------------------------------------------------------------
 < Fixed Update >
 ------------------------------------------------------------------------------*/
-void Crab::FixedUpdate() {
+void Jumper::FixedUpdate() {
 
 }

@@ -25,6 +25,8 @@ public:
 	Texture texEnemyDestroy = Texture("assets/enemy-destroy.png",192,32);
 	Texture texCrabWalk = Texture("assets/crab-walk.png",192,32);
 	Texture texFlyer = Texture("assets/flyer.png",64,32);
+	Texture texJumperIdle = Texture("assets/jumper-idle.png",188,32);
+	Texture texJumperJump = Texture("assets/jumper-jump.png",47,32);
 	Texture texBlock = Texture("assets/block.png",48,16);
 	Texture texOrb = Texture("assets/score.png",48,16);
 	Texture texUIEnergyBG = Texture("assets/ui-energy.png",112,32);

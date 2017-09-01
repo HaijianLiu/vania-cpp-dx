@@ -26,6 +26,7 @@ public:
 	// Map path
 	const char* cameraPath = "map/scene_Scene-Null";
 	const char* rangePath = "map/scene_Scene-Null";
+	const char* jumperPath = "map/scene_Scene-Null";
 	const char* flyerPath = "map/scene_Scene-Null";
 	const char* crabPath = "map/scene_Scene-Null";
 	const char* aiPath = "map/scene_Scene-Null";
@@ -34,10 +35,12 @@ public:
 	const char* groundPath = "map/scene_Scene-Null";
 	const char* backGroundPath = "map/scene_Scene-Null";
 	// ReSet Data
+	std::vector<Int2D> jumperData;
 	std::vector<Int2D> flyerData;
 	std::vector<Int2D> crabData;
 	// Map Object
 	std::vector<NoneObject*> range;
+	std::vector<Jumper*> jumpers;
 	std::vector<Flyer*> flyers;
 	std::vector<Crab*> crabs;
 	std::vector<Ground*> ai;

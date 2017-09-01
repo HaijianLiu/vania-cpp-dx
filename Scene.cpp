@@ -33,6 +33,11 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 	// Enemy
+	Scene::LoadMapData(this->jumperPath, this->jumperData);
+	for (unsigned int i = 0; i < this->jumperData.size(); i++) {
+		this->jumpers.push_back(new Jumper());
+		Scene::SetPosition(this->jumpers.back(), this->jumperData[i].x);
+	}
 	Scene::LoadMapData(this->flyerPath, this->flyerData);
 	for (unsigned int i = 0; i < this->flyerData.size(); i++) {
 		this->flyers.push_back(new Flyer());
@@ -103,6 +108,7 @@ Scene::~Scene() {
 	// delete Map GameObjects
 	for (unsigned int i = 0; i < this->range.size(); i++) delete this->range[i];
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
+	for (unsigned int i = 0; i < this->jumpers.size(); i++) delete this->jumpers[i];
 	for (unsigned int i = 0; i < this->flyers.size(); i++) delete this->flyers[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
 	for (unsigned int i = 0; i < this->orbs.size(); i++) delete this->orbs[i];

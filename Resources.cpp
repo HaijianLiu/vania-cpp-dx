@@ -64,6 +64,8 @@ Resources::~Resources() {
 	if (this->texEnemyDestroy.texture != NULL) this->texEnemyDestroy.texture->Release();
 	if (this->texCrabWalk.texture != NULL) this->texCrabWalk.texture->Release();
 	if (this->texFlyer.texture != NULL) this->texFlyer.texture->Release();
+	if (this->texJumperIdle.texture != NULL) this->texJumperIdle.texture->Release();
+	if (this->texJumperJump.texture != NULL) this->texJumperJump.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
 	if (this->texOrb.texture != NULL) this->texOrb.texture->Release();
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
@@ -109,6 +111,8 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texEnemyDestroy);
 	Resources::LoadTexture(&this->texCrabWalk);
 	Resources::LoadTexture(&this->texFlyer);
+	Resources::LoadTexture(&this->texJumperIdle);
+	Resources::LoadTexture(&this->texJumperJump);
 	Resources::LoadTexture(&this->texBlock);
 	Resources::LoadTexture(&this->texOrb);
 	Resources::LoadTexture(&this->texUIEnergyBG);

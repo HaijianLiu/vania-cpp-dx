@@ -171,6 +171,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Jumper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NoneObject.cpp" />
     <ClCompile Include="OffsetObject.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Jumper.h" />
     <ClInclude Include="NoneObject.h" />
     <ClInclude Include="OffsetObject.h" />
     <ClInclude Include="Orb.h" />
