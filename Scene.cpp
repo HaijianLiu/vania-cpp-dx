@@ -33,6 +33,12 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 	// Enemy
+	std::vector<Int2D> flyerData;
+	Scene::LoadMapData(this->flyerPath, flyerData);
+	for (unsigned int i = 0; i < flyerData.size(); i++) {
+		this->flyers.push_back(new Flyer());
+		Scene::SetPosition(this->flyers.back(), flyerData[i].x);
+	}
 	std::vector<Int2D> crabData;
 	Scene::LoadMapData(this->crabPath, crabData);
 	for (unsigned int i = 0; i < crabData.size(); i++) {
@@ -99,6 +105,7 @@ Scene::~Scene() {
 	// delete Map GameObjects
 	for (unsigned int i = 0; i < this->range.size(); i++) delete this->range[i];
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
+	for (unsigned int i = 0; i < this->flyers.size(); i++) delete this->flyers[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
 	for (unsigned int i = 0; i < this->orbs.size(); i++) delete this->orbs[i];
 	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];

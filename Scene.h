@@ -26,6 +26,7 @@ public:
 	// Map path
 	const char* cameraPath = "map/scene_Scene-Null";
 	const char* rangePath = "map/scene_Scene-Null";
+	const char* flyerPath = "map/scene_Scene-Null";
 	const char* crabPath = "map/scene_Scene-Null";
 	const char* aiPath = "map/scene_Scene-Null";
 	const char* orbPath = "map/scene_Scene-Null";
@@ -34,6 +35,7 @@ public:
 	const char* backGroundPath = "map/scene_Scene-Null";
 	// Map Object
 	std::vector<NoneObject*> range;
+	std::vector<Flyer*> flyers;
 	std::vector<Crab*> crabs;
 	std::vector<Ground*> ai;
 	std::vector<Orb*> orbs;

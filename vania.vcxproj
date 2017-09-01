@@ -167,6 +167,7 @@
     <ClCompile Include="Crab.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Flyer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Crab.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Flyer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Input.h" />

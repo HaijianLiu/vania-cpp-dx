@@ -74,6 +74,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "Crab.h"
+#include "Flyer.h"
 #include "Ground.h"
 #include "BackGround.h"
 #include "Block.h"
