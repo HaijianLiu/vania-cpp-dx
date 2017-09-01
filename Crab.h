@@ -22,7 +22,6 @@ public:
 	float jumpPower = 4.0f;
 
 	// status
-	bool move = false;
 	bool right = false;
 	bool air = true;
 	float verticalSpeed = 0.0f;
