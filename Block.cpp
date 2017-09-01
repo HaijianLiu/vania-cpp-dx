@@ -39,7 +39,10 @@ void Block::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Block::Update() {
-	if (this->status->hp < 70 && this->status->hp >= 40) {
+	if (this->status->hp >= 70) {
+		this->sprite->slice = Slice(0,0,0,16,16);
+	}
+	else if (this->status->hp < 70 && this->status->hp >= 40) {
 		this->sprite->slice = Slice(0,16,0,16,16);
 	}
 	else if (this->status->hp < 40 && this->status->hp > 0) {

@@ -33,17 +33,15 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 	// Enemy
-	std::vector<Int2D> flyerData;
-	Scene::LoadMapData(this->flyerPath, flyerData);
-	for (unsigned int i = 0; i < flyerData.size(); i++) {
+	Scene::LoadMapData(this->flyerPath, this->flyerData);
+	for (unsigned int i = 0; i < this->flyerData.size(); i++) {
 		this->flyers.push_back(new Flyer());
-		Scene::SetPosition(this->flyers.back(), flyerData[i].x);
+		Scene::SetPosition(this->flyers.back(), this->flyerData[i].x);
 	}
-	std::vector<Int2D> crabData;
-	Scene::LoadMapData(this->crabPath, crabData);
-	for (unsigned int i = 0; i < crabData.size(); i++) {
+	Scene::LoadMapData(this->crabPath, this->crabData);
+	for (unsigned int i = 0; i < this->crabData.size(); i++) {
 		this->crabs.push_back(new Crab());
-		Scene::SetPosition(this->crabs.back(), crabData[i].x);
+		Scene::SetPosition(this->crabs.back(), this->crabData[i].x);
 	}
 	std::vector<Int2D> aiData;
 	Scene::LoadMapData(this->aiPath, aiData);
@@ -256,4 +254,25 @@ void Scene::SetTile(GameObject* gameObject, int mapID, int tileID) {
 void Scene::SetPosition(GameObject* gameObject, int mapID) {
 	gameObject->transform->position.x = mapID % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
+}
+
+void Scene::ReSet() {
+	// Enemy
+	for (unsigned int i = 0; i < this->flyers.size(); i++) {
+		Scene::SetPosition(this->flyers[i], this->flyerData[i].x);
+		this->flyers[i]->active = true;
+		this->flyers[i]->status->hp = 100;
+		this->flyers[i]->orb->active = false;
+	}
+	for (unsigned int i = 0; i < this->crabs.size(); i++) {
+		Scene::SetPosition(this->crabs[i], this->crabData[i].x);
+		this->crabs[i]->active = true;
+		this->crabs[i]->status->hp = 100;
+		this->crabs[i]->orb->active = false;
+	}
+	// Block
+	for (unsigned int i = 0; i < this->blocks.size(); i++) {
+		this->blocks[i]->active = true;
+		this->blocks[i]->status->hp = 100;
+	}
 }

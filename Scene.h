@@ -33,6 +33,9 @@ public:
 	const char* blockPath = "map/scene_Scene-Null";
 	const char* groundPath = "map/scene_Scene-Null";
 	const char* backGroundPath = "map/scene_Scene-Null";
+	// ReSet Data
+	std::vector<Int2D> flyerData;
+	std::vector<Int2D> crabData;
 	// Map Object
 	std::vector<NoneObject*> range;
 	std::vector<Flyer*> flyers;
@@ -57,6 +60,7 @@ public:
 	bool LoadMapData(const char* path, std::vector<Int2D>& data);
 	void SetTile(GameObject* gameObject, int mapID, int tileID);
 	void SetPosition(GameObject* gameObject, int mapID);
+	void ReSet();
 };
 
 #endif

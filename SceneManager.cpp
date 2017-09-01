@@ -88,4 +88,5 @@ void SceneManager::Draw() {
 void SceneManager::SetActiveScene(unsigned int i) {
 	this->activeScene = i;
 	this->camera->activeRange = i;
+	this->scenes[this->activeScene]->ReSet();
 }
