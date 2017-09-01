@@ -22,6 +22,9 @@ void Scene::SetScene() {
 	// range
 	std::vector<Int2D> cameraData;
 	Scene::LoadMapData(this->cameraPath, cameraData);
+	if (cameraData.size() == 1) {
+		cameraData.push_back(cameraData[0]);
+	}
 	for (unsigned int i = 0; i < cameraData.size(); i++) {
 		this->camera->range.push_back(new NoneObject());
 		Scene::SetPosition(this->camera->range.back(), cameraData[i].x);

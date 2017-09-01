@@ -186,6 +186,7 @@
     <ClCompile Include="Scene02.cpp" />
     <ClCompile Include="Scene03.cpp" />
     <ClCompile Include="Scene04.cpp" />
+    <ClCompile Include="Scene05.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Status.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Scene02.h" />
     <ClInclude Include="Scene03.h" />
     <ClInclude Include="Scene04.h" />
+    <ClInclude Include="Scene05.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Status.h" />
