@@ -40,9 +40,6 @@ void Scene02::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Scene02::Update() {
-	// Update
-	Scene::Update();
-
 	// Check Switch Scene
 	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
 		if (DistancePow(this->sceneManager->player->transform->position,this->range[0]->transform->position) < 1.0f ) {
@@ -52,4 +49,7 @@ void Scene02::Update() {
 			this->sceneManager->SetActiveScene(3);
 		}
 	}
+	
+	// Update
+	Scene::Update();
 }

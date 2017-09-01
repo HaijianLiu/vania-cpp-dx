@@ -87,6 +87,7 @@
 #include "Scene01.h"
 #include "Scene02.h"
 #include "Scene03.h"
+#include "Scene04.h"
 #include "SceneManager.h"
 
 /*------------------------------------------------------------------------------

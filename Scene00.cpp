@@ -53,11 +53,10 @@ void Scene00::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Scene00::Update() {
-	// Update
-	Scene::Update();
-
 	// Check Switch Scene
 	if (this->sceneManager->player->transform->position.x > this->range[1]->transform->position.x) {
 		this->sceneManager->SetActiveScene(1);
 	}
+	// Update
+	Scene::Update();
 }
