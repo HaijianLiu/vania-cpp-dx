@@ -11,7 +11,6 @@ public:
 	BoxCollider* collHorizonCheck;
 	// Animation
 	Animation* animWalk;
-	AnimationObject* enemyDestroy;
 
 	// GameObject
 	Orb* orb;

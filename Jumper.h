@@ -13,7 +13,6 @@ public:
 	// Animation
 	Animation* animIdle;
 	Animation* animJump;
-	AnimationObject* enemyDestroy;
 
 	// GameObject
 	GameObject* target;
