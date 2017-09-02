@@ -118,6 +118,8 @@ void Ball::OnTriggerEnter(BoxCollider* other) {
 	/* Damage if tag = "bullet"
 	..............................................................................*/
 	if (other->tag == "bullet") {
+		this->right = !this->right;
+		this->up = !this->up;
 		this->sprite->Flash();
 		this->status->hp -= other->gameObject->status->damage;
 	}
