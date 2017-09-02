@@ -77,6 +77,8 @@
 #include "Flyer.h"
 #include "Jumper.h"
 #include "Ball.h"
+#include "BossCore.h"
+#include "Boss.h"
 #include "Ground.h"
 #include "DamageZone.h"
 #include "BackGround.h"

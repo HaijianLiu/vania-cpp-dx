@@ -68,6 +68,8 @@ Resources::~Resources() {
 	if (this->texJumperIdle.texture != NULL) this->texJumperIdle.texture->Release();
 	if (this->texJumperJump.texture != NULL) this->texJumperJump.texture->Release();
 	if (this->texBall.texture != NULL) this->texBall.texture->Release();
+	if (this->texBossEyeBall.texture != NULL) this->texBossEyeBall.texture->Release();
+	if (this->texBossCore.texture != NULL) this->texBossCore.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
 	if (this->texOrb.texture != NULL) this->texOrb.texture->Release();
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
@@ -117,6 +119,8 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texJumperIdle);
 	Resources::LoadTexture(&this->texJumperJump);
 	Resources::LoadTexture(&this->texBall);
+	Resources::LoadTexture(&this->texBossEyeBall);
+	Resources::LoadTexture(&this->texBossCore);
 	Resources::LoadTexture(&this->texBlock);
 	Resources::LoadTexture(&this->texOrb);
 	Resources::LoadTexture(&this->texUIEnergyBG);

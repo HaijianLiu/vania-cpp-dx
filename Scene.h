@@ -26,6 +26,7 @@ public:
 	// Map path
 	const char* cameraPath = "map/scene_Scene-Null";
 	const char* rangePath = "map/scene_Scene-Null";
+	const char* bossPath = "map/scene_Scene-Null";
 	const char* ballPath = "map/scene_Scene-Null";
 	const char* jumperPath = "map/scene_Scene-Null";
 	const char* flyerPath = "map/scene_Scene-Null";
@@ -45,6 +46,7 @@ public:
 	std::vector<Int2D> playerData;
 	// Map Object
 	std::vector<NoneObject*> range;
+	std::vector<Boss*> bosses;
 	std::vector<Ball*> balls;
 	std::vector<Jumper*> jumpers;
 	std::vector<Flyer*> flyers;

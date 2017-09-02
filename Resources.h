@@ -28,6 +28,8 @@ public:
 	Texture texJumperIdle = Texture("assets/jumper-idle.png",188,32);
 	Texture texJumperJump = Texture("assets/jumper-jump.png",47,32);
 	Texture texBall = Texture("assets/ball.png",16,16);
+	Texture texBossEyeBall = Texture("assets/boss-eye-ball.png",128,128);
+	Texture texBossCore = Texture("assets/boss-eye-core.png",32,32);
 	Texture texBlock = Texture("assets/block.png",48,16);
 	Texture texOrb = Texture("assets/score.png",48,16);
 	Texture texUIEnergyBG = Texture("assets/ui-energy.png",112,32);

@@ -36,6 +36,12 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 	// Enemy
+	std::vector<Int2D> bossData;
+	Scene::LoadMapData(this->bossPath, bossData);
+	for (unsigned int i = 0; i < bossData.size(); i++) {
+		this->bosses.push_back(new Boss());
+		Scene::SetPosition(this->bosses.back(), bossData[i].x);
+	}
 	Scene::LoadMapData(this->ballPath, this->ballData);
 	for (unsigned int i = 0; i < this->ballData.size(); i++) {
 		this->balls.push_back(new Ball());
@@ -166,6 +172,7 @@ Scene::~Scene() {
 	// delete Map GameObjects
 	for (unsigned int i = 0; i < this->range.size(); i++) delete this->range[i];
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
+	for (unsigned int i = 0; i < this->bosses.size(); i++) delete this->bosses[i];
 	for (unsigned int i = 0; i < this->balls.size(); i++) delete this->balls[i];
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) delete this->jumpers[i];
 	for (unsigned int i = 0; i < this->flyers.size(); i++) delete this->flyers[i];
