@@ -16,6 +16,8 @@ Boss::Boss() {
 	this->collider = new BoxCollider(this,0.0f,0.0f,64.0f,64.0f);
 	this->collider->trigger = true;
 	this->collider->tag = "boss";
+	// GameObject
+	this->core = new BossCore();
 }
 
 
@@ -25,6 +27,8 @@ Boss::Boss() {
 Boss::~Boss() {
 	// Collider
 	delete this->collider;
+	// GameObject
+	delete this->core;
 }
 
 
@@ -44,6 +48,20 @@ void Boss::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Boss::Update() {
+	/* Core Transform
+	..............................................................................*/
+	float angle = atan((this->target->transform->position.y - this->transform->position.y) / (this->target->transform->position.x - this->transform->position.x));
+
+	if (this->target->transform->position.x < this->transform->position.x) {
+		this->core->transform->position.x = this->transform->position.x + cos(angle) * this->core->radius;
+		this->core->transform->position.y = this->transform->position.y + sin(angle) * this->core->radius;
+	}
+	else {
+		this->core->transform->position.x = this->transform->position.x - cos(angle) * this->core->radius;
+		this->core->transform->position.y = this->transform->position.y - sin(angle) * this->core->radius;
+	}
+
+
 	/* Death
 	..............................................................................*/
 	if (this->status->hp <= 0) {

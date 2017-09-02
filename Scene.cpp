@@ -193,6 +193,9 @@ void Scene::Start() {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->resources->texTile;
 	}
 	// Link target
+	for (unsigned int i = 0; i < this->bosses.size(); i++) {
+		this->bosses[i]->target = this->sceneManager->player;
+	}
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
 		this->jumpers[i]->target = this->sceneManager->player;
 	}

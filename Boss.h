@@ -13,6 +13,9 @@ public:
 	// GameObject
 	BossCore* core;
 
+	// Target
+	GameObject* target;
+
 	// Parameter
 
 	// status
