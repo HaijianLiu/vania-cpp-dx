@@ -33,6 +33,7 @@ public:
 	Texture texBlock = Texture("assets/block.png",48,16);
 	Texture texOrb = Texture("assets/score.png",48,16);
 	Texture texUIEnergyBG = Texture("assets/ui-energy.png",112,32);
+	Texture texUIBossBG = Texture("assets/ui-boss.png",112,32);
 	// Animation Object
 	AnimationObject* enemyDestroy;
 	// Audio

@@ -12,13 +12,19 @@ public:
 
 	// GameObject
 	BossCore* core;
+	// UIObject
+	UIObject* uiBossBG;
+	UIObject* uiLife;
 
 	// Target
 	GameObject* target;
 
 	// Parameter
+	float hp = 1000.0f;
 
 	// status
+	bool awake = false;
+	bool freeze = true;
 
 	// Constructors
 	Boss ();
