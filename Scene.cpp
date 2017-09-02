@@ -36,6 +36,11 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->range.back(), rangeData[i].x);
 	}
 	// Enemy
+	Scene::LoadMapData(this->ballPath, this->ballData);
+	for (unsigned int i = 0; i < this->ballData.size(); i++) {
+		this->balls.push_back(new Ball());
+		Scene::SetPosition(this->balls.back(), this->ballData[i].x);
+	}
 	Scene::LoadMapData(this->jumperPath, this->jumperData);
 	for (unsigned int i = 0; i < this->jumperData.size(); i++) {
 		this->jumpers.push_back(new Jumper());
@@ -117,6 +122,12 @@ void Scene::SetScene() {
 ------------------------------------------------------------------------------*/
 void Scene::Reset() {
 	// Enemy
+	for (unsigned int i = 0; i < this->balls.size(); i++) {
+		Scene::SetPosition(this->balls[i], this->ballData[i].x);
+		this->balls[i]->active = true;
+		this->balls[i]->status->hp = 100;
+		this->balls[i]->orb->active = false;
+	}
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
 		Scene::SetPosition(this->jumpers[i], this->jumperData[i].x);
 		this->jumpers[i]->active = true;
@@ -155,6 +166,7 @@ Scene::~Scene() {
 	// delete Map GameObjects
 	for (unsigned int i = 0; i < this->range.size(); i++) delete this->range[i];
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
+	for (unsigned int i = 0; i < this->balls.size(); i++) delete this->balls[i];
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) delete this->jumpers[i];
 	for (unsigned int i = 0; i < this->flyers.size(); i++) delete this->flyers[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];

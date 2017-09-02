@@ -19,6 +19,7 @@ Resources::Resources() {
 	this->audPlayerNoAmmo = new Audio("assets/Sound/SE/sfx_wpn_noammo1.wav");
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_impact1.wav");
 	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
+	this->audBallBounce = new Audio("assets/Sound/SE/sfx_sounds_Blip4.wav");
 	this->audOrbGet = new Audio("assets/Sound/SE/sfx_sounds_powerup10.wav");
 	// ParticleSystem
 	this->fxTail = new ParticleSystem(100);
@@ -66,6 +67,7 @@ Resources::~Resources() {
 	if (this->texFlyer.texture != NULL) this->texFlyer.texture->Release();
 	if (this->texJumperIdle.texture != NULL) this->texJumperIdle.texture->Release();
 	if (this->texJumperJump.texture != NULL) this->texJumperJump.texture->Release();
+	if (this->texBall.texture != NULL) this->texBall.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
 	if (this->texOrb.texture != NULL) this->texOrb.texture->Release();
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
@@ -81,6 +83,7 @@ Resources::~Resources() {
 	delete this->audPlayerNoAmmo;
 	delete this->audEnemyDamage;
 	delete this->audEnemyDestroy;
+	delete this->audBallBounce;
 	delete this->audOrbGet;
 	// ParticleSystem
 	delete this->fxDestroy;
@@ -113,6 +116,7 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texFlyer);
 	Resources::LoadTexture(&this->texJumperIdle);
 	Resources::LoadTexture(&this->texJumperJump);
+	Resources::LoadTexture(&this->texBall);
 	Resources::LoadTexture(&this->texBlock);
 	Resources::LoadTexture(&this->texOrb);
 	Resources::LoadTexture(&this->texUIEnergyBG);
@@ -129,6 +133,7 @@ void Resources::Start() {
 	this->audPlayerNoAmmo->LoadAudio();
 	this->audEnemyDamage->LoadAudio();
 	this->audEnemyDestroy->LoadAudio();
+	this->audBallBounce->LoadAudio();
 	this->audOrbGet->LoadAudio();
 	// ParticleSystem
 	this->fxDestroy->LinkTexture(this->texFxDestroy);

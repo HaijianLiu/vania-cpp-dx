@@ -76,6 +76,7 @@
 #include "Crab.h"
 #include "Flyer.h"
 #include "Jumper.h"
+#include "Ball.h"
 #include "Ground.h"
 #include "DamageZone.h"
 #include "BackGround.h"

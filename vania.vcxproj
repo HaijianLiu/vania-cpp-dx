@@ -159,6 +159,7 @@
     <ClCompile Include="AnimationObject.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="AnimationObject.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
