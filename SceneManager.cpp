@@ -23,13 +23,14 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene03());
 	scenes.push_back(new Scene04());
 	scenes.push_back(new Scene05());
+	scenes.push_back(new Scene06());
 	// set SceneManager in scene
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->sceneManager = this;
 	}
 
 	// active Scene
-	SceneManager::SetActiveScene(0);
+	SceneManager::SetActiveScene(5);
 }
 
 
@@ -61,7 +62,7 @@ void SceneManager::Start() {
 	this->uiEnergyBG->sprite->texture = this->resources->texUIEnergyBG;
 
 	// Scene Start
-	// this->resources->audSceneBGM->Play();
+	this->resources->audSceneBGM->Play();
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->Start();
 	}

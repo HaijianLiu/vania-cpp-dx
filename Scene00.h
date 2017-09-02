@@ -6,8 +6,6 @@ class Scene00 : public Scene {
 private:
 
 public:
-	std::vector<NoneObject*> playerPosition;
-
 	Scene00();
 	~Scene00();
 

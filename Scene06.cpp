@@ -4,14 +4,16 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Scene05::Scene05() {
+Scene06::Scene06() {
 	// Set Map path
-	this->cameraPath = "map/scene_Scene05-Camera.csv";
-	this->rangePath = "map/scene_Scene05-Range.csv";
-	this->orbPath = "map/scene_Scene05-Orb.csv";
-	this->playerPath = "map/scene_Scene05-Player.csv";
-	this->groundPath = "map/scene_Scene05-Ground.csv";
-	this->backGroundPath = "map/scene_Scene05-BackGround.csv";
+	this->cameraPath = "map/scene_Scene06-Camera.csv";
+	this->rangePath = "map/scene_Scene06-Range.csv";
+	this->jumperPath = "map/scene_Scene06-Jumper.csv";
+	this->flyerPath = "map/scene_Scene06-Flyer.csv";
+	this->crabPath = "map/scene_Scene06-Crab.csv";
+	this->blockPath = "map/scene_Scene06-Block.csv";
+	this->groundPath = "map/scene_Scene06-Ground.csv";
+	this->backGroundPath = "map/scene_Scene06-BackGround.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -21,7 +23,7 @@ Scene05::Scene05() {
 /*------------------------------------------------------------------------------
 < Destructor >
 ------------------------------------------------------------------------------*/
-Scene05::~Scene05() {
+Scene06::~Scene06() {
 
 }
 
@@ -29,7 +31,7 @@ Scene05::~Scene05() {
 /*------------------------------------------------------------------------------
 < Start >
 ------------------------------------------------------------------------------*/
-void Scene05::Start() {
+void Scene06::Start() {
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
@@ -39,13 +41,10 @@ void Scene05::Start() {
 /*------------------------------------------------------------------------------
 < Update >
 ------------------------------------------------------------------------------*/
-void Scene05::Update() {
+void Scene06::Update() {
 	// Check Switch Scene
 	if (this->sceneManager->player->transform->position.x > this->range[1]->transform->position.x) {
-		this->sceneManager->SetActiveScene(4);
-	}
-	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
-		this->sceneManager->SetActiveScene(6);
+		this->sceneManager->SetActiveScene(5);
 	}
 
 	// Update

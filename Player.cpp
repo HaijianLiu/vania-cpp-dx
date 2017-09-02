@@ -6,6 +6,7 @@
 ------------------------------------------------------------------------------*/
 Player::Player() {
 	// Status
+	this->active = false;
 	this->status->hp = 100;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(80.0f,80.0f);

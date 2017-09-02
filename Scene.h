@@ -20,7 +20,7 @@ public:
 	Camera* camera;
 
 	// Map Data
-	Int2D mapSize = Int2D(147,45);
+	Int2D mapSize = Int2D(200,45);
 	int tilePixel = 16;
 	Int2D tileSize = Int2D(384/16,192/16);
 	// Map path
@@ -32,12 +32,14 @@ public:
 	const char* aiPath = "map/scene_Scene-Null";
 	const char* orbPath = "map/scene_Scene-Null";
 	const char* blockPath = "map/scene_Scene-Null";
+	const char* playerPath = "map/scene_Scene-Null";
 	const char* groundPath = "map/scene_Scene-Null";
 	const char* backGroundPath = "map/scene_Scene-Null";
 	// ReSet Data
 	std::vector<Int2D> jumperData;
 	std::vector<Int2D> flyerData;
 	std::vector<Int2D> crabData;
+	std::vector<Int2D> playerData;
 	// Map Object
 	std::vector<NoneObject*> range;
 	std::vector<Jumper*> jumpers;

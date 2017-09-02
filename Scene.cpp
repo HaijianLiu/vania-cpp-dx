@@ -74,6 +74,8 @@ void Scene::SetScene() {
 		this->blocks.push_back(new Block());
 		Scene::SetPosition(this->blocks.back(), blockData[i].x);
 	}
+	// Set Player
+	Scene::LoadMapData(this->playerPath, this->playerData);
 	// Map
 	std::vector<Int2D> backGroundData;
 	Scene::LoadMapData(this->backGroundPath, backGroundData);
@@ -131,6 +133,11 @@ void Scene::Reset() {
 	for (unsigned int i = 0; i < this->blocks.size(); i++) {
 		this->blocks[i]->active = true;
 		this->blocks[i]->status->hp = 100;
+	}
+	// Player
+	if (this->playerData.size() != 0 && !this->sceneManager->player->active) {
+		Scene::SetPosition(this->sceneManager->player, this->playerData[0].x);
+		this->sceneManager->player->active = true;
 	}
 }
 

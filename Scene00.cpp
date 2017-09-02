@@ -12,16 +12,9 @@ Scene00::Scene00() {
 	this->aiPath = "map/scene_Scene00-AI.csv";
 	this->orbPath = "map/scene_Scene00-Orb.csv";
 	this->blockPath = "map/scene_Scene00-Block.csv";
+	this->playerPath = "map/scene_Scene00-Player.csv";
 	this->groundPath = "map/scene_Scene00-Ground.csv";
 	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
-
-	// Load Map Data
-	std::vector<Int2D> playerPositionData;
-	Scene::LoadMapData("map/scene_Scene00-Player.csv", playerPositionData);
-	for (unsigned int i = 0; i < playerPositionData.size(); i++) {
-		this->playerPosition.push_back(new NoneObject());
-		Scene::SetPosition(this->playerPosition.back(), playerPositionData[i].x);
-	}
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -32,7 +25,7 @@ Scene00::Scene00() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene00::~Scene00() {
-	for (unsigned int i = 0; i < this->playerPosition.size(); i++) delete this->playerPosition[i];
+
 }
 
 
@@ -40,9 +33,6 @@ Scene00::~Scene00() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene00::Start() {
-	// Set Player position
-	this->sceneManager->player->transform->position.x = this->playerPosition[0]->transform->position.x;
-	this->sceneManager->player->transform->position.y = this->playerPosition[0]->transform->position.y;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
