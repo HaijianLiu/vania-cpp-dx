@@ -33,6 +33,7 @@ public:
 	const char* orbPath = "map/scene_Scene-Null";
 	const char* blockPath = "map/scene_Scene-Null";
 	const char* playerPath = "map/scene_Scene-Null";
+	const char* damageZonePath = "map/scene_Scene-Null";
 	const char* groundPath = "map/scene_Scene-Null";
 	const char* backGroundPath = "map/scene_Scene-Null";
 	// ReSet Data
@@ -48,6 +49,7 @@ public:
 	std::vector<Ground*> ai;
 	std::vector<Orb*> orbs;
 	std::vector<Block*> blocks;
+	std::vector<DamageZone*> damageZones;
 	std::vector<Ground*> grounds;
 	std::vector<BackGround*> backGrounds;
 

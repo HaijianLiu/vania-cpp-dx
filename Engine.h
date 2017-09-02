@@ -77,6 +77,7 @@
 #include "Flyer.h"
 #include "Jumper.h"
 #include "Ground.h"
+#include "DamageZone.h"
 #include "BackGround.h"
 #include "Block.h"
 
@@ -92,6 +93,7 @@
 #include "Scene05.h"
 #include "Scene06.h"
 #include "Scene07.h"
+#include "Scene08.h"
 #include "SceneManager.h"
 
 /*------------------------------------------------------------------------------

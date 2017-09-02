@@ -77,17 +77,23 @@ void Scene::SetScene() {
 	// Set Player
 	Scene::LoadMapData(this->playerPath, this->playerData);
 	// Map
-	std::vector<Int2D> backGroundData;
-	Scene::LoadMapData(this->backGroundPath, backGroundData);
-	for (unsigned int i = 0; i < backGroundData.size(); i++) {
-		this->backGrounds.push_back(new BackGround());
-		Scene::SetTile(this->backGrounds.back(), backGroundData[i].x, backGroundData[i].y);
+	std::vector<Int2D> damageZoneData;
+	Scene::LoadMapData(this->damageZonePath, damageZoneData);
+	for (unsigned int i = 0; i < damageZoneData.size(); i++) {
+		this->damageZones.push_back(new DamageZone());
+		Scene::SetTile(this->damageZones.back(), damageZoneData[i].x, damageZoneData[i].y);
 	}
 	std::vector<Int2D> groundData;
 	Scene::LoadMapData(this->groundPath, groundData);
 	for (unsigned int i = 0; i < groundData.size(); i++) {
 		this->grounds.push_back(new Ground());
 		Scene::SetTile(this->grounds.back(), groundData[i].x, groundData[i].y);
+	}
+	std::vector<Int2D> backGroundData;
+	Scene::LoadMapData(this->backGroundPath, backGroundData);
+	for (unsigned int i = 0; i < backGroundData.size(); i++) {
+		this->backGrounds.push_back(new BackGround());
+		Scene::SetTile(this->backGrounds.back(), backGroundData[i].x, backGroundData[i].y);
 	}
 
 	// Get GameObject && Get Collider
