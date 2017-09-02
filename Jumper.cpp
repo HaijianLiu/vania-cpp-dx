@@ -140,11 +140,9 @@ void Jumper::OnTriggerEnter(BoxCollider* other) {
 		if (this->collHorizonCheck->enter == true) {
 			if (this->transform->position.x > other->gameObject->transform->position.x) {
 				this->transform->position.x = other->gameObject->transform->position.x + other->offset.x + other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x + this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
-				this->right = true;
 			}
 			if (this->transform->position.x < other->gameObject->transform->position.x) {
 				this->transform->position.x = other->gameObject->transform->position.x + other->offset.x - other->halfSize.x * PIXEL_TO_UNIT - this->collHorizonCheck->offset.x - this->collHorizonCheck->halfSize.x * PIXEL_TO_UNIT;
-				this->right = false;
 			}
 		}
 		if (this->collCeilingCheck->enter == true) {
