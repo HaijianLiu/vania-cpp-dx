@@ -26,6 +26,8 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene06());
 	scenes.push_back(new Scene07());
 	scenes.push_back(new Scene08());
+	scenes.push_back(new Scene10());
+	scenes.push_back(new Scene10());
 	// set SceneManager in scene
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->sceneManager = this;

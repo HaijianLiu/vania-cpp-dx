@@ -20,7 +20,7 @@ public:
 	Camera* camera;
 
 	// Map Data
-	Int2D mapSize = Int2D(200,45);
+	Int2D mapSize = Int2D(200,90);
 	int tilePixel = 16;
 	Int2D tileSize = Int2D(384/16,320/16);
 	// Map path
