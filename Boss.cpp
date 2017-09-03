@@ -107,6 +107,20 @@ void Boss::Update() {
 			Instantiate(this->resources->enemyDestroy, this->transform);
 		}
 	}
+
+	/* BGM
+	..............................................................................*/
+	if (this->awake) {
+		if (!this->intro) {
+			this->resources->audBossIntroBGM->Play();
+			this->intro = true;
+		}
+		else {
+			if (!this->resources->audBossMainBGM->Playing() && !this->resources->audBossIntroBGM->Playing()) {
+				this->resources->audBossMainBGM->Play();
+			}
+		}
+	}
 }
 
 

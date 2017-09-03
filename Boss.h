@@ -25,6 +25,7 @@ public:
 	// status
 	bool awake = false;
 	bool freeze = true;
+	bool intro = false;
 
 	// Constructors
 	Boss ();

@@ -14,6 +14,9 @@ Resources::Resources() {
 	}
 	this->audSceneBGM = new Audio("assets/Sound/BGM/Venus.wav");
 	this->audSceneBGM->loop = true;
+	this->audBossIntroBGM = new Audio("assets/Sound/BGM/BossIntro.wav");
+	this->audBossMainBGM = new Audio("assets/Sound/BGM/BossMain.wav");
+	this->audBossMainBGM->loop = true;
 	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
 	this->audPlayerHurt = new Audio("assets/Sound/SE/sfx_sounds_error14.wav");
 	this->audPlayerNoAmmo = new Audio("assets/Sound/SE/sfx_wpn_noammo1.wav");
@@ -81,6 +84,8 @@ Resources::~Resources() {
 		delete this->audShoot[i];
 	}
 	delete this->audSceneBGM;
+	delete this->audBossIntroBGM;
+	delete this->audBossMainBGM;
 	delete this->audLanding;
 	delete this->audPlayerHurt;
 	delete this->audPlayerNoAmmo;
@@ -134,6 +139,8 @@ void Resources::Start() {
 		this->audShoot[i]->LoadAudio();
 	}
 	this->audSceneBGM->LoadAudio();
+	this->audBossIntroBGM->LoadAudio();
+	this->audBossMainBGM->LoadAudio();
 	this->audLanding->LoadAudio();
 	this->audPlayerHurt->LoadAudio();
 	this->audPlayerNoAmmo->LoadAudio();

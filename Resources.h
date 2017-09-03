@@ -39,6 +39,8 @@ public:
 	// Audio
 	std::vector<Audio*> audShoot;
 	Audio* audSceneBGM;
+	Audio* audBossIntroBGM;
+	Audio* audBossMainBGM;
 	Audio* audLanding;
 	Audio* audPlayerHurt;
 	Audio* audPlayerNoAmmo;
