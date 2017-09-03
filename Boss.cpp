@@ -5,6 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Boss::Boss() {
+	// Camera
+	this->camera = GetCamera();
 	// Status
 	this->status->hp = 100;
 	this->status->damage = 30;
@@ -94,20 +96,6 @@ void Boss::Update() {
 	}
 
 
-	/* Death
-	..............................................................................*/
-	if (this->status->hp <= 0) {
-		if (!this->awake) {
-			this->awake = true;
-			this->status->hp = this->hp;
-		}
-		else {
-			this->active = false;
-			this->resources->audEnemyDestroy->Play();
-			Instantiate(this->resources->enemyDestroy, this->transform);
-		}
-	}
-
 	/* BGM
 	..............................................................................*/
 	if (this->awake) {
@@ -119,6 +107,24 @@ void Boss::Update() {
 			if (!this->resources->audBossMainBGM->Playing() && !this->resources->audBossIntroBGM->Playing()) {
 				this->resources->audBossMainBGM->Play();
 			}
+		}
+	}
+
+	
+	/* Death && Awake
+	..............................................................................*/
+	if (this->status->hp <= 0) {
+		if (!this->awake) {
+			this->awake = true;
+			this->camera->SwitchTarget(this);
+			this->status->hp = this->hp;
+		}
+		else {
+			this->active = false;
+			this->resources->audEnemyDestroy->Play();
+			Instantiate(this->resources->enemyDestroy, this->transform);
+			this->resources->audBossMainBGM->Stop();
+			this->camera->SwitchTarget(this->target);
 		}
 	}
 }

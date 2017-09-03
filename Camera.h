@@ -12,10 +12,14 @@ public:
 	std::vector<NoneObject*> range;
 	unsigned int activeRange;
 
+	bool switching = false;
+	float switchSpeed = 0.5f;
+
 	Camera();
 	~Camera();
 
 	void Update();
+	void SwitchTarget(GameObject* target);
 };
 
 #endif

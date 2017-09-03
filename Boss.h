@@ -6,6 +6,9 @@ class Boss : public GameObject {
 private:
 
 public:
+	// Camera
+	Camera* camera;
+
 	// Collider
 	BoxCollider* collider;
 	// Animation
