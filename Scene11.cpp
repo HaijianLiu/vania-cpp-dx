@@ -9,6 +9,7 @@ Scene11::Scene11() {
 	this->cameraPath = "map/scene_Scene11-Camera.csv";
 	this->rangePath = "map/scene_Scene11-Range.csv";
 	this->bossPath = "map/scene_Scene11-Boss.csv";
+	this->orbPath = "map/scene_Scene11-Orb.csv";
 	this->groundPath = "map/scene_Scene11-Ground.csv";
 	this->backGroundPath = "map/scene_Scene11-BackGround.csv";
 

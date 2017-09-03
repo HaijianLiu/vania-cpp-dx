@@ -14,13 +14,14 @@ Boss::Boss() {
 	this->sprite->slice = Slice(0,0,0,128,128);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,64.0f,64.0f);
-	this->collider->trigger = true;
 	this->collider->tag = "boss";
 	// GameObject
 	this->core = new BossCore();
 	// UIObject
 	this->uiLife = new UIObject(0.0f, 0.0f, 100.0f, 2.0f);
+	this->uiLife->active = false;
 	this->uiBossBG = new UIObject(200.0f - 56.0f, -120.0f + 16.0f, 112.0f, 32.0f);
+	this->uiBossBG->active = false;
 }
 
 
@@ -58,21 +59,25 @@ void Boss::Start() {
 void Boss::Update() {
 	/* UIObject
 	..............................................................................*/
-	this->uiLife->offset = Float2D(200.0f - 6.0f - 0.05f * this->status->hp,  -120.0f + 20.0f);
-	this->uiLife->transform->scale = Float2D(this->status->hp * 0.1f, 2.0f);
-	if (!this->freeze) {
-		if (this->status->hp > 600) {
-			this->uiLife->sprite->SetColor(0,255,255,255);
-		}
-		else if (this->status->hp > 200) {
-			this->uiLife->sprite->SetColor(255,192,0,255);
+	if (this->awake) {
+		this->uiLife->active = true;
+		this->uiBossBG->active = true;
+		this->uiLife->offset = Float2D(200.0f - 6.0f - 0.05f * this->status->hp,  -120.0f + 20.0f);
+		this->uiLife->transform->scale = Float2D(this->status->hp * 0.1f, 2.0f);
+		if (!this->freeze) {
+			if (this->status->hp > 600) {
+				this->uiLife->sprite->SetColor(0,255,255,255);
+			}
+			else if (this->status->hp > 200) {
+				this->uiLife->sprite->SetColor(255,192,0,255);
+			}
+			else {
+				this->uiLife->sprite->SetColor(255,79,108,255);
+			}
 		}
 		else {
-			this->uiLife->sprite->SetColor(255,79,108,255);
+			this->uiLife->sprite->SetColor(100,100,100,255);
 		}
-	}
-	else {
-		this->uiLife->sprite->SetColor(100,100,100,255);
 	}
 
 	/* Core Transform
