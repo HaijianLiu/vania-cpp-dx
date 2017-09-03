@@ -37,7 +37,7 @@ Player::Player() {
 	// Bullet
 	for (int i = 0; i < 16; i++) {
 		this->bullets.push_back(new Bullet());
-		this->bullets.back()->status->damage = 40;
+		this->bullets.back()->status->damage = this->bulletDamage;
 	}
 }
 

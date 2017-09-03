@@ -195,6 +195,9 @@ void Scene::Start() {
 	// Link target
 	for (unsigned int i = 0; i < this->bosses.size(); i++) {
 		this->bosses[i]->target = this->sceneManager->player;
+		for (unsigned int j = 0; j < this->bosses[i]->bullets.size(); j++) {
+			this->bosses[i]->bullets[j]->target = this->bosses[i]->target;
+		}
 	}
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
 		this->jumpers[i]->target = this->sceneManager->player;

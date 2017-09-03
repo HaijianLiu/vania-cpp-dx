@@ -7,8 +7,8 @@ private:
 
 public:
 	// Parameter
-	float radius = -0.1f;
-	
+	float radius = 0.1f;
+
 	// Constructors
 	BossCore ();
 	~BossCore();

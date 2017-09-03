@@ -118,12 +118,12 @@ void Boss::Update() {
 	float angle = atan((this->target->transform->position.y - this->transform->position.y) / (this->target->transform->position.x - this->transform->position.x));
 
 	if (this->target->transform->position.x < this->transform->position.x) {
-		this->core->transform->position.x = this->transform->position.x + cos(angle) * this->core->radius;
-		this->core->transform->position.y = this->transform->position.y + sin(angle) * this->core->radius;
-	}
-	else {
 		this->core->transform->position.x = this->transform->position.x - cos(angle) * this->core->radius;
 		this->core->transform->position.y = this->transform->position.y - sin(angle) * this->core->radius;
+	}
+	else {
+		this->core->transform->position.x = this->transform->position.x + cos(angle) * this->core->radius;
+		this->core->transform->position.y = this->transform->position.y + sin(angle) * this->core->radius;
 	}
 
 	/* Bullet
@@ -134,7 +134,7 @@ void Boss::Update() {
 				this->bullets[i]->active = true;
 				this->bullets[i]->status->hp = this->bullets[i]->hp;
 				this->bullets[i]->transform->position.x = this->transform->position.x - 1.5f + i;
-				this->bullets[i]->transform->position.y = this->transform->position.y;
+				this->bullets[i]->transform->position.y = this->transform->position.y - 1.0f;
 			}
 		}
 		this->currentSkill = NONE_SKILL;

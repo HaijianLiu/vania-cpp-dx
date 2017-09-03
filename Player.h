@@ -38,6 +38,7 @@ public:
 	float backSpeed = 0.5f;
 	float shootEnergy = 20.0f;
 	float energyRegain = 20.0f;
+	float bulletDamage = 40.0f;
 	// status
 	bool move = false;
 	bool right = true;

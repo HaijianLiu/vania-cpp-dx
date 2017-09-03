@@ -19,8 +19,8 @@ public:
 	~BossBullet();
 
 	// Parameter
-	float hp = 50.0f;
-	float speed = 1.0f;
+	float hp = 40.0f;
+	float speed = 0.3f;
 
 	// virtual Functions
 	void Start();

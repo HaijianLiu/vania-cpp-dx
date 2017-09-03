@@ -2,7 +2,7 @@
 #ifndef _BOSS_H_
 #define _BOSS_H_
 
-enum skill { NONE_SKILL, BULLET, SKILL_MAX};
+enum skill { BULLET, SKILL_MAX, NONE_SKILL};
 
 class Boss : public GameObject {
 private:
@@ -30,7 +30,7 @@ public:
 	// Parameter
 	float hp = 1000.0f;
 	float deathWallRange = 1.6f;
-	float skillColdDown = 5.0f;
+	float skillColdDown = 10.0f;
 
 	// status
 	bool awake = false;
