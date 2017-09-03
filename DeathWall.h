@@ -29,7 +29,6 @@ public:
 
 	// Functions
 	void Forward();
-	void Backward();
 };
 
 #endif

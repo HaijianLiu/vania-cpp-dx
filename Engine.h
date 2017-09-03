@@ -78,6 +78,7 @@
 #include "Jumper.h"
 #include "Ball.h"
 #include "DeathWall.h"
+#include "BossBullet.h"
 #include "BossCore.h"
 #include "Boss.h"
 #include "Ground.h"

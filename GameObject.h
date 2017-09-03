@@ -19,6 +19,7 @@ public:
 	DWORD birthTime = 0;
 	bool active = true;
 	bool draw = true;
+	int layer = 0;
 
 	GameObject();
 	virtual ~GameObject();

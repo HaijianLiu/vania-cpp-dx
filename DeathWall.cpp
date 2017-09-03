@@ -99,6 +99,3 @@ void DeathWall::Forward() {
 		}
 	}
 }
-void DeathWall::Backward() {
-
-}

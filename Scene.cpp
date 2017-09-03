@@ -247,7 +247,12 @@ void Scene::Update() {
 void Scene::Draw() {
 	// Draw GameObject && Draw Collider (_DEBUG)
 	for (unsigned int i = this->gameObjects.size(); i > 0; i--) {
-		if (this->gameObjects[i-1]->active && this->gameObjects[i-1]->draw) {
+		if (this->gameObjects[i-1]->active && this->gameObjects[i-1]->draw && this->gameObjects[i-1]->layer == 0) {
+			this->gameObjects[i-1]->Draw();
+		}
+	}
+	for (unsigned int i = this->gameObjects.size(); i > 0; i--) {
+		if (this->gameObjects[i-1]->active && this->gameObjects[i-1]->draw && this->gameObjects[i-1]->layer == 1) {
 			this->gameObjects[i-1]->Draw();
 		}
 	}

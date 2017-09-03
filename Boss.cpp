@@ -26,6 +26,9 @@ Boss::Boss() {
 		this->deathWallsLeft.push_back(new DeathWall());
 		this->deathWallsLeft.back()->right = false;
 	}
+	for (unsigned int i = 0; i < 4; i++) {
+		this->bullets.push_back(new BossBullet());
+	}
 	// UIObject
 	this->uiLife = new UIObject(0.0f, 0.0f, 100.0f, 2.0f);
 	this->uiLife->active = false;
@@ -44,6 +47,7 @@ Boss::~Boss() {
 	delete this->core;
 	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) delete this->deathWallsRight[i];
 	for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) delete this->deathWallsLeft[i];
+	for (unsigned int i = 0; i < this->bullets.size(); i++) delete this->bullets[i];
 	// UIObject
 	delete this->uiLife;
 	delete this->uiBossBG;
@@ -80,6 +84,12 @@ void Boss::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Boss::Update() {
+	// CheckSkill
+	if (this->awake) {
+		Boss::CheckSkill();
+	}
+
+
 	/* UIObject
 	..............................................................................*/
 	if (this->awake) {
@@ -114,6 +124,20 @@ void Boss::Update() {
 	else {
 		this->core->transform->position.x = this->transform->position.x - cos(angle) * this->core->radius;
 		this->core->transform->position.y = this->transform->position.y - sin(angle) * this->core->radius;
+	}
+
+	/* Bullet
+	..............................................................................*/
+	if (this->currentSkill == BULLET) {
+		for (unsigned int i = 0; i < this->bullets.size(); i++) {
+			if (!this->bullets[i]->active) {
+				this->bullets[i]->active = true;
+				this->bullets[i]->status->hp = this->bullets[i]->hp;
+				this->bullets[i]->transform->position.x = this->transform->position.x - 1.5f + i;
+				this->bullets[i]->transform->position.y = this->transform->position.y;
+			}
+		}
+		this->currentSkill = NONE_SKILL;
 	}
 
 	/* DeathWall
@@ -194,4 +218,15 @@ void Boss::OnTriggerEnter(BoxCollider* other) {
 ------------------------------------------------------------------------------*/
 void Boss::FixedUpdate() {
 
+}
+
+
+/*------------------------------------------------------------------------------
+< Functions >
+------------------------------------------------------------------------------*/
+void Boss::CheckSkill() {
+	if (this->time->currentTime - this->lastSkill > this->skillColdDown * 1000.0f) {
+		this->currentSkill = rand() % SKILL_MAX;
+		this->lastSkill = this->time->currentTime;
+	}
 }
