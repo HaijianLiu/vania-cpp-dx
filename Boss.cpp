@@ -19,6 +19,13 @@ Boss::Boss() {
 	this->collider->tag = "boss";
 	// GameObject
 	this->core = new BossCore();
+	for (unsigned int i = 0; i < 7; i++) {
+		this->deathWallsRight.push_back(new DeathWall());
+	}
+	for (unsigned int i = 0; i < 7; i++) {
+		this->deathWallsLeft.push_back(new DeathWall());
+		this->deathWallsLeft.back()->right = false;
+	}
 	// UIObject
 	this->uiLife = new UIObject(0.0f, 0.0f, 100.0f, 2.0f);
 	this->uiLife->active = false;
@@ -35,6 +42,8 @@ Boss::~Boss() {
 	delete this->collider;
 	// GameObject
 	delete this->core;
+	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) delete this->deathWallsRight[i];
+	for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) delete this->deathWallsLeft[i];
 	// UIObject
 	delete this->uiLife;
 	delete this->uiBossBG;
@@ -49,6 +58,18 @@ void Boss::Start() {
 	this->sprite->texture = this->resources->texBossEyeBall;
 	this->uiLife->sprite->texture = this->resources->texDefault;
 	this->uiBossBG->sprite->texture = this->resources->texUIBossBG;
+
+	// GameObject
+	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
+		this->deathWallsRight[i]->transform->position.x = this->transform->position.x + 2.24f;
+		this->deathWallsRight[i]->transform->position.y = this->transform->position.y - 0.96f + 0.32f * i;
+		this->deathWallsRight[i]->startPosition = this->deathWallsRight[i]->transform->position;
+	}
+	for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) {
+		this->deathWallsLeft[i]->transform->position.x = this->transform->position.x - 2.24f;
+		this->deathWallsLeft[i]->transform->position.y = this->transform->position.y - 0.96f + 0.32f * i;
+		this->deathWallsLeft[i]->startPosition = this->deathWallsLeft[i]->transform->position;
+	}
 
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->sprite->SetTexture();
@@ -95,6 +116,20 @@ void Boss::Update() {
 		this->core->transform->position.y = this->transform->position.y - sin(angle) * this->core->radius;
 	}
 
+	/* DeathWall
+	..............................................................................*/
+	if (this->awake) {
+		if (this->target->transform->position.x - this->transform->position.x  > this->deathWallRange) {
+			for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
+				this->deathWallsRight[i]->Forward();
+			}
+		}
+		if (this->transform->position.x - this->target->transform->position.x > this->deathWallRange) {
+			for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) {
+				this->deathWallsLeft[i]->Forward();
+			}
+		}
+	}
 
 	/* BGM
 	..............................................................................*/
@@ -110,14 +145,25 @@ void Boss::Update() {
 		}
 	}
 
-	
+
 	/* Death && Awake
 	..............................................................................*/
 	if (this->status->hp <= 0) {
 		if (!this->awake) {
-			this->awake = true;
-			this->camera->SwitchTarget(this);
-			this->status->hp = this->hp;
+			if (abs(this->target->transform->position.x - this->transform->position.x) < this->deathWallRange) {
+				this->awake = true;
+				this->camera->SwitchTarget(this);
+				this->status->hp = this->hp;
+				for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
+					this->deathWallsRight[i]->active = true;
+				}
+				for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) {
+					this->deathWallsLeft[i]->active = true;
+				}
+			}
+			else {
+				this->status->hp = 1.0f;
+			}
 		}
 		else {
 			this->active = false;

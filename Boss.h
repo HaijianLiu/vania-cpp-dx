@@ -15,6 +15,8 @@ public:
 
 	// GameObject
 	BossCore* core;
+	std::vector<DeathWall*> deathWallsLeft;
+	std::vector<DeathWall*> deathWallsRight;
 	// UIObject
 	UIObject* uiBossBG;
 	UIObject* uiLife;
@@ -24,6 +26,7 @@ public:
 
 	// Parameter
 	float hp = 1000.0f;
+	float deathWallRange = 1.6f;
 
 	// status
 	bool awake = false;

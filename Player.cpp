@@ -252,7 +252,7 @@ void Player::Update() {
 void Player::OnTriggerEnter(BoxCollider* other) {
 	/* Transform if tag = "ground"
 	..............................................................................*/
-	if (other->tag == "ground") {
+	if (other->tag == "ground" || other->tag == "death wall") {
 		if (this->collGroundCheck->enter == true) {
 			this->transform->position.y = other->gameObject->transform->position.y + other->offset.y - other->halfSize.y * PIXEL_TO_UNIT - this->collGroundCheck->offset.y - this->collGroundCheck->halfSize.y * PIXEL_TO_UNIT;
 			this->air = false;
@@ -276,7 +276,7 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	}
 	/* Shield if tag = "enemy"
 	..............................................................................*/
-	if (other->tag == "enemy") {
+	if (other->tag == "enemy" || other->tag == "death wall") {
 		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtColdDown * 1000.0f) {
 			this->hurt = true;
 			this->lastHurt = this->time->currentTime;
