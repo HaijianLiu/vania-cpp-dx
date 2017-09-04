@@ -2,7 +2,7 @@
 #ifndef _BOSS_H_
 #define _BOSS_H_
 
-enum skill { DEATH_BITE, DEATH_AREA_LEFT, DEATH_AREA_RIGHT, SKILL_MAX, NONE_SKILL };
+enum skill { DEATH_BITE, DEATH_AREA, SKILL_MAX, NONE_SKILL, DEATH_AREA_LEFT, DEATH_AREA_RIGHT };
 
 class Boss : public GameObject {
 private:
@@ -31,9 +31,9 @@ public:
 	GameObject* target;
 
 	// Parameter
-	float hp = 1000.0f;
+	float hp = 1500.0f;
 	float deathWallRange = 1.6f;
-	float deathAreaTime = 2.0f;
+	float deathAreaTime = 3.0f;
 	float deathBiteTime = 2.0f;
 	float skillColdDown = 5.0f;
 	float skillDelay = 1.0f;
@@ -41,11 +41,11 @@ public:
 
 	// status
 	bool awake = false;
-	bool freeze = true;
 	bool intro = false;
 	int currentSkill = NONE_SKILL;
 	DWORD lastSkill = 0;
 	DWORD lastBullet = 0;
+	int phase = 0;
 
 	// Constructors
 	Boss ();

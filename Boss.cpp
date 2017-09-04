@@ -97,6 +97,7 @@ void Boss::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Boss::Update() {
+
 	/* Core Transform
 	..............................................................................*/
 	if (this->currentSkill == DEATH_AREA_LEFT) {
@@ -116,30 +117,34 @@ void Boss::Update() {
 	}
 	this->core->FollowTarget();
 
-	// CheckSkill
+	/* awake
+	..............................................................................*/
 	if (this->awake) {
-		Boss::CheckSkill();
+		/* Phase
+		..............................................................................*/
+		if (this->status->hp > 0.8f * this->hp) {
+			this->phase = 0;
+		}
+		else if (this->status->hp > 0.5f * this->hp) {
+			this->phase = 1;
+		}
+		else {
+			this->phase = 2;
+		}
+
+		/* CheckSkill
+		..............................................................................*/
+		if (this->phase > 0) {
+			Boss::CheckSkill();
+		}
 
 		/* UIObject
 		..............................................................................*/
 		this->uiLife->active = true;
 		this->uiBossBG->active = true;
-		this->uiLife->offset = Float2D(200.0f - 6.0f - 0.05f * this->status->hp,  -120.0f + 20.0f);
-		this->uiLife->transform->scale = Float2D(this->status->hp * 0.1f, 2.0f);
-		if (!this->freeze) {
-			if (this->status->hp > 600) {
-				this->uiLife->sprite->SetColor(0,255,255,255);
-			}
-			else if (this->status->hp > 200) {
-				this->uiLife->sprite->SetColor(255,192,0,255);
-			}
-			else {
-				this->uiLife->sprite->SetColor(255,79,108,255);
-			}
-		}
-		else {
-			this->uiLife->sprite->SetColor(100,100,100,255);
-		}
+		this->uiLife->offset = Float2D(200.0f - 6.0f - 50.0f * this->status->hp / this->hp,  -120.0f + 20.0f);
+		this->uiLife->transform->scale = Float2D(this->status->hp / this->hp * 100.0f, 2.0f);
+		this->uiLife->sprite->SetColor(255,79,108,255);
 
 		/* Bullet
 		..............................................................................*/
@@ -257,21 +262,43 @@ void Boss::FixedUpdate() {
 < Functions >
 ------------------------------------------------------------------------------*/
 void Boss::CheckSkill() {
+	// Get Skill every skillColdDown
 	if (this->time->currentTime > this->lastSkill + this->skillColdDown * 1000.0f) {
-		this->currentSkill = rand() % SKILL_MAX;
+		this->currentSkill = rand() % this->phase;
 		this->lastSkill = this->time->currentTime;
+
+		if (this->currentSkill == DEATH_BITE) {
+			if (this->deathBite->active) {
+				if (this->phase == 1) {
+					this->currentSkill = NONE_SKILL;
+				}
+				else {
+					this->currentSkill = DEATH_AREA;
+				}
+			}
+		}
+
+		if (this->currentSkill == DEATH_AREA) {
+			if (rand() % 2 == 0) {
+				this->currentSkill = DEATH_AREA_LEFT;
+			}
+			else {
+				this->currentSkill = DEATH_AREA_RIGHT;
+			}
+		}
 	}
+
+	// Check Reset to NONE_SKILL every Update
+	if (this->currentSkill == DEATH_BITE) {
+		if (this->time->currentTime > this->lastSkill + this->deathBiteTime * 1000.0f) {
+			this->currentSkill = NONE_SKILL;
+		}
+	}
+
 	if (this->currentSkill == DEATH_AREA_LEFT || this->currentSkill == DEATH_AREA_RIGHT) {
 		if (this->time->currentTime > this->lastSkill + this->deathAreaTime * 1000.0f) {
 			this->currentSkill = NONE_SKILL;
 		}
 	}
-	if (this->currentSkill == DEATH_BITE) {
-		if (this->deathBite->active) {
-			this->currentSkill = NONE_SKILL;
-		}
-		if (this->time->currentTime > this->lastSkill + this->deathBiteTime * 1000.0f) {
-			this->currentSkill = NONE_SKILL;
-		}
-	}
+
 }
