@@ -5,7 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 SceneGameOver::SceneGameOver() {
-	// Set Map path
+	// UIObject
+	this->uiGameOverText = new UIObject(0,0,64,16);
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -16,7 +17,7 @@ SceneGameOver::SceneGameOver() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneGameOver::~SceneGameOver() {
-
+	delete this->uiGameOverText;
 }
 
 
@@ -24,6 +25,7 @@ SceneGameOver::~SceneGameOver() {
 < Start >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Start() {
+	this->uiGameOverText->sprite->texture = this->sceneManager->player->resources->texUIGameOverText;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
@@ -34,6 +36,10 @@ void SceneGameOver::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Update() {
+	this->uiGameOverText->sprite->Flash();
+	if (this->sceneManager->player->time->currentTime > this->sceneManager->player->lastGameOver + this->restartDelay * 1000.0f) {
+		this->sceneManager->SetActiveScene(this->sceneManager->checkPoint);
+	}
 	// if (this->sceneManager->resources->audSceneBGM->Playing()) {
 	// 	this->sceneManager->resources->audSceneBGM->Stop();
 	// }

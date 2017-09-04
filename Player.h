@@ -60,6 +60,7 @@ public:
 	float shootAnimationLast = 0.2f;
 	float deathDelay = 1.0f;
 	float gameOverDelay = 3.0f;
+	DWORD lastGameOver = 0;
 
 	// Constructors
 	Player ();

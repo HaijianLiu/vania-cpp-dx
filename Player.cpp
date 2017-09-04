@@ -200,6 +200,7 @@ void Player::Update() {
 		this->uiEnergy->active = false;
 		this->uiEnergyBG->active = false;
 		this->sceneManager->SetActiveScene(this->sceneManager->gameOverScene);
+		this->lastGameOver = this->time->currentTime;
 	}
 
 	/* Gravity

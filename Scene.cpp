@@ -166,7 +166,26 @@ void Scene::Reset() {
 	// Player
 	if (this->playerData.size() != 0 && !this->sceneManager->player->active) {
 		Scene::SetPosition(this->sceneManager->player, this->playerData[0].x);
+		this->sceneManager->player->status->hp = 100.0f;
 		this->sceneManager->player->active = true;
+		this->sceneManager->player->draw = true;
+		this->sceneManager->player->uiEnergy->active = true;
+		this->sceneManager->player->uiEnergyBG->active = true;
+		this->camera->target = this->sceneManager->player;
+	}
+	// Boss
+	if (this->bosses.size() != 0) {
+		if (this->bosses[0]->active) {
+			this->bosses[0]->awake = false;
+			this->bosses[0]->status->hp = 100.0f;
+			this->bosses[0]->phase = 0;
+			this->bosses[0]->uiBossBG->active = false;
+			this->bosses[0]->uiLife->active = false;
+			this->bosses[0]->currentSkill = NONE_SKILL;
+			for (unsigned int i = 0; i < this->bosses[0]->bullets.size(); i++) {
+				this->bosses[0]->bullets[i]->active = false;
+			}
+		}
 	}
 }
 

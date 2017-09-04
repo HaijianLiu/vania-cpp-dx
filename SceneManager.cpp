@@ -35,7 +35,7 @@ SceneManager::SceneManager() {
 	this->player->sceneManager = this;
 
 	// active Scene
-	SceneManager::SetActiveScene(5);
+	SceneManager::SetActiveScene(this->activeScene);
 }
 
 
