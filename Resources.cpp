@@ -8,6 +8,7 @@
 Resources::Resources() {
 	// Animation Object
 	this->enemyDestroy = new AnimationObject(32,32,6,1,4);
+	this->playerDestroy = new AnimationObject(67,48,5,1,4);
 	// Audio
 	for (unsigned int i = 0; i < 4; i++) {
 		this->audShoot.push_back(new Audio("assets/Sound/SE/sfx_wpn_laser8.wav"));
@@ -19,6 +20,8 @@ Resources::Resources() {
 	this->audBossMainBGM->loop = true;
 	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
 	this->audPlayerHurt = new Audio("assets/Sound/SE/sfx_sounds_error14.wav");
+	this->audPlayerDeath = new Audio("assets/Sound/SE/sfx_deathscream_human1.wav");
+	this->audPlayerDestroy = new Audio("assets/Sound/SE/sfx_exp_medium1.wav");
 	this->audPlayerNoAmmo = new Audio("assets/Sound/SE/sfx_wpn_noammo1.wav");
 	this->audEnemyDamage = new Audio("assets/Sound/SE/sfx_sounds_impact1.wav");
 	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
@@ -65,6 +68,7 @@ Resources::~Resources() {
 	if (this->texPlayerDuck.texture != NULL) this->texPlayerDuck.texture->Release();
 	if (this->texPlayerDuckFire.texture != NULL) this->texPlayerDuckFire.texture->Release();
 	if (this->texPlayerHurt.texture != NULL) this->texPlayerHurt.texture->Release();
+	if (this->texPlayerDestroy.texture != NULL) this->texPlayerDestroy.texture->Release();
 	if (this->texBullet.texture != NULL) this->texBullet.texture->Release();
 	if (this->texFxDestroy.texture != NULL) this->texFxDestroy.texture->Release();
 	if (this->texEnemyDestroy.texture != NULL) this->texEnemyDestroy.texture->Release();
@@ -86,6 +90,7 @@ Resources::~Resources() {
 	if (this->texUIBossBG.texture != NULL) this->texUIBossBG.texture->Release();
 	// AnimationObject
 	delete this->enemyDestroy;
+	delete this->playerDestroy;
 	// Audio
 	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
 		delete this->audShoot[i];
@@ -95,6 +100,8 @@ Resources::~Resources() {
 	delete this->audBossMainBGM;
 	delete this->audLanding;
 	delete this->audPlayerHurt;
+	delete this->audPlayerDeath;
+	delete this->audPlayerDestroy;
 	delete this->audPlayerNoAmmo;
 	delete this->audEnemyDamage;
 	delete this->audEnemyDestroy;
@@ -126,6 +133,7 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texPlayerDuck);
 	Resources::LoadTexture(&this->texPlayerDuckFire);
 	Resources::LoadTexture(&this->texPlayerHurt);
+	Resources::LoadTexture(&this->texPlayerDestroy);
 	Resources::LoadTexture(&this->texBullet);
 	Resources::LoadTexture(&this->texFxDestroy);
 	Resources::LoadTexture(&this->texEnemyDestroy);
@@ -148,6 +156,8 @@ void Resources::Start() {
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;
 	this->enemyDestroy->animation->sprite->texture = this->texEnemyDestroy;
+	this->playerDestroy->animation->sprite->device = this->device;
+	this->playerDestroy->animation->sprite->texture = this->texPlayerDestroy;
 	// Audio
 	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
 		this->audShoot[i]->LoadAudio();
@@ -157,6 +167,8 @@ void Resources::Start() {
 	this->audBossMainBGM->LoadAudio();
 	this->audLanding->LoadAudio();
 	this->audPlayerHurt->LoadAudio();
+	this->audPlayerDeath->LoadAudio();
+	this->audPlayerDestroy->LoadAudio();
 	this->audPlayerNoAmmo->LoadAudio();
 	this->audEnemyDamage->LoadAudio();
 	this->audEnemyDestroy->LoadAudio();

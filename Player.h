@@ -34,11 +34,13 @@ public:
 	float jumpPower = 4.0f;
 	float fireColdDown = 0.1f;
 	float hurtColdDown = 1.0f;
+	float hurtFreeze = 0.3f;
 	float freezeColdDown = 5.0f;
 	float backSpeed = 0.5f;
 	float shootEnergy = 20.0f;
 	float energyRegain = 20.0f;
 	float bulletDamage = 40.0f;
+
 	// status
 	bool move = false;
 	bool right = true;
@@ -51,6 +53,8 @@ public:
 	DWORD lastHurt = 0;
 	DWORD lastFreeze = 0;
 	float verticalSpeed = 0.0f;
+	float shootAnimationLast = 0.2f;
+	float deathDelay = 1.0f;
 
 	// Constructors
 	Player ();

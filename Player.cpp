@@ -177,6 +177,14 @@ void Player::Update() {
 		}
 	}
 
+	/* Death
+	..............................................................................*/
+	if (this->status->hp <= 0 && !this->hurt) {
+		this->active = false;
+		this->resources->audPlayerDestroy->Play();
+		Instantiate(this->resources->playerDestroy, this->transform);
+	}
+
 	/* Gravity
 	..............................................................................*/
 	this->verticalSpeed -= this->gravity * this->time->deltaTime;
@@ -188,16 +196,30 @@ void Player::Update() {
 		this->air = true;
 	}
 
+
 	/* Animation
-	..............................................................................*/
 	// Animation SetTexture() || Sprite SetTexture()
-	if ((float)this->time->currentTime > (float)this->lastFire + 200.0f) {
+	..............................................................................*/
+
+	// Shoot Flag
+	if ((float)this->time->currentTime > (float)this->lastFire + this->shootAnimationLast * 1000.0f) {
 		this->shoot = false;
 	}
-	if ((float)this->time->currentTime > (float)this->lastHurt + 0.3f * this->hurtColdDown * 1000.0f) {
-		this->hurt = false;
+
+	// Hurt Flag
+	if (this->status->hp > 0) {
+		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtFreeze * 1000.0f) {
+			this->hurt = false;
+		}
+	}
+	else {
+		if ((float)this->time->currentTime > (float)this->lastHurt + this->deathDelay * 1000.0f) {
+			this->hurt = false;
+		}
 	}
 
+	/* Animation
+	..............................................................................*/
 	if (!this->hurt) {
 		if (this->air) {
 			this->animJump->sprite->flipX = !this->right;
@@ -283,7 +305,12 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 			this->freeze = true;
 			this->lastFreeze = this->time->currentTime;
 			this->status->hp -= other->gameObject->status->damage;
-			this->resources->audPlayerHurt->Play();
+			if (this->status->hp <= 0) {
+				this->resources->audPlayerDeath->Play();
+			}
+			else {
+				this->resources->audPlayerHurt->Play();
+			}
 			if (other->gameObject->transform->position.x > this->transform->position.x) {
 				this->right = true;
 			}

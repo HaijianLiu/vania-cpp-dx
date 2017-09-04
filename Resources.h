@@ -21,6 +21,7 @@ public:
 	Texture texPlayerDuck = Texture("assets/player-duck.png",80,80);
 	Texture texPlayerDuckFire = Texture("assets/player-duck-shoot.png",240,80);
 	Texture texPlayerHurt = Texture("assets/player-hurt.png",80,80);
+	Texture texPlayerDestroy = Texture("assets/player-destroy.png",335,48);
 	Texture texBullet = Texture("assets/bullet.png",4,4);
 	Texture texFxDestroy = Texture("assets/fx-destroy.png",32,32);
 	Texture texEnemyDestroy = Texture("assets/enemy-destroy.png",192,32);
@@ -42,6 +43,7 @@ public:
 	Texture texUIBossBG = Texture("assets/ui-boss.png",112,32);
 	// Animation Object
 	AnimationObject* enemyDestroy;
+	AnimationObject* playerDestroy;
 	// Audio
 	std::vector<Audio*> audShoot;
 	Audio* audSceneBGM;
@@ -49,6 +51,8 @@ public:
 	Audio* audBossMainBGM;
 	Audio* audLanding;
 	Audio* audPlayerHurt;
+	Audio* audPlayerDeath;
+	Audio* audPlayerDestroy;
 	Audio* audPlayerNoAmmo;
 	Audio* audEnemyDamage;
 	Audio* audEnemyDestroy;
