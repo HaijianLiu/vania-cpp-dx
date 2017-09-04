@@ -11,9 +11,9 @@ DeathBite::DeathBite() {
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(64.0f,64.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
-	this->animBite = new Animation(4,1,15);
-	this->animAppear = new Animation(4,1,15);
-	this->animDisappear = new Animation(4,1,15);
+	this->animBite = new Animation(6,1,10);
+	this->animAppear = new Animation(4,1,20);
+	this->animDisappear = new Animation(4,1,20);
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,32.0f,32.0f);
 	this->collider->tag = "enemy";
@@ -55,8 +55,23 @@ void DeathBite::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void DeathBite::Update() {
+	if (this->time->currentTime > this->lastAppear + this->lastTime * 1000.0f) {
+		this->active = false;
+	}
 
 	// Animation SetTexture() || Sprite SetTexture()
+	if (this->time->currentTime < this->lastAppear + this->appearTime * 1000.0f) {
+		this->animAppear->SetTexture(this->sprite->vertex);
+		this->sprite->texture = this->animAppear->sprite->texture;
+	}
+	if (this->time->currentTime >= this->lastAppear + this->appearTime * 1000.0f && this->time->currentTime <= this->lastAppear + (this->lastTime - this->appearTime) * 1000.0f) {
+		this->animBite->SetTexture(this->sprite->vertex);
+		this->sprite->texture = this->animBite->sprite->texture;
+	}
+	if (this->time->currentTime > this->lastAppear + (this->lastTime - this->appearTime) * 1000.0f) {
+		this->animDisappear->SetTexture(this->sprite->vertex);
+		this->sprite->texture = this->animDisappear->sprite->texture;
+	}
 }
 
 
@@ -73,4 +88,21 @@ void DeathBite::OnTriggerEnter(BoxCollider* other) {
 ------------------------------------------------------------------------------*/
 void DeathBite::FixedUpdate() {
 
+}
+
+
+/*------------------------------------------------------------------------------
+< Functions >
+------------------------------------------------------------------------------*/
+void DeathBite::Appear() {
+	if (!this->active) {
+		this->transform->position.x = this->target->transform->position.x;
+		this->transform->position.y = this->target->transform->position.y;
+		this->active = true;
+		this->animAppear->counter = 0;
+		this->animAppear->currentSprite = 0;
+		this->animDisappear->counter = 0;
+		this->animDisappear->currentSprite = 0;
+		this->lastAppear = this->time->currentTime;
+	}
 }

@@ -71,9 +71,10 @@ void Boss::Start() {
 	this->uiLife->sprite->texture = this->resources->texDefault;
 	this->uiBossBG->sprite->texture = this->resources->texUIBossBG;
 
-	// Core
+	// target
 	this->core->parent = this;
 	this->core->target = this->target;
+	this->deathBite->target = this->target;
 
 	// DeathWall
 	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
@@ -105,6 +106,9 @@ void Boss::Update() {
 	if (this->currentSkill == DEATH_AREA_RIGHT) {
 		this->core->sprite->SetColor(255,0,0,255);
 		this->core->target = this->rightTarget;
+	}
+	if (this->currentSkill == DEATH_BITE) {
+		this->core->sprite->SetColor(189,29,255,255);
 	}
 	if (this->currentSkill == NONE_SKILL) {
 		this->core->sprite->SetColor(255,255,255,255);
@@ -180,6 +184,9 @@ void Boss::Update() {
 
 		/* DeatBite
 		..............................................................................*/
+		if (this->currentSkill == DEATH_BITE && this->time->currentTime > this->lastSkill + this->skillDelay * 1000.0f) {
+			this->deathBite->Appear();
+		}
 
 		/* BGM
 		..............................................................................*/
@@ -255,7 +262,15 @@ void Boss::CheckSkill() {
 		this->lastSkill = this->time->currentTime;
 	}
 	if (this->currentSkill == DEATH_AREA_LEFT || this->currentSkill == DEATH_AREA_RIGHT) {
-		if (this->time->currentTime > this->lastSkill + this->deathWallTime * 1000.0f) {
+		if (this->time->currentTime > this->lastSkill + this->deathAreaTime * 1000.0f) {
+			this->currentSkill = NONE_SKILL;
+		}
+	}
+	if (this->currentSkill == DEATH_BITE) {
+		if (this->deathBite->active) {
+			this->currentSkill = NONE_SKILL;
+		}
+		if (this->time->currentTime > this->lastSkill + this->deathBiteTime * 1000.0f) {
 			this->currentSkill = NONE_SKILL;
 		}
 	}

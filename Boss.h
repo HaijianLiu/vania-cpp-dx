@@ -2,7 +2,7 @@
 #ifndef _BOSS_H_
 #define _BOSS_H_
 
-enum skill { NONE_SKILL, DEATH_AREA_LEFT, DEATH_AREA_RIGHT, DEATH_BITE, SKILL_MAX };
+enum skill { DEATH_BITE, DEATH_AREA_LEFT, DEATH_AREA_RIGHT, SKILL_MAX, NONE_SKILL };
 
 class Boss : public GameObject {
 private:
@@ -33,8 +33,9 @@ public:
 	// Parameter
 	float hp = 1000.0f;
 	float deathWallRange = 1.6f;
-	float deathWallTime = 2.0f;
-	float skillColdDown = 10.0f;
+	float deathAreaTime = 2.0f;
+	float deathBiteTime = 2.0f;
+	float skillColdDown = 5.0f;
 	float skillDelay = 1.0f;
 	float bulletColdDown = 15.0f;
 
