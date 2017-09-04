@@ -15,6 +15,7 @@ public:
 
 	// Parameter
 	float speed = 1.0f;
+	float maxArea = 1.6f;
 
 	// status
 	D3DXVECTOR3 startPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -29,6 +30,7 @@ public:
 
 	// Functions
 	void Forward();
+	void DeathArea(bool right);
 };
 
 #endif

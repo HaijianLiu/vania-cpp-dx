@@ -2,7 +2,7 @@
 #ifndef _BOSS_H_
 #define _BOSS_H_
 
-enum skill { BULLET, SKILL_MAX, NONE_SKILL};
+enum skill { NONE_SKILL, DEATH_AREA_LEFT, DEATH_AREA_RIGHT, SKILL_MAX };
 
 class Boss : public GameObject {
 private:
@@ -31,6 +31,7 @@ public:
 	float hp = 1000.0f;
 	float deathWallRange = 1.6f;
 	float skillColdDown = 10.0f;
+	float bulletColdDown = 15.0f;
 
 	// status
 	bool awake = false;
@@ -38,6 +39,7 @@ public:
 	bool intro = false;
 	int currentSkill = NONE_SKILL;
 	DWORD lastSkill = 0;
+	DWORD lastBullet = 0;
 
 	// Constructors
 	Boss ();

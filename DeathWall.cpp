@@ -99,3 +99,20 @@ void DeathWall::Forward() {
 		}
 	}
 }
+
+void DeathWall::DeathArea(bool right) {
+	if (right) {
+		this->active = true;
+		this->transform->position.x -= 3.0f * this->speed * this->time->deltaTime;
+		if (this->startPosition.x - this->transform->position.x > this->maxArea) {
+			this->transform->position.x = this->startPosition.x - this->maxArea;
+		}
+	}
+	else {
+		this->active = true;
+		this->transform->position.x += 3.0f * this->speed * this->time->deltaTime;
+		if (this->transform->position.x - this->startPosition.x > this->maxArea) {
+			this->transform->position.x = this->startPosition.x + this->maxArea;
+		}
+	}
+}

@@ -128,29 +128,45 @@ void Boss::Update() {
 
 	/* Bullet
 	..............................................................................*/
-	if (this->currentSkill == BULLET) {
-		for (unsigned int i = 0; i < this->bullets.size(); i++) {
-			if (!this->bullets[i]->active) {
-				this->bullets[i]->active = true;
-				this->bullets[i]->status->hp = this->bullets[i]->hp;
-				this->bullets[i]->transform->position.x = this->transform->position.x - 1.5f + i;
-				this->bullets[i]->transform->position.y = this->transform->position.y - 1.0f;
+	if (this->awake) {
+		if (this->time->currentTime > this->lastBullet + this->bulletColdDown * 1000.0f) {
+			this->lastBullet = this->time->currentTime;
+			for (unsigned int i = 0; i < this->bullets.size(); i++) {
+				if (!this->bullets[i]->active) {
+					this->bullets[i]->active = true;
+					this->bullets[i]->status->hp = this->bullets[i]->hp;
+					this->bullets[i]->transform->position.x = this->transform->position.x - 1.5f + i;
+					this->bullets[i]->transform->position.y = this->transform->position.y - 1.0f;
+				}
 			}
 		}
-		this->currentSkill = NONE_SKILL;
 	}
 
-	/* DeathWall
+	/* DeathWall && DeathArea
 	..............................................................................*/
 	if (this->awake) {
-		if (this->target->transform->position.x - this->transform->position.x  > this->deathWallRange) {
+		if (this->currentSkill == DEATH_AREA_RIGHT) {
 			for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
-				this->deathWallsRight[i]->Forward();
+				this->deathWallsRight[i]->DeathArea(true);
 			}
 		}
-		if (this->transform->position.x - this->target->transform->position.x > this->deathWallRange) {
+		else {
+			if (this->target->transform->position.x - this->transform->position.x  > this->deathWallRange) {
+				for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
+					this->deathWallsRight[i]->Forward();
+				}
+			}
+		}
+		if (this->currentSkill == DEATH_AREA_LEFT) {
 			for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) {
-				this->deathWallsLeft[i]->Forward();
+				this->deathWallsLeft[i]->DeathArea(false);
+			}
+		}
+		else {
+			if (this->transform->position.x - this->target->transform->position.x > this->deathWallRange) {
+				for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) {
+					this->deathWallsLeft[i]->Forward();
+				}
 			}
 		}
 	}
