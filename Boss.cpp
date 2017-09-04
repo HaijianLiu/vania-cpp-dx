@@ -18,8 +18,8 @@ Boss::Boss() {
 	this->collider = new BoxCollider(this,0.0f,0.0f,64.0f,64.0f);
 	this->collider->tag = "boss";
 	// OffsetObject
-	this->leftTarget = new OffsetObject(this,-2.0f,0.0f);
-	this->rightTarget = new OffsetObject(this,2.0f,0.0f);
+	this->leftTarget = new OffsetObject(this,-2.0f,0.01f);
+	this->rightTarget = new OffsetObject(this,2.0f,0.01f);
 	// GameObject
 	this->core = new BossCore();
 	for (unsigned int i = 0; i < 7; i++) {
@@ -32,6 +32,7 @@ Boss::Boss() {
 	for (unsigned int i = 0; i < 4; i++) {
 		this->bullets.push_back(new BossBullet());
 	}
+	this->deathBite = new DeathBite();
 	// UIObject
 	this->uiLife = new UIObject(0.0f, 0.0f, 100.0f, 2.0f);
 	this->uiLife->active = false;
@@ -54,6 +55,7 @@ Boss::~Boss() {
 	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) delete this->deathWallsRight[i];
 	for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) delete this->deathWallsLeft[i];
 	for (unsigned int i = 0; i < this->bullets.size(); i++) delete this->bullets[i];
+	delete this->deathBite;
 	// UIObject
 	delete this->uiLife;
 	delete this->uiBossBG;
@@ -94,15 +96,28 @@ void Boss::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Boss::Update() {
+	/* Core Transform
+	..............................................................................*/
+	if (this->currentSkill == DEATH_AREA_LEFT) {
+		this->core->sprite->SetColor(255,0,0,255);
+		this->core->target = this->leftTarget;
+	}
+	if (this->currentSkill == DEATH_AREA_RIGHT) {
+		this->core->sprite->SetColor(255,0,0,255);
+		this->core->target = this->rightTarget;
+	}
+	if (this->currentSkill == NONE_SKILL) {
+		this->core->sprite->SetColor(255,255,255,255);
+		this->core->target = this->target;
+	}
+	this->core->FollowTarget();
+
 	// CheckSkill
 	if (this->awake) {
 		Boss::CheckSkill();
-	}
 
-
-	/* UIObject
-	..............................................................................*/
-	if (this->awake) {
+		/* UIObject
+		..............................................................................*/
 		this->uiLife->active = true;
 		this->uiBossBG->active = true;
 		this->uiLife->offset = Float2D(200.0f - 6.0f - 0.05f * this->status->hp,  -120.0f + 20.0f);
@@ -121,27 +136,9 @@ void Boss::Update() {
 		else {
 			this->uiLife->sprite->SetColor(100,100,100,255);
 		}
-	}
 
-	/* Core Transform
-	..............................................................................*/
-	if (this->currentSkill == DEATH_AREA_LEFT) {
-		this->core->sprite->SetColor(255,0,0,255);
-		this->core->target = this->leftTarget;
-	}
-	if (this->currentSkill == DEATH_AREA_RIGHT) {
-		this->core->sprite->SetColor(255,0,0,255);
-		this->core->target = this->rightTarget;
-	}
-	if (this->currentSkill == NONE_SKILL) {
-		this->core->sprite->SetColor(255,255,255,255);
-		this->core->target = this->target;
-	}
-	this->core->FollowTarget();
-
-	/* Bullet
-	..............................................................................*/
-	if (this->awake) {
+		/* Bullet
+		..............................................................................*/
 		if (this->time->currentTime > this->lastBullet + this->bulletColdDown * 1000.0f) {
 			this->lastBullet = this->time->currentTime;
 			for (unsigned int i = 0; i < this->bullets.size(); i++) {
@@ -153,11 +150,9 @@ void Boss::Update() {
 				}
 			}
 		}
-	}
 
-	/* DeathWall && DeathArea
-	..............................................................................*/
-	if (this->awake) {
+		/* DeathWall && DeathArea
+		..............................................................................*/
 		if (this->currentSkill == DEATH_AREA_RIGHT && this->time->currentTime > this->lastSkill + this->skillDelay * 1000.0f) {
 			for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
 				this->deathWallsRight[i]->DeathArea(true);
@@ -182,11 +177,12 @@ void Boss::Update() {
 				}
 			}
 		}
-	}
 
-	/* BGM
-	..............................................................................*/
-	if (this->awake) {
+		/* DeatBite
+		..............................................................................*/
+
+		/* BGM
+		..............................................................................*/
 		if (!this->intro) {
 			this->resources->audBossIntroBGM->Play();
 			this->intro = true;

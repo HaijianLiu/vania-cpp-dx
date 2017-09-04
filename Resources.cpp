@@ -75,6 +75,9 @@ Resources::~Resources() {
 	if (this->texBossCore.texture != NULL) this->texBossCore.texture->Release();
 	if (this->texDeathWall.texture != NULL) this->texDeathWall.texture->Release();
 	if (this->texBossBullet.texture != NULL) this->texBossBullet.texture->Release();
+	if (this->texBossBiteAppear.texture != NULL) this->texBossBiteAppear.texture->Release();
+	if (this->texBossBiteDisappear.texture != NULL) this->texBossBiteDisappear.texture->Release();
+	if (this->texBossBiteBite.texture != NULL) this->texBossBiteBite.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
 	if (this->texOrb.texture != NULL) this->texOrb.texture->Release();
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
@@ -131,6 +134,9 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texBossCore);
 	Resources::LoadTexture(&this->texDeathWall);
 	Resources::LoadTexture(&this->texBossBullet);
+	Resources::LoadTexture(&this->texBossBiteAppear);
+	Resources::LoadTexture(&this->texBossBiteDisappear);
+	Resources::LoadTexture(&this->texBossBiteBite);
 	Resources::LoadTexture(&this->texBlock);
 	Resources::LoadTexture(&this->texOrb);
 	Resources::LoadTexture(&this->texUIEnergyBG);

@@ -2,7 +2,7 @@
 #ifndef _BOSS_H_
 #define _BOSS_H_
 
-enum skill { NONE_SKILL, DEATH_AREA_LEFT, DEATH_AREA_RIGHT, SKILL_MAX };
+enum skill { NONE_SKILL, DEATH_AREA_LEFT, DEATH_AREA_RIGHT, DEATH_BITE, SKILL_MAX };
 
 class Boss : public GameObject {
 private:
@@ -22,6 +22,7 @@ public:
 	std::vector<DeathWall*> deathWallsLeft;
 	std::vector<DeathWall*> deathWallsRight;
 	std::vector<BossBullet*> bullets;
+	DeathBite* deathBite;
 	// UIObject
 	UIObject* uiBossBG;
 	UIObject* uiLife;

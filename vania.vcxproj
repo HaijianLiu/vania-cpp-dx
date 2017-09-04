@@ -170,6 +170,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Crab.cpp" />
     <ClCompile Include="DamageZone.cpp" />
+    <ClCompile Include="DeathBite.cpp" />
     <ClCompile Include="DeathWall.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Crab.h" />
     <ClInclude Include="DamageZone.h" />
+    <ClInclude Include="DeathBite.h" />
     <ClInclude Include="DeathWall.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Engine.h" />

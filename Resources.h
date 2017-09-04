@@ -32,6 +32,9 @@ public:
 	Texture texBossCore = Texture("assets/boss-eye-core.png",32,32);
 	Texture texDeathWall = Texture("assets/death-wall.png",32,32);
 	Texture texBossBullet = Texture("assets/boss-bullet.png",147,21);
+	Texture texBossBiteAppear = Texture("assets/death-bite-appear.png",256,64);
+	Texture texBossBiteDisappear = Texture("assets/death-bite-disappear.png",256,64);
+	Texture texBossBiteBite = Texture("assets/death-bite-bite.png",256,64);
 	Texture texBlock = Texture("assets/block.png",48,16);
 	Texture texOrb = Texture("assets/score.png",48,16);
 	Texture texUIEnergyBG = Texture("assets/ui-energy.png",112,32);
