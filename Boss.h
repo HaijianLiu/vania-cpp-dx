@@ -13,7 +13,9 @@ public:
 
 	// Collider
 	BoxCollider* collider;
-	// Animation
+	// OffsetObject
+	OffsetObject* leftTarget;
+	OffsetObject* rightTarget;
 
 	// GameObject
 	BossCore* core;

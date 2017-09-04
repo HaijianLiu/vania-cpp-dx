@@ -36,8 +36,7 @@ void BossCore::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void BossCore::Update() {
-	/* Transform
-	..............................................................................*/
+	
 }
 
 
@@ -92,10 +91,4 @@ void BossCore::FollowTarget() {
 	// 	this->transform->position.x = this->parent->transform->position.x + cos(angle) * this->radius;
 	// 	this->transform->position.y = this->parent->transform->position.y + sin(angle) * this->radius;
 	// }
-}
-void BossCore::LookRight() {
-
-}
-void BossCore::LookLeft() {
-
 }

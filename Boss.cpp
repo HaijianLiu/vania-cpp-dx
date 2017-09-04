@@ -17,6 +17,9 @@ Boss::Boss() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,64.0f,64.0f);
 	this->collider->tag = "boss";
+	// OffsetObject
+	this->leftTarget = new OffsetObject(this,-2.0f,0.0f);
+	this->rightTarget = new OffsetObject(this,2.0f,0.0f);
 	// GameObject
 	this->core = new BossCore();
 	for (unsigned int i = 0; i < 7; i++) {
@@ -43,6 +46,9 @@ Boss::Boss() {
 Boss::~Boss() {
 	// Collider
 	delete this->collider;
+	// OffsetObject
+	delete this->leftTarget;
+	delete this->rightTarget;
 	// GameObject
 	delete this->core;
 	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) delete this->deathWallsRight[i];
@@ -119,6 +125,18 @@ void Boss::Update() {
 
 	/* Core Transform
 	..............................................................................*/
+	if (this->currentSkill == DEATH_AREA_LEFT) {
+		this->core->sprite->SetColor(255,0,0,255);
+		this->core->target = this->leftTarget;
+	}
+	if (this->currentSkill == DEATH_AREA_RIGHT) {
+		this->core->sprite->SetColor(255,0,0,255);
+		this->core->target = this->rightTarget;
+	}
+	if (this->currentSkill == NONE_SKILL) {
+		this->core->sprite->SetColor(255,255,255,255);
+		this->core->target = this->target;
+	}
 	this->core->FollowTarget();
 
 	/* Bullet
