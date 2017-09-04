@@ -6,6 +6,9 @@ class Player : public GameObject {
 private:
 
 public:
+	// SceneManager
+	SceneManager* sceneManager;
+
 	// Collider
 	BoxCollider* collGroundCheck;
 	BoxCollider* collCeilingCheck;
@@ -26,6 +29,7 @@ public:
 	// Bullet
 	std::vector<Bullet*> bullets;
 	// UIObject
+	UIObject* uiEnergyBG;
 	UIObject* uiEnergy;
 
 	// Parameter
@@ -55,6 +59,7 @@ public:
 	float verticalSpeed = 0.0f;
 	float shootAnimationLast = 0.2f;
 	float deathDelay = 1.0f;
+	float gameOverDelay = 3.0f;
 
 	// Constructors
 	Player ();

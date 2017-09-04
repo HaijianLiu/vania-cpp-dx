@@ -11,14 +11,13 @@ public:
 	// Resources
 	Resources* resources;
 
-	// UIObject
-	UIObject* uiEnergyBG;
-	UIObject* uiEnergy;
 	// GameObject
 	Player* player;
+	
 	// Scene
 	unsigned int checkPoint = 0;
 	unsigned int activeScene = 0;
+	unsigned int gameOverScene = 0;
 	std::vector<Scene*> scenes;
 
 	SceneManager();

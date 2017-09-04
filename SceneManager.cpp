@@ -10,12 +10,8 @@ SceneManager::SceneManager() {
 	// Resources
 	this->resources = GetResources();
 
-	// UIObject
-	this->uiEnergy = new UIObject(-200.0f + 6.5f + 49.5f, -120.0f + 19.5f,100.0f,1.0f);
-	this->uiEnergyBG = new UIObject(-144.0f,-104.0f,112.0f,32.0f);
 	// GameObject
 	this->player = new Player();
-	this->player->uiEnergy = this->uiEnergy;
 	// Scene
 	scenes.push_back(new Scene00());
 	scenes.push_back(new Scene01());
@@ -29,11 +25,14 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene10());
 	scenes.push_back(new Scene10());
 	scenes.push_back(new Scene11());
+	scenes.push_back(new SceneGameOver());
+	this->gameOverScene = this->scenes.size() - 1;
 	// set SceneManager in scene
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->sceneManager = this;
 		this->scenes[i]->checkPoint->sceneManager = this;
 	}
+	this->player->sceneManager = this;
 
 	// active Scene
 	SceneManager::SetActiveScene(5);
@@ -44,9 +43,6 @@ SceneManager::SceneManager() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneManager::~SceneManager() {
-	// UIObject
-	delete this->uiEnergy;
-	delete this->uiEnergyBG;
 	// Player
 	delete this->player;
 	// Scene
@@ -62,11 +58,6 @@ SceneManager::~SceneManager() {
 void SceneManager::Start() {
 	// Camera target
 	this->camera->target = this->player;
-
-	// Resources
-	this->uiEnergy->sprite->texture = this->resources->texDefault;
-	this->uiEnergyBG->sprite->texture = this->resources->texUIEnergyBG;
-
 	// Scene Start
 	this->resources->audSceneBGM->Play();
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {

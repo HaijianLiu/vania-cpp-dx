@@ -39,6 +39,9 @@ Player::Player() {
 		this->bullets.push_back(new Bullet());
 		this->bullets.back()->status->damage = this->bulletDamage;
 	}
+	// UIObject
+	this->uiEnergy = new UIObject(-200.0f + 6.5f + 49.5f, -120.0f + 19.5f,100.0f,1.0f);
+	this->uiEnergyBG = new UIObject(-144.0f,-104.0f,112.0f,32.0f);
 }
 
 
@@ -64,6 +67,9 @@ Player::~Player() {
 	for (unsigned int i = 0; i < this->bullets.size(); i++) {
 		delete this->bullets[i];
 	}
+	// UIObject
+	delete this->uiEnergy;
+	delete this->uiEnergyBG;
 }
 
 
@@ -86,6 +92,8 @@ void Player::Start() {
 	this->animDuckFire->sprite->texture = this->resources->texPlayerDuckFire;
 	this->animHurt->sprite->device = this->resources->device;
 	this->animHurt->sprite->texture = this->resources->texPlayerHurt;
+	this->uiEnergy->sprite->texture = this->resources->texDefault;
+	this->uiEnergyBG->sprite->texture = this->resources->texUIEnergyBG;
 
 	// Animation MakeFrame() || Sprite MakeSlice()
 	this->animIdle->MakeFrame();
@@ -179,10 +187,19 @@ void Player::Update() {
 
 	/* Death
 	..............................................................................*/
-	if (this->status->hp <= 0 && !this->hurt) {
-		this->active = false;
+	if (this->status->hp <= 0 && !this->hurt && this->draw) {
+		this->draw = false;
 		this->resources->audPlayerDestroy->Play();
 		Instantiate(this->resources->playerDestroy, this->transform);
+	}
+
+	/* GameOver
+	..............................................................................*/
+	if (this->status->hp <= 0 && this->time->currentTime > this->lastHurt + this->gameOverDelay * 1000.0f) {
+		this->active = false;
+		this->uiEnergy->active = false;
+		this->uiEnergyBG->active = false;
+		this->sceneManager->SetActiveScene(this->sceneManager->gameOverScene);
 	}
 
 	/* Gravity
@@ -202,18 +219,18 @@ void Player::Update() {
 	..............................................................................*/
 
 	// Shoot Flag
-	if ((float)this->time->currentTime > (float)this->lastFire + this->shootAnimationLast * 1000.0f) {
+	if (this->time->currentTime > this->lastFire + this->shootAnimationLast * 1000.0f) {
 		this->shoot = false;
 	}
 
 	// Hurt Flag
 	if (this->status->hp > 0) {
-		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtFreeze * 1000.0f) {
+		if (this->time->currentTime > this->lastHurt + this->hurtFreeze * 1000.0f) {
 			this->hurt = false;
 		}
 	}
 	else {
-		if ((float)this->time->currentTime > (float)this->lastHurt + this->deathDelay * 1000.0f) {
+		if (this->time->currentTime > this->lastHurt + this->deathDelay * 1000.0f) {
 			this->hurt = false;
 		}
 	}
@@ -299,7 +316,7 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	/* Shield if tag = "enemy"
 	..............................................................................*/
 	if (other->tag == "enemy" || other->tag == "death wall") {
-		if ((float)this->time->currentTime > (float)this->lastHurt + this->hurtColdDown * 1000.0f) {
+		if (this->status->hp > 0 && this->time->currentTime > this->lastHurt + this->hurtColdDown * 1000.0f) {
 			this->hurt = true;
 			this->lastHurt = this->time->currentTime;
 			this->freeze = true;
@@ -332,7 +349,7 @@ void Player::FixedUpdate() {
 	..............................................................................*/
 	if (!this->hurt) {
 		if (GetKeyboardTrigger(DIK_F)) {
-			if ((float)this->time->currentTime > (float)this->lastFire + this->fireColdDown * 1000.0f) {
+			if (this->time->currentTime > this->lastFire + this->fireColdDown * 1000.0f) {
 				if (this->status->hp > this->shootEnergy) {
 					this->shoot = true;
 					this->status->hp -= this->shootEnergy;
