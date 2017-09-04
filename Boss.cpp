@@ -63,7 +63,11 @@ void Boss::Start() {
 	this->uiLife->sprite->texture = this->resources->texDefault;
 	this->uiBossBG->sprite->texture = this->resources->texUIBossBG;
 
-	// GameObject
+	// Core
+	this->core->parent = this;
+	this->core->target = this->target;
+
+	// DeathWall
 	for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
 		this->deathWallsRight[i]->transform->position.x = this->transform->position.x + 2.24f;
 		this->deathWallsRight[i]->transform->position.y = this->transform->position.y - 0.96f + 0.32f * i;
@@ -115,16 +119,7 @@ void Boss::Update() {
 
 	/* Core Transform
 	..............................................................................*/
-	float angle = atan((this->target->transform->position.y - this->transform->position.y) / (this->target->transform->position.x - this->transform->position.x));
-
-	if (this->target->transform->position.x < this->transform->position.x) {
-		this->core->transform->position.x = this->transform->position.x - cos(angle) * this->core->radius;
-		this->core->transform->position.y = this->transform->position.y - sin(angle) * this->core->radius;
-	}
-	else {
-		this->core->transform->position.x = this->transform->position.x + cos(angle) * this->core->radius;
-		this->core->transform->position.y = this->transform->position.y + sin(angle) * this->core->radius;
-	}
+	this->core->FollowTarget();
 
 	/* Bullet
 	..............................................................................*/

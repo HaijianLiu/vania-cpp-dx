@@ -6,8 +6,13 @@ class BossCore : public GameObject {
 private:
 
 public:
+	// GameObject
+	GameObject* parent;
+	GameObject* target;
+
 	// Parameter
 	float radius = 0.1f;
+	float speed = 0.5f;
 
 	// Constructors
 	BossCore ();
@@ -18,6 +23,11 @@ public:
 	void Update();
 	void OnTriggerEnter(BoxCollider* other);
 	void FixedUpdate();
+
+	// Functions
+	void FollowTarget();
+	void LookRight();
+	void LookLeft();
 };
 
 #endif

@@ -45,7 +45,7 @@ void BossCore::Update() {
 < On Trigger Enter >
 ------------------------------------------------------------------------------*/
 void BossCore::OnTriggerEnter(BoxCollider* other) {
-	
+
 }
 
 
@@ -53,5 +53,49 @@ void BossCore::OnTriggerEnter(BoxCollider* other) {
 < Fixed Update >
 ------------------------------------------------------------------------------*/
 void BossCore::FixedUpdate() {
+
+}
+
+
+/*------------------------------------------------------------------------------
+< Functions >
+------------------------------------------------------------------------------*/
+void BossCore::FollowTarget() {
+
+	float angle = atan((this->target->transform->position.y - this->parent->transform->position.y) / (this->target->transform->position.x - this->parent->transform->position.x));
+
+	if (this->target->transform->position.x < this->parent->transform->position.x) {
+		this->transform->position.x -= cos(angle) * this->speed * this->time->deltaTime;
+		this->transform->position.y -= sin(angle) * this->speed * this->time->deltaTime;
+		if (this->transform->position.x < this->parent->transform->position.x - cos(angle) * this->radius) {
+			this->transform->position.x = this->parent->transform->position.x - cos(angle) * this->radius;
+		}
+		if ( (this->transform->position.y <= this->parent->transform->position.y - sin(angle) * this->radius && sin(angle) >= 0) || (this->transform->position.y > this->parent->transform->position.y - sin(angle) * this->radius && sin(angle) < 0) ){
+			this->transform->position.y = this->parent->transform->position.y - sin(angle) * this->radius;
+		}
+	}
+	else {
+		this->transform->position.x += cos(angle) * this->speed * this->time->deltaTime;
+		this->transform->position.y += sin(angle) * this->speed * this->time->deltaTime;
+		if (this->transform->position.x > this->parent->transform->position.x + cos(angle) * this->radius) {
+			this->transform->position.x = this->parent->transform->position.x + cos(angle) * this->radius;
+		}
+		if ( (this->transform->position.y >= this->parent->transform->position.y + sin(angle) * this->radius && sin(angle) >= 0) || (this->transform->position.y < this->parent->transform->position.y + sin(angle) * this->radius && sin(angle) < 0) ){
+			this->transform->position.y = this->parent->transform->position.y + sin(angle) * this->radius;
+		}
+	}
+	// if (this->target->transform->position.x < this->parent->transform->position.x) {
+	// 	this->transform->position.x = this->parent->transform->position.x - cos(angle) * this->radius;
+	// 	this->transform->position.y = this->parent->transform->position.y - sin(angle) * this->radius;
+	// }
+	// else {
+	// 	this->transform->position.x = this->parent->transform->position.x + cos(angle) * this->radius;
+	// 	this->transform->position.y = this->parent->transform->position.y + sin(angle) * this->radius;
+	// }
+}
+void BossCore::LookRight() {
+
+}
+void BossCore::LookLeft() {
 
 }
