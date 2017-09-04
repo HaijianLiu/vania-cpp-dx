@@ -17,7 +17,8 @@ public:
 	// GameObject
 	Player* player;
 	// Scene
-	unsigned int activeScene;
+	unsigned int checkPoint = 0;
+	unsigned int activeScene = 0;
 	std::vector<Scene*> scenes;
 
 	SceneManager();

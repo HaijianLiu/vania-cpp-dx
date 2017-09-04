@@ -54,6 +54,7 @@ public:
 	Audio* audEnemyDestroy;
 	Audio* audBallBounce;
 	Audio* audOrbGet;
+	Audio* audCheckPoint;
 	// Particle System
 	ParticleSystem* fxDestroy;
 	ParticleSystem* fxTail;

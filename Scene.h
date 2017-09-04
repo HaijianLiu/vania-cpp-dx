@@ -45,6 +45,7 @@ public:
 	std::vector<Int2D> crabData;
 	std::vector<Int2D> playerData;
 	// Map Object
+	CheckPoint* checkPoint;
 	std::vector<NoneObject*> range;
 	std::vector<Boss*> bosses;
 	std::vector<Ball*> balls;

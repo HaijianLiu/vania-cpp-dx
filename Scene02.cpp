@@ -10,6 +10,7 @@ Scene02::Scene02() {
 	this->rangePath = "map/scene_Scene02-Range.csv";
 	this->flyerPath = "map/scene_Scene02-Flyer.csv";
 	this->orbPath = "map/scene_Scene02-Orb.csv";
+	this->playerPath = "map/scene_Scene02-Player.csv";
 	this->groundPath = "map/scene_Scene02-Ground.csv";
 	this->backGroundPath = "map/scene_Scene02-BackGround.csv";
 
@@ -49,7 +50,7 @@ void Scene02::Update() {
 			this->sceneManager->SetActiveScene(3);
 		}
 	}
-	
+
 	// Update
 	Scene::Update();
 }

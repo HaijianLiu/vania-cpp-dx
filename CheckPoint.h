@@ -9,6 +9,12 @@ public:
 	// Collider
 	BoxCollider* collider;
 
+	// SceneManager
+	SceneManager* sceneManager;
+
+	// status
+	bool check = false;
+
 	// Constructors
 	CheckPoint();
 	~CheckPoint();

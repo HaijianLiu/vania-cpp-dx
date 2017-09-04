@@ -87,6 +87,12 @@ void Scene::SetScene() {
 	}
 	// Set Player
 	Scene::LoadMapData(this->playerPath, this->playerData);
+	// CheckPoint
+	this->checkPoint = new CheckPoint();
+	if (this->playerData.size() != 0) {
+		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
+		this->checkPoint->active = true;
+	}
 	// Map
 	std::vector<Int2D> damageZoneData;
 	Scene::LoadMapData(this->damageZonePath, damageZoneData);
@@ -181,6 +187,7 @@ Scene::~Scene() {
 	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];
 	for (unsigned int i = 0; i < this->grounds.size(); i++) delete this->grounds[i];
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) delete this->backGrounds[i];
+	delete this->checkPoint;
 }
 
 
