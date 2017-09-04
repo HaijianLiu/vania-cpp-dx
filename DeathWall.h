@@ -15,7 +15,7 @@ public:
 
 	// Parameter
 	float speed = 1.0f;
-	float maxArea = 1.6f;
+	float maxArea = 2.0f;
 
 	// status
 	D3DXVECTOR3 startPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);

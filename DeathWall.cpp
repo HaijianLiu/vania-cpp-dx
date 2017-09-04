@@ -7,6 +7,7 @@
 DeathWall::DeathWall() {
 	// Set GameObject
 	this->active = false;
+	this->layer = 1;
 	this->status->damage = 30.0f;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(32.0f,32.0f);

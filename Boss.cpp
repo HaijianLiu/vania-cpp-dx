@@ -158,7 +158,7 @@ void Boss::Update() {
 	/* DeathWall && DeathArea
 	..............................................................................*/
 	if (this->awake) {
-		if (this->currentSkill == DEATH_AREA_RIGHT) {
+		if (this->currentSkill == DEATH_AREA_RIGHT && this->time->currentTime > this->lastSkill + this->skillDelay * 1000.0f) {
 			for (unsigned int i = 0; i < this->deathWallsRight.size(); i++) {
 				this->deathWallsRight[i]->DeathArea(true);
 			}
@@ -170,7 +170,7 @@ void Boss::Update() {
 				}
 			}
 		}
-		if (this->currentSkill == DEATH_AREA_LEFT) {
+		if (this->currentSkill == DEATH_AREA_LEFT && this->time->currentTime > this->lastSkill + this->skillDelay * 1000.0f) {
 			for (unsigned int i = 0; i < this->deathWallsLeft.size(); i++) {
 				this->deathWallsLeft[i]->DeathArea(false);
 			}
@@ -254,8 +254,13 @@ void Boss::FixedUpdate() {
 < Functions >
 ------------------------------------------------------------------------------*/
 void Boss::CheckSkill() {
-	if (this->time->currentTime - this->lastSkill > this->skillColdDown * 1000.0f) {
+	if (this->time->currentTime > this->lastSkill + this->skillColdDown * 1000.0f) {
 		this->currentSkill = rand() % SKILL_MAX;
 		this->lastSkill = this->time->currentTime;
+	}
+	if (this->currentSkill == DEATH_AREA_LEFT || this->currentSkill == DEATH_AREA_RIGHT) {
+		if (this->time->currentTime > this->lastSkill + this->deathWallTime * 1000.0f) {
+			this->currentSkill = NONE_SKILL;
+		}
 	}
 }

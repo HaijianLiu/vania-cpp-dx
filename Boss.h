@@ -32,7 +32,9 @@ public:
 	// Parameter
 	float hp = 1000.0f;
 	float deathWallRange = 1.6f;
+	float deathWallTime = 2.0f;
 	float skillColdDown = 10.0f;
+	float skillDelay = 1.0f;
 	float bulletColdDown = 15.0f;
 
 	// status
