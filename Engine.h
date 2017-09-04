@@ -72,6 +72,7 @@
 ------------------------------------------------------------------------------*/
 #include "Orb.h"
 #include "Bullet.h"
+#include "CheckPoint.h"
 #include "Player.h"
 #include "Crab.h"
 #include "Flyer.h"

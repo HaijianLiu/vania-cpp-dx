@@ -56,6 +56,7 @@ Resources::~Resources() {
 	// Texture
 	if (this->texDefault.texture != NULL) this->texDefault.texture->Release();
 	if (this->texTile.texture != NULL) this->texTile.texture->Release();
+	if (this->texCheckPoint.texture != NULL) this->texCheckPoint.texture->Release();
 	if (this->texPlayerIdle.texture != NULL) this->texPlayerIdle.texture->Release();
 	if (this->texPlayerShoot.texture != NULL) this->texPlayerShoot.texture->Release();
 	if (this->texPlayerRun.texture != NULL) this->texPlayerRun.texture->Release();
@@ -115,6 +116,7 @@ void Resources::Start() {
 	// LoadTexture
 	Resources::LoadTexture(&this->texDefault);
 	Resources::LoadTexture(&this->texTile);
+	Resources::LoadTexture(&this->texCheckPoint);
 	Resources::LoadTexture(&this->texPlayerIdle);
 	Resources::LoadTexture(&this->texPlayerShoot);
 	Resources::LoadTexture(&this->texPlayerRun);

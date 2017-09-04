@@ -167,6 +167,7 @@
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Crab.cpp" />
     <ClCompile Include="DamageZone.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Crab.h" />
     <ClInclude Include="DamageZone.h" />

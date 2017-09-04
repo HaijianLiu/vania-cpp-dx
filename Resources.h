@@ -13,6 +13,7 @@ public:
 	// Texture
 	Texture texDefault = Texture("assets/default.png",32,32);
 	Texture texTile = Texture("assets/tilesets.png",384,320);
+	Texture texCheckPoint = Texture("assets/check-point.png",64,32);
 	Texture texPlayerIdle = Texture("assets/player-idle.png",240,80);
 	Texture texPlayerShoot = Texture("assets/player-shoot.png",240,80);
 	Texture texPlayerRun = Texture("assets/player-run-shoot.png",800,80);
