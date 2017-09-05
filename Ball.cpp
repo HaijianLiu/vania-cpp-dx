@@ -6,7 +6,7 @@
 ------------------------------------------------------------------------------*/
 Ball::Ball() {
 	// Status
-	this->status->hp = 100;
+	this->status->hp = this->hp;
 	this->status->damage = 30;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(16.0f,16.0f);

@@ -15,6 +15,7 @@ public:
 	Orb* orb;
 
 	// Parameter
+	float hp = 100.0f;
 	float speed = 1.0f;
 
 	// status

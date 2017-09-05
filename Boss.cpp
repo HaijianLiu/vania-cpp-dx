@@ -8,7 +8,7 @@ Boss::Boss() {
 	// Camera
 	this->camera = GetCamera();
 	// Status
-	this->status->hp = 100;
+	this->status->hp = this->sleepHP;
 	this->status->damage = 30;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(128.0f,128.0f);

@@ -15,6 +15,7 @@ public:
 	Orb* orb;
 
 	// Parameter
+	float hp = 100.0f;
 	float verticalSpeed = 1.0f;
 	float horizonSpeed = 1.0f;
 

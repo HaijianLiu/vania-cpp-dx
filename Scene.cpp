@@ -137,36 +137,36 @@ void Scene::Reset() {
 	for (unsigned int i = 0; i < this->balls.size(); i++) {
 		Scene::SetPosition(this->balls[i], this->ballData[i].x);
 		this->balls[i]->active = true;
-		this->balls[i]->status->hp = 100;
+		this->balls[i]->status->hp = this->balls[i]->hp;
 		this->balls[i]->orb->active = false;
 	}
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
 		Scene::SetPosition(this->jumpers[i], this->jumperData[i].x);
 		this->jumpers[i]->active = true;
-		this->jumpers[i]->status->hp = 100;
+		this->jumpers[i]->status->hp = this->jumpers[i]->hp;
 		this->jumpers[i]->orb->active = false;
 	}
 	for (unsigned int i = 0; i < this->flyers.size(); i++) {
 		Scene::SetPosition(this->flyers[i], this->flyerData[i].x);
 		this->flyers[i]->active = true;
-		this->flyers[i]->status->hp = 100;
+		this->flyers[i]->status->hp = this->flyers[i]->hp;
 		this->flyers[i]->orb->active = false;
 	}
 	for (unsigned int i = 0; i < this->crabs.size(); i++) {
 		Scene::SetPosition(this->crabs[i], this->crabData[i].x);
 		this->crabs[i]->active = true;
-		this->crabs[i]->status->hp = 100;
+		this->crabs[i]->status->hp = this->crabs[i]->hp;
 		this->crabs[i]->orb->active = false;
 	}
 	// Block
 	for (unsigned int i = 0; i < this->blocks.size(); i++) {
 		this->blocks[i]->active = true;
-		this->blocks[i]->status->hp = 100;
+		this->blocks[i]->status->hp = this->blocks[i]->hp;
 	}
 	// Player
 	if (this->playerData.size() != 0 && !this->sceneManager->player->active) {
 		Scene::SetPosition(this->sceneManager->player, this->playerData[0].x);
-		this->sceneManager->player->status->hp = 100.0f;
+		this->sceneManager->player->status->hp = this->sceneManager->player->hp;
 		this->sceneManager->player->active = true;
 		this->sceneManager->player->draw = true;
 		this->sceneManager->player->uiEnergy->active = true;
@@ -177,7 +177,7 @@ void Scene::Reset() {
 	if (this->bosses.size() != 0) {
 		if (this->bosses[0]->active) {
 			this->bosses[0]->awake = false;
-			this->bosses[0]->status->hp = 100.0f;
+			this->bosses[0]->status->hp = this->bosses[0]->sleepHP;
 			this->bosses[0]->phase = 0;
 			this->bosses[0]->uiBossBG->active = false;
 			this->bosses[0]->uiLife->active = false;

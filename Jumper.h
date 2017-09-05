@@ -19,6 +19,7 @@ public:
 	Orb* orb;
 
 	// Parameter
+	float hp = 100.0f;
 	float gravity = 9.8f;
 	float speed = 0.5f;
 	float jumpPower = 4.0f;

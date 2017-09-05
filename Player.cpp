@@ -7,7 +7,7 @@
 Player::Player() {
 	// Status
 	this->active = false;
-	this->status->hp = 100;
+	this->status->hp = this->hp;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(80.0f,80.0f);
 	this->sprite->flashTime = this->hurtColdDown;
@@ -121,17 +121,17 @@ void Player::Update() {
 		}
 	}
 	if (this->status->hp < 0) this->status->hp = 0;
-	if (this->status->hp > 100) this->status->hp = 100;
+	if (this->status->hp > this->hp) this->status->hp = this->hp;
 
 	/* UIObject
 	..............................................................................*/
 	this->uiEnergy->offset = Float2D(-200.0f + 6.0f + 0.5f * this->status->hp,  -120.0f + 20.0f);
 	this->uiEnergy->transform->scale = Float2D(this->status->hp * 1.0f, 2.0f);
 	if (!this->freeze) {
-		if (this->status->hp > 60) {
+		if (this->status->hp > 0.6f * this->hp) {
 			this->uiEnergy->sprite->SetColor(0,255,255,255);
 		}
-		else if (this->status->hp > 20) {
+		else if (this->status->hp > 0.2f * this->hp) {
 			this->uiEnergy->sprite->SetColor(255,192,0,255);
 		}
 		else {

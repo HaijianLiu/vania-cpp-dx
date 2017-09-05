@@ -31,6 +31,7 @@ public:
 	GameObject* target;
 
 	// Parameter
+	float sleepHP = 100.0f;
 	float hp = 1500.0f;
 	float deathWallRange = 1.6f;
 	float deathAreaTime = 3.0f;

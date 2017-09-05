@@ -33,6 +33,7 @@ public:
 	UIObject* uiEnergy;
 
 	// Parameter
+	float hp = 100.0f;
 	float gravity = 9.8f;
 	float speed = 1.0f;
 	float jumpPower = 4.0f;
