@@ -111,6 +111,7 @@
 #include "Scene17.h"
 #include "Scene18.h"
 #include "Scene19.h"
+#include "Scene20.h"
 #include "SceneGameOver.h"
 #include "SceneManager.h"
 
