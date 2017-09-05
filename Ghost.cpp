@@ -17,6 +17,9 @@ Ghost::Ghost() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,24.0f,24.0f);
 	this->collider->tag = "enemy";
+
+	// GameObject
+	this->orb = new Orb();
 }
 
 
@@ -27,6 +30,8 @@ Ghost::~Ghost() {
 	// delete objects
 	delete this->collider;
 	delete this->animation;
+	// GameObject
+	delete this->orb;
 }
 
 
@@ -53,6 +58,7 @@ void Ghost::Update() {
 		this->active = false;
 		this->resources->audEnemyDestroy->Play();
 		Instantiate(this->resources->enemyDestroy, this->transform);
+		Instantiate(this->orb, this->transform);
 	}
 
 	/* Transform

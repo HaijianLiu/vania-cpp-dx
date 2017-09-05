@@ -28,6 +28,7 @@ public:
 	const char* rangePath = "map/scene_Scene-Null";
 	const char* bossPath = "map/scene_Scene-Null";
 	const char* ballPath = "map/scene_Scene-Null";
+	const char* ghostPath = "map/scene_Scene-Null";
 	const char* jumperPath = "map/scene_Scene-Null";
 	const char* flyerPath = "map/scene_Scene-Null";
 	const char* crabPath = "map/scene_Scene-Null";
@@ -40,6 +41,7 @@ public:
 	const char* backGroundPath = "map/scene_Scene-Null";
 	// ReSet Data
 	std::vector<Int2D> ballData;
+	std::vector<Int2D> ghostData;
 	std::vector<Int2D> jumperData;
 	std::vector<Int2D> flyerData;
 	std::vector<Int2D> crabData;
@@ -49,6 +51,7 @@ public:
 	std::vector<NoneObject*> range;
 	std::vector<Boss*> bosses;
 	std::vector<Ball*> balls;
+	std::vector<Ghost*> ghosts;
 	std::vector<Jumper*> jumpers;
 	std::vector<Flyer*> flyers;
 	std::vector<Crab*> crabs;

@@ -13,6 +13,7 @@ public:
 
 	// GameObject
 	GameObject* target;
+	Orb* orb;
 
 	// Constructors
 	Ghost();

@@ -47,6 +47,11 @@ void Scene::SetScene() {
 		this->balls.push_back(new Ball());
 		Scene::SetPosition(this->balls.back(), this->ballData[i].x);
 	}
+	Scene::LoadMapData(this->ghostPath, this->ghostData);
+	for (unsigned int i = 0; i < this->ghostData.size(); i++) {
+		this->ghosts.push_back(new Ghost());
+		Scene::SetPosition(this->ghosts.back(), this->ghostData[i].x);
+	}
 	Scene::LoadMapData(this->jumperPath, this->jumperData);
 	for (unsigned int i = 0; i < this->jumperData.size(); i++) {
 		this->jumpers.push_back(new Jumper());
@@ -140,6 +145,12 @@ void Scene::Reset() {
 		this->balls[i]->status->hp = this->balls[i]->hp;
 		this->balls[i]->orb->active = false;
 	}
+	for (unsigned int i = 0; i < this->ghosts.size(); i++) {
+		Scene::SetPosition(this->ghosts[i], this->ghostData[i].x);
+		this->ghosts[i]->active = true;
+		this->ghosts[i]->status->hp = this->ghosts[i]->hp;
+		this->ghosts[i]->orb->active = false;
+	}
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
 		Scene::SetPosition(this->jumpers[i], this->jumperData[i].x);
 		this->jumpers[i]->active = true;
@@ -199,6 +210,7 @@ Scene::~Scene() {
 	for (unsigned int i = 0; i < this->ai.size(); i++) delete this->ai[i];
 	for (unsigned int i = 0; i < this->bosses.size(); i++) delete this->bosses[i];
 	for (unsigned int i = 0; i < this->balls.size(); i++) delete this->balls[i];
+	for (unsigned int i = 0; i < this->ghosts.size(); i++) delete this->ghosts[i];
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) delete this->jumpers[i];
 	for (unsigned int i = 0; i < this->flyers.size(); i++) delete this->flyers[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
@@ -224,6 +236,9 @@ void Scene::Start() {
 		for (unsigned int j = 0; j < this->bosses[i]->bullets.size(); j++) {
 			this->bosses[i]->bullets[j]->target = this->bosses[i]->target;
 		}
+	}
+	for (unsigned int i = 0; i < this->ghosts.size(); i++) {
+		this->ghosts[i]->target = this->sceneManager->player;
 	}
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) {
 		this->jumpers[i]->target = this->sceneManager->player;
