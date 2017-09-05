@@ -207,6 +207,7 @@
     <ClCompile Include="Scene16.cpp" />
     <ClCompile Include="Scene17.cpp" />
     <ClCompile Include="Scene18.cpp" />
+    <ClCompile Include="Scene19.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="Scene16.h" />
     <ClInclude Include="Scene17.h" />
     <ClInclude Include="Scene18.h" />
+    <ClInclude Include="Scene19.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
