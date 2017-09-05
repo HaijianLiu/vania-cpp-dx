@@ -47,6 +47,9 @@ void Scene00::Update() {
 	if (this->sceneManager->player->transform->position.x > this->range[1]->transform->position.x) {
 		this->sceneManager->SetActiveScene(1);
 	}
+	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
+		this->sceneManager->SetActiveScene(12);
+	}
 	// Update
 	Scene::Update();
 }
