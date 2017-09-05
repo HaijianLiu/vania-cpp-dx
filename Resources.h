@@ -30,6 +30,7 @@ public:
 	Texture texJumperIdle = Texture("assets/jumper-idle.png",188,32);
 	Texture texJumperJump = Texture("assets/jumper-jump.png",47,32);
 	Texture texBall = Texture("assets/ball.png",16,16);
+	Texture texGhost = Texture("assets/ghost.png",112,37);
 	Texture texBossEyeBall = Texture("assets/boss-eye-ball.png",128,128);
 	Texture texBossCore = Texture("assets/boss-eye-core.png",32,32);
 	Texture texDeathWall = Texture("assets/death-wall.png",32,32);

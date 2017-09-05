@@ -77,6 +77,7 @@
 #include "Crab.h"
 #include "Flyer.h"
 #include "Jumper.h"
+#include "Ghost.h"
 #include "Ball.h"
 #include "DeathBite.h"
 #include "DeathWall.h"
