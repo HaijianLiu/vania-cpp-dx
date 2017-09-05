@@ -8,6 +8,10 @@ Scene15::Scene15() {
 	// Set Map path
 	this->cameraPath = "map/scene_Scene15-Camera.csv";
 	this->rangePath = "map/scene_Scene15-Range.csv";
+	this->aiPath = "map/scene_Scene15-AI.csv";
+	this->jumperPath = "map/scene_Scene15-Jumper.csv";
+	this->crabPath = "map/scene_Scene15-Crab.csv";
+	this->blockPath = "map/scene_Scene15-Block.csv";
 	this->groundPath = "map/scene_Scene15-Ground.csv";
 	this->backGroundPath = "map/scene_Scene15-BackGround.csv";
 

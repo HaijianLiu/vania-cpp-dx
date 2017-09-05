@@ -91,13 +91,13 @@ void Ghost::OnTriggerEnter(BoxCollider* other) {
 		this->sprite->Flash();
 		this->status->hp -= other->gameObject->status->damage;
 	}
-	/* dead if tag = "player"
-	..............................................................................*/
-	if (other->tag == "player") {
-		this->active = false;
-		this->resources->audEnemyDestroy->Play();
-		Instantiate(this->resources->enemyDestroy, this->transform);
-	}
+	// /* dead if tag = "player"
+	// ..............................................................................*/
+	// if (other->tag == "player") {
+	// 	this->active = false;
+	// 	this->resources->audEnemyDestroy->Play();
+	// 	Instantiate(this->resources->enemyDestroy, this->transform);
+	// }
 }
 
 

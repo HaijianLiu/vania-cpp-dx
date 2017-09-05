@@ -5,6 +5,8 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 UIObject::UIObject(float offsetX, float offsetY, float sizeX, float sizeY) {
+	// Set GameObject
+	this->layer = 1;
 	// Camera
 	this->camera = GetCamera();
 	// offset in real pixel
