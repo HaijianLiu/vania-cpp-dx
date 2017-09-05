@@ -101,6 +101,7 @@
 #include "Scene06.h"
 #include "Scene07.h"
 #include "Scene08.h"
+#include "Scene09.h"
 #include "Scene10.h"
 #include "Scene11.h"
 #include "Scene12.h"

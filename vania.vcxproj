@@ -198,6 +198,7 @@
     <ClCompile Include="Scene06.cpp" />
     <ClCompile Include="Scene07.cpp" />
     <ClCompile Include="Scene08.cpp" />
+    <ClCompile Include="Scene09.cpp" />
     <ClCompile Include="Scene10.cpp" />
     <ClCompile Include="Scene11.cpp" />
     <ClCompile Include="Scene12.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="Scene06.h" />
     <ClInclude Include="Scene07.h" />
     <ClInclude Include="Scene08.h" />
+    <ClInclude Include="Scene09.h" />
     <ClInclude Include="Scene10.h" />
     <ClInclude Include="Scene11.h" />
     <ClInclude Include="Scene12.h" />

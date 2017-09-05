@@ -22,7 +22,7 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene06());
 	scenes.push_back(new Scene07());
 	scenes.push_back(new Scene08());
-	scenes.push_back(new Scene10());
+	scenes.push_back(new Scene09());
 	scenes.push_back(new Scene10());
 	scenes.push_back(new Scene11());
 	scenes.push_back(new Scene12());
@@ -47,7 +47,7 @@ SceneManager::SceneManager() {
 	this->player->sceneManager = this;
 
 	// active Scene
-	SceneManager::SetActiveScene(14);
+	SceneManager::SetActiveScene(5);
 	// SceneManager::SetActiveScene(this->activeScene);
 }
 
