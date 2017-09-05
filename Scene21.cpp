@@ -42,9 +42,9 @@ void Scene21::Update() {
 	if (this->sceneManager->player->transform->position.y > this->range[1]->transform->position.y) {
 		this->sceneManager->SetActiveScene(16);
 	}
-	// if (this->sceneManager->player->transform->position.y > this->range[1]->transform->position.y) {
-	// 	this->sceneManager->SetActiveScene(18);
-	// }
+	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
+		this->sceneManager->SetActiveScene(22);
+	}
 
 	// Update
 	Scene::Update();
