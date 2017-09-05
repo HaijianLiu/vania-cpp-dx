@@ -64,8 +64,11 @@ void Block::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "bullet") {
 		this->status->hp -= other->gameObject->status->damage;
 	}
+	if (other->tag == "ball ceiling check" || other->tag == "ball ground check" || other->tag == "ball enemy") {
+		this->status->hp -= 50.0f;
+	}
 	if (other->tag == "ground check") {
-		this->status->hp -= (int)(this->destroySpeed * this->time->deltaTime);
+		this->status->hp -= this->destroySpeed * this->time->deltaTime;
 	}
 }
 

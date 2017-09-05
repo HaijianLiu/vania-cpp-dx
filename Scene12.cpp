@@ -4,16 +4,16 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Scene07::Scene07() {
+Scene12::Scene12() {
 	// Set Map path
-	this->cameraPath = "map/scene_Scene07-Camera.csv";
-	this->rangePath = "map/scene_Scene07-Range.csv";
-	this->jumperPath = "map/scene_Scene07-Jumper.csv";
-	this->flyerPath = "map/scene_Scene07-Flyer.csv";
-	this->blockPath = "map/scene_Scene07-Block.csv";
-	this->damageZonePath = "map/scene_Scene07-DamageZone.csv";
-	this->groundPath = "map/scene_Scene07-Ground.csv";
-	this->backGroundPath = "map/scene_Scene07-BackGround.csv";
+	this->cameraPath = "map/scene_Scene12-Camera.csv";
+	this->rangePath = "map/scene_Scene12-Range.csv";
+	this->ballPath = "map/scene_Scene12-Ball.csv";
+	this->aiPath = "map/scene_Scene12-AI.csv";
+	this->blockPath = "map/scene_Scene12-Block.csv";
+	this->orbPath = "map/scene_Scene12-Orb.csv";
+	this->groundPath = "map/scene_Scene12-Ground.csv";
+	this->backGroundPath = "map/scene_Scene12-BackGround.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -23,7 +23,7 @@ Scene07::Scene07() {
 /*------------------------------------------------------------------------------
 < Destructor >
 ------------------------------------------------------------------------------*/
-Scene07::~Scene07() {
+Scene12::~Scene12() {
 
 }
 
@@ -31,7 +31,7 @@ Scene07::~Scene07() {
 /*------------------------------------------------------------------------------
 < Start >
 ------------------------------------------------------------------------------*/
-void Scene07::Start() {
+void Scene12::Start() {
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
@@ -41,16 +41,13 @@ void Scene07::Start() {
 /*------------------------------------------------------------------------------
 < Update >
 ------------------------------------------------------------------------------*/
-void Scene07::Update() {
+void Scene12::Update() {
 	// Check Switch Scene
-	if (this->sceneManager->player->transform->position.y > this->range[3]->transform->position.y) {
-		this->sceneManager->SetActiveScene(6);
+	if (this->sceneManager->player->transform->position.y > this->range[1]->transform->position.y) {
+		this->sceneManager->SetActiveScene(7);
 	}
-	if (this->sceneManager->player->transform->position.x > this->range[2]->transform->position.x) {
-		this->sceneManager->SetActiveScene(8);
-	}
-	if (this->sceneManager->player->transform->position.y < this->range[0]->transform->position.y) {
-		this->sceneManager->SetActiveScene(12);
+	if (this->sceneManager->player->transform->position.x > this->range[0]->transform->position.x) {
+		this->sceneManager->SetActiveScene(0);
 	}
 
 	// Update

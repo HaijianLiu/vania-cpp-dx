@@ -15,13 +15,13 @@ Ball::Ball() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collGroundCheck = new BoxCollider(this,0.0f,0.07f,4.0f,4.0f);
 	this->collGroundCheck->trigger = true;
-	this->collGroundCheck->tag = "ground check";
+	this->collGroundCheck->tag = "ball ground check";
 	this->collCeilingCheck = new BoxCollider(this,0.0f,-0.07f,4.0f,4.0f);
 	this->collCeilingCheck->trigger = true;
-	this->collCeilingCheck->tag = "ceiling check";
+	this->collCeilingCheck->tag = "ball ceiling check";
 	this->collHorizonCheck = new BoxCollider(this,0.0f,0.0f,16.0f,16.0f);
 	this->collHorizonCheck->trigger = true;
-	this->collHorizonCheck->tag = "enemy";
+	this->collHorizonCheck->tag = "ball enemy";
 
 	// GameObject
 	this->orb = new Orb();

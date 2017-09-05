@@ -185,23 +185,23 @@ void Player::Update() {
 		}
 	}
 
-	/* Death
-	..............................................................................*/
-	if (this->status->hp <= 0 && !this->hurt && this->draw) {
-		this->draw = false;
-		this->resources->audPlayerDestroy->Play();
-		Instantiate(this->resources->playerDestroy, this->transform);
-	}
-
-	/* GameOver
-	..............................................................................*/
-	if (this->status->hp <= 0 && this->time->currentTime > this->lastHurt + this->gameOverDelay * 1000.0f) {
-		this->active = false;
-		this->uiEnergy->active = false;
-		this->uiEnergyBG->active = false;
-		this->sceneManager->SetActiveScene(this->sceneManager->gameOverScene);
-		this->lastGameOver = this->time->currentTime;
-	}
+	// /* Death
+	// ..............................................................................*/
+	// if (this->status->hp <= 0 && !this->hurt && this->draw) {
+	// 	this->draw = false;
+	// 	this->resources->audPlayerDestroy->Play();
+	// 	Instantiate(this->resources->playerDestroy, this->transform);
+	// }
+	//
+	// /* GameOver
+	// ..............................................................................*/
+	// if (this->status->hp <= 0 && this->time->currentTime > this->lastHurt + this->gameOverDelay * 1000.0f) {
+	// 	this->active = false;
+	// 	this->uiEnergy->active = false;
+	// 	this->uiEnergyBG->active = false;
+	// 	this->sceneManager->SetActiveScene(this->sceneManager->gameOverScene);
+	// 	this->lastGameOver = this->time->currentTime;
+	// }
 
 	/* Gravity
 	..............................................................................*/
@@ -316,7 +316,7 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	}
 	/* Shield if tag = "enemy"
 	..............................................................................*/
-	if (other->tag == "enemy" || other->tag == "death wall") {
+	if (other->tag == "enemy" || other->tag == "death wall" || other->tag == "ball enemy") {
 		if (this->status->hp > 0 && this->time->currentTime > this->lastHurt + this->hurtColdDown * 1000.0f) {
 			this->hurt = true;
 			this->lastHurt = this->time->currentTime;
