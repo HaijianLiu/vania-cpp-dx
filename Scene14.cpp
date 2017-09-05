@@ -4,12 +4,13 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Scene13::Scene13() {
+Scene14::Scene14() {
 	// Set Map path
-	this->cameraPath = "map/scene_Scene13-Camera.csv";
-	this->rangePath = "map/scene_Scene13-Range.csv";
-	this->groundPath = "map/scene_Scene13-Ground.csv";
-	this->backGroundPath = "map/scene_Scene13-BackGround.csv";
+	this->cameraPath = "map/scene_Scene14-Camera.csv";
+	this->rangePath = "map/scene_Scene14-Range.csv";
+	this->playerPath = "map/scene_Scene14-Player.csv";
+	this->groundPath = "map/scene_Scene14-Ground.csv";
+	this->backGroundPath = "map/scene_Scene14-BackGround.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -19,7 +20,7 @@ Scene13::Scene13() {
 /*------------------------------------------------------------------------------
 < Destructor >
 ------------------------------------------------------------------------------*/
-Scene13::~Scene13() {
+Scene14::~Scene14() {
 
 }
 
@@ -27,7 +28,7 @@ Scene13::~Scene13() {
 /*------------------------------------------------------------------------------
 < Start >
 ------------------------------------------------------------------------------*/
-void Scene13::Start() {
+void Scene14::Start() {
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
@@ -37,15 +38,10 @@ void Scene13::Start() {
 /*------------------------------------------------------------------------------
 < Update >
 ------------------------------------------------------------------------------*/
-void Scene13::Update() {
+void Scene14::Update() {
 	// Check Switch Scene
-	if (this->sceneManager->player->transform->position.x > this->range[0]->transform->position.x) {
-		if (DistancePow(this->sceneManager->player->transform->position,this->range[0]->transform->position) < 1.0f ) {
-			this->sceneManager->SetActiveScene(6);
-		}
-		else {
-			this->sceneManager->SetActiveScene(14);
-		}
+	if (this->sceneManager->player->transform->position.x < this->range[2]->transform->position.x) {
+		this->sceneManager->SetActiveScene(13);
 	}
 
 	// Update
