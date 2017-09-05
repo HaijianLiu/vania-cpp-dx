@@ -8,6 +8,9 @@ Scene17::Scene17() {
 	// Set Map path
 	this->cameraPath = "map/scene_Scene17-Camera.csv";
 	this->rangePath = "map/scene_Scene17-Range.csv";
+	this->aiPath = "map/scene_Scene17-AI.csv";
+	this->ballPath = "map/scene_Scene17-Ball.csv";
+	this->blockPath = "map/scene_Scene17-Block.csv";
 	this->groundPath = "map/scene_Scene17-Ground.csv";
 	this->backGroundPath = "map/scene_Scene17-BackGround.csv";
 
