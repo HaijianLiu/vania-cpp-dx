@@ -26,6 +26,7 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene10());
 	scenes.push_back(new Scene11());
 	scenes.push_back(new Scene12());
+	scenes.push_back(new Scene13());
 	scenes.push_back(new SceneGameOver());
 	this->gameOverScene = this->scenes.size() - 1;
 	// set SceneManager in scene
