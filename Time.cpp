@@ -36,8 +36,8 @@ void Time::SetTime() {
 // in FPS check loop
 void Time::Update() {
 	this->deltaTime = (float)(this->currentTime - this->lastTime) / 1000;
-	if (this->deltaTime > 0.08f) {
-		this->deltaTime = 0.064f;
+	if (this->deltaTime > 0.04f) {
+		this->deltaTime = 0.032f;
 	}
 	this->lastTime = this->currentTime;
 

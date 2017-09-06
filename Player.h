@@ -31,6 +31,7 @@ public:
 	// UIObject
 	UIObject* uiEnergyBG;
 	UIObject* uiEnergy;
+	Score* score;
 
 	// Parameter
 	float hp = 100.0f;

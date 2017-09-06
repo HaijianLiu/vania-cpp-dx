@@ -7,6 +7,7 @@
 Orb::Orb() {
 	// Set GameObject
 	this->active = false;
+	this->status->hp = 300;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(16.0f,16.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel

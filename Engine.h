@@ -73,6 +73,7 @@
 #include "Orb.h"
 #include "Bullet.h"
 #include "CheckPoint.h"
+#include "Score.h"
 #include "Player.h"
 #include "Crab.h"
 #include "Flyer.h"
@@ -88,7 +89,6 @@
 #include "DamageZone.h"
 #include "BackGround.h"
 #include "Block.h"
-#include "Score.h"
 
 /*------------------------------------------------------------------------------
 < Scene >

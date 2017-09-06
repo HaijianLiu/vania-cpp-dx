@@ -4,17 +4,13 @@
 /*------------------------------------------------------------------------------
 < Constructor >
 ------------------------------------------------------------------------------*/
-Score::Score(float offsetX, float offsetY, float sizeX, float sizeY) {
+Score::Score() {
 	// Set GameObject
-	this->layer = 1;
-	// Camera
-	this->camera = GetCamera();
-	// offset in real pixel
-	this->offset = Float2D(offsetX,offsetY);
-	// Transform Size in real pixel (Int2D)
-	this->transform->scale = Float2D(sizeX,sizeY);
-	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
-	this->sprite->slice = Slice(0,0,0,(int)sizeX,(int)sizeY);
+	this->draw = false;
+	// GameObject
+	for (unsigned int i = 0; i < this->max; i++) {
+		this->numbers.push_back(new UIObject(this->offset.x + (this->max - i - 1) * this->size.x, this->offset.y, (float)this->size.x, (float)this->size.y));
+	}
 }
 
 
@@ -30,6 +26,16 @@ Score::~Score() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Score::Start() {
+	// Resources
+	for (unsigned int i = 0; i < this->numbers.size(); i++) {
+		this->numbers[i]->active = false;
+		this->numbers[i]->sprite->device = this->resources->device;
+		this->numbers[i]->sprite->texture = this->resources->texUINumbers;
+		this->numbers[i]->sprite->slice = Slice(0,0,0,this->size.x,this->size.y);
+	}
+	// show zero
+	this->numbers[0]->active = true;
+
 	// Animation MakeFrame()
 }
 
@@ -38,9 +44,32 @@ void Score::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Score::Update() {
+	if (this->willAdd != 0) {
+		this->score++;
+		Score::AddOne(0);
+		this->willAdd--;
+	}
 
 	// Animation SetTexture() || Sprite SetTexture()
-	this->sprite->SetTexture();
+}
+
+void Score::AddOne(unsigned int i) {
+	if (i < this->max) {
+		if (this->numbers[i]->sprite->slice.position.x != 9 * this->size.x) {
+			if (!this->numbers[i]->active) {
+				this->numbers[i]->active = true;
+			}
+			this->numbers[i]->sprite->slice.position.x += this->size.x;
+		}
+		else {
+			this->numbers[i]->sprite->slice.position.x = 0;
+			Score::AddOne(i+1);
+		}
+	}
+}
+
+void Score::WillAdd(unsigned int i) {
+	this->willAdd += i;
 }
 
 
@@ -56,6 +85,5 @@ void Score::OnTriggerEnter(BoxCollider* other) {
 < Fixed Update >
 ------------------------------------------------------------------------------*/
 void Score::FixedUpdate() {
-	this->transform->position.x = this->camera->position.x + this->offset.x * PIXEL_TO_UNIT;
-	this->transform->position.y = this->camera->position.y + this->offset.y * PIXEL_TO_UNIT;
+
 }

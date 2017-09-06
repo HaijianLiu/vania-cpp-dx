@@ -25,6 +25,10 @@ void Scene::SetScene() {
 	if (cameraData.size() == 1) {
 		cameraData.push_back(cameraData[0]);
 	}
+	if (cameraData.size() == 0) {
+		cameraData.push_back(Int2D(0,0));
+		cameraData.push_back(Int2D(0,0));
+	}
 	for (unsigned int i = 0; i < cameraData.size(); i++) {
 		this->camera->range.push_back(new NoneObject());
 		Scene::SetPosition(this->camera->range.back(), cameraData[i].x);

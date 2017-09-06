@@ -42,6 +42,7 @@ Player::Player() {
 	// UIObject
 	this->uiEnergy = new UIObject(-200.0f + 6.5f + 49.5f, -120.0f + 19.5f,100.0f,1.0f);
 	this->uiEnergyBG = new UIObject(-144.0f,-104.0f,112.0f,32.0f);
+	this->score = new Score();
 }
 
 
@@ -70,6 +71,7 @@ Player::~Player() {
 	// UIObject
 	delete this->uiEnergy;
 	delete this->uiEnergyBG;
+	delete this->score;
 }
 
 
@@ -338,6 +340,12 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 			this->verticalSpeed = 0.5f * this->jumpPower;
 			this->sprite->Flash();
 		}
+	}
+
+	/* add score if tag = "orb"
+	..............................................................................*/
+	if (other->tag == "orb") {
+		this->score->WillAdd((unsigned int)other->gameObject->status->hp);
 	}
 }
 

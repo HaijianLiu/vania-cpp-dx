@@ -90,6 +90,7 @@ Resources::~Resources() {
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
 	if (this->texUIBossBG.texture != NULL) this->texUIBossBG.texture->Release();
 	if (this->texUIGameOverText.texture != NULL) this->texUIGameOverText.texture->Release();
+	if (this->texUINumbers.texture != NULL) this->texUINumbers.texture->Release();
 	// AnimationObject
 	delete this->enemyDestroy;
 	delete this->playerDestroy;
@@ -157,6 +158,7 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texUIEnergyBG);
 	Resources::LoadTexture(&this->texUIBossBG);
 	Resources::LoadTexture(&this->texUIGameOverText);
+	Resources::LoadTexture(&this->texUINumbers);
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;
 	this->enemyDestroy->animation->sprite->texture = this->texEnemyDestroy;

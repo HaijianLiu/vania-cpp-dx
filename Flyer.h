@@ -13,6 +13,7 @@ public:
 
 	// GameObject
 	Orb* orb;
+	float score = 75.0f;
 
 	// Parameter
 	float hp = 100.0f;

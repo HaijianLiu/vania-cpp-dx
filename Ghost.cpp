@@ -20,6 +20,7 @@ Ghost::Ghost() {
 
 	// GameObject
 	this->orb = new Orb();
+	this->orb->status->hp = this->score;
 }
 
 

@@ -14,6 +14,7 @@ public:
 	// GameObject
 	GameObject* target;
 	Orb* orb;
+	float score = 125.0f;
 
 	// Constructors
 	Ghost();
