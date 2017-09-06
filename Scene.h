@@ -19,6 +19,9 @@ public:
 	// Camera
 	Camera* camera;
 
+	// Frame Delay
+	bool frameDelay = true;
+
 	// Map Data
 	Int2D mapSize = Int2D(225,90);
 	int tilePixel = 16;

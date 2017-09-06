@@ -32,6 +32,8 @@ public:
 	UIObject* uiEnergyBG;
 	UIObject* uiEnergy;
 	Score* score;
+	// Orb
+	Orb* orb;
 
 	// Parameter
 	float hp = 100.0f;

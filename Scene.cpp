@@ -27,7 +27,7 @@ void Scene::SetScene() {
 	}
 	if (cameraData.size() == 0) {
 		cameraData.push_back(Int2D(0,0));
-		cameraData.push_back(Int2D(0,0));
+		cameraData.push_back(Int2D(this->mapSize.x * this->mapSize.y - 1,0));
 	}
 	for (unsigned int i = 0; i < cameraData.size(); i++) {
 		this->camera->range.push_back(new NoneObject());
@@ -142,6 +142,7 @@ void Scene::SetScene() {
 < Reset >
 ------------------------------------------------------------------------------*/
 void Scene::Reset() {
+	this->frameDelay = true;
 	// Enemy
 	for (unsigned int i = 0; i < this->balls.size(); i++) {
 		Scene::SetPosition(this->balls[i], this->ballData[i].x);

@@ -43,6 +43,9 @@ Player::Player() {
 	this->uiEnergy = new UIObject(-200.0f + 6.5f + 49.5f, -120.0f + 19.5f,100.0f,1.0f);
 	this->uiEnergyBG = new UIObject(-144.0f,-104.0f,112.0f,32.0f);
 	this->score = new Score();
+	// Orb
+	this->orb = new Orb();
+	this->orb->sprite->slice = Slice(0,32,0,16,16);
 }
 
 
@@ -72,6 +75,8 @@ Player::~Player() {
 	delete this->uiEnergy;
 	delete this->uiEnergyBG;
 	delete this->score;
+	// Orb
+	delete this->orb;
 }
 
 
@@ -203,6 +208,17 @@ void Player::Update() {
 		this->uiEnergyBG->active = false;
 		this->sceneManager->SetActiveScene(this->sceneManager->gameOverScene);
 		this->lastGameOver = this->time->currentTime;
+		// Score
+		for (unsigned int i = 0; i < this->score->numbers.size(); i++) {
+			this->score->numbers[i]->active = false;
+			this->score->numbers[i]->sprite->slice = Slice(0,0,0,this->score->size.x,this->score->size.y);
+		}
+		this->score->numbers[0]->active = true;
+
+		this->orb->status->hp = this->score->score;
+		this->score->score = 0;
+		this->score->willAdd = 0;
+		Instantiate(this->orb, this->transform);
 	}
 
 	/* Gravity

@@ -92,7 +92,12 @@ void SceneManager::Update() {
 < Draw >
 ------------------------------------------------------------------------------*/
 void SceneManager::Draw() {
-	this->scenes[this->activeScene]->Draw();
+	if (this->scenes[this->activeScene]->frameDelay) {
+		this->scenes[this->activeScene]->frameDelay = false;
+	}
+	else{
+		this->scenes[this->activeScene]->Draw();
+	}
 }
 
 
