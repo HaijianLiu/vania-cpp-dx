@@ -42,6 +42,7 @@ void Orb::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Orb::Update() {
+	this->transform->position.y += 0.002f * sin(this->time->currentTime/300.0f);
 	this->fxOrb->Instantiate(this->transform);
 
 	// Animation SetTexture() || Sprite SetTexture()

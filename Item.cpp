@@ -5,6 +5,7 @@
 < Constructor >
 ------------------------------------------------------------------------------*/
 Item::Item() {
+	this->layer = 1;
 	// Transform Size in real pixel (Int2D)
 	this->transform->scale = Float2D(16.0f,16.0f);
 	// Animation (divideX, divideY, sampleTime) || Slice (ID,positionX,positionY,sizeX,sizeY) all in real pixel
@@ -28,7 +29,7 @@ Item::~Item() {
 ------------------------------------------------------------------------------*/
 void Item::Start() {
 	// Resources
-	this->sprite->texture = this->resources->texOrb;
+	this->sprite->texture = this->resources->texItem;
 
 	// Animation MakeFrame()
 }
@@ -38,6 +39,8 @@ void Item::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Item::Update() {
+	this->transform->position.y += 0.002f * sin(this->time->currentTime/300.0f);
+	this->resources->fxItem->Instantiate(this->transform);
 
 	// Animation SetTexture() || Sprite SetTexture()
 	this->sprite->SetTexture();

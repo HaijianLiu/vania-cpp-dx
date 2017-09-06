@@ -9,6 +9,7 @@ private:
 public:
 	float hp = 0;
 	float damage = 0;
+	const char* tag = "none";
 
 	Status();
 	~Status();

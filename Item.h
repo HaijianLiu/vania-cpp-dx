@@ -9,6 +9,9 @@ public:
 	// Collider
 	BoxCollider* collider;
 
+	// GameObject
+	BackGround* light;
+
 	// Constructors
 	Item();
 	~Item();

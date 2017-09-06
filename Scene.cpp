@@ -87,6 +87,13 @@ void Scene::SetScene() {
 		this->orbs.back()->active = true;
 		this->orbs.back()->sprite->slice = Slice(0,32,0,16,16);
 	}
+	// Item
+	std::vector<Int2D> itemData;
+	Scene::LoadMapData(this->itemPath, itemData);
+	for (unsigned int i = 0; i < itemData.size(); i++) {
+		this->items.push_back(new Item());
+		Scene::SetPosition(this->items.back(), itemData[i].x);
+	}
 	// Block
 	std::vector<Int2D> blockData;
 	Scene::LoadMapData(this->blockPath, blockData);
@@ -219,6 +226,7 @@ Scene::~Scene() {
 	for (unsigned int i = 0; i < this->jumpers.size(); i++) delete this->jumpers[i];
 	for (unsigned int i = 0; i < this->flyers.size(); i++) delete this->flyers[i];
 	for (unsigned int i = 0; i < this->crabs.size(); i++) delete this->crabs[i];
+	for (unsigned int i = 0; i < this->items.size(); i++) delete this->items[i];
 	for (unsigned int i = 0; i < this->orbs.size(); i++) delete this->orbs[i];
 	for (unsigned int i = 0; i < this->blocks.size(); i++) delete this->blocks[i];
 	for (unsigned int i = 0; i < this->grounds.size(); i++) delete this->grounds[i];

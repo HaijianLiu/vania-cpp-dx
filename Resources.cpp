@@ -51,6 +51,14 @@ Resources::Resources() {
 	this->fxOrb->SetStartAngleRange(0.0f,2.0f*PI);
 	this->fxOrb->SetGravity(-0.05f);
 	this->fxOrb->SetColor(255,255,255,255);
+	this->fxItem = new ParticleSystem(50);
+	// this->fxItem->rate = 1;
+	this->fxItem->SetStartLifeTimeRange(0.5f,2.0f);
+	this->fxItem->SetStartSpeedRange(0.01f,0.2f);
+	this->fxItem->SetStartSizeRange(0.02f,0.04f);
+	this->fxItem->SetStartAngleRange(0.0f,2.0f*PI);
+	this->fxItem->SetGravity(-0.07f);
+	this->fxItem->SetColor(245,103,227,255);
 }
 
 
@@ -88,6 +96,8 @@ Resources::~Resources() {
 	if (this->texBossBiteBite.texture != NULL) this->texBossBiteBite.texture->Release();
 	if (this->texBlock.texture != NULL) this->texBlock.texture->Release();
 	if (this->texOrb.texture != NULL) this->texOrb.texture->Release();
+	if (this->texItem.texture != NULL) this->texItem.texture->Release();
+	if (this->texItemLight.texture != NULL) this->texItemLight.texture->Release();
 	if (this->texUIEnergyBG.texture != NULL) this->texUIEnergyBG.texture->Release();
 	if (this->texUIBossBG.texture != NULL) this->texUIBossBG.texture->Release();
 	if (this->texUIGameOverText.texture != NULL) this->texUIGameOverText.texture->Release();
@@ -157,6 +167,8 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texBossBiteBite);
 	Resources::LoadTexture(&this->texBlock);
 	Resources::LoadTexture(&this->texOrb);
+	Resources::LoadTexture(&this->texItem);
+	Resources::LoadTexture(&this->texItemLight);
 	Resources::LoadTexture(&this->texUIEnergyBG);
 	Resources::LoadTexture(&this->texUIBossBG);
 	Resources::LoadTexture(&this->texUIGameOverText);

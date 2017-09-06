@@ -146,6 +146,8 @@ void Boss::Update() {
 		this->uiLife->transform->scale = Float2D(this->status->hp / this->hp * 100.0f, 2.0f);
 		this->uiLife->sprite->SetColor(255,79,108,255);
 
+		this->transform->position.y += 0.003f * sin(this->time->currentTime/400.0f);
+
 		/* Bullet
 		..............................................................................*/
 		if (this->time->currentTime > this->lastBullet + this->bulletColdDown * 1000.0f) {

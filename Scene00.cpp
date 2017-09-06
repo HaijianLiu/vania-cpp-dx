@@ -13,6 +13,7 @@ Scene00::Scene00() {
 	this->orbPath = "map/scene_Scene00-Orb.csv";
 	this->blockPath = "map/scene_Scene00-Block.csv";
 	this->playerPath = "map/scene_Scene00-Player.csv";
+	this->itemPath = "map/scene_Scene00-Item.csv";
 	this->groundPath = "map/scene_Scene00-Ground.csv";
 	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
 

@@ -38,6 +38,7 @@ public:
 	const char* aiPath = "map/scene_Scene-Null";
 	const char* orbPath = "map/scene_Scene-Null";
 	const char* blockPath = "map/scene_Scene-Null";
+	const char* itemPath = "map/scene_Scene-Null";
 	const char* playerPath = "map/scene_Scene-Null";
 	const char* damageZonePath = "map/scene_Scene-Null";
 	const char* groundPath = "map/scene_Scene-Null";
@@ -59,6 +60,7 @@ public:
 	std::vector<Flyer*> flyers;
 	std::vector<Crab*> crabs;
 	std::vector<Ground*> ai;
+	std::vector<Item*> items;
 	std::vector<Orb*> orbs;
 	std::vector<Block*> blocks;
 	std::vector<DamageZone*> damageZones;
