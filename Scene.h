@@ -20,7 +20,7 @@ public:
 	Camera* camera;
 
 	// Frame Delay
-	bool frameDelay = true;
+	bool frameDelay = true; // skip the first frame
 
 	// Map Data
 	Int2D mapSize = Int2D(225,90);

@@ -6,7 +6,7 @@
 ------------------------------------------------------------------------------*/
 SceneGameOver::SceneGameOver() {
 	// UIObject
-	this->uiGameOverText = new UIObject(0,0,64,16);
+	this->uiGameOverText = new UIObject(0,32,64,16);
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -36,7 +36,7 @@ void SceneGameOver::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Update() {
-	this->uiGameOverText->sprite->Flash();
+	// this->uiGameOverText->sprite->Flash();
 	if (this->sceneManager->player->time->currentTime > this->sceneManager->player->lastGameOver + this->restartDelay * 1000.0f) {
 		this->sceneManager->SetActiveScene(this->sceneManager->checkPoint);
 	}

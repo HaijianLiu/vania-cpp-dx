@@ -39,7 +39,7 @@ public:
 	Texture texBossBiteDisappear = Texture("assets/death-bite-disappear.png",256,64);
 	Texture texBossBiteBite = Texture("assets/death-bite-bite.png",384,64);
 	Texture texBlock = Texture("assets/block.png",48,16);
-	Texture texOrb = Texture("assets/score.png",48,16);
+	Texture texOrb = Texture("assets/score.png",64,16);
 	Texture texUIEnergyBG = Texture("assets/ui-energy.png",112,32);
 	Texture texUIBossBG = Texture("assets/ui-boss.png",112,32);
 	Texture texUIGameOverText = Texture("assets/ui-toribodose.png",64,16);
@@ -61,6 +61,7 @@ public:
 	Audio* audEnemyDestroy;
 	Audio* audBallBounce;
 	Audio* audOrbGet;
+	Audio* audOrbReturn;
 	Audio* audCheckPoint;
 	// Particle System
 	ParticleSystem* fxDestroy;

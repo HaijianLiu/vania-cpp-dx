@@ -27,6 +27,7 @@ Resources::Resources() {
 	this->audEnemyDestroy = new Audio("assets/Sound/SE/sfx_exp_shortest_soft9.wav");
 	this->audBallBounce = new Audio("assets/Sound/SE/sfx_sounds_Blip4.wav");
 	this->audOrbGet = new Audio("assets/Sound/SE/sfx_sounds_powerup10.wav");
+	this->audOrbReturn = new Audio("assets/Sound/SE/sfx_sounds_powerup1.wav");
 	this->audCheckPoint = new Audio("assets/Sound/SE/sfx_sounds_powerup18.wav");
 	// ParticleSystem
 	this->fxTail = new ParticleSystem(100);
@@ -49,7 +50,7 @@ Resources::Resources() {
 	this->fxOrb->SetStartSizeRange(0.02f,0.04f);
 	this->fxOrb->SetStartAngleRange(0.0f,2.0f*PI);
 	this->fxOrb->SetGravity(-0.05f);
-	this->fxOrb->SetColor(170,255,255,255);
+	this->fxOrb->SetColor(255,255,255,255);
 }
 
 
@@ -110,6 +111,7 @@ Resources::~Resources() {
 	delete this->audEnemyDestroy;
 	delete this->audBallBounce;
 	delete this->audOrbGet;
+	delete this->audOrbReturn;
 	delete this->audCheckPoint;
 	// ParticleSystem
 	delete this->fxDestroy;
@@ -180,6 +182,7 @@ void Resources::Start() {
 	this->audEnemyDestroy->LoadAudio();
 	this->audBallBounce->LoadAudio();
 	this->audOrbGet->LoadAudio();
+	this->audOrbReturn->LoadAudio();
 	this->audCheckPoint->LoadAudio();
 	// ParticleSystem
 	this->fxDestroy->LinkTexture(this->texFxDestroy);

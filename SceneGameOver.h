@@ -9,7 +9,7 @@ public:
 	// UIObject
 	UIObject* uiGameOverText;
 
-	float restartDelay = 2.0f;
+	float restartDelay = 3.0f;
 
 	SceneGameOver();
 	~SceneGameOver();

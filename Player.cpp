@@ -45,7 +45,8 @@ Player::Player() {
 	this->score = new Score();
 	// Orb
 	this->orb = new Orb();
-	this->orb->sprite->slice = Slice(0,32,0,16,16);
+	this->orb->sprite->slice = Slice(0,48,0,16,16);
+	this->orb->collider->tag = "my orb";
 }
 
 
@@ -362,6 +363,10 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	..............................................................................*/
 	if (other->tag == "orb") {
 		this->score->WillAdd((unsigned int)other->gameObject->status->hp);
+	}
+	if (other->tag == "my orb") {
+		this->score->WillAdd((unsigned int)other->gameObject->status->hp);
+		this->resources->audOrbReturn->Play();
 	}
 }
 
