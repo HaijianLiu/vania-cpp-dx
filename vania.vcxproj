@@ -216,6 +216,7 @@
     <ClCompile Include="Scene23.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -284,6 +285,7 @@
     <ClInclude Include="Scene23.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="Time.h" />

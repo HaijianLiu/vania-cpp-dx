@@ -48,8 +48,8 @@ SceneManager::SceneManager() {
 
 	// active Scene
 	// SceneManager::SetActiveScene(5);
-	SceneManager::SetActiveScene(14);
-	// SceneManager::SetActiveScene(this->activeScene);
+	// SceneManager::SetActiveScene(14);
+	SceneManager::SetActiveScene(this->activeScene);
 }
 
 

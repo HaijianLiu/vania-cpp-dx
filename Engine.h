@@ -88,6 +88,7 @@
 #include "DamageZone.h"
 #include "BackGround.h"
 #include "Block.h"
+#include "Score.h"
 
 /*------------------------------------------------------------------------------
 < Scene >
