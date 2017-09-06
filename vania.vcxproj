@@ -180,6 +180,7 @@
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Jumper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NoneObject.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Jumper.h" />
     <ClInclude Include="NoneObject.h" />
     <ClInclude Include="OffsetObject.h" />

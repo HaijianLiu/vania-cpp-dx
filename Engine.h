@@ -71,6 +71,7 @@
 < GameObject >
 ------------------------------------------------------------------------------*/
 #include "Orb.h"
+#include "Item.h"
 #include "Bullet.h"
 #include "CheckPoint.h"
 #include "Score.h"
