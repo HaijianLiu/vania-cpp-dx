@@ -36,6 +36,7 @@ void SceneGameOver::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Update() {
+	this->camera->target = this->sceneManager->player;
 	// this->uiGameOverText->sprite->Flash();
 	if (this->sceneManager->player->time->currentTime > this->sceneManager->player->lastGameOver + this->restartDelay * 1000.0f) {
 		this->sceneManager->SetActiveScene(this->sceneManager->checkPoint);

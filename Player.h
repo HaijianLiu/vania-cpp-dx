@@ -57,14 +57,14 @@ public:
 	bool duck = false;
 	bool hurt = false;
 	bool freeze = false;
-	DWORD lastFire = 0;
-	DWORD lastHurt = 0;
-	DWORD lastFreeze = 0;
 	float verticalSpeed = 0.0f;
 	float shootAnimationLast = 0.2f;
 	float deathDelay = 1.0f;
 	float gameOverDelay = 3.0f;
 	DWORD lastGameOver = 0;
+	DWORD lastFire = 0;
+	DWORD lastHurt = 0;
+	DWORD lastFreeze = 0;
 
 	// Constructors
 	Player ();
