@@ -76,6 +76,8 @@ public:
 	Audio* audOrbGet;
 	Audio* audOrbReturn;
 	Audio* audCheckPoint;
+	Audio* audCurser;
+	Audio* audStart;
 	// Particle System
 	ParticleSystem* fxDestroy;
 	ParticleSystem* fxTail;

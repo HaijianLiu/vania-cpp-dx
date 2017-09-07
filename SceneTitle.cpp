@@ -17,9 +17,9 @@ SceneTitle::SceneTitle() {
 	this->uiTitleOption->sprite->slice = Slice(0,0,16,64,8);
 	this->uiTitleOption->sprite->SetColor(100,100,100,255);
 
-	this->uiTitleStart->sprite->flashTime = 1.0f;
-	this->uiTitleCredits->sprite->flashTime = 1.0f;
-	this->uiTitleOption->sprite->flashTime = 1.0f;
+	this->uiTitleStart->sprite->flashTime = this->enterDelay;
+	this->uiTitleCredits->sprite->flashTime = this->enterDelay;
+	this->uiTitleOption->sprite->flashTime = this->enterDelay;
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -65,18 +65,21 @@ void SceneTitle::Start() {
 void SceneTitle::Update() {
 	if (!this->enter) {
 		if (GetKeyboardTrigger(DIK_DOWN)) {
+			this->sceneManager->resources->audCurser->Play();
 			this->selected ++;
 			if (this->selected > 3) {
 				this->selected = 3;
 			}
 		}
 		if (GetKeyboardTrigger(DIK_UP)) {
+			this->sceneManager->resources->audCurser->Play();
 			this->selected --;
 			if (this->selected < 0) {
 				this->selected = 0;
 			}
 		}
 		if (GetKeyboardTrigger(DIK_RETURN)) {
+			this->sceneManager->resources->audStart->Play();
 			this->enter = true;
 			this->lastEnter = this->time->currentTime;
 			switch (this->selected) {

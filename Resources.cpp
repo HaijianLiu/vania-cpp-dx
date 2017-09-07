@@ -29,6 +29,8 @@ Resources::Resources() {
 	this->audOrbGet = new Audio("assets/Sound/SE/sfx_sounds_powerup10.wav");
 	this->audOrbReturn = new Audio("assets/Sound/SE/sfx_sounds_powerup1.wav");
 	this->audCheckPoint = new Audio("assets/Sound/SE/sfx_sounds_powerup18.wav");
+	this->audCurser = new Audio("assets/Sound/SE/sfx_sounds_Blip7.wav");
+	this->audStart = new Audio("assets/Sound/SE/Intro_Jingle.wav");
 	// ParticleSystem
 	this->fxTail = new ParticleSystem(100);
 	this->fxTail->rateOverTime = false;
@@ -134,6 +136,8 @@ Resources::~Resources() {
 	delete this->audOrbGet;
 	delete this->audOrbReturn;
 	delete this->audCheckPoint;
+	delete this->audCurser;
+	delete this->audStart;
 	// ParticleSystem
 	delete this->fxDestroy;
 	delete this->fxTail;
@@ -219,6 +223,8 @@ void Resources::Start() {
 	this->audOrbGet->LoadAudio();
 	this->audOrbReturn->LoadAudio();
 	this->audCheckPoint->LoadAudio();
+	this->audCurser->LoadAudio();
+	this->audStart->LoadAudio();
 	// ParticleSystem
 	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
