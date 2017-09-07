@@ -372,16 +372,18 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	..............................................................................*/
 	if (other->tag == "item") {
 		if (other->gameObject->status->tag == "dark") {
-			/* code */
+			this->energyRegain += 5.0f;
+			this->hurtColdDown += 0.5f;
+			this->sprite->flashTime = this->hurtColdDown;
 		}
 		if (other->gameObject->status->tag == "gold") {
-			this->energyRegain = 30.0f;
+			this->energyRegain += 10.0f;
 		}
 		if (other->gameObject->status->tag == "sliver") {
 			this->fireColdDown = 0.05f;
 		}
 		if (other->gameObject->status->tag == "bronze") {
-			this->hurtColdDown += 2.0f;
+			this->hurtColdDown += 1.0f;
 			this->sprite->flashTime = this->hurtColdDown;
 		}
 	}

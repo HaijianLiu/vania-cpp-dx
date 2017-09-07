@@ -37,8 +37,12 @@ SceneManager::SceneManager() {
 	scenes.push_back(new Scene21());
 	scenes.push_back(new Scene22());
 	scenes.push_back(new Scene23());
+	scenes.push_back(new SceneTitle());
 	scenes.push_back(new SceneGameOver());
+
 	this->gameOverScene = this->scenes.size() - 1;
+	this->titleScene = this->scenes.size() - 2;
+
 	// set SceneManager in scene
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->sceneManager = this;
@@ -49,7 +53,7 @@ SceneManager::SceneManager() {
 	// active Scene
 	// SceneManager::SetActiveScene(5);
 	// SceneManager::SetActiveScene(14);
-	SceneManager::SetActiveScene(this->activeScene);
+	SceneManager::SetActiveScene(this->titleScene);
 }
 
 

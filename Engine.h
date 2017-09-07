@@ -120,6 +120,7 @@
 #include "Scene22.h"
 #include "Scene23.h"
 #include "SceneGameOver.h"
+#include "SceneTitle.h"
 #include "SceneManager.h"
 
 /*------------------------------------------------------------------------------
