@@ -45,6 +45,7 @@ public:
 	const char* damageZonePath = "map/scene_Scene-Null";
 	const char* groundPath = "map/scene_Scene-Null";
 	const char* backGroundPath = "map/scene_Scene-Null";
+	const char* backGround2Path = "map/scene_Scene-Null";
 	// ReSet Data
 	std::vector<Int2D> ballData;
 	std::vector<Int2D> ghostData;

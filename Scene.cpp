@@ -122,6 +122,12 @@ void Scene::SetScene() {
 		this->backGrounds.push_back(new BackGround());
 		Scene::SetTile(this->backGrounds.back(), backGroundData[i].x, backGroundData[i].y);
 	}
+	std::vector<Int2D> backGround2Data;
+	Scene::LoadMapData(this->backGround2Path, backGround2Data);
+	for (unsigned int i = 0; i < backGround2Data.size(); i++) {
+		this->backGrounds.push_back(new BackGround());
+		Scene::SetTile(this->backGrounds.back(), backGround2Data[i].x, backGround2Data[i].y);
+	}
 	// Set Player
 	Scene::LoadMapData(this->playerPath, this->playerData);
 	// CheckPoint
@@ -130,6 +136,7 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
 		this->checkPoint->active = true;
 	}
+
 
 	// Get GameObject && Get Collider
 	this->gameObjects = CopyGameObjects();
@@ -196,6 +203,7 @@ void Scene::Reset() {
 		this->sceneManager->player->draw = true;
 		this->sceneManager->player->uiEnergy->active = true;
 		this->sceneManager->player->uiEnergyBG->active = true;
+		this->sceneManager->player->score->active = true;
 		this->camera->target = this->sceneManager->player;
 	}
 	// Boss

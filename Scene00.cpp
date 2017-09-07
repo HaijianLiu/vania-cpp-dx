@@ -15,6 +15,7 @@ Scene00::Scene00() {
 	this->playerPath = "map/scene_Scene00-Player.csv";
 	this->groundPath = "map/scene_Scene00-Ground.csv";
 	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
+	this->backGround2Path = "map/scene_Scene00-BackGround2.csv";
 
 	// Item test
 	// this->itemPath = "map/scene_Scene00-Item.csv";
