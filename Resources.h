@@ -67,6 +67,8 @@ public:
 	Audio* audSceneBGMMars;
 	Audio* audBossIntroBGM;
 	Audio* audBossMainBGM;
+	Audio* audBossDead;
+	Audio* audClear;
 	Audio* audLanding;
 	Audio* audPlayerHurt;
 	Audio* audPlayerDeath;

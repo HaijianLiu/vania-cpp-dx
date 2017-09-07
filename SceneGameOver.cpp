@@ -25,10 +25,6 @@ SceneGameOver::~SceneGameOver() {
 < Start >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Start() {
-	if (this->sceneManager->resources->audBossMainBGM->Playing()) {
-		this->sceneManager->resources->audBossMainBGM->Stop();
-	}
-
 	this->uiGameOverText->sprite->texture = this->sceneManager->player->resources->texUIGameOverText;
 	// Link Texture
 	this->backGround2nd->active = false;
@@ -43,6 +39,10 @@ void SceneGameOver::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Update() {
+	if (this->sceneManager->resources->audBossMainBGM->Playing()) {
+		this->sceneManager->resources->audBossMainBGM->Stop();
+	}
+
 	this->camera->target = this->sceneManager->player;
 	// this->uiGameOverText->sprite->Flash();
 	if (this->sceneManager->player->time->currentTime > this->sceneManager->player->lastGameOver + this->restartDelay * 1000.0f) {

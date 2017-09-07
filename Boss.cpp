@@ -119,7 +119,7 @@ void Boss::Update() {
 
 	/* awake
 	..............................................................................*/
-	if (this->awake) {
+	if (this->awake && this->alive) {
 		/* Phase
 		..............................................................................*/
 		if (this->status->hp > 0.8f * this->hp) {
@@ -189,7 +189,7 @@ void Boss::Update() {
 			}
 		}
 
-		/* DeatBite
+		/* DeathBite
 		..............................................................................*/
 		if (this->currentSkill == DEATH_BITE && this->time->currentTime > this->lastSkill + this->skillDelay * 1000.0f) {
 			this->deathBite->Appear();
@@ -211,7 +211,7 @@ void Boss::Update() {
 
 	/* Death && Awake
 	..............................................................................*/
-	if (this->status->hp <= 0) {
+	if (this->status->hp <= 0 && this->alive) {
 		if (!this->awake) {
 			if (abs(this->target->transform->position.x - this->transform->position.x) < this->deathWallRange) {
 				this->awake = true;
@@ -229,12 +229,18 @@ void Boss::Update() {
 			}
 		}
 		else {
-			this->active = false;
-			this->resources->audEnemyDestroy->Play();
+			this->draw = false;
+			this->alive = false;
+			this->resources->audBossDead->Play();
 			Instantiate(this->resources->enemyDestroy, this->transform);
 			this->resources->audBossMainBGM->Stop();
 			this->camera->SwitchTarget(this->target);
 		}
+	}
+
+	if (!this->alive && !this->resources->audBossDead->Playing()) {
+		this->active = false;
+		this->resources->audClear->Play();
 	}
 }
 

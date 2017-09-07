@@ -335,29 +335,29 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 	}
 	/* Shield if tag = "enemy"
 	..............................................................................*/
-	// if (other->tag == "enemy" || other->tag == "death wall" || other->tag == "ball enemy") {
-	// 	if (this->status->hp > 0 && this->time->currentTime > this->lastHurt + this->hurtColdDown * 1000.0f) {
-	// 		this->hurt = true;
-	// 		this->lastHurt = this->time->currentTime;
-	// 		this->freeze = true;
-	// 		this->lastFreeze = this->time->currentTime;
-	// 		this->status->hp -= other->gameObject->status->damage;
-	// 		if (this->status->hp <= 0) {
-	// 			this->resources->audPlayerDeath->Play();
-	// 		}
-	// 		else {
-	// 			this->resources->audPlayerHurt->Play();
-	// 		}
-	// 		if (other->gameObject->transform->position.x > this->transform->position.x) {
-	// 			this->right = true;
-	// 		}
-	// 		else {
-	// 			this->right = false;
-	// 		}
-	// 		this->verticalSpeed = 0.5f * this->jumpPower;
-	// 		this->sprite->Flash();
-	// 	}
-	// }
+	if (other->tag == "enemy" || other->tag == "death wall" || other->tag == "ball enemy") {
+		if (this->status->hp > 0 && this->time->currentTime > this->lastHurt + this->hurtColdDown * 1000.0f) {
+			this->hurt = true;
+			this->lastHurt = this->time->currentTime;
+			this->freeze = true;
+			this->lastFreeze = this->time->currentTime;
+			this->status->hp -= other->gameObject->status->damage;
+			if (this->status->hp <= 0) {
+				this->resources->audPlayerDeath->Play();
+			}
+			else {
+				this->resources->audPlayerHurt->Play();
+			}
+			if (other->gameObject->transform->position.x > this->transform->position.x) {
+				this->right = true;
+			}
+			else {
+				this->right = false;
+			}
+			this->verticalSpeed = 0.5f * this->jumpPower;
+			this->sprite->Flash();
+		}
+	}
 
 	/* add score if tag = "orb"
 	..............................................................................*/

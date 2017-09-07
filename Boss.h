@@ -42,6 +42,7 @@ public:
 
 	// status
 	bool awake = false;
+	bool alive = true;
 	bool intro = false;
 	int currentSkill = NONE_SKILL;
 	DWORD lastSkill = 0;

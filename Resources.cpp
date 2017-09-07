@@ -22,6 +22,8 @@ Resources::Resources() {
 	this->audBossIntroBGM = new Audio("assets/Sound/BGM/BossIntro.wav");
 	this->audBossMainBGM = new Audio("assets/Sound/BGM/BossMain.wav");
 	this->audBossMainBGM->loop = true;
+	this->audBossDead = new Audio("assets/Sound/SE/sfx_exp_odd2.wav");
+	this->audClear = new Audio("assets/Sound/SE/Win_Jingle.wav");
 	this->audLanding = new Audio("assets/Sound/SE/sfx_movement_jump14_landing.wav");
 	this->audPlayerHurt = new Audio("assets/Sound/SE/sfx_sounds_error14.wav");
 	this->audPlayerDeath = new Audio("assets/Sound/SE/sfx_deathscream_human1.wav");
@@ -131,6 +133,8 @@ Resources::~Resources() {
 	delete this->audSceneBGMMars;
 	delete this->audBossIntroBGM;
 	delete this->audBossMainBGM;
+	delete this->audBossDead;
+	delete this->audClear;
 	delete this->audLanding;
 	delete this->audPlayerHurt;
 	delete this->audPlayerDeath;
@@ -220,6 +224,8 @@ void Resources::Start() {
 	this->audSceneBGMMars->LoadAudio();
 	this->audBossIntroBGM->LoadAudio();
 	this->audBossMainBGM->LoadAudio();
+	this->audBossDead->LoadAudio();
+	this->audClear->LoadAudio();
 	this->audLanding->LoadAudio();
 	this->audPlayerHurt->LoadAudio();
 	this->audPlayerDeath->LoadAudio();
