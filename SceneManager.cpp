@@ -53,7 +53,6 @@ SceneManager::SceneManager() {
 	// active Scene
 	// SceneManager::SetActiveScene(5);
 	// SceneManager::SetActiveScene(14);
-	SceneManager::SetActiveScene(this->titleScene);
 }
 
 
@@ -76,8 +75,7 @@ SceneManager::~SceneManager() {
 void SceneManager::Start() {
 	// Camera target
 	this->camera->target = this->player;
-	// Scene Start
-	this->resources->audSceneBGM->Play();
+	SceneManager::SetActiveScene(this->titleScene);
 	for (unsigned int i = 0; i < this->scenes.size(); i++) {
 		this->scenes[i]->Start();
 	}
@@ -109,6 +107,11 @@ void SceneManager::Draw() {
 < Functions >
 ------------------------------------------------------------------------------*/
 void SceneManager::SetActiveScene(unsigned int i) {
+	if (i < this->titleScene) {
+		if (!this->resources->audSceneBGM->Playing()) {
+			this->resources->audSceneBGM->Play();
+		}
+	}
 	this->activeScene = i;
 	this->camera->activeRange = i;
 	this->scenes[this->activeScene]->Reset();

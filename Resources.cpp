@@ -110,6 +110,8 @@ Resources::~Resources() {
 	if (this->texUIItemDark.texture != NULL) this->texUIItemDark.texture->Release();
 	if (this->texBackGround2nd.texture != NULL) this->texBackGround2nd.texture->Release();
 	if (this->texBackGround4th.texture != NULL) this->texBackGround4th.texture->Release();
+	if (this->texBackGround2ndTissue.texture != NULL) this->texBackGround2ndTissue.texture->Release();
+	if (this->texBackGround2ndShip.texture != NULL) this->texBackGround2ndShip.texture->Release();
 
 	// AnimationObject
 	delete this->enemyDestroy;
@@ -191,6 +193,8 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texUIItemDark);
 	Resources::LoadTexture(&this->texBackGround2nd);
 	Resources::LoadTexture(&this->texBackGround4th);
+	Resources::LoadTexture(&this->texBackGround2ndTissue);
+	Resources::LoadTexture(&this->texBackGround2ndShip);
 
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;

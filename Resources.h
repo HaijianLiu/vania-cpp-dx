@@ -54,6 +54,8 @@ public:
 	Texture texUIItemDark = Texture("assets/item-info-dark.png",256,128);
 	Texture texBackGround2nd = Texture("assets/background-2nd.png",272,176);
 	Texture texBackGround4th = Texture("assets/background-4th.png",240,176);
+	Texture texBackGround2ndTissue = Texture("assets/background-2th-tissue.png",144,144);
+	Texture texBackGround2ndShip = Texture("assets/background-2nd-ship.png",64,64);
 
 	// Animation Object
 	AnimationObject* enemyDestroy;

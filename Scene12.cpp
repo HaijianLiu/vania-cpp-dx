@@ -35,6 +35,9 @@ Scene12::~Scene12() {
 ------------------------------------------------------------------------------*/
 void Scene12::Start() {
 	this->items[0]->status->tag = "bronze";
+	// Link Texture
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2nd;
+	this->backGround4th->sprite->texture = this->sceneManager->resources->texBackGround4th;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

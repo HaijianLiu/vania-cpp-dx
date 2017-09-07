@@ -28,6 +28,9 @@ Scene21::~Scene21() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene21::Start() {
+	// Link Texture
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2ndTissue;
+	this->backGround4th->active = false;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

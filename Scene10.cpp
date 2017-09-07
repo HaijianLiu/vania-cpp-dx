@@ -30,6 +30,8 @@ Scene10::~Scene10() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene10::Start() {
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2ndShip;
+	this->backGround4th->active = false;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

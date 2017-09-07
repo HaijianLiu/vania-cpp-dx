@@ -25,7 +25,14 @@ SceneGameOver::~SceneGameOver() {
 < Start >
 ------------------------------------------------------------------------------*/
 void SceneGameOver::Start() {
+	if (this->sceneManager->resources->audBossMainBGM->Playing()) {
+		this->sceneManager->resources->audBossMainBGM->Stop();
+	}
+
 	this->uiGameOverText->sprite->texture = this->sceneManager->player->resources->texUIGameOverText;
+	// Link Texture
+	this->backGround2nd->active = false;
+	this->backGround4th->active = false;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

@@ -50,6 +50,10 @@ void SceneTitle::Start() {
 	this->sceneManager->player->uiEnergy->active = false;
 	this->sceneManager->player->score->active = false;
 
+	// Link Texture
+	this->backGround2nd->active = false;
+	this->backGround4th->active = false;
+
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
 }

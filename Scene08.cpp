@@ -33,6 +33,9 @@ Scene08::~Scene08() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene08::Start() {
+	// Link Texture
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2ndTissue;
+	this->backGround4th->active = false;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

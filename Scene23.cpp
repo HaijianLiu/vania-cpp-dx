@@ -22,6 +22,9 @@ Scene23::Scene23() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 Scene23::~Scene23() {
+	// Link Texture
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2ndTissue;
+	this->backGround4th->active = false;
 
 }
 

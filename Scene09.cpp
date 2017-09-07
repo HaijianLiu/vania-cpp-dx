@@ -30,6 +30,9 @@ Scene09::~Scene09() {
 ------------------------------------------------------------------------------*/
 void Scene09::Start() {
 	this->items[0]->status->tag = "sliver";
+	// Link Texture
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2ndShip;
+	this->backGround4th->active = false;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

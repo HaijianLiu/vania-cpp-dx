@@ -30,6 +30,8 @@ Scene11::~Scene11() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene11::Start() {
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2ndTissue;
+	this->backGround4th->active = false;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
@@ -44,9 +46,9 @@ void Scene11::Update() {
 		this->sceneManager->resources->audSceneBGM->Stop();
 	}
 	// Check Switch Scene
-	// if (this->sceneManager->player->transform->position.x > this->range[0]->transform->position.x) {
-	// 	this->sceneManager->SetActiveScene(11);
-	// }
+	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
+		this->sceneManager->SetActiveScene(10);
+	}
 	// if (this->sceneManager->player->transform->position.x > this->range[0]->transform->position.x) {
 	// 	this->sceneManager->SetActiveScene(8);
 	// }

@@ -165,6 +165,7 @@ void Scene::SetScene() {
 < Reset >
 ------------------------------------------------------------------------------*/
 void Scene::Reset() {
+	// frameDelay
 	this->frameDelay = true;
 	// Enemy
 	for (unsigned int i = 0; i < this->balls.size(); i++) {
@@ -258,12 +259,9 @@ Scene::~Scene() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene::Start() {
-	// Link Texture
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->resources->texTile;
 	}
-	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2nd;
-	this->backGround4th->sprite->texture = this->sceneManager->resources->texBackGround4th;
 	// Link target
 	for (unsigned int i = 0; i < this->bosses.size(); i++) {
 		this->bosses[i]->target = this->sceneManager->player;
