@@ -116,6 +116,14 @@ void Scene::SetScene() {
 		this->grounds.push_back(new Ground());
 		Scene::SetTile(this->grounds.back(), groundData[i].x, groundData[i].y);
 	}
+	// Set Player
+	Scene::LoadMapData(this->playerPath, this->playerData);
+	// CheckPoint
+	this->checkPoint = new CheckPoint();
+	if (this->playerData.size() != 0) {
+		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
+		this->checkPoint->active = true;
+	}
 	std::vector<Int2D> backGroundData;
 	Scene::LoadMapData(this->backGroundPath, backGroundData);
 	for (unsigned int i = 0; i < backGroundData.size(); i++) {
@@ -127,14 +135,6 @@ void Scene::SetScene() {
 	for (unsigned int i = 0; i < backGround2Data.size(); i++) {
 		this->backGrounds.push_back(new BackGround());
 		Scene::SetTile(this->backGrounds.back(), backGround2Data[i].x, backGround2Data[i].y);
-	}
-	// Set Player
-	Scene::LoadMapData(this->playerPath, this->playerData);
-	// CheckPoint
-	this->checkPoint = new CheckPoint();
-	if (this->playerData.size() != 0) {
-		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
-		this->checkPoint->active = true;
 	}
 	// BackGround Object
 	this->backGround2nd = new UIObject(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
@@ -297,7 +297,7 @@ void Scene::Start() {
 void Scene::Update() {
 	// backGround2nd && backGround4th
 	this->backGround2nd->sprite->slice = Slice(0, 0.5f * this->camera->position.x * UNIT_TO_PIXEL, 0.5f * this->camera->position.y * UNIT_TO_PIXEL, SCREEN_WIDTH, SCREEN_HEIGHT);
-	
+
 	// Update GameObject && CheckCollider && Update Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
 		if (this->gameObjects[i]->active) {
