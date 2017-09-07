@@ -69,6 +69,9 @@ public:
 	std::vector<DamageZone*> damageZones;
 	std::vector<Ground*> grounds;
 	std::vector<BackGround*> backGrounds;
+	// BackGround Object
+	UIObject* backGround2nd;
+	UIObject* backGround4th;
 
 	Scene();
 	virtual ~Scene();

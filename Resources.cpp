@@ -108,6 +108,9 @@ Resources::~Resources() {
 	if (this->texUIItemSliver.texture != NULL) this->texUIItemSliver.texture->Release();
 	if (this->texUIItemBronze.texture != NULL) this->texUIItemBronze.texture->Release();
 	if (this->texUIItemDark.texture != NULL) this->texUIItemDark.texture->Release();
+	if (this->texBackGround2nd.texture != NULL) this->texBackGround2nd.texture->Release();
+	if (this->texBackGround4th.texture != NULL) this->texBackGround4th.texture->Release();
+
 	// AnimationObject
 	delete this->enemyDestroy;
 	delete this->playerDestroy;
@@ -186,6 +189,8 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texUIItemSliver);
 	Resources::LoadTexture(&this->texUIItemBronze);
 	Resources::LoadTexture(&this->texUIItemDark);
+	Resources::LoadTexture(&this->texBackGround2nd);
+	Resources::LoadTexture(&this->texBackGround4th);
 
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;

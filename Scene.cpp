@@ -136,6 +136,13 @@ void Scene::SetScene() {
 		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
 		this->checkPoint->active = true;
 	}
+	// BackGround Object
+	this->backGround2nd = new UIObject(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+	this->backGround4th = new UIObject(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+	this->backGround2nd->sprite->slice = Slice(0,0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+	this->backGround4th->sprite->slice = Slice(0,0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+	this->backGround2nd->layer = 0;
+	this->backGround4th->layer = 0;
 
 
 	// Get GameObject && Get Collider
@@ -242,6 +249,8 @@ Scene::~Scene() {
 	for (unsigned int i = 0; i < this->grounds.size(); i++) delete this->grounds[i];
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) delete this->backGrounds[i];
 	delete this->checkPoint;
+	delete this->backGround2nd;
+	delete this->backGround4th;
 }
 
 
@@ -253,6 +262,8 @@ void Scene::Start() {
 	for (unsigned int i = 0; i < this->backGrounds.size(); i++) {
 		this->backGrounds[i]->sprite->texture = this->sceneManager->resources->texTile;
 	}
+	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2nd;
+	this->backGround4th->sprite->texture = this->sceneManager->resources->texBackGround4th;
 	// Link target
 	for (unsigned int i = 0; i < this->bosses.size(); i++) {
 		this->bosses[i]->target = this->sceneManager->player;
@@ -284,6 +295,9 @@ void Scene::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void Scene::Update() {
+	// backGround2nd && backGround4th
+	this->backGround2nd->sprite->slice = Slice(0, 0.5f * this->camera->position.x * UNIT_TO_PIXEL, 0.5f * this->camera->position.y * UNIT_TO_PIXEL, SCREEN_WIDTH, SCREEN_HEIGHT);
+	// this->backGround4th->sprite->slice = Slice(0, 0.25f * this->camera->position.x * UNIT_TO_PIXEL, 0.25f * this->camera->position.y * UNIT_TO_PIXEL, SCREEN_WIDTH, SCREEN_HEIGHT);
 	// Update GameObject && CheckCollider && Update Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
 		if (this->gameObjects[i]->active) {

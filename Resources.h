@@ -52,6 +52,9 @@ public:
 	Texture texUIItemSliver = Texture("assets/item-info-sliver.png",256,128);
 	Texture texUIItemBronze = Texture("assets/item-info-bronze.png",256,128);
 	Texture texUIItemDark = Texture("assets/item-info-dark.png",256,128);
+	Texture texBackGround2nd = Texture("assets/background-2nd.png",272,176);
+	Texture texBackGround4th = Texture("assets/background-4th.png",240,176);
+
 	// Animation Object
 	AnimationObject* enemyDestroy;
 	AnimationObject* playerDestroy;
