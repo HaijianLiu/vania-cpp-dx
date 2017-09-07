@@ -13,9 +13,11 @@ Scene00::Scene00() {
 	this->orbPath = "map/scene_Scene00-Orb.csv";
 	this->blockPath = "map/scene_Scene00-Block.csv";
 	this->playerPath = "map/scene_Scene00-Player.csv";
-	this->itemPath = "map/scene_Scene00-Item.csv";
 	this->groundPath = "map/scene_Scene00-Ground.csv";
 	this->backGroundPath = "map/scene_Scene00-BackGround.csv";
+
+	// Item test
+	// this->itemPath = "map/scene_Scene00-Item.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
@@ -34,6 +36,10 @@ Scene00::~Scene00() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene00::Start() {
+	// this->items[0]->status->tag = "gold";
+	// this->items[1]->status->tag = "sliver";
+	// this->items[2]->status->tag = "bronze";
+	// this->items[3]->status->tag = "dark";
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

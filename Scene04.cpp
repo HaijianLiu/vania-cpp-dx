@@ -12,6 +12,7 @@ Scene04::Scene04() {
 	this->flyerPath = "map/scene_Scene04-Flyer.csv";
 	this->orbPath = "map/scene_Scene04-Orb.csv";
 	this->blockPath = "map/scene_Scene04-Block.csv";
+	this->itemPath = "map/scene_Scene04-Item.csv";
 	this->groundPath = "map/scene_Scene04-Ground.csv";
 	this->backGroundPath = "map/scene_Scene04-BackGround.csv";
 
@@ -32,6 +33,7 @@ Scene04::~Scene04() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene04::Start() {
+	this->items[0]->status->tag = "gold";
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

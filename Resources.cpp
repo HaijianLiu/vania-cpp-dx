@@ -58,7 +58,7 @@ Resources::Resources() {
 	this->fxItem->SetStartSizeRange(0.02f,0.04f);
 	this->fxItem->SetStartAngleRange(0.0f,2.0f*PI);
 	this->fxItem->SetGravity(-0.07f);
-	this->fxItem->SetColor(245,103,227,255);
+	this->fxItem->SetColor(255,255,255,255);
 }
 
 
@@ -102,7 +102,10 @@ Resources::~Resources() {
 	if (this->texUIBossBG.texture != NULL) this->texUIBossBG.texture->Release();
 	if (this->texUIGameOverText.texture != NULL) this->texUIGameOverText.texture->Release();
 	if (this->texUINumbers.texture != NULL) this->texUINumbers.texture->Release();
-	if (this->texUIItem.texture != NULL) this->texUIItem.texture->Release();
+	if (this->texUIItemGold.texture != NULL) this->texUIItemGold.texture->Release();
+	if (this->texUIItemSliver.texture != NULL) this->texUIItemSliver.texture->Release();
+	if (this->texUIItemBronze.texture != NULL) this->texUIItemBronze.texture->Release();
+	if (this->texUIItemDark.texture != NULL) this->texUIItemDark.texture->Release();
 	// AnimationObject
 	delete this->enemyDestroy;
 	delete this->playerDestroy;
@@ -174,7 +177,11 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texUIBossBG);
 	Resources::LoadTexture(&this->texUIGameOverText);
 	Resources::LoadTexture(&this->texUINumbers);
-	Resources::LoadTexture(&this->texUIItem);
+	Resources::LoadTexture(&this->texUIItemGold);
+	Resources::LoadTexture(&this->texUIItemSliver);
+	Resources::LoadTexture(&this->texUIItemBronze);
+	Resources::LoadTexture(&this->texUIItemDark);
+
 	// AnimationObject
 	this->enemyDestroy->animation->sprite->device = this->device;
 	this->enemyDestroy->animation->sprite->texture = this->texEnemyDestroy;

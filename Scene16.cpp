@@ -12,6 +12,7 @@ Scene16::Scene16() {
 	this->ghostPath = "map/scene_Scene16-Ghost.csv";
 	this->crabPath = "map/scene_Scene16-Crab.csv";
 	this->blockPath = "map/scene_Scene16-Block.csv";
+	this->itemPath = "map/scene_Scene16-Item.csv";
 	this->groundPath = "map/scene_Scene16-Ground.csv";
 	this->backGroundPath = "map/scene_Scene16-BackGround.csv";
 
@@ -32,6 +33,7 @@ Scene16::~Scene16() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene16::Start() {
+	this->items[0]->status->tag = "dark";
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

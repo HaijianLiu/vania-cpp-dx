@@ -46,7 +46,10 @@ public:
 	Texture texUIBossBG = Texture("assets/ui-boss.png",112,32);
 	Texture texUIGameOverText = Texture("assets/ui-toribodose.png",64,16);
 	Texture texUINumbers = Texture("assets/ui-numbers.png",90,7);
-	Texture texUIItem = Texture("assets/text.png",213,34);
+	Texture texUIItemGold = Texture("assets/item-info-gold.png",256,128);
+	Texture texUIItemSliver = Texture("assets/item-info-sliver.png",256,128);
+	Texture texUIItemBronze = Texture("assets/item-info-bronze.png",256,128);
+	Texture texUIItemDark = Texture("assets/item-info-dark.png",256,128);
 	// Animation Object
 	AnimationObject* enemyDestroy;
 	AnimationObject* playerDestroy;

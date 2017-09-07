@@ -8,6 +8,7 @@ Scene09::Scene09() {
 	// Set Map path
 	this->cameraPath = "map/scene_Scene09-Camera.csv";
 	this->rangePath = "map/scene_Scene09-Range.csv";
+	this->itemPath = "map/scene_Scene09-Item.csv";
 	this->groundPath = "map/scene_Scene09-Ground.csv";
 	this->backGroundPath = "map/scene_Scene09-BackGround.csv";
 
@@ -28,6 +29,7 @@ Scene09::~Scene09() {
 < Start >
 ------------------------------------------------------------------------------*/
 void Scene09::Start() {
+	this->items[0]->status->tag = "sliver";
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

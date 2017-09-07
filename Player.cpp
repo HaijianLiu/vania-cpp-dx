@@ -368,6 +368,23 @@ void Player::OnTriggerEnter(BoxCollider* other) {
 		this->score->WillAdd((unsigned int)other->gameObject->status->hp);
 		this->resources->audOrbReturn->Play();
 	}
+	/*  if tag = "item"
+	..............................................................................*/
+	if (other->tag == "item") {
+		if (other->gameObject->status->tag == "dark") {
+			/* code */
+		}
+		if (other->gameObject->status->tag == "gold") {
+			this->energyRegain = 30.0f;
+		}
+		if (other->gameObject->status->tag == "sliver") {
+			this->fireColdDown = 0.05f;
+		}
+		if (other->gameObject->status->tag == "bronze") {
+			this->hurtColdDown += 2.0f;
+			this->sprite->flashTime = this->hurtColdDown;
+		}
+	}
 }
 
 
