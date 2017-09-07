@@ -13,8 +13,12 @@ Resources::Resources() {
 	for (unsigned int i = 0; i < 4; i++) {
 		this->audShoot.push_back(new Audio("assets/Sound/SE/sfx_wpn_laser8.wav"));
 	}
-	this->audSceneBGM = new Audio("assets/Sound/BGM/Venus.wav");
-	this->audSceneBGM->loop = true;
+	this->audSceneBGMBasic = new Audio("assets/Sound/BGM/Map_basic_version.wav");
+	this->audSceneBGMBasic->loop = true;
+	this->audSceneBGMMap = new Audio("assets/Sound/BGM/Map.wav");
+	this->audSceneBGMMap->loop = true;
+	this->audSceneBGMMars = new Audio("assets/Sound/BGM/Mars.wav");
+	this->audSceneBGMMars->loop = true;
 	this->audBossIntroBGM = new Audio("assets/Sound/BGM/BossIntro.wav");
 	this->audBossMainBGM = new Audio("assets/Sound/BGM/BossMain.wav");
 	this->audBossMainBGM->loop = true;
@@ -122,7 +126,9 @@ Resources::~Resources() {
 	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
 		delete this->audShoot[i];
 	}
-	delete this->audSceneBGM;
+	delete this->audSceneBGMBasic;
+	delete this->audSceneBGMMap;
+	delete this->audSceneBGMMars;
 	delete this->audBossIntroBGM;
 	delete this->audBossMainBGM;
 	delete this->audLanding;
@@ -209,7 +215,9 @@ void Resources::Start() {
 	for (unsigned int i = 0; i < this->audShoot.size(); i++) {
 		this->audShoot[i]->LoadAudio();
 	}
-	this->audSceneBGM->LoadAudio();
+	this->audSceneBGMBasic->LoadAudio();
+	this->audSceneBGMMap->LoadAudio();
+	this->audSceneBGMMars->LoadAudio();
 	this->audBossIntroBGM->LoadAudio();
 	this->audBossMainBGM->LoadAudio();
 	this->audLanding->LoadAudio();

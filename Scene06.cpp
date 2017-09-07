@@ -36,6 +36,7 @@ void Scene06::Start() {
 	// Link Texture
 	this->backGround2nd->sprite->texture = this->sceneManager->resources->texBackGround2nd;
 	this->backGround4th->sprite->texture = this->sceneManager->resources->texBackGround4th;
+	this->bgm = this->sceneManager->resources->audSceneBGMMap;
 
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();

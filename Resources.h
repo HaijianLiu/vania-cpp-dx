@@ -62,7 +62,9 @@ public:
 	AnimationObject* playerDestroy;
 	// Audio
 	std::vector<Audio*> audShoot;
-	Audio* audSceneBGM;
+	Audio* audSceneBGMBasic;
+	Audio* audSceneBGMMap;
+	Audio* audSceneBGMMars;
 	Audio* audBossIntroBGM;
 	Audio* audBossMainBGM;
 	Audio* audLanding;

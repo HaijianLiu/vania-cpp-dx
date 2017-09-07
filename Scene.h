@@ -20,6 +20,8 @@ public:
 	Camera* camera;
 	// Camera
 	Time* time;
+	// Audio
+	Audio* bgm;
 
 	// Frame Delay
 	bool frameDelay = true; // skip the first frame

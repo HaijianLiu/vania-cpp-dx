@@ -107,12 +107,13 @@ void SceneManager::Draw() {
 < Functions >
 ------------------------------------------------------------------------------*/
 void SceneManager::SetActiveScene(unsigned int i) {
-	if (i < this->titleScene) {
-		if (!this->resources->audSceneBGM->Playing()) {
-			this->resources->audSceneBGM->Play();
-		}
+	if (this->scenes[this->activeScene]->bgm != nullptr && this->scenes[this->activeScene]->bgm->Playing()) {
+		this->scenes[this->activeScene]->bgm->Stop();
 	}
 	this->activeScene = i;
 	this->camera->activeRange = i;
 	this->scenes[this->activeScene]->Reset();
+	if (this->scenes[this->activeScene]->bgm != nullptr) {
+		this->scenes[this->activeScene]->bgm->Play();
+	}
 }
