@@ -12,7 +12,10 @@ public:
 	UIObject* uiTitleOption;
 	UIObject* uiTitleCredits;
 
+	bool enter = false;
 	int selected = 0;
+	DWORD lastEnter = 0;
+	float enterDelay = 1.0f;
 
 	SceneTitle();
 	~SceneTitle();

@@ -17,6 +17,10 @@ SceneTitle::SceneTitle() {
 	this->uiTitleOption->sprite->slice = Slice(0,0,16,64,8);
 	this->uiTitleOption->sprite->SetColor(100,100,100,255);
 
+	this->uiTitleStart->sprite->flashTime = 1.0f;
+	this->uiTitleCredits->sprite->flashTime = 1.0f;
+	this->uiTitleOption->sprite->flashTime = 1.0f;
+
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();
 }
@@ -51,18 +55,50 @@ void SceneTitle::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneTitle::Update() {
-	if (GetKeyboardTrigger(DIK_DOWN)) {
-		this->selected ++;
-		if (this->selected > 3) {
-			this->selected = 3;
+	if (!this->enter) {
+		if (GetKeyboardTrigger(DIK_DOWN)) {
+			this->selected ++;
+			if (this->selected > 3) {
+				this->selected = 3;
+			}
+		}
+		if (GetKeyboardTrigger(DIK_UP)) {
+			this->selected --;
+			if (this->selected < 0) {
+				this->selected = 0;
+			}
+		}
+		if (GetKeyboardTrigger(DIK_RETURN)) {
+			this->enter = true;
+			this->lastEnter = this->time->currentTime;
+			switch (this->selected) {
+				case 0:
+					this->uiTitleStart->sprite->Flash();
+					break;
+				case 1:
+					this->uiTitleCredits->sprite->Flash();
+					break;
+				case 2:
+					this->uiTitleOption->sprite->Flash();
+					break;
+			}
 		}
 	}
-	if (GetKeyboardTrigger(DIK_UP)) {
-		this->selected --;
-		if (this->selected < 0) {
-			this->selected = 0;
+	else {
+		if (this->time->currentTime > this->lastEnter + this->enterDelay * 1000.0f) {
+			switch (this->selected) {
+				case 0:
+					this->sceneManager->SetActiveScene(0);
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+			}
 		}
 	}
+
+	// Draw
 	switch (this->selected) {
 		case 0:
 			this->uiTitleStart->sprite->SetColor(255,255,255,255);
@@ -80,16 +116,6 @@ void SceneTitle::Update() {
 			this->uiTitleOption->sprite->SetColor(255,255,255,255);
 			break;
 	}
-
-	// this->camera->target = this->sceneManager->player;
-	// this->uiGameOverText->sprite->Flash();
-	// if (this->sceneManager->player->time->currentTime > this->sceneManager->player->lastGameOver + this->restartDelay * 1000.0f) {
-	// 	this->sceneManager->SetActiveScene(this->sceneManager->checkPoint);
-	// }
-	// if (this->sceneManager->resources->audSceneBGM->Playing()) {
-	// 	this->sceneManager->resources->audSceneBGM->Stop();
-	// }
-	// Check Switch Scene
 
 	// Update
 	Scene::Update();

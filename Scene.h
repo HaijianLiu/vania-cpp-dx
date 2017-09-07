@@ -18,6 +18,8 @@ public:
 	SceneManager* sceneManager;
 	// Camera
 	Camera* camera;
+	// Camera
+	Time* time;
 
 	// Frame Delay
 	bool frameDelay = true; // skip the first frame

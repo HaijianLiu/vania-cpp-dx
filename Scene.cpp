@@ -7,6 +7,8 @@
 Scene::Scene() {
 	// Camera
 	this->camera = GetCamera();
+	// Camera
+	this->time = GetTime();
 
 	// get start size
 	this->gpGameObjects = GetGameObjects();
@@ -101,14 +103,6 @@ void Scene::SetScene() {
 		this->blocks.push_back(new Block());
 		Scene::SetPosition(this->blocks.back(), blockData[i].x);
 	}
-	// Set Player
-	Scene::LoadMapData(this->playerPath, this->playerData);
-	// CheckPoint
-	this->checkPoint = new CheckPoint();
-	if (this->playerData.size() != 0) {
-		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
-		this->checkPoint->active = true;
-	}
 	// Map
 	std::vector<Int2D> damageZoneData;
 	Scene::LoadMapData(this->damageZonePath, damageZoneData);
@@ -127,6 +121,14 @@ void Scene::SetScene() {
 	for (unsigned int i = 0; i < backGroundData.size(); i++) {
 		this->backGrounds.push_back(new BackGround());
 		Scene::SetTile(this->backGrounds.back(), backGroundData[i].x, backGroundData[i].y);
+	}
+	// Set Player
+	Scene::LoadMapData(this->playerPath, this->playerData);
+	// CheckPoint
+	this->checkPoint = new CheckPoint();
+	if (this->playerData.size() != 0) {
+		Scene::SetPosition(this->checkPoint, this->playerData[0].x);
+		this->checkPoint->active = true;
 	}
 
 	// Get GameObject && Get Collider
