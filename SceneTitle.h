@@ -12,7 +12,7 @@ public:
 	UIObject* uiTitleOption;
 	UIObject* uiTitleCredits;
 
-	unsigned int selected = 0;
+	int selected = 0;
 
 	SceneTitle();
 	~SceneTitle();
