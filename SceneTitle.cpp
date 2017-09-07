@@ -46,6 +46,10 @@ void SceneTitle::Start() {
 	this->uiTitleCredits->sprite->texture = this->sceneManager->player->resources->texUITitleText;
 	this->uiTitleOption->sprite->texture = this->sceneManager->player->resources->texUITitleText;
 
+	this->sceneManager->player->uiEnergyBG->active = false;
+	this->sceneManager->player->uiEnergy->active = false;
+	this->sceneManager->player->score->active = false;
+
 	// Start GameObject && Start Collider (_DEBUG)
 	Scene::Start();
 }
