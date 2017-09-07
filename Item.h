@@ -10,7 +10,7 @@ public:
 	BoxCollider* collider;
 
 	// GameObject
-	BackGround* light;
+	UIObject* info;
 
 	// Constructors
 	Item();

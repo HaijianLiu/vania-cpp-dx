@@ -38,6 +38,9 @@ void UIObject::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void UIObject::Update() {
+	if (this->destroy) {
+		Destroy(this,3.0f);
+	}
 
 	// Animation SetTexture() || Sprite SetTexture()
 	this->sprite->SetTexture();

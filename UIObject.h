@@ -10,6 +10,8 @@ public:
 	// offset
 	Float2D offset;
 
+	bool destroy = false;
+
 	// Constructors
 	UIObject(float offsetX, float offsetY, float sizeX, float sizeY);
 	~UIObject();

@@ -46,6 +46,7 @@ public:
 	Texture texUIBossBG = Texture("assets/ui-boss.png",112,32);
 	Texture texUIGameOverText = Texture("assets/ui-toribodose.png",64,16);
 	Texture texUINumbers = Texture("assets/ui-numbers.png",90,7);
+	Texture texUIItem = Texture("assets/text.png",213,34);
 	// Animation Object
 	AnimationObject* enemyDestroy;
 	AnimationObject* playerDestroy;

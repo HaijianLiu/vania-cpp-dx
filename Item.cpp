@@ -13,6 +13,9 @@ Item::Item() {
 	// Collider (this,offsetX,offsetY,sizeX,sizeY) size is in real pixel && Collider is trigger ?
 	this->collider = new BoxCollider(this,0.0f,0.0f,16.0f,16.0f);
 	this->collider->tag = "item";
+	// UIObject
+	this->info = new UIObject(0.0f, 0.0f, 213.0f, 34.0f);
+	this->info->active = false;
 }
 
 
@@ -21,6 +24,7 @@ Item::Item() {
 ------------------------------------------------------------------------------*/
 Item::~Item() {
 	delete this->collider;
+	delete this->info;
 }
 
 
@@ -30,6 +34,7 @@ Item::~Item() {
 void Item::Start() {
 	// Resources
 	this->sprite->texture = this->resources->texItem;
+	this->info->sprite->texture = this->resources->texUIItem;
 
 	// Animation MakeFrame()
 }
@@ -54,6 +59,9 @@ void Item::OnTriggerEnter(BoxCollider* other) {
 	if (other->tag == "player") {
 		this->active = false;
 		this->resources->audOrbGet->Play();
+		this->info->birthTime = this->time->currentTime;
+		this->info->active = true;
+		this->info->destroy = true;
 	}
 }
 
