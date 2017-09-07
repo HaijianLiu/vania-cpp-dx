@@ -12,6 +12,7 @@ Scene13::Scene13() {
 	this->orbPath = "map/scene_Scene13-Orb.csv";
 	this->groundPath = "map/scene_Scene13-Ground.csv";
 	this->backGroundPath = "map/scene_Scene13-BackGround.csv";
+	this->backGround2Path = "map/scene_Scene13-BackGround2.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();

@@ -15,6 +15,7 @@ Scene07::Scene07() {
 	this->damageZonePath = "map/scene_Scene07-DamageZone.csv";
 	this->groundPath = "map/scene_Scene07-Ground.csv";
 	this->backGroundPath = "map/scene_Scene07-BackGround.csv";
+	this->backGround2Path = "map/scene_Scene07-BackGround2.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();

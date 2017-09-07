@@ -13,6 +13,7 @@ Scene02::Scene02() {
 	this->playerPath = "map/scene_Scene02-Player.csv";
 	this->groundPath = "map/scene_Scene02-Ground.csv";
 	this->backGroundPath = "map/scene_Scene02-BackGround.csv";
+	this->backGround2Path = "map/scene_Scene02-BackGround2.csv";
 
 	// Get GameObject && Get Collider && reset
 	Scene::SetScene();

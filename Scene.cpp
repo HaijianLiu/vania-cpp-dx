@@ -297,7 +297,7 @@ void Scene::Start() {
 void Scene::Update() {
 	// backGround2nd && backGround4th
 	this->backGround2nd->sprite->slice = Slice(0, 0.5f * this->camera->position.x * UNIT_TO_PIXEL, 0.5f * this->camera->position.y * UNIT_TO_PIXEL, SCREEN_WIDTH, SCREEN_HEIGHT);
-	// this->backGround4th->sprite->slice = Slice(0, 0.25f * this->camera->position.x * UNIT_TO_PIXEL, 0.25f * this->camera->position.y * UNIT_TO_PIXEL, SCREEN_WIDTH, SCREEN_HEIGHT);
+	
 	// Update GameObject && CheckCollider && Update Collider (_DEBUG)
 	for (unsigned int i = 0; i < this->gameObjects.size(); i++) {
 		if (this->gameObjects[i]->active) {
