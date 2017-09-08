@@ -154,12 +154,12 @@ void Player::Update() {
 	..............................................................................*/
 	if (!this->hurt) {
 		// move
-		if (GetKeyboardPress(DIK_LEFT)) {
+		if (GetKeyboardPress(DIK_LEFT) || GetKeyboardPress(DIK_A)) {
 			this->move = true;
 			this->right = false;
 			this->transform->position.x -= this->speed * this->time->deltaTime;
 		}
-		else if (GetKeyboardPress(DIK_RIGHT)) {
+		else if (GetKeyboardPress(DIK_RIGHT) || GetKeyboardPress(DIK_D)) {
 			this->move = true;
 			this->right = true;
 			this->transform->position.x += this->speed * this->time->deltaTime;
@@ -168,14 +168,14 @@ void Player::Update() {
 			this->move = false;
 		}
 		// jump
-		if (GetKeyboardTrigger(DIK_SPACE)) {
+		if (GetKeyboardTrigger(DIK_SPACE) || GetKeyboardPress(DIK_J)) {
 			if (!this->air) {
 				this->verticalSpeed = this->jumpPower;
 				this->air = true;
 			}
 		}
 		// duck
-		if (GetKeyboardPress(DIK_DOWN)) {
+		if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S)) {
 			if (!this->air) {
 				this->duck = true;
 			}
@@ -397,7 +397,7 @@ void Player::FixedUpdate() {
 	/* Fire
 	..............................................................................*/
 	if (!this->hurt) {
-		if (GetKeyboardTrigger(DIK_F)) {
+		if (GetKeyboardTrigger(DIK_F) || GetKeyboardPress(DIK_K)) {
 			if (this->time->currentTime > this->lastFire + this->fireColdDown * 1000.0f) {
 				if (this->status->hp > this->shootEnergy) {
 					this->shoot = true;
