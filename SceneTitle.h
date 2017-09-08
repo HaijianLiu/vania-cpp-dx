@@ -8,6 +8,7 @@ private:
 public:
 	// UIObject
 	UIObject* uiTitleBG;
+	UIObject* uiTitle;
 	UIObject* uiTitleStart;
 	UIObject* uiTitleOption;
 	UIObject* uiTitleCredits;
@@ -16,6 +17,8 @@ public:
 	int selected = 0;
 	DWORD lastEnter = 0;
 	float enterDelay = 2.0f;
+
+	int counter = 0;
 
 	SceneTitle();
 	~SceneTitle();

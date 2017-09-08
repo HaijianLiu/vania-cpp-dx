@@ -110,6 +110,7 @@ Resources::~Resources() {
 	if (this->texUIBossBG.texture != NULL) this->texUIBossBG.texture->Release();
 	if (this->texUIGameOverText.texture != NULL) this->texUIGameOverText.texture->Release();
 	if (this->texUITitle.texture != NULL) this->texUITitle.texture->Release();
+	if (this->texUITitleStar.texture != NULL) this->texUITitleStar.texture->Release();
 	if (this->texUITitleText.texture != NULL) this->texUITitleText.texture->Release();
 	if (this->texUINumbers.texture != NULL) this->texUINumbers.texture->Release();
 	if (this->texUIItemGold.texture != NULL) this->texUIItemGold.texture->Release();
@@ -199,6 +200,7 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texUIBossBG);
 	Resources::LoadTexture(&this->texUIGameOverText);
 	Resources::LoadTexture(&this->texUITitle);
+	Resources::LoadTexture(&this->texUITitleStar);
 	Resources::LoadTexture(&this->texUITitleText);
 	Resources::LoadTexture(&this->texUINumbers);
 	Resources::LoadTexture(&this->texUIItemGold);

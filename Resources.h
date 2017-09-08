@@ -46,6 +46,7 @@ public:
 	Texture texUIBossBG = Texture("assets/ui-boss.png",112,32);
 	Texture texUIGameOverText = Texture("assets/ui-toribodose.png",64,16);
 	Texture texUITitle = Texture("assets/title.png",400,250);
+	Texture texUITitleStar = Texture("assets/title-star.png",400,250);
 	Texture texUITitleText = Texture("assets/title-text.png",64,24);
 	Texture texUINumbers = Texture("assets/ui-numbers.png",90,7);
 	Texture texUIItemGold = Texture("assets/item-info-gold.png",256,128);

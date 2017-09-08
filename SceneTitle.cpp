@@ -6,10 +6,13 @@
 ------------------------------------------------------------------------------*/
 SceneTitle::SceneTitle() {
 	// UIObject
-	this->uiTitleBG = new UIObject(0,0,400,250);
+
 	this->uiTitleStart = new UIObject(0,54,64,8);
 	this->uiTitleCredits = new UIObject(0,64,64,8);
 	this->uiTitleOption = new UIObject(0,74,64,8);
+
+	this->uiTitle = new UIObject(0,0,400,250);
+	this->uiTitleBG = new UIObject(0,0,400,250);
 
 	this->uiTitleStart->sprite->slice = Slice(0,0,0,64,8);
 	this->uiTitleCredits->sprite->slice = Slice(0,0,8,64,8);
@@ -30,6 +33,7 @@ SceneTitle::SceneTitle() {
 < Destructor >
 ------------------------------------------------------------------------------*/
 SceneTitle::~SceneTitle() {
+	delete this->uiTitle;
 	delete this->uiTitleBG;
 	delete this->uiTitleStart;
 	delete this->uiTitleCredits;
@@ -41,7 +45,8 @@ SceneTitle::~SceneTitle() {
 < Start >
 ------------------------------------------------------------------------------*/
 void SceneTitle::Start() {
-	this->uiTitleBG->sprite->texture = this->sceneManager->player->resources->texUITitle;
+	this->uiTitle->sprite->texture = this->sceneManager->player->resources->texUITitle;
+	this->uiTitleBG->sprite->texture = this->sceneManager->player->resources->texUITitleStar;
 	this->uiTitleStart->sprite->texture = this->sceneManager->player->resources->texUITitleText;
 	this->uiTitleCredits->sprite->texture = this->sceneManager->player->resources->texUITitleText;
 	this->uiTitleOption->sprite->texture = this->sceneManager->player->resources->texUITitleText;
@@ -63,12 +68,18 @@ void SceneTitle::Start() {
 < Update >
 ------------------------------------------------------------------------------*/
 void SceneTitle::Update() {
+	this->uiTitleBG->sprite->SetColor(this->counter/2,this->counter/2,this->counter/2,255);
+	if (this->counter < 510) {
+		this->counter ++ ;
+	}
+	this->uiTitleBG->offset.x += 0.05f * sin(this->time->currentTime /2000.0f);
+	this->uiTitleBG->offset.y += 0.02f * cos(this->time->currentTime /1000.0f);
 	if (!this->enter) {
 		if (GetKeyboardTrigger(DIK_DOWN)) {
 			this->sceneManager->resources->audCurser->Play();
 			this->selected ++;
-			if (this->selected > 3) {
-				this->selected = 3;
+			if (this->selected > 2) {
+				this->selected = 2;
 			}
 		}
 		if (GetKeyboardTrigger(DIK_UP)) {

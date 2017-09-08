@@ -410,7 +410,7 @@ bool Scene::LoadMapData(const char* path, std::vector<Int2D>& data) {
 void Scene::SetTile(GameObject* gameObject, int mapID, int tileID) {
 	gameObject->transform->position.x = mapID % this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
 	gameObject->transform->position.y = mapID / this->mapSize.x * PIXEL_TO_UNIT * this->tilePixel;
-	gameObject->transform->scale = Float2D((float)this->tilePixel, (float)this->tilePixel);
+	gameObject->transform->scale = Float2D((float)this->tilePixel + 0.1f, (float)this->tilePixel + 0.1f);
 	gameObject->sprite->slice = Slice(tileID, tileID % this->tileSize.x * this->tilePixel , tileID / this->tileSize.x * this->tilePixel, this->tilePixel, this->tilePixel);
 }
 

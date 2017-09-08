@@ -33,7 +33,7 @@
 /*------------------------------------------------------------------------------
 < Macross >
 ------------------------------------------------------------------------------*/
-#define PIXEL_SCALE (2)
+#define PIXEL_SCALE (2.5f)
 #define PIXEL_TO_UNIT (0.01f)
 #define UNIT_TO_PIXEL (100)
 #define SCREEN_WIDTH (25 * 16 * PIXEL_SCALE)
