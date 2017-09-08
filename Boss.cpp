@@ -21,18 +21,18 @@ Boss::Boss() {
 	this->leftTarget = new OffsetObject(this,-2.0f,0.01f);
 	this->rightTarget = new OffsetObject(this,2.0f,0.01f);
 	// GameObject
-	this->core = new BossCore();
-	for (unsigned int i = 0; i < 7; i++) {
-		this->deathWallsRight.push_back(new DeathWall());
+	for (unsigned int i = 0; i < 4; i++) {
+		this->bullets.push_back(new BossBullet());
 	}
 	for (unsigned int i = 0; i < 7; i++) {
 		this->deathWallsLeft.push_back(new DeathWall());
 		this->deathWallsLeft.back()->right = false;
 	}
-	for (unsigned int i = 0; i < 4; i++) {
-		this->bullets.push_back(new BossBullet());
-	}
 	this->deathBite = new DeathBite();
+	this->core = new BossCore();
+	for (unsigned int i = 0; i < 7; i++) {
+		this->deathWallsRight.push_back(new DeathWall());
+	}
 	// UIObject
 	this->uiLife = new UIObject(0.0f, 0.0f, 100.0f, 2.0f);
 	this->uiLife->active = false;
