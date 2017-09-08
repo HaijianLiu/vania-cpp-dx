@@ -19,8 +19,6 @@ public:
 	unsigned int activeScene = 0;
 	unsigned int gameOverScene = 0;
 	unsigned int titleScene = 0;
-	unsigned int optionScene = 0;
-	unsigned int creditsScene = 0;
 	std::vector<Scene*> scenes;
 
 	SceneManager();

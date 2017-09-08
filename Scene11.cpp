@@ -46,6 +46,9 @@ void Scene11::Update() {
 	if (this->sceneManager->player->transform->position.x < this->range[0]->transform->position.x) {
 		this->sceneManager->SetActiveScene(10);
 	}
+	if (!this->bosses[0]->active && !this->sceneManager->resources->audBossDead->Playing() && !this->sceneManager->resources->audClear->Playing()) {
+		this->sceneManager->SetActiveScene(0);
+	}
 	// if (this->sceneManager->player->transform->position.x > this->range[0]->transform->position.x) {
 	// 	this->sceneManager->SetActiveScene(8);
 	// }

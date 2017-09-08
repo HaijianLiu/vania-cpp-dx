@@ -18,6 +18,7 @@ public:
 	void Play();
 	bool Playing();
 	void Stop();
+	void Reset();
 };
 
 #endif

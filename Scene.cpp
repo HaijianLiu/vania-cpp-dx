@@ -218,11 +218,13 @@ void Scene::Reset() {
 	if (this->bosses.size() != 0) {
 		if (this->bosses[0]->active) {
 			this->bosses[0]->awake = false;
+			this->bosses[0]->intro = false;
 			this->bosses[0]->status->hp = this->bosses[0]->sleepHP;
 			this->bosses[0]->phase = 0;
 			this->bosses[0]->uiBossBG->active = false;
 			this->bosses[0]->uiLife->active = false;
 			this->bosses[0]->currentSkill = NONE_SKILL;
+			this->sceneManager->resources->audBossMainBGM->Reset();
 			for (unsigned int i = 0; i < this->bosses[0]->bullets.size(); i++) {
 				this->bosses[0]->bullets[i]->active = false;
 			}

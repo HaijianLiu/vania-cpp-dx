@@ -91,3 +91,7 @@ void Audio::Stop() {
 	this->soundBuffer->GetStatus(&status);
 	if (status & DSBSTATUS_PLAYING ) this->soundBuffer->Stop();
 }
+
+void Audio::Reset() {
+	this->soundBuffer->SetCurrentPosition(0);
+}
