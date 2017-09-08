@@ -48,6 +48,9 @@ public:
 	Texture texUITitle = Texture("assets/title.png",400,250);
 	Texture texUITitleStar = Texture("assets/title-star.png",400,250);
 	Texture texUITitleText = Texture("assets/title-text.png",64,24);
+	Texture texUITitleCredits = Texture("assets/title-credits.png",400,250);
+	Texture texUITitleOption = Texture("assets/title-option.png",400,250);
+	Texture texUITitlePress = Texture("assets/title-enter.png",88,7);
 	Texture texUINumbers = Texture("assets/ui-numbers.png",90,7);
 	Texture texUIItemGold = Texture("assets/item-info-gold.png",256,128);
 	Texture texUIItemSliver = Texture("assets/item-info-sliver.png",256,128);
@@ -83,6 +86,7 @@ public:
 	Audio* audCheckPoint;
 	Audio* audCurser;
 	Audio* audStart;
+	Audio* audSelect;
 	// Particle System
 	ParticleSystem* fxDestroy;
 	ParticleSystem* fxTail;

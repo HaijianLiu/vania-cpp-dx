@@ -12,6 +12,9 @@ public:
 	UIObject* uiTitleStart;
 	UIObject* uiTitleOption;
 	UIObject* uiTitleCredits;
+	UIObject* uiTitleCreditsText;
+	UIObject* uiTitleOptionText;
+	UIObject* uiTitlePress;
 
 	bool enter = false;
 	int selected = 0;

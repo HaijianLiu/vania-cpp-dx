@@ -10,9 +10,16 @@ SceneTitle::SceneTitle() {
 	this->uiTitleStart = new UIObject(0,54,64,8);
 	this->uiTitleCredits = new UIObject(0,64,64,8);
 	this->uiTitleOption = new UIObject(0,74,64,8);
+	this->uiTitleCreditsText = new UIObject(0,0,400,250);
+	this->uiTitleCreditsText->draw = false;
+	this->uiTitleOptionText = new UIObject(0,0,400,250);
+	this->uiTitleOptionText->draw = false;
+	this->uiTitlePress = new UIObject(0,88,88,7);
+	this->uiTitlePress->draw = false;
 
 	this->uiTitle = new UIObject(0,0,400,250);
 	this->uiTitleBG = new UIObject(0,0,400,250);
+
 
 	this->uiTitleStart->sprite->slice = Slice(0,0,0,64,8);
 	this->uiTitleCredits->sprite->slice = Slice(0,0,8,64,8);
@@ -38,6 +45,8 @@ SceneTitle::~SceneTitle() {
 	delete this->uiTitleStart;
 	delete this->uiTitleCredits;
 	delete this->uiTitleOption;
+	delete this->uiTitleCreditsText;
+	delete this->uiTitleOptionText;
 }
 
 
@@ -50,6 +59,10 @@ void SceneTitle::Start() {
 	this->uiTitleStart->sprite->texture = this->sceneManager->player->resources->texUITitleText;
 	this->uiTitleCredits->sprite->texture = this->sceneManager->player->resources->texUITitleText;
 	this->uiTitleOption->sprite->texture = this->sceneManager->player->resources->texUITitleText;
+	this->uiTitleCreditsText->sprite->texture = this->sceneManager->player->resources->texUITitleCredits;
+	this->uiTitleOptionText->sprite->texture = this->sceneManager->player->resources->texUITitleOption;
+	this->uiTitlePress->sprite->texture = this->sceneManager->player->resources->texUITitlePress;
+
 
 	this->sceneManager->player->uiEnergyBG->active = false;
 	this->sceneManager->player->uiEnergy->active = false;
@@ -90,32 +103,59 @@ void SceneTitle::Update() {
 			}
 		}
 		if (GetKeyboardTrigger(DIK_RETURN)) {
-			this->sceneManager->resources->audStart->Play();
 			this->enter = true;
-			this->lastEnter = this->time->currentTime;
 			switch (this->selected) {
 				case 0:
+					this->sceneManager->resources->audStart->Play();
+					this->lastEnter = this->time->currentTime;
 					this->uiTitleStart->sprite->Flash();
 					break;
 				case 1:
-					this->uiTitleCredits->sprite->Flash();
+					this->uiTitleCredits->draw = false;
+					this->uiTitleStart->draw = false;
+					this->uiTitleOption->draw = false;
+					this->uiTitle->draw = false;
+					this->uiTitleCreditsText->draw = true;
+					this->uiTitlePress->draw = true;
+					this->sceneManager->resources->audSelect->Play();
 					break;
 				case 2:
-					this->uiTitleOption->sprite->Flash();
+					this->uiTitleCredits->draw = false;
+					this->uiTitleStart->draw = false;
+					this->uiTitleOption->draw = false;
+					this->uiTitle->draw = false;
+					this->uiTitleOptionText->draw = true;
+					this->uiTitlePress->draw = true;
+					this->sceneManager->resources->audSelect->Play();
 					break;
 			}
 		}
 	}
 	else {
-		if (this->time->currentTime > this->lastEnter + this->enterDelay * 1000.0f) {
-			switch (this->selected) {
-				case 0:
-					this->sceneManager->SetActiveScene(0);
-					break;
-				case 1:
-					break;
-				case 2:
-					break;
+		this->uiTitlePress->sprite->Flash();
+		if (this->selected == 0) {
+			if (this->time->currentTime > this->lastEnter + this->enterDelay * 1000.0f) {
+				switch (this->selected) {
+					case 0:
+						this->sceneManager->SetActiveScene(0);
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+				}
+			}
+		}
+		else {
+			if (GetKeyboardTrigger(DIK_RETURN)) {
+				this->uiTitleCredits->draw = true;
+				this->uiTitleStart->draw = true;
+				this->uiTitleOption->draw = true;
+				this->uiTitle->draw = true;
+				this->uiTitleCreditsText->draw = false;
+				this->uiTitleOptionText->draw = false;
+				this->uiTitlePress->draw = false;
+				this->enter = false;
 			}
 		}
 	}

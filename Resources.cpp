@@ -37,6 +37,7 @@ Resources::Resources() {
 	this->audCheckPoint = new Audio("assets/Sound/SE/sfx_sounds_powerup18.wav");
 	this->audCurser = new Audio("assets/Sound/SE/sfx_sounds_Blip7.wav");
 	this->audStart = new Audio("assets/Sound/SE/Intro_Jingle.wav");
+	this->audSelect = new Audio("assets/Sound/SE/sfx_menu_select2.wav");
 	// ParticleSystem
 	this->fxTail = new ParticleSystem(100);
 	this->fxTail->rateOverTime = false;
@@ -112,6 +113,9 @@ Resources::~Resources() {
 	if (this->texUITitle.texture != NULL) this->texUITitle.texture->Release();
 	if (this->texUITitleStar.texture != NULL) this->texUITitleStar.texture->Release();
 	if (this->texUITitleText.texture != NULL) this->texUITitleText.texture->Release();
+	if (this->texUITitleCredits.texture != NULL) this->texUITitleCredits.texture->Release();
+	if (this->texUITitleOption.texture != NULL) this->texUITitleOption.texture->Release();
+	if (this->texUITitlePress.texture != NULL) this->texUITitlePress.texture->Release();
 	if (this->texUINumbers.texture != NULL) this->texUINumbers.texture->Release();
 	if (this->texUIItemGold.texture != NULL) this->texUIItemGold.texture->Release();
 	if (this->texUIItemSliver.texture != NULL) this->texUIItemSliver.texture->Release();
@@ -149,6 +153,7 @@ Resources::~Resources() {
 	delete this->audCheckPoint;
 	delete this->audCurser;
 	delete this->audStart;
+	delete this->audSelect;
 	// ParticleSystem
 	delete this->fxDestroy;
 	delete this->fxTail;
@@ -202,6 +207,9 @@ void Resources::Start() {
 	Resources::LoadTexture(&this->texUITitle);
 	Resources::LoadTexture(&this->texUITitleStar);
 	Resources::LoadTexture(&this->texUITitleText);
+	Resources::LoadTexture(&this->texUITitleCredits);
+	Resources::LoadTexture(&this->texUITitleOption);
+	Resources::LoadTexture(&this->texUITitlePress);
 	Resources::LoadTexture(&this->texUINumbers);
 	Resources::LoadTexture(&this->texUIItemGold);
 	Resources::LoadTexture(&this->texUIItemSliver);
@@ -241,6 +249,7 @@ void Resources::Start() {
 	this->audCheckPoint->LoadAudio();
 	this->audCurser->LoadAudio();
 	this->audStart->LoadAudio();
+	this->audSelect->LoadAudio();
 	// ParticleSystem
 	this->fxDestroy->LinkTexture(this->texFxDestroy);
 	this->fxTail->LinkTexture(this->texDefault);
