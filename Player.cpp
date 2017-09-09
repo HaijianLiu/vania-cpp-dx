@@ -168,7 +168,7 @@ void Player::Update() {
 			this->move = false;
 		}
 		// jump
-		if (GetKeyboardTrigger(DIK_SPACE) || GetKeyboardPress(DIK_J)) {
+		if (GetKeyboardTrigger(DIK_SPACE) || GetKeyboardTrigger(DIK_J)) {
 			if (!this->air) {
 				this->verticalSpeed = this->jumpPower;
 				this->air = true;
@@ -397,7 +397,7 @@ void Player::FixedUpdate() {
 	/* Fire
 	..............................................................................*/
 	if (!this->hurt) {
-		if (GetKeyboardTrigger(DIK_F) || GetKeyboardPress(DIK_K)) {
+		if (GetKeyboardTrigger(DIK_F) || GetKeyboardTrigger(DIK_K)) {
 			if (this->time->currentTime > this->lastFire + this->fireColdDown * 1000.0f) {
 				if (this->status->hp > this->shootEnergy) {
 					this->shoot = true;
